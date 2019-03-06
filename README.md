@@ -1,3 +1,18 @@
+---
+home: true
+heroImage: 
+actionText: 快速开始 →
+actionLink: /zh/guide/
+features:
+- title: JavaScript
+  details: 主要记录一些JavaScript方面知识
+- title: CSS
+  details: 知识讲解，实际效果例子
+- title: HTML
+  details: 知识讲解，实际效果例子
+footer: MIT Licensed | Copyright © 2019-yulilong
+---
+
 ## 1. 项目介绍
 
 本项目是前端技术文档网站，使用的是`vuepress`的静态网站生成器。
