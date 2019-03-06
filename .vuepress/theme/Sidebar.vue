@@ -3,7 +3,7 @@
     <NavLinks/>
     <slot name="top"/>
     <ul class="sidebar-links" v-if="items.length">
-      <li v-for="(item, i) in items" :key="i">
+      <li v-for="(item, i) in items" :key="i" v-on:click="fileName($event.target)">
         <SidebarGroup
           v-if="item.type === 'group'"
           :item="item"
@@ -31,8 +31,13 @@ export default {
   props: ['items'],
 
   data () {
+    let h = '';
+    if (typeof window !== 'undefined') {
+        h = window.location.href
+    }
     return {
-      openGroupIndex: 0
+      openGroupIndex: 0,
+      href: h,
     }
   },
 
@@ -63,6 +68,33 @@ export default {
 
     isActive (page) {
       return isActive(this.$route, page.path)
+    },
+
+    // 点击侧边栏标题链接
+    fileName (a) {
+        var nextSibling = a.nextSibling;
+        // 点击没有子标题时 nextSibling === null，点击的是分组侧边栏时 nextSibling === #text
+        // 当点击的标题有子标题时，才收缩标题
+        if (nextSibling && nextSibling.tagName === 'UL') {
+            setTimeout(this.changeStyle,5, a.nextSibling);
+        }
+    },
+    // 切换二级菜单
+    changeStyle (b) {
+        if(this.href !== location.href) {
+            // 点击了不同的标题
+            this.href = location.href;
+            b.style.height = 'auto';
+            b.style.overflow = 'inherit';
+        } else if (b.style.height === '' || b.style.height === 'auto') {
+            // 收起子菜单
+            b.style.height = '0';
+            b.style.overflow = 'hidden';
+        } else {
+            // 展开子菜单
+            b.style.height = 'auto';
+            b.style.overflow = 'inherit';
+        }
     }
   }
 }
