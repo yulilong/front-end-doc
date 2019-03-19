@@ -1,7 +1,6 @@
 ---
 sidebar: auto
 ---
-[[TOC]]
 
 # 正则表达式
 
