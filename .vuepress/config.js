@@ -6,6 +6,7 @@ module.exports = {
         // 导航栏设置
         nav: [
             { text: 'Home', link: '/' },                      // 根路径
+            { text: 'javascript', link: '/javascript/' },
             { text: '正则表达式', link: '/javascript/regularExpression.md' },
             { text: 'JS执行流程', link: '/javascript/jsHowWork/' },
         ],
@@ -18,6 +19,12 @@ module.exports = {
                 'JS在浏览器中运行机制和事件循环',
                 'JS代码在nodejs环境下执行机制和事件循环',
                 'JS中异步方法',
+            ],
+            '/javascript/': [
+                '',
+                '001-对象_构造函数_原型链',
+                '002-this_call_apply_bind',
+                'regularExpression',
             ],
         },
     },
