@@ -9,16 +9,19 @@ module.exports = {
             { text: '正则表达式', link: '/javascript/regularExpression.md' },
             { text: 'JS执行流程', link: '/javascript/jsHowWork/' },
         ],
+        // 侧边栏标题显示的层数
+        sidebarDepth: 2,
         // 侧边栏设置
         sidebar: {
             '/javascript/jsHowWork/': [
                 '',
                 'JS在浏览器中运行机制和事件循环',
                 'JS代码在nodejs环境下执行机制和事件循环',
+                'JS中异步方法',
             ],
         },
     },
-    markdown: {
-        lineNumbers: true,          // 代码块显示行号
-    },
+    // markdown: {
+    //     lineNumbers: true,          // 代码块显示行号
+    // },
 }
