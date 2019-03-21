@@ -10,7 +10,7 @@ echo "执行命令：cd ./.vuepress/dist\n"
 cd ./.vuepress/dist
 
 # 发布到自定义域名
-echo "把域名放到CNAME文件中"
+echo "把yulilong.cn域名放到CNAME文件中"
 echo 'yulilong.cn' > CNAME
 
 # 初始化一个仓库，仅仅是做了一个初始化的操作，项目里的文件还没有被跟踪
