@@ -14,17 +14,25 @@ module.exports = {
         sidebarDepth: 2,
         // 侧边栏设置
         sidebar: {
-            '/javascript/jsHowWork/': [
-                '',
-                'JS在浏览器中运行机制和事件循环',
-                'JS代码在nodejs环境下执行机制和事件循环',
-                'JS中异步方法',
-            ],
             '/javascript/': [
                 '',
+                {
+                    title: 'JS代码执行机制和事件循环',
+                    children: [
+                        'jsHowWork/',
+                        'jsHowWork/JS在浏览器中运行机制和事件循环',
+                        'jsHowWork/JS代码在nodejs环境下执行机制和事件循环',
+                        'jsHowWork/JS中异步方法',
+                    ]
+                },
+                'regularExpression',
                 '001-对象_构造函数_原型链',
                 '002-this_call_apply_bind',
-                'regularExpression',
+                '003-数据类型转换',
+                '004-跨域',
+                '005-Ajax',
+                '006-函数',
+                '007-作用域',
             ],
         },
     },
