@@ -62,6 +62,8 @@ module.exports = {
 }
 ```
 
+如果是github Pages使用购买的域名，那么不需要设置这个参数，否则会出错。
+
 然后在终端使用`vuepress build .`命令来生成最终项目：
 
 ```
