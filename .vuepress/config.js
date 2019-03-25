@@ -8,8 +8,17 @@ module.exports = {
         nav: [
             { text: 'Home', link: '/' },                      // 根路径
             { text: 'javascript', link: '/javascript/' },
-            { text: '正则表达式', link: '/javascript/regularExpression.md' },
-            { text: 'JS执行流程', link: '/javascript/jsHowWork/' },
+            {
+                text: '工具',
+                items: [
+                    {
+                        text: 'JS打包工具',
+                        items: [
+                            {text: 'webpack', link: '/tool/bundle/webpack/'}
+                        ]
+                    },
+                ],
+            },
         ],
         // 侧边栏标题显示的层数
         sidebarDepth: 2,
@@ -34,6 +43,9 @@ module.exports = {
                 '005-Ajax',
                 '006-函数',
                 '007-作用域',
+            ],
+            '/tool/bundle/webpack/': [
+                '',
             ],
         },
     },
