@@ -1,6 +1,9 @@
 module.exports = {
     title: '前端知识',
     description: '一个总结前端知识的文档网站',
+    head: [
+        ["link", { rel: "icon", href: "/logo.png" }],   // 添加网站的icon图标
+    ],
     // 如果github Pages绑定域名，则需要把base删除，否则域名访问会失败
     // base: '/front-end-doc/',     // 仓库名字,用于github Pages 部署,
     themeConfig: {
@@ -51,6 +54,16 @@ module.exports = {
             ],
             '/dom/': [
                 '',
+                '001-节点的类型',
+                '002-节点的关系',
+                '003-节点的操作',
+                '004-动态集合NodeLIst-HTMLCollection',
+                '005-Element',
+                '006-Node',
+                '007-Element对象',
+                '008-document对象',
+                '009-事件模型',
+                '010-事件种类',
             ],
         },
     },
