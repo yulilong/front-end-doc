@@ -4,10 +4,12 @@ module.exports = {
     // 如果github Pages绑定域名，则需要把base删除，否则域名访问会失败
     // base: '/front-end-doc/',     // 仓库名字,用于github Pages 部署,
     themeConfig: {
+        logo: '/logo.png',
         // 导航栏设置
         nav: [
             { text: 'Home', link: '/' },                      // 根路径
             { text: 'javascript', link: '/javascript/' },
+            { text: 'dom', link: '/dom/' },
             {
                 text: '工具',
                 items: [
@@ -45,6 +47,9 @@ module.exports = {
                 '007-作用域',
             ],
             '/tool/bundle/webpack/': [
+                '',
+            ],
+            '/dom/': [
                 '',
             ],
         },
