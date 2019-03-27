@@ -2,7 +2,7 @@
 home: true
 heroImage: 
 actionText: 快速开始 →
-actionLink: /zh/guide/
+actionLink: /javascript/
 features:
 - title: JavaScript
   details: 主要记录一些JavaScript方面知识
