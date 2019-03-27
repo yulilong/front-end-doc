@@ -13,6 +13,7 @@ module.exports = {
             { text: 'Home', link: '/' },                      // 根路径
             { text: 'javascript', link: '/javascript/' },
             { text: 'dom', link: '/dom/' },
+            { text: 'browser', link: '/browser/' },
             {
                 text: '工具',
                 items: [
@@ -76,6 +77,10 @@ module.exports = {
                 'react代码片段',
                 'react开发遇到的问题',
                 '',
+            ],
+            '/browser/': [
+                '',
+                '001-URL相关操作',
             ],
         },
     },
