@@ -24,6 +24,12 @@ module.exports = {
                     },
                 ],
             },
+            {
+                text: '前端框架',
+                items: [
+                    { text: 'react', link: '/framework/react/' },
+                ],
+            },
         ],
         // 侧边栏标题显示的层数
         sidebarDepth: 2,
@@ -64,6 +70,12 @@ module.exports = {
                 '008-document对象',
                 '009-事件模型',
                 '010-事件种类',
+            ],
+            '/framework/react/': [
+                'react常用语法',
+                'react代码片段',
+                'react开发遇到的问题',
+                '',
             ],
         },
     },
