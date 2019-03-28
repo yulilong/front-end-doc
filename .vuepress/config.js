@@ -11,6 +11,13 @@ module.exports = {
         // 导航栏设置
         nav: [
             { text: 'Home', link: '/' },                      // 根路径
+            {
+                text: 'CSS',
+                items: [
+                    { text: '基础', link: '/css/base/' },
+                    { text: 'CSS深入浅出', link: '/css/depth/' },
+                ],
+            },
             { text: 'javascript', link: '/javascript/' },
             { text: 'dom', link: '/dom/' },
             { text: 'browser', link: '/browser/' },
@@ -81,6 +88,22 @@ module.exports = {
             '/browser/': [
                 '',
                 '001-URL相关操作',
+            ],
+            '/css/base/': [
+                '',
+                '001-Transitions-Transforms-Animation',
+                '002-定位',
+                '003-浏览器兼容',
+                '004-normalize-reset',
+            ],
+            '/css/depth/': [
+                '',
+                '001-堆叠上下文',
+                '002-icon全解',
+                '003-移动端页面(响应式)',
+                '004-Flex布局',
+                '005-布局套路',
+                '006-BFC',
             ],
         },
     },
