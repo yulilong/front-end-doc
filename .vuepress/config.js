@@ -62,6 +62,19 @@ module.exports = {
                 '005-Ajax',
                 '006-函数',
                 '007-作用域',
+                {
+                    title: '高级',
+                    collapsable: false,
+                    children: [
+                        'advanced/001-ES6模块import_export',
+                        'advanced/002-错误处理try_catch',
+                        'advanced/003-常用的代码片段',
+                        'advanced/004-轮播代码实现',
+                        'advanced/005-浏览器兼容',
+                        'advanced/006-手机端页面开发',
+                        'advanced/007-SEO搜索引擎优化',
+                    ]
+                },
             ],
             '/tool/bundle/webpack/': [
                 '',
