@@ -6,6 +6,8 @@ module.exports = {
     ],
     // 如果github Pages绑定域名，则需要把base删除，否则域名访问会失败
     // base: '/front-end-doc/',     // 仓库名字,用于github Pages 部署,
+    // 设置本地开发端口号
+    port: 4000,
     themeConfig: {
         logo: '/logo.png',
         // 导航栏设置
