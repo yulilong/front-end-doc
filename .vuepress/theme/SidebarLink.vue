@@ -4,26 +4,30 @@ import { isActive, hashRE, groupHeaders } from './util'
 export default {
   functional: true,
 
-  props: ['item'],
+  props: ['item', 'chapter'],
 
-  render (h, { parent: { $page, $site, $route }, props: { item }}) {
+  render (h, { parent: { $page, $site, $route }, props: { item, chapter }}) {
     // use custom active class matching logic
     // due to edge case of paths ending with / + hash
     const selfActive = isActive($route, item.path)
     // for sidebar: auto pages, a hash link should be active if one of its child
     // matches
+    // item.type === 'auto' 是配置文件中设置themeConfig.sidebar = 'auto'
+    // 打开的是当前的页面标题
     const active = item.type === 'auto'
       ? selfActive || item.children.some(c => isActive($route, item.basePath + '#' + c.slug))
       : selfActive
-    const link = renderLink(h, item.path, item.title || item.path, active)
+    const link = renderLink(h, item.path, item.title || item.path, active, chapter, true)
     const configDepth = $page.frontmatter.sidebarDepth != null
       ? $page.frontmatter.sidebarDepth
       : $site.themeConfig.sidebarDepth
     const maxDepth = configDepth == null ? 1 : configDepth
+    // 是否在配置文件中设置themeConfig.displayAllHeaders = true
     const displayAllHeaders = !!$site.themeConfig.displayAllHeaders
     if (item.type === 'auto') {
       return [link, renderChildren(h, item.children, item.basePath, $route, maxDepth)]
     } else if ((active || displayAllHeaders) && item.headers && !hashRE.test(item.path)) {
+      // 侧边栏展开的状态
       const children = groupHeaders(item.headers)
       return [link, renderChildren(h, children, item.path, $route, maxDepth)]
     } else {
@@ -32,7 +36,7 @@ export default {
   }
 }
 
-function renderLink (h, to, text, active) {
+function renderLink (h, to, text, active, chapter, oneLevel) {
   return h('router-link', {
     props: {
       to,
@@ -40,6 +44,9 @@ function renderLink (h, to, text, active) {
       exactActiveClass: ''
     },
     class: {
+      // 可收缩菜单左边的指示箭头
+      'one-level': oneLevel,    // 箭头样式
+      'one-level-active': active && chapter && oneLevel,    // 箭头向下样式
       active,
       'sidebar-link': true
     }
@@ -88,4 +95,27 @@ a.sidebar-link
     border-left none
     &.active
       font-weight 500
+
+.one-level
+  position relative
+  &:before
+    content ''
+    border-top 1px solid
+    border-right 1px solid
+    position absolute
+    left: 0px;
+    top: 10px;
+    height: 9px;
+    width: 9px;
+    transform: rotate(45deg);
+  .sidebar-group &
+    &:before
+      left: 8px;
+.one-level-active
+  &:before
+    left: 4px;
+    transform: rotate(135deg);
+  .sidebar-group &
+    &:before
+      left: 12px;
 </style>

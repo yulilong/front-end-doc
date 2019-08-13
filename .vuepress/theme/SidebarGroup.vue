@@ -23,7 +23,7 @@
         v-if="open || !collapsable"
       >
         <li v-for="child in item.children">
-          <SidebarLink :item="child"/>
+          <SidebarLink :item="child"  :chapter="chapter"/>
         </li>
       </ul>
     </DropdownTransition>
@@ -36,7 +36,7 @@ import DropdownTransition from './DropdownTransition.vue'
 
 export default {
   name: 'SidebarGroup',
-  props: ['item', 'first', 'open', 'collapsable'],
+  props: ['item', 'first', 'open', 'collapsable', 'chapter'],
   components: { SidebarLink, DropdownTransition }
 }
 </script>
