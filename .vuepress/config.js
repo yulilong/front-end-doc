@@ -16,12 +16,12 @@ module.exports = {
             {
                 text: 'CSS',
                 items: [
-                    { text: '基础', link: '/css/base/' },
-                    { text: 'CSS深入浅出', link: '/css/depth/' },
+                    { text: '基础', link: '/doc/css/base/' },
+                    { text: 'CSS深入浅出', link: '/doc/css/depth/' },
                 ],
             },
             { text: 'javascript', link: '/javascript/' },
-            { text: 'dom', link: '/dom/' },
+            { text: 'dom', link: '/doc/dom/' },
             { text: 'browser', link: '/browser/' },
             {
                 text: '工具',
@@ -81,7 +81,7 @@ module.exports = {
             '/tool/bundle/webpack/': [
                 '',
             ],
-            '/dom/': [
+            '/doc/dom/': [
                 '',
                 '001-节点的类型',
                 '002-节点的关系',
@@ -104,14 +104,14 @@ module.exports = {
                 '',
                 '001-URL相关操作',
             ],
-            '/css/base/': [
+            '/doc/css/base/': [
                 '',
                 '001-Transitions-Transforms-Animation',
                 '002-定位',
                 '003-浏览器兼容',
                 '004-normalize-reset',
             ],
-            '/css/depth/': [
+            '/doc/css/depth/': [
                 '',
                 '001-堆叠上下文',
                 '002-icon全解',
