@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
     title: '前端知识',
     description: '一个总结前端知识的文档网站',
@@ -8,6 +10,14 @@ module.exports = {
     // base: '/front-end-doc/',     // 仓库名字,用于github Pages 部署,
     // 设置本地开发端口号
     port: 4000,
+    configureWebpack: {
+        resolve: {
+            // 设置路径别名，用于引入图片地址时，使用别名表示路径
+            alias: {
+                '@img': path.join(__dirname, '../assets/img'),
+            }
+        }
+    },
     themeConfig: {
         logo: '/logo.png',
         // 导航栏设置
