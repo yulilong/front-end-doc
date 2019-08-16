@@ -45,7 +45,7 @@ JavaScript是单线程的，那么这个单线程就成为主线程。而事件�
 
 ### 2.4 事件循环
 
-![](./../../assets/img/js_EventLoop.jpg)
+![](./../../../assets/img/js_EventLoop.jpg)
 
 
 1. 主线程运行的时候会生成堆（heap）和栈（stack）；
@@ -89,7 +89,7 @@ https://html.spec.whatwg.org/multipage/webappapis.html#event-loops
 - 然后再从**macrotask queue**（宏任务队列）中取下一个，执行完毕后，再次将**microtask queue**（微任务队列）中的全部取出；
 - 循环往复，直到两个queue中的任务都取完。
 
-![](./../../assets/img/hong.png)
+![](./../../../assets/img/hong.png)
 
 https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#microtask-queuing
 

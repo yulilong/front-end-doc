@@ -30,7 +30,7 @@ module.exports = {
                     { text: 'CSS深入浅出', link: '/doc/css/depth/' },
                 ],
             },
-            { text: 'javascript', link: '/javascript/' },
+            { text: 'javascript', link: '/doc/javascript/' },
             { text: 'dom', link: '/doc/dom/' },
             { text: 'browser', link: '/browser/' },
             {
@@ -55,7 +55,7 @@ module.exports = {
         sidebarDepth: 2,
         // 侧边栏设置
         sidebar: {
-            '/javascript/': [
+            '/doc/javascript/': [
                 '',
                 {
                     title: 'JS代码执行机制和事件循环',

@@ -69,7 +69,7 @@ console.log('开始： ' + (new Date()).getTime());
 
 下面的图片分别是在浏览器中和nodejs中的输出结果。
 
-![](./../../assets/img/003.png)
+![](./../../../assets/img/003.png)
 
 2、如果JavaScript同步代码有耗时的代码，那么setTimeout回调函数执行的时间就会大于设置的时间：
 
@@ -107,7 +107,7 @@ setTimeout(cb, 0);
 
 nodejs是最少间隔1毫秒执行一次。
 
-![](./../../assets/img/004.png)
+![](./../../../assets/img/004.png)
 
 
 
