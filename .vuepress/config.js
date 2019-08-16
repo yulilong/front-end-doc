@@ -32,7 +32,7 @@ module.exports = {
             },
             { text: 'javascript', link: '/doc/javascript/' },
             { text: 'dom', link: '/doc/dom/' },
-            { text: 'browser', link: '/browser/' },
+            { text: 'browser', link: '/doc/browser/' },
             {
                 text: '工具',
                 items: [
@@ -110,7 +110,7 @@ module.exports = {
                 'react开发遇到的问题',
                 '',
             ],
-            '/browser/': [
+            '/doc/browser/': [
                 '',
                 '001-URL相关操作',
             ],
