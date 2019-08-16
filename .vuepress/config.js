@@ -47,7 +47,7 @@ module.exports = {
             {
                 text: '前端框架',
                 items: [
-                    { text: 'react', link: '/framework/react/' },
+                    { text: 'react', link: '/doc/framework/react/' },
                 ],
             },
         ],
@@ -104,7 +104,7 @@ module.exports = {
                 '009-事件模型',
                 '010-事件种类',
             ],
-            '/framework/react/': [
+            '/doc/framework/react/': [
                 'react常用语法',
                 'react代码片段',
                 'react开发遇到的问题',
