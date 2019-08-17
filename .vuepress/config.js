@@ -19,8 +19,16 @@ module.exports = {
         }
     },
     themeConfig: {
+        // 如果有新内容，则显示刷新按钮刷新页面
+        serviceWorker: {
+            updatePopup: true // Boolean | Object, 默认值是 undefined.
+        },
         // 在导航最右边显示github链接
         repo: 'https://github.com/yulilong/front-end-doc',
+        // 编辑此页功能打开
+        editLinks: true,
+        // 启用最后更新时间
+        lastUpdated: 'Last Updated',
         logo: '/logo.png',
         // 导航栏设置
         nav: [
