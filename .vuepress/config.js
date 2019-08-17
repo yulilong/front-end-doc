@@ -39,7 +39,7 @@ module.exports = {
                     {
                         text: 'JS打包工具',
                         items: [
-                            {text: 'webpack', link: '/tool/bundle/webpack/'}
+                            {text: 'webpack', link: '/doc/tool/bundle/webpack/'}
                         ]
                     },
                 ],
@@ -88,7 +88,7 @@ module.exports = {
                     ]
                 },
             ],
-            '/tool/bundle/webpack/': [
+            '/doc/tool/bundle/webpack/': [
                 '',
             ],
             '/doc/dom/': [
