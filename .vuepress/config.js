@@ -19,6 +19,8 @@ module.exports = {
         }
     },
     themeConfig: {
+        // 在导航最右边显示github链接
+        repo: 'https://github.com/yulilong/front-end-doc',
         logo: '/logo.png',
         // 导航栏设置
         nav: [
