@@ -41,7 +41,7 @@ module.exports = {
                     { text: 'CSS深入浅出', link: '/doc/css/depth/' },
                 ],
             },
-            { text: 'javascript', link: '/doc/javascript/' },
+            { text: 'javascript', link: '/doc/js/' },
             { text: 'dom', link: '/doc/dom/' },
             { text: 'browser', link: '/doc/browser/' },
             {

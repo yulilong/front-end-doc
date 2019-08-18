@@ -1,5 +1,5 @@
 module.exports = {
-    '/doc/javascript/': [
+    '/doc/js/': [
         '',
         {
             title: 'JS代码执行机制和事件循环',
