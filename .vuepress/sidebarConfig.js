@@ -49,14 +49,15 @@ module.exports = {
         '010-事件种类',
     ],
     '/doc/framework/react/': [
+        '',
         'react常用语法',
         'react代码片段',
         'react开发遇到的问题',
-        '',
     ],
     '/doc/browser/': [
         '',
         '001-URL相关操作',
+        '002-cookie、session、WebStorage区别',
     ],
     '/doc/css/base/': [
         '',
