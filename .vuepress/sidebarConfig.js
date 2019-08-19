@@ -66,6 +66,7 @@ module.exports = {
         '003-定位',
         '004-浏览器兼容',
         '005-normalize-reset',
+        '006-css常用代码片段',
     ],
     '/doc/css/depth/': [
         '',
