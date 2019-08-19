@@ -41,10 +41,7 @@ module.exports = {
             { text: 'Home', link: '/' },                      // 根路径
             {
                 text: 'CSS',
-                items: [
-                    { text: '基础', link: '/doc/css/base/' },
-                    { text: 'CSS深入浅出', link: '/doc/css/depth/' },
-                ],
+                link: '/doc/css/'
             },
             { text: 'javascript', link: '/doc/js/' },
             { text: 'dom', link: '/doc/dom/' },
@@ -132,23 +129,32 @@ module.exports = {
                 '001-URL相关操作',
                 '002-cookie、session、WebStorage区别',
             ],
-            '/doc/css/base/': [
+            '/doc/css/': [
                 '',
-                '001-选择器',
-                '002-Transitions-Transforms-Animation',
-                '003-定位',
-                '004-浏览器兼容',
-                '005-normalize-reset',
-                '006-css常用代码片段',
-            ],
-            '/doc/css/depth/': [
-                '',
-                '001-堆叠上下文',
-                '002-icon全解',
-                '003-移动端页面(响应式)',
-                '004-Flex布局',
-                '005-布局套路',
-                '006-BFC',
+                {
+                    title: '基础',
+                    collapsable: false,
+                    children: [
+                        'base/001-选择器',
+                        'base/002-Transitions-Transforms-Animation',
+                        'base/003-定位',
+                        'base/004-浏览器兼容',
+                        'base/005-normalize-reset',
+                        'base/006-css常用代码片段',
+                    ]
+                },
+                {
+                    title: 'css深入浅出',
+                    collapsable: false,
+                    children: [
+                        'depth/001-堆叠上下文',
+                        'depth/002-icon全解',
+                        'depth/003-移动端页面(响应式)',
+                        'depth/004-Flex布局',
+                        'depth/005-布局套路',
+                        'depth/006-BFC',
+                    ]
+                },
             ],
         },
     },
