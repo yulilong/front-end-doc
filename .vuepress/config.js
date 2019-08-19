@@ -31,6 +31,11 @@ module.exports = {
         // 启用最后更新时间
         lastUpdated: 'Last Updated',
         logo: '/logo.png',
+        // 设置使用Algolia 搜索
+        algolia: {
+            apiKey: 'eb7ed07c4a067ac8d5276f84faed7c97',
+            indexName: 'yulilong'
+        },
         // 导航栏设置
         nav: [
             { text: 'Home', link: '/' },                      // 根路径
