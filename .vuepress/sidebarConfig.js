@@ -61,10 +61,11 @@ module.exports = {
     ],
     '/doc/css/base/': [
         '',
-        '001-Transitions-Transforms-Animation',
-        '002-定位',
-        '003-浏览器兼容',
-        '004-normalize-reset',
+        '001-选择器',
+        '002-Transitions-Transforms-Animation',
+        '003-定位',
+        '004-浏览器兼容',
+        '005-normalize-reset',
     ],
     '/doc/css/depth/': [
         '',
