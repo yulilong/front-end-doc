@@ -150,6 +150,7 @@ module.exports = {
                 '001-缓存',
                 '002-http协议',
                 '003-XSS攻击',
+                '004-CSRF攻击',
             ],
 
             '/doc/tool/bundle/webpack/': [
