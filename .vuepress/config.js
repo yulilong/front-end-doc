@@ -135,7 +135,8 @@ module.exports = {
             ],
             
             '/doc/html/': [
-                '001-HTML5特性说明'
+                '001-HTML5特性说明',
+                '002-HTML字符实体',
             ],
 
             '/doc/tool/bundle/webpack/': [
