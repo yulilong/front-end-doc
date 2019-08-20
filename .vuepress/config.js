@@ -40,14 +40,21 @@ module.exports = {
         nav: [
             // 根路径
             { text: 'Home', link: '/' },
-            { text: 'javascript', link: '/doc/js/' },
+            // { text: 'javascript', link: '/doc/js/' },
+            {
+                text: 'javascript', 
+                items: [
+                    { text: 'js文档', link: '/doc/js/' },
+                    { text: 'dom操作文档', link: '/doc/dom/' },
+                    { text: 'network网络', link: '/doc/network/' },
+                    { text: '浏览器相关', link: '/doc/browser/' },
+                ],
+            },
             {
                 text: 'CSS',
                 link: '/doc/css/'
             },
             { text: 'html', link: '/doc/html/' },
-            { text: 'dom', link: '/doc/dom/' },
-            { text: 'browser', link: '/doc/browser/' },
             {
                 text: '工具',
                 items: [
@@ -137,6 +144,12 @@ module.exports = {
             '/doc/html/': [
                 '001-HTML5特性说明',
                 '002-HTML字符实体',
+            ],
+
+            '/doc/network/': [
+                '001-缓存',
+                '002-http协议',
+                '003-XSS攻击',
             ],
 
             '/doc/tool/bundle/webpack/': [
