@@ -56,6 +56,7 @@ module.exports = {
                 link: '/doc/css/'
             },
             { text: 'html', link: '/doc/html/' },
+            { text: 'react', link: '/doc/react/' },
             {
                 text: '工具',
                 items: [
@@ -152,6 +153,15 @@ module.exports = {
             '/doc/html/': [
                 '001-HTML5特性说明',
                 '002-HTML字符实体',
+            ],
+
+            '/doc/react/': [
+                '',
+                '001-react编程规范',
+                '002-react常用语法',
+                '003-react代码片段',
+                '004-react高阶组件',
+                '005-react开发遇到的问题',
             ],
 
             '/doc/network/': [

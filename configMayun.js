@@ -31,6 +31,11 @@ module.exports = {
         // 启用最后更新时间
         lastUpdated: 'Last Updated',
         logo: '/logo.png',
+        // 设置使用Algolia 搜索
+        algolia: {
+            apiKey: 'eb7ed07c4a067ac8d5276f84faed7c97',
+            indexName: 'yulilong'
+        },
         // 导航栏设置
         nav: [
             // 根路径
@@ -51,6 +56,7 @@ module.exports = {
                 link: '/doc/css/'
             },
             { text: 'html', link: '/doc/html/' },
+            { text: 'react', link: '/doc/react/' },
             {
                 text: '工具',
                 items: [
@@ -147,6 +153,15 @@ module.exports = {
             '/doc/html/': [
                 '001-HTML5特性说明',
                 '002-HTML字符实体',
+            ],
+
+            '/doc/react/': [
+                '',
+                '001-react编程规范',
+                '002-react常用语法',
+                '003-react代码片段',
+                '004-react高阶组件',
+                '005-react开发遇到的问题',
             ],
 
             '/doc/network/': [

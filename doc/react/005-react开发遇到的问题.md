@@ -1,4 +1,6 @@
-# 三、react开发遇到的问题
+[TOC]
+
+# react开发遇到的问题
 
 ## 1. Module build failed: SyntaxError: Missing class properties transform.
 

@@ -1,8 +1,9 @@
-# 四、react编程规范
+# react编程规范
 
 ## 1. Basic Rules 基本规范
 
 - 每个文件只写一个模块.
+
   - 不过可以包含多个 [Stateless 或 Pure 组件](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions)。 eslint 规则：[react/no-multi-comp](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-multi-comp.md#ignorestateless)
 - 推荐使用JSX语法.
 - 不要使用 React.createElement，除非从一个非JSX的文件中初始化你的app.
@@ -285,7 +286,6 @@ JSX属性名使用骆驼式风格`camelCase`.
 <div accessKey="h" />
 // good
 <div />
-
 ```
 
 避免使用数组的 `index` 来作为属性 `key` 的值，推荐使用唯一ID([为什么?](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318))
@@ -305,7 +305,6 @@ JSX属性名使用骆驼式风格`camelCase`.
   key={todo.id}
 />
 ))}
-
 ```
 
 对于所有非必须的属性，总是手动去定义`defaultProps`属性.
@@ -335,7 +334,6 @@ SFC.defaultProps = {
 bar: '',
 children: null,
 };
-
 ```
 
 ## 10. Refs
@@ -351,7 +349,6 @@ children: null,
 <Foo
   ref={(ref) => { this.myRef = ref; }}
 />
-
 ```
 
 ## 11. 括号
@@ -378,7 +375,6 @@ render() {
   const body = <div>hello</div>;
   return <MyComponent>{body}</MyComponent>;
 }
-
 ```
 
 ## 12. 标签
@@ -390,7 +386,6 @@ render() {
 <Foo className="stuff"></Foo>
 // good
 <Foo className="stuff" />
-
 ```
 
 如果组件有多行属性，闭合标签应写在新的一行上。eslint: [react/jsx-closing-bracket-location](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md)
@@ -405,7 +400,6 @@ render() {
   bar="bar"
   baz="baz"
 />
-
 ```
 
 ## 13. Methods 函数
@@ -425,7 +419,6 @@ function ItemList(props) {
     </ul>
   );
 }
-
 ```
 
 当在 `render()` 里使用事件处理方法时，提前在构造函数里把 `this` 绑定上去. eslint: [`react/jsx-no-bind`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-bind.md)
@@ -455,7 +448,6 @@ class extends React.Component {
     return <div onClick={this.onClickDiv} />
   }
 }
-
 ```
 
 在React模块中，不要给所谓的私有函数添加 `_` 前缀，本质上它并不是私有的.
@@ -477,7 +469,6 @@ class extends React.Component {
   }
   // other stuff
 }
-
 ```
 
 在 `render` 方法中总是确保 `return` 返回值. eslint: [`react/require-render-return`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/require-render-return.md)
@@ -491,7 +482,6 @@ render() {
 render() {
   return (<div />);
 }
-
 ```
 
 ## 14. 模块生命周期
@@ -536,7 +526,6 @@ render() {
   Link.propTypes = propTypes;
   Link.defaultProps = defaultProps;
   export default Link;
-  
   ```
 
 - 使用 React.createClass 时，方法顺序如下：
