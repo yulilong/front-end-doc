@@ -105,6 +105,7 @@ module.exports = {
                         'advanced/005-浏览器兼容',
                         'advanced/006-手机端页面开发',
                         'advanced/007-SEO搜索引擎优化',
+                        'advanced/008-前端数据模拟Mock',
                     ]
                 },
             ],
