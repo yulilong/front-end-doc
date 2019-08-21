@@ -98,6 +98,7 @@ module.exports = {
                 '006-函数',
                 '007-作用域',
                 '008-排序算法',
+                '009-获取标签宽高及实例',
                 {
                     title: '高级',
                     collapsable: false,
