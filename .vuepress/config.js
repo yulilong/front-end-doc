@@ -112,6 +112,7 @@ module.exports = {
                         'advanced/007-SEO搜索引擎优化',
                         'advanced/008-前端数据模拟Mock',
                         'advanced/009-JS中的垃圾回收和内存泄露',
+                        'advanced/010-moment时间插件使用说明',
                     ]
                 },
             ],
