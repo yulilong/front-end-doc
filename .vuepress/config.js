@@ -97,6 +97,7 @@ module.exports = {
                 '005-Ajax',
                 '006-函数',
                 '007-作用域',
+                '008-排序算法',
                 {
                     title: '高级',
                     collapsable: false,
