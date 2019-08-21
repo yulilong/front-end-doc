@@ -111,6 +111,7 @@ module.exports = {
                         'advanced/006-手机端页面开发',
                         'advanced/007-SEO搜索引擎优化',
                         'advanced/008-前端数据模拟Mock',
+                        'advanced/009-JS中的垃圾回收和内存泄露',
                     ]
                 },
             ],
