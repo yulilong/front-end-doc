@@ -108,6 +108,8 @@ module.exports = {
                         'advanced/008-前端数据模拟Mock',
                         'advanced/009-JS中的垃圾回收和内存泄露',
                         'advanced/010-moment时间插件使用说明',
+                        'advanced/011-react项目搭建',
+                        'advanced/012-vue项目搭建',
                     ]
                 },
             ],
