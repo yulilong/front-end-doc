@@ -43,6 +43,7 @@ module.exports = {
                     { text: 'dom操作文档', link: '/doc/dom/' },
                     { text: 'network网络', link: '/doc/network/' },
                     { text: '浏览器相关', link: '/doc/browser/' },
+                    { text: '设计模式', link: '/doc/designPattern/' },
                 ],
             },
             {
@@ -181,6 +182,9 @@ module.exports = {
                 '',
                 '001-URL相关操作',
                 '002-cookie、session、WebStorage区别',
+            ],
+            '/doc/designPattern/':[
+                ''
             ],
         },
     },
