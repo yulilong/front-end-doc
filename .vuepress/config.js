@@ -44,7 +44,7 @@ module.exports = {
             {
                 text: 'javascript', 
                 items: [
-                    { text: 'js文档', link: '/doc/js/' },
+                    { text: 'js', link: '/doc/js/' },
                     { text: 'dom操作文档', link: '/doc/dom/' },
                     { text: 'network网络', link: '/doc/network/' },
                     { text: '浏览器相关', link: '/doc/browser/' },
@@ -66,12 +66,6 @@ module.exports = {
                             {text: 'webpack', link: '/doc/tool/bundle/webpack/'}
                         ]
                     },
-                ],
-            },
-            {
-                text: '前端框架',
-                items: [
-                    { text: 'react', link: '/doc/framework/react/' },
                 ],
             },
         ],

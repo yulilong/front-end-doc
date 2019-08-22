@@ -68,12 +68,6 @@ module.exports = {
                     },
                 ],
             },
-            {
-                text: '前端框架',
-                items: [
-                    { text: 'react', link: '/doc/framework/react/' },
-                ],
-            },
         ],
         // 侧边栏标题显示的层数, 0:禁用标题（headers）链接， 1：提取到 h2 的标题， 2： 同时提取 h2 和 h3 标题
         sidebarDepth: 2,
