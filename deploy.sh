@@ -35,3 +35,8 @@ git push -f https://github.com/yulilong/front-end-doc.git master:gh-pages
 # 返回到上一次的工作目录
 echo "回到刚才工作目录"
 cd -
+
+echo ''
+echo "开始部署码云代码"
+echo ''
+bash mayun.sh

@@ -37,4 +37,5 @@ git push -f https://gitee.com/dragon-li/front-end-doc.git master:gh-pages
 echo "回到刚才工作目录"
 cd -
 echo "恢复修改的文件"
+echo "git checkout ."
 git checkout .
