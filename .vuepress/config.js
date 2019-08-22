@@ -40,13 +40,13 @@ module.exports = {
         nav: [
             // 根路径
             { text: 'Home', link: '/' },
-            // { text: 'javascript', link: '/doc/js/' },
+            { text: '目录', link: '/catalog' },
             {
                 text: 'javascript', 
                 items: [
                     { text: 'js', link: '/doc/js/' },
                     { text: 'dom操作文档', link: '/doc/dom/' },
-                    { text: 'network网络', link: '/doc/network/' },
+                    { text: 'network网络', link: '/doc/network/001-缓存' },
                     { text: '浏览器相关', link: '/doc/browser/' },
                     { text: '设计模式', link: '/doc/designPattern/' },
                 ],
@@ -115,6 +115,37 @@ module.exports = {
                 },
             ],
             
+            '/doc/dom/': [
+                '',
+                '001-节点的类型',
+                '002-节点的关系',
+                '003-节点的操作',
+                '004-动态集合NodeLIst-HTMLCollection',
+                '005-Element',
+                '006-Node',
+                '007-Element对象',
+                '008-document对象',
+                '009-事件模型',
+                '010-事件种类',
+            ],
+
+            '/doc/network/': [
+                '001-缓存',
+                '002-http协议',
+                '003-XSS攻击',
+                '004-CSRF攻击',
+            ],
+
+            '/doc/browser/': [
+                '',
+                '001-URL相关操作',
+                '002-cookie、session、WebStorage区别',
+            ],
+
+            '/doc/designPattern/':[
+                ''
+            ],
+
             '/doc/css/': [
                 // '',
                 {
@@ -158,43 +189,13 @@ module.exports = {
                 '005-react开发遇到的问题',
             ],
 
-            '/doc/network/': [
-                '001-缓存',
-                '002-http协议',
-                '003-XSS攻击',
-                '004-CSRF攻击',
-            ],
-
             '/doc/tool/bundle/webpack/': [
                 '',
             ],
-            '/doc/dom/': [
-                '',
-                '001-节点的类型',
-                '002-节点的关系',
-                '003-节点的操作',
-                '004-动态集合NodeLIst-HTMLCollection',
-                '005-Element',
-                '006-Node',
-                '007-Element对象',
-                '008-document对象',
-                '009-事件模型',
-                '010-事件种类',
-            ],
-            '/doc/framework/react/': [
-                '',
-                'react常用语法',
-                'react代码片段',
-                'react开发遇到的问题',
-            ],
-            '/doc/browser/': [
-                '',
-                '001-URL相关操作',
-                '002-cookie、session、WebStorage区别',
-            ],
-            '/doc/designPattern/':[
-                ''
-            ],
+            
+            '/': [
+                'catalog',
+            ]
         },
     },
     // markdown: {
