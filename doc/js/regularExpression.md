@@ -1,7 +1,3 @@
-<!-- ---
-sidebar: auto
---- -->
-
 # 正则表达式
 
 ## 1、正则表达式介绍
@@ -432,3 +428,5 @@ var reg = /\d*[\u4e00-\u9fa5]\/[\u4e00-\u9fa5]\,/	// 匹配（10元/斤,）
   [RegExp对象介绍](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp#assertions)
 
   [String对象介绍](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String)
+
+[学习正则表达式 github](https://github.com/ziishaned/learn-regex)
