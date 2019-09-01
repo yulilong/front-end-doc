@@ -140,6 +140,7 @@ module.exports = {
                 '',
                 '001-URL相关操作',
                 '002-cookie、session、WebStorage区别',
+                '003-浏览器缓存',
             ],
 
             '/doc/designPattern/':[
