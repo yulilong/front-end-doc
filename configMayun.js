@@ -45,8 +45,7 @@ module.exports = {
                 items: [
                     { text: 'js', link: '/doc/js/' },
                     { text: 'dom操作文档', link: '/doc/dom/' },
-                    { text: 'network网络', link: '/doc/network/001-缓存' },
-                    { text: '浏览器相关', link: '/doc/browser/' },
+                    { text: '浏览器、网络', link: '/doc/browserNetwork/' },
                     { text: '设计模式', link: '/doc/designPattern/' },
                 ],
             },
@@ -128,18 +127,16 @@ module.exports = {
                 '010-事件种类',
             ],
 
-            '/doc/network/': [
-                '001-缓存',
-                '002-http协议',
-                '003-XSS攻击',
-                '004-CSRF攻击',
-            ],
-
-            '/doc/browser/': [
+            // 浏览器、网咯相关
+            '/doc/browserNetwork/': [
                 '',
+                '001-cookie',
                 '001-URL相关操作',
                 '002-cookie、session、WebStorage区别',
                 '003-浏览器缓存',
+                '004-http协议',
+                '005-XSS攻击',
+                '006-CSRF攻击',
             ],
 
             '/doc/designPattern/':[
