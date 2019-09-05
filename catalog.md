@@ -62,12 +62,12 @@
 ## 2. CSS
 
 * 基础
-    * [001-选择器](/doc/css/base/001-选择器.md)
-    * [002-Transitions-Transforms-Animation](/doc/css/base/002-Transitions-Transforms-Animation.md)
-    * [003-定位](/doc/css/base/003-定位.md)
-    * [004-浏览器兼容](/doc/css/base/004-浏览器兼容.md)
-    * [005-normalize-reset](/doc/css/base/005-normalize-reset.md)
-    * [006-css常用代码片段](/doc/css/base/006-css常用代码片段.md)
+    * [001-选择器](/doc/css/001-选择器.md)
+    * [002-Transitions-Transforms-Animation](/doc/css/002-Transitions-Transforms-Animation.md)
+    * [003-定位](/doc/css/003-定位.md)
+    * [004-浏览器兼容](/doc/css/004-浏览器兼容.md)
+    * [005-normalize-reset](/doc/css/005-normalize-reset.md)
+    * [006-css常用代码片段](/doc/css/006-css常用代码片段.md)
 * css深入浅出
     * [001-宽度与高度](/doc/css/depth/001-宽度与高度.md)
     * [002-堆叠上下文](/doc/css/depth/002-堆叠上下文.md)

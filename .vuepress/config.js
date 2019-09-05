@@ -8,7 +8,7 @@ module.exports = {
         ["link", { rel: "icon", href: "/logo.png" }],   // 添加网站的icon图标
     ],
     // 如果github Pages绑定域名，则需要把base删除，否则域名访问会失败
-    base: '/front-end-doc/',     // 仓库名字,用于github Pages 部署,
+    // base: '/front-end-doc/',     // 仓库名字,用于github Pages 部署,
     // 设置本地开发端口号
     port: 4000,
     configureWebpack: {
@@ -155,18 +155,6 @@ module.exports = {
                 '004-浏览器兼容',
                 '005-normalize-reset',
                 '006-css常用代码片段',
-                {
-                    title: '基础',
-                    collapsable: false,
-                    children: [
-                        'base/001-选择器',
-                        'base/002-Transitions-Transforms-Animation',
-                        'base/003-定位',
-                        'base/004-浏览器兼容',
-                        'base/005-normalize-reset',
-                        'base/006-css常用代码片段',
-                    ]
-                },
                 {
                     title: 'css深入浅出',
                     collapsable: false,
