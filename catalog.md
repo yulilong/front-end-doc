@@ -63,7 +63,8 @@
 
 * 基础
     * [001-选择器](/doc/css/001-选择器.md)
-    * [002-Transitions-Transforms-Animation](/doc/css/002-Transitions-Transforms-Animation.md)
+    * [002-transition-transform](/doc/css/002-transition-transform.md)
+    * [002-animation](/doc/css/002-animation.md)
     * [003-定位](/doc/css/003-定位.md)
     * [004-浏览器兼容](/doc/css/004-浏览器兼容.md)
     * [005-normalize-reset](/doc/css/005-normalize-reset.md)

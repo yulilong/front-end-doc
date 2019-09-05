@@ -1,5 +1,4 @@
 const path = require('path');
-const sidebarConfig = require('./sidebarConfig');
 
 module.exports = {
     title: '前端知识',
@@ -150,7 +149,8 @@ module.exports = {
             '/doc/css/': [
                 '',
                 '001-选择器',
-                '002-Transitions-Transforms-Animation',
+                '002-transition-transform',
+                '002-animation',
                 '003-定位',
                 '004-浏览器兼容',
                 '005-normalize-reset',
