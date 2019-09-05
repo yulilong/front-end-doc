@@ -148,7 +148,13 @@ module.exports = {
             ],
 
             '/doc/css/': [
-                // '',
+                '',
+                '001-选择器',
+                '002-Transitions-Transforms-Animation',
+                '003-定位',
+                '004-浏览器兼容',
+                '005-normalize-reset',
+                '006-css常用代码片段',
                 {
                     title: '基础',
                     collapsable: false,
@@ -199,7 +205,4 @@ module.exports = {
             ]
         },
     },
-    // markdown: {
-    //     lineNumbers: true,          // 代码块显示行号
-    // },
 }
