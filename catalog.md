@@ -46,18 +46,16 @@
 * [009-事件模型](/doc/dom/009-事件模型.md)
 * [010-事件种类](/doc/dom/010-事件种类.md)
 
-### 1.3 网络
+### 1.3 浏览器、网络相关
 
-* [001-缓存](/doc/network/001-缓存.md)
-* [002-http协议](/doc/network/002-http协议.md)
-* [003-XSS攻击](/doc/network/003-XSS攻击.md)
-* [004-CSRF攻击](/doc/network/004-CSRF攻击.md)
+* [cookie](/doc/browserNetwork/001-cookie.md)
+* [URL相关操作](/doc/browserNetwork/001-URL相关操作.md)
+* [cookie、session、WebStorage区别](/doc/browserNetwork/002-cookie、session、WebStorage区别.md)
+* [浏览器缓存](/doc/browserNetwork/003-浏览器缓存.md)
+* [http协议](/doc/browserNetwork/004-http协议.md)
+* [CSRF攻击](/doc/browserNetwork/004-CSRF攻击.md)
+* [XSS攻击](/doc/browserNetwork/005-XSS攻击.md)
 
-### 1.4 浏览器相关
-
-* [cookie](/doc/browser/README.md)
-* [001-URL相关操作](/doc/browser/001-URL相关操作.md)
-* [002-cookie、session、WebStorage区别](/doc/browser/002-cookie、session、WebStorage区别.md)
 
 ## 2. CSS
 

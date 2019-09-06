@@ -127,7 +127,7 @@ module.exports = {
                 '010-事件种类',
             ],
 
-            // 浏览器、网咯相关
+            // 浏览器、网络相关
             '/doc/browserNetwork/': [
                 '',
                 '001-cookie',
@@ -135,8 +135,8 @@ module.exports = {
                 '002-cookie、session、WebStorage区别',
                 '003-浏览器缓存',
                 '004-http协议',
+                '004-CSRF攻击',
                 '005-XSS攻击',
-                '006-CSRF攻击',
             ],
 
             '/doc/designPattern/':[

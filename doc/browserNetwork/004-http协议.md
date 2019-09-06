@@ -19,10 +19,6 @@ HTTP是一个应用层协议，由请求和响应构成，是一个标准的客�
 
 
 
-docsify主题：
-
-https://jhildenbiddle.github.io/docsify-themeable/#/customization
-
 ## 参考资料
 
 
