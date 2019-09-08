@@ -138,6 +138,7 @@ module.exports = {
                 '004-CSRF攻击',
                 '005-XSS攻击',
                 '006-http发展史',
+                '007-http报文',
             ],
 
             '/doc/designPattern/':[
