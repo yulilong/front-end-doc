@@ -78,7 +78,7 @@ HTTP报文分为两类：
 
 响应报文例子：
 
-```http
+```
 curl -i www.baidu.com
 
 HTTP/1.1 200 OK
@@ -100,8 +100,55 @@ Set-Cookie: BDORZ=27315; max-age=86400; domain=.baidu.com; path=/
 
 
 
+## 3. 报文首部
+
+首部也就是请求头和响应头内容。
+
+1、首部用来说明客户端、服务器或报文主体的一些信息
+
+2、首部可以有好几行，也可以没有
+
+3、每个首部行由首部字段+`:` + 空格 + 值组成，如：`Connection: Keep-Alive`
+
+4、每个首部行在结束的地方都有`CRLF`(回车和换行符)
+
+5、首部字段分为4种：**通用首部字段、请求首部字段、响应首部字段、实体首部字段**
+
+6、请求头部包含：**请求首部字段、通用首部字段、实体首部字段**
+
+7、响应头部包含：**响应首部字段、通用首部字段、实体首部字段**
+
+![](./img/011-httpMessage.png)
+
+### 3.1 通用部首
+
+通用部署字段是请求报文和响应报文都使用的字段。
+
+| 首部              | 描述                                                         |
+| ----------------- | ------------------------------------------------------------ |
+| Cache-Control     | 控制缓存的行为,`Cache-Control: private, no-cache, no-store`  |
+| Connection        | 客户端和服务器是否保持连接,`Connection: Keep-Alive`          |
+| Date              | 创建报文的日期时间,`Date: Sun, 08 Sep 2019 16:44:37 GMT`     |
+| Pragma            | http1.1之前的版本历史遗留字段，报文指令，`Pragma: no-cache`对应`Cahche-Control: no-cache` |
+| Trailer           | 允许发送方在分块传输发送的消息后面添加额外的元信息，比如消息的完整性校验，消息的数字签名，或者消息经过处理之后的最终状态等。`Trailer: Expires` |
+| Transfer-Encoding | 规定了传输报文主体采用的编码方式,`Transfer-Encoding: chunked` |
+| Upgrade           | 用于检测HTTP协议，是否可使用更高版本的协议,`Upgrade: TLS/1.0, HTTP/1.1` |
+| Via               | 显示了报文经过的中间节点（代理、网关）,`Via: 1.0 fred, 1.1 p.example.net` |
+|                   |                                                              |
+|                   |                                                              |
+|                   |                                                              |
+|                   |                                                              |
+|                   |                                                              |
+|                   |                                                              |
+
+
+
 ## 参考资料
 
 [HTTP头字段 维基百科](https://zh.wikipedia.org/wiki/HTTP头字段)
+
+[HTTP Headers MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers)
+
+[部首脑图](https://www.processon.com/view/link/58025201e4b0d6b27dd4c8af)
 
 [可能是全网最全的http面试答案 掘金](https://juejin.im/post/5d032b77e51d45777a126183)
