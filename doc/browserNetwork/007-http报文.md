@@ -149,6 +149,7 @@ Set-Cookie: BDORZ=27315; max-age=86400; domain=.baidu.com; path=/
 | Accept-Encoding                                              | (接收端)可以接受的内容编码形式(所支持的压缩算法),`Accept-Encoding: gzip, deflate`, HTTP/1.1 |
 | Accept-Language                                              | 列出用户代理期望的页面语言。`Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,en-US`,HTTP/1.1 |
 | [Authorization](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Authorization) | 请求消息头含有服务器用于验证用户代理身份的凭证，通常会在服务器返回[`401`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status/401) `Unauthorized` 状态码以及[`WWW-Authenticate`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/WWW-Authenticate) 消息头之后在后续请求中发送此消息头。`Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==` |
+| [Cookie](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Cookie) | 含有先前由服务器通过 [`Set-Cookie`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Set-Cookie)  首部投放并存储到客户端的 [HTTP cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies)。`Cookie: PHPSESSID=298zf09hf012fh2; csrftoken=u32t4o3tb3gg43; _gat=1;` |
 | [Expect](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Expect) | 包含一个期望条件，表示服务器只有在满足此期望条件的情况下才能妥善地处理请求。`Expect: 100-continue` |
 | From                                                         | 发起此请求的用户的邮件地址,`From: user@example.com`          |
 | Host                                                         | 指明了服务器的域名（对于虚拟主机来说），以及（可选的）服务器监听的TCP端口号。`Host: en.wikipedia.org:80` |
@@ -160,14 +161,36 @@ Set-Cookie: BDORZ=27315; max-age=86400; domain=.baidu.com; path=/
 | Max-Forwards                                                 | 限制该消息可被代理及网关转发的次数。`Max-Forwards: 10`       |
 | Proxy-Authorization                                          | 用来向代理进行认证的认证信息。`Proxy-Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==` |
 | Range                                                        | Range对请求中的 Url 的原始获取方                             |
-| Referer                                                      |                                                              |
-|                                                              |                                                              |
+| [Referer](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Referer) | 当前请求页面的来源页面的地址，即表示当前页面是通过此来源页面里的链接进入的。`Referer: http://en.wikipedia.org/wiki/Main_Page` |
+| User-Agent                                                   | 告诉服务器，创建请求的浏览器和用户代理名称等信息。`user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36` |
 
 
 
 ### 3.3 响应首部字段
 
 从服务器端向客户端返回响应报文时使用的首部。补充了响应的附加内容，也会要求客户端附加额外的内容信息。
+
+| 首部                                                         | 描述                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [Access-Control-Allow-Origin](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS) | 指定哪些网站可参与到跨来源资源共享过程中.`Access-Control-Allow-Origin: *` |
+| [Accept-Ranges](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Accept-Ranges) | 用来告诉浏览器，服务器是否可以处理范围请求，字段的具体值用于定义范围请求的单位。`Accept-Ranges: bytes`:范围请求的单位是 bytes （字节） |
+| Age                                                          | 告诉浏览器，服务器在多久之前创建了响应,Age消息头的值通常接近于0。表示此消息对象刚刚从原始服务器获取不久；其他的值则是表示代理服务器当前的系统时间与此应答消息中的通用消息头 [`Date`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Date) 的值之差。`Age: 12` |
+| [Allow](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Allow) | 列出了服务器可用的请求方法，`Allow: GET, HEAD`               |
+| [ETag](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/ETag) | 协商缓存字段，对应请求头的`If-None-Match`表示当前资源文件的一个唯一标识(由服务器生成),`ETag: "737060cd8c284d8af7ad3082f209582d"` |
+| [Location](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Location) | 需要将页面重新定向至的地址。一般在响应码为3xx的响应中才会有意义。`Location: /index.html` |
+| Proxy-Authenticate                                           | 把代理服务器要求的认证信息发送给客户端,`Proxy-Authenticate: Basic` |
+| [Retry-After](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Retry-After) | 如果某个实体临时不可用，则，此协议头用来告知客户端日后重试。其值可以是一个特定的时间段(以秒为单位)或一个超文本传输协议日期。`Retry-After: Fri, 07 Nov 2014 23:59:59 GMT`，或者：`Retry-After: 120` |
+| Server                                                       | 服务器应用软件名称和版本,`Server: Apache/2.4.1 (Unix)`       |
+| Vary                                                         |                                                              |
+|                                                              |                                                              |
+|                                                              |                                                              |
+|                                                              |                                                              |
+|                                                              |                                                              |
+|                                                              |                                                              |
+|                                                              |                                                              |
+|                                                              |                                                              |
+|                                                              |                                                              |
+|                                                              |                                                              |
 
 
 
