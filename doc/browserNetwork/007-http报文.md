@@ -175,28 +175,40 @@ Set-Cookie: BDORZ=27315; max-age=86400; domain=.baidu.com; path=/
 | [Access-Control-Allow-Origin](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS) | 指定哪些网站可参与到跨来源资源共享过程中.`Access-Control-Allow-Origin: *` |
 | [Accept-Ranges](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Accept-Ranges) | 用来告诉浏览器，服务器是否可以处理范围请求，字段的具体值用于定义范围请求的单位。`Accept-Ranges: bytes`:范围请求的单位是 bytes （字节） |
 | Age                                                          | 告诉浏览器，服务器在多久之前创建了响应,Age消息头的值通常接近于0。表示此消息对象刚刚从原始服务器获取不久；其他的值则是表示代理服务器当前的系统时间与此应答消息中的通用消息头 [`Date`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Date) 的值之差。`Age: 12` |
-| [Allow](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Allow) | 列出了服务器可用的请求方法，`Allow: GET, HEAD`               |
 | [ETag](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/ETag) | 协商缓存字段，对应请求头的`If-None-Match`表示当前资源文件的一个唯一标识(由服务器生成),`ETag: "737060cd8c284d8af7ad3082f209582d"` |
 | [Location](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Location) | 需要将页面重新定向至的地址。一般在响应码为3xx的响应中才会有意义。`Location: /index.html` |
 | Proxy-Authenticate                                           | 把代理服务器要求的认证信息发送给客户端,`Proxy-Authenticate: Basic` |
 | [Retry-After](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Retry-After) | 如果某个实体临时不可用，则，此协议头用来告知客户端日后重试。其值可以是一个特定的时间段(以秒为单位)或一个超文本传输协议日期。`Retry-After: Fri, 07 Nov 2014 23:59:59 GMT`，或者：`Retry-After: 120` |
 | Server                                                       | 服务器应用软件名称和版本,`Server: Apache/2.4.1 (Unix)`       |
-| Vary                                                         |                                                              |
-|                                                              |                                                              |
-|                                                              |                                                              |
-|                                                              |                                                              |
-|                                                              |                                                              |
-|                                                              |                                                              |
-|                                                              |                                                              |
-|                                                              |                                                              |
-|                                                              |                                                              |
-|                                                              |                                                              |
+| [Set-Cookie](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Set-Cookie) | 用来由服务器端向客户端发送 cookie,`Set-Cookie: UserID=JohnDoe; Max-Age=3600; Version=1` |
+| Vary                                                         | vary字段可以对缓存进行控制,当代理服务器接受到带有Vary字段的请求时，如果使用的Accept-Language字段相同，那么就直接从缓存中返回响应，如果不一致，就先从原服务器获取资源后，才能作为响应返回.`Vary: *` |
+| [WWW-Authenticate](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/WWW-Authenticate) | 表明在请求获取这个实体时应当使用的认证模式,`WWW-Authenticate: Basic` |
+
+
 
 
 
 ### 3.4 实体首部字段
 
-针对请求报文和响应报文的实体部分使用的首部。补充了资源内容更新时间等与实体有关的信息。
+针对http报文的实体部分使用的首部。补充了资源内容更新时间等与实体有关的信息。
+
+在请求报文和响应报文中，都包含着实体相关信息的首部字段
+
+| 首部                                                         | 描述                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [Allow](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Allow) | 列出了服务器可用的请求方法，`Allow: GET, HEAD                |
+| [Content-Encoding](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Encoding) | 用于对特定媒体类型的数据进行压缩。当这个首部出现的时候，它的值表示消息主体进行了何种方式的内容编码转换。这个消息首部用来告知客户端应该怎样解码才能获取在 `Content-Type` 中标示的媒体类型内容。`Content-Encoding: gzip` |
+| [Content-Language](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Language) | 实体内容所使用的语言，`Content-Language: en-US`              |
+| Content-Length                                               | 回应消息体的长度，以 字节 （8位为一字节）为单位.`Content-Length: 348` |
+| [Content-Location](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Location) | 资源实际所处的位置,`Content-Location: /index.htm`            |
+| Content-MD5                                                  | 客户端会将接受到的主体执行相同的MD5算法，然后与该字段比较,`Content-MD5: Q2hlY2sgSW50ZWdyaXR5IQ==` |
+| Content-Range                                                | 这条部分消息是属于某条完整消息的哪个部分,`Content-Range: bytes 21010-47021/47022` |
+| [Content-Type](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Type) | 实体主体内对象的媒体类型,指示资源的[MIME类型](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types),`Content-Type: text/html; charset=utf-8` |
+| Expires                                                      | 强缓存字段，指定一个日期/时间，超过该时间则认为此回应已经过期，`Expires: Thu, 01 Dec 1994 16:00:00 GMT` |
+| [Last-Modified](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Last-Modified) | 协商缓存字段，实体最后一次修改时间。`Last-Modified: Tue, 15 Nov 1994 12:45:26 GMT` |
+
+
+
 
 ## 参考资料
 
