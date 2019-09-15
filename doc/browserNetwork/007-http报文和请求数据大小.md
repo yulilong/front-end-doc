@@ -4,7 +4,7 @@
 
 
 
-# http报文
+# http报文和请求数据大小
 
 HTTP报文是在HTTP应用程序之间发送的数据块。这些数据块以一些文本形式的 `元信息(meta-information)`开头，这些信息描述了报文的内容及含义，后面跟着可选的数据部分。
 
@@ -209,6 +209,78 @@ Set-Cookie: BDORZ=27315; max-age=86400; domain=.baidu.com; path=/
 
 
 
+## 4. 请求数据大小说明
+
+HTTP报文每个部分都包含请求信息，那么每个请求部分是否都有大小限制呢？
+
+### 4.1 请求行 URI
+
+在GET请求中，请求参数是放在URL中进行传递的，所以，HTTP GET请求最关心的问题：URL能有多长？能放多杀个参数？
+
+在HTTP 1.1 协议中([RFC 2616](https://tools.ietf.org/html/rfc2616)):
+
+```
+The HTTP protocol does not place any a priori limit on the length of a URI
+```
+
+通过查看文档，可以明确一点的是HTTP协议没有显式限制URI的长度，理论上在URI中传递多少参数都可以。但出于各种原因考虑，浏览器、服务器都对URI做了不同的的限制。
+
+#### 4.1.1 浏览器限制
+
+所有主流浏览器都会对URI的长度进行限制。如果在浏览器中输入过长的URI，浏览器会自动进行截断。各个浏览器对URI长度的限制各不相同，甚至不同版本也不一样。大约一个概念，2000字符以内的URI都能符合所有主流浏览器的要求。
+
+#### 4.1.2 服务器限制
+
+一般服务器没有专门针对URI的参数限制，但是由于URI是会包含在报文请求头中(request header)，所以对header的大小限制会对URI起作用，比如Nginx的`large_client_header_buffers`这个属性，它默认是4K。
+
+这里`URI是包含在 request header中的`这句话其实是有问题的。URI 在HTTP 请求报文的请求行中(request line)，请求报文分request line、request header、request body三个部分(具体：https://www.ietf.org/rfc/rfc2616.txt，第4章和第5章)。但是使用的时候都默认将header中理解为包含request line。
+
+### 4.2 请求头部 header
+
+请求头部 header 的长度和URI一样，协议中并没有显式的限制大小。理论上在header中放多少属性都是可以的，但出于各种考虑，各家浏览器和服务都做了不同的限制。
+
+#### 4.2.1 浏览器限制
+
+各个主流浏览器限制几十K到几百M不等的限制。基本上能满足平时的需求，如果这个长度对实际工作业务有很大影响的话，建议还是亲自测试一下。
+
+#### 4.2.2 服务器限制
+
+比如Nginx的`large_client_header_buffers`就限制了header的长度，也可以自己设置这个值。
+
+可能会影响的header的参数还有：`client_header_buffer_size`、`client_header_timeout`，更多参考：http://wiki.nginx.org/HttpCoreModule
+
+### 4.3 请求体 body
+
+HTTP支持文件传输，文件的二进制数据不会放在URI或header中，而放在了body里面，那么这个body的大小就一定不能默认限制太小，尤其是客户端。
+
+理论上，协议没有对body大小做任何限制。
+
+浏览器也没有对body做任何大小限制，因为如果浏览器做了大小限制就意味着它直接影响了你的服务功能。
+
+所以对body的限制任务就放在了服务器上。
+
+出于安全考虑，我们必须在服务器端对请求体大小进行限制，请求体长度的最大值的设置有多方面的因素，需要根据业务情况反复调优决定。考虑以下几方面因素：
+1、根据请求报文的大小，预估实际请求体的最大值；
+2、限制上传文件的大小，文件上传服务与业务操作服务分离；
+3、设置合理的超时时间，避免由于请求体太大导致线程被长时间占用；
+4、请求体设置不能太大，防止轻易被DDOS攻击；
+在Nginx中，`client_max_body_size`参数可以限制body大小，默认是1M。`client_body_timeout`参数用于当body太大，或者网络太差时，这个也有可能会影响请求的成功率。
+
+### 4.3 HTTP请求大小的影响
+
+安全因素：
+
+如果一个网站的服务器不限制body大小，那么它就可以被黑客利用攻击。黑客利用这一点向HTTP POST方法的body中传递非常大（比如几M)的请求。那么有的服务器会占用一个进程专门处理这个请求，就会导致拟对外无法提供其他的服务，你的服务器就瘫痪了，这就是DDOS攻击。
+
+文件上传服务：
+
+文件上传有两种情况：
+
+- 可能会遇到文件上传失败，那么大多是服务器请求大小设置没有设置好
+- 文件上传大小是不是设置越大越好？答案必须是否定的，理由也是安全考虑。满足需求的大小限制就够了。
+
+实际中，大都把文件上传和业务接口分开来提供。如果你的文件上传服务和业务接口是同一个机器的话，那么说明你的业务接口可以允许body大小一定是很大的。在这种情况下，你的业务中所有POST请求都是不安全的！！只要进行DDOS攻击，业务就会瘫痪。
+
 
 ## 参考资料
 
@@ -221,3 +293,5 @@ Set-Cookie: BDORZ=27315; max-age=86400; domain=.baidu.com; path=/
 [部首脑图](https://www.processon.com/view/link/58025201e4b0d6b27dd4c8af)
 
 [可能是全网最全的http面试答案 掘金](https://juejin.im/post/5d032b77e51d45777a126183)
+
+[论HTTP请求大小](https://www.cnblogs.com/yjf512/archive/2013/03/29/2988296.html)
