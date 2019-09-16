@@ -2,7 +2,7 @@
 
 [TOC]
 
-# HTTP 请求方法
+# HTTP 请求方法和状态码
 
 HTTP定义了一组`请求方法`，以表明要给定资源执行的操作。指示针对给定资源要执行的期望动作。每个请求方法都实现了不同的语义，但一些共同的特征由一组共享，例如一个请求方法可以是[安全](https://developer.mozilla.org/zh-CN/docs/Glossary/safe)、[幂等](https://developer.mozilla.org/zh-CN/docs/Glossary/幂等)、[可缓存](https://developer.mozilla.org/en-US/docs/Glossary/cacheable)。
 
@@ -118,6 +118,14 @@ PUT方法是幂等的：连续调用一次或者多次的效果相同（无副�
 ### 2.3 PUT、PATCH区别
 
 PUT和PATCH都是更新资源，而PATCH用来对已知资源进行局部更新。
+
+
+
+## 3. HTTP状态码
+
+**HTTP状态码**（英语：HTTP Status Code）用来表示请求的结果，状态码被分为五大类：
+
+
 
 ## 参考资料
 

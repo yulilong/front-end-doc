@@ -139,6 +139,7 @@ module.exports = {
                 '005-XSS攻击',
                 '006-http发展史',
                 '007-http报文和请求数据大小',
+                '008-http方法和状态码',
             ],
 
             '/doc/designPattern/':[

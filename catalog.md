@@ -57,6 +57,7 @@
 * [XSS攻击](/doc/browserNetwork/005-XSS攻击.md)
 * [http发展史](/doc/browserNetwork/006-http发展史.md)
 * [http报文和请求数据大小](/doc/browserNetwork/007-http报文和请求数据大小.md)
+* [http方法和状态码](/doc/browserNetwork/008-http方法和状态码.md)
 
 
 ## 2. CSS
