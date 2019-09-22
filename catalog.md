@@ -91,3 +91,5 @@
 * [003-react代码片段](/doc/react/003-react代码片段.md)
 * [004-react高阶组件](/doc/react/004-react高阶组件.md)
 * [005-react开发遇到的问题](/doc/react/005-react开发遇到的问题.md)
+* [006-react平时注意的规范](/doc/react/006-react平时注意的规范.md)
+* [007-react生命周期](/doc/react/007-react生命周期.md)

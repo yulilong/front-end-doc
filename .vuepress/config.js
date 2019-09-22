@@ -182,6 +182,8 @@ module.exports = {
                 '003-react代码片段',
                 '004-react高阶组件',
                 '005-react开发遇到的问题',
+                '006-react平时注意的规范',
+                '007-react生命周期',
             ],
 
             '/doc/tool/bundle/webpack/': [
