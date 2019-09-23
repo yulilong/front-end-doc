@@ -369,6 +369,135 @@ UNSAFE_componentWillUpdate(nextProps, nextState)
 
 
 
+## 6. react组件其他API
+
+### 6.1 forceUpdate()
+
+```javascript
+component.forceUpdate(callback)
+```
+
+默认情况下，当组件的 state 或 props 发生变化时，组件将重新渲染。如果 `render()` 方法依赖于其他数据，则可以调用 `forceUpdate()` 强制让组件重新渲染。
+
+调用 `forceUpdate()` 将致使组件调用 `render()` 方法，此操作会跳过该组件的 `shouldComponentUpdate()`。但其子组件会触发正常的生命周期方法，包括 `shouldComponentUpdate()` 方法。如果标记发生变化，React 仍将只更新 DOM。
+
+通常你应该避免使用 `forceUpdate()`，尽量在 `render()` 中使用 `this.props` 和 `this.state`。
+
+
+
+### 6.2 setState()
+
+```javascript
+setState(updater[, callback])
+```
+
+`setState()` 将对组件 state 的更改排入队列，并通知 React 需要使用更新后的 state 重新渲染此组件及其子组件。这是用于更新用户界面以响应事件处理器和处理服务器数据的主要方式
+
+将 `setState()` 视为*请求*而不是立即更新组件的命令。为了更好的感知性能，React 会延迟调用它，然后通过一次传递更新多个组件。React 并不会保证 state 的变更会立即生效。
+
+`setState()` 并不总是立即更新组件。它会批量推迟更新。这使得在调用 `setState()` 后立即读取 `this.state` 成为了隐患。为了消除隐患，请使用 `componentDidUpdate` 或者 `setState` 的回调函数（`setState(updater, callback)`），这两种方式都可以保证在应用更新后触发。如需基于之前的 state 来设置当前的 state，请阅读下述关于参数 `updater` 的内容。
+
+除非 `shouldComponentUpdate()` 返回 `false`，否则 `setState()` 将始终执行重新渲染操作。如果可变对象被使用，且无法在 `shouldComponentUpdate()` 中实现条件渲染，那么仅在新旧状态不一时调用 `setState()`可以避免不必要的重新渲染
+
+参数一为带有形式参数的 `updater` 函数：
+
+```javascript
+(state, props) => stateChange
+```
+
+`state` 是对应用变化时组件状态的引用。当然，它不应直接被修改。你应该使用基于 `state` 和 `props` 构建的新对象来表示变化。例如，假设我们想根据 `props.step` 来增加 state：
+
+```
+this.setState((state, props) => {
+  return {counter: state.counter + props.step};
+});
+```
+
+updater 函数中接收的 `state` 和 `props` 都保证为最新。updater 的返回值会与 `state` 进行浅合并。
+
+`setState()` 的第二个参数为可选的回调函数，它将在 `setState` 完成合并并重新渲染组件后执行。通常，我们建议使用 `componentDidUpdate()` 来代替此方式。
+
+`setState()` 的第一个参数除了接受函数外，还可以接受对象类型：
+
+```
+setState(stateChange[, callback])
+```
+
+`stateChange` 会将传入的对象浅层合并到新的 state 中，例如，调整购物车商品数：
+
+```
+this.setState({quantity: 2})
+```
+
+这种形式的 `setState()` 也是异步的，并且在同一周期内会对多个 `setState` 进行批处理。例如，如果在同一周期内多次设置商品数量增加，则相当于：
+
+```
+Object.assign(
+  previousState,
+  {quantity: state.quantity + 1},
+  {quantity: state.quantity + 1},
+  ...
+)
+```
+
+后调用的 `setState()` 将覆盖同一周期内先调用 `setState` 的值，因此商品数仅增加一次。如果后续状态取决于当前状态，我们建议使用 updater 函数的形式代替：
+
+```
+this.setState((state) => {
+  return {quantity: state.quantity + 1};
+});
+```
+
+
+
+## 7. react Class属性
+
+### 7.1 defaultProps
+
+`defaultProps` 可以为 Class 组件添加默认 props。这一般用于 props 未赋值，但又不能为 null 的情况。例如：
+
+```javascript
+class CustomButton extends React.Component {
+  // ...
+}
+
+CustomButton.defaultProps = {
+  color: 'blue'
+};
+```
+
+如果未提供 `props.color`，则默认设置为 `'blue'`
+
+```javascript
+  render() {
+    return <CustomButton /> ; // props.color 将设置为 'blue'
+  }
+```
+
+如果 `props.color` 被设置为 `null`，则它将保持为 `null`
+
+```jsx
+  render() {
+    return <CustomButton color={null} /> ; // props.color 将保持是 null
+  }
+```
+
+
+
+### 7.2 displayName
+
+`displayName` 字符串多用于调试消息。通常，你不需要设置它，因为它可以根据函数组件或 class 组件的名称推断出来。如果调试时需要显示不同的名称或创建高阶组件，
+
+```
+class CustomButton extends React.Component {
+  // ...
+}
+
+CustomButton.displayName = "ppp";
+```
+
+
+
 ## 参考资料
 
 [React.Component 官方文档](https://zh-hans.reactjs.org/docs/react-component.html)
