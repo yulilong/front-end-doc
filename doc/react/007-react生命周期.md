@@ -296,6 +296,66 @@ componentWillUnmount()
 
 `componentWillUnmount()` 中**不应调用 setState()**，因为该组件将永远不会重新渲染。组件实例卸载后，将永远不会再挂载它。
 
+## 5. 弃用的生命周期
+
+一下介绍的生命周期方法为过时的方法，这些方法仍然有效，但不建议在新代码中使用它们。过时的方法将支持到react17版本中，然后就会删除。
+
+### 5.1 UNSAFE_componentWillMount()
+
+```javascript
+UNSAFE_componentWillMount()
+```
+
+> ***注意：***
+>
+> 此生命周期之前名为 `componentWillMount`。该名称将继续使用至 React 17。
+
+`UNSAFE_componentWillMount()` 在挂载之前被调用。它在 `render()` 之前调用，因此在此方法中同步调用 `setState()` 不会触发额外渲染。通常，我们建议使用 `constructor()` 来初始化 state。
+
+避免在此方法中引入任何副作用或订阅。如遇此种情况，请改用 `componentDidMount()`。
+
+此方法是服务端渲染唯一会调用的生命周期函数。
+
+### 5.2 UNSAFE_componentWillReceiveProps()
+
+```javascript
+UNSAFE_componentWillReceiveProps(nextProps)
+```
+
+> ***注意：***
+>
+> 此生命周期之前名为 `componentWillReceiveProps`。该名称将继续使用至 React 17。
+>
+> 使用此生命周期方法通常会出现 bug 和不一致性：
+>
+> - 如果你需要**执行副作用**（例如，数据提取或动画）以响应 props 中的更改，请改用 [`componentDidUpdate`](https://zh-hans.reactjs.org/docs/react-component.html#componentdidupdate) 生命周期。
+> - 如果你使用 `componentWillReceiveProps` **仅在 prop 更改时重新计算某些数据**，请[使用 memoization helper 代替](https://zh-hans.reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#what-about-memoization)。
+> - 如果你使用 `componentWillReceiveProps` 是为了**在 prop 更改时“重置”某些 state**，请考虑使组件[完全受控](https://zh-hans.reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-controlled-component)或[使用 `key` 使组件完全不受控](https://zh-hans.reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key) 代替。
+
+`UNSAFE_componentWillReceiveProps()` 会在已挂载的组件接收新的 props 之前被调用。如果你需要更新状态以响应 prop 更改（例如，重置它），你可以比较 `this.props` 和 `nextProps` 并在此方法中使用 `this.setState()` 执行 state 转换。
+
+请注意，如果父组件导致组件重新渲染，即使 props 没有更改，也会调用此方法。如果只想处理更改，请确保进行当前值与变更值的比较。
+
+在[挂载](https://zh-hans.reactjs.org/docs/react-component.html#mounting)过程中，React 不会针对初始 props 调用 `UNSAFE_componentWillReceiveProps()`。组件只会在组件的 props 更新时调用此方法。调用 `this.setState()` 通常不会触发 `UNSAFE_componentWillReceiveProps()`。
+
+### 5.3 UNSAFE_componentWillUpdate()
+
+```javascript
+UNSAFE_componentWillUpdate(nextProps, nextState)
+```
+
+> ***注意：***
+>
+> 此生命周期之前名为 `componentWillUpdate`。该名称将继续使用至 React 17。
+>
+> 如果`shouldComponentUpdate()`返回 false，则不会调用`UNSAFE_componentWillUpdate()`。
+
+当组件收到新的 props 或 state 时，会在渲染之前调用 `UNSAFE_componentWillUpdate()`。使用此作为在更新发生之前执行准备更新的机会。初始渲染不会调用此方法。
+
+注意，你不能此方法中调用 `this.setState()`；在 `UNSAFE_componentWillUpdate()` 返回之前，你也不应该执行任何其他操作（例如，dispatch Redux 的 action）触发对 React 组件的更新
+
+通常，此方法可以替换为 `componentDidUpdate()`。如果你在此方法中读取 DOM 信息（例如，为了保存滚动位置），则可以将此逻辑移至 `getSnapshotBeforeUpdate()` 中。
+
 
 
 ## 参考资料
