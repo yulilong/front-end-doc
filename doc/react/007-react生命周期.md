@@ -85,6 +85,17 @@ react[官网](https://reactjs.org)文档中关于 Mounting 加载阶段生命周
 
 - [**componentWillUnmount()**](https://zh-hans.reactjs.org/docs/react-component.html#componentwillunmount)：组件挂载前执行
 
+
+
+### 1.4 错误处理
+
+当渲染过程，生命周期，或子组件的构造函数中抛出错误时，会调用如下方法：
+
+- [`static getDerivedStateFromError()`](https://zh-hans.reactjs.org/docs/react-component.html#static-getderivedstatefromerror)
+- [`componentDidCatch()`](https://zh-hans.reactjs.org/docs/react-component.html#componentdidcatch)
+
+
+
 ## 2. 挂载阶段生命周期函数说明
 
 ### 2.1 constructor(props):初始化构造函数
