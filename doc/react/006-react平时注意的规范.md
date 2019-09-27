@@ -2,9 +2,11 @@
 
 [TOC]
 
-### 1. for循环的元素key值尽量不要是用数组的索引
+# react 平时注意的规范
 
-### 2. HTML元素的点击事件不要是用箭头函数
+## 1. for循环的元素key值尽量不要是用数组的索引
+
+## 2. HTML元素的点击事件不要是用箭头函数
 
 1、如果有参数，可以使用使用HTML的`data-`属性，注意`data-`的属性要全小写。
 
@@ -41,7 +43,7 @@ onShowMoreQueryBtn = (a, b) => e => {
 }
 ```
 
-### 3. 文件头注释、函数注释
+## 3. 文件头注释、函数注释
 
 文件头注释：
 
@@ -74,7 +76,7 @@ onConfirmEditBtn = data => {}
 
 引用类型大写:`{Object}`,`{Function}`,`{Array}`,`{Date}`,`{RegExp}`
 
-### 4. JavaScript中避免硬编码
+## 4. JavaScript中避免硬编码
 
 在代码中如果一个常量使用超过2次，那么就需要定义一个常量变量来使用。
 
@@ -82,14 +84,26 @@ onConfirmEditBtn = data => {}
 
 `var HTML_ENTITY = {};`
 
-### 5. 关于数据遍历
+## 5. 关于数据遍历
 
 遍历数据返回新的数组，尽量使用map方法。
 
 
 
-### 6. html中样式尽量减少标签
+## 6. html中样式尽量减少标签
 
 比如HTML文本需要换行，避免使用`<br />` 标签，应该使用CSS样式修改或者使用`<div>`标签。
 
 HTML尽量使用`&nbsp;`空格实体，可使用CSS样式来添加边距。
+
+## 7. 事件方法命名规范
+
+组件提供的事件，建议采用on开头。
+
+如果每次点击都触发，使用`onClick`；
+
+如果是切换的时候触发，使用`onChange`;
+
+可以参考[antd UI](https://ant.design/docs/react/introduce-cn)组件命名方式。
+
+
