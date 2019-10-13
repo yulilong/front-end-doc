@@ -18,6 +18,7 @@
 * [作用域](/doc/js/007-作用域.md)
 * [排序算法](/doc/js/008-排序算法.md)
 * [获取标签宽高及实例](/doc/js/009-获取标签宽高及实例.md)
+* [从输入URL到页面渲染过程](/doc/js/010-从输入URL到页面渲染过程.md)
 * 高级
     * [001-ES6模块import_export](/doc/js/advanced/001-ES6模块import_export.md)
     * [002-错误处理try_catch](/doc/js/advanced/002-错误处理try_catch.md)
