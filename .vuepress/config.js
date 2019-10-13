@@ -74,15 +74,6 @@ module.exports = {
         sidebar: {
             '/doc/js/': [
                 '',
-                {
-                    title: 'JS代码执行机制和事件循环',
-                    children: [
-                        'jsHowWork/',
-                        'jsHowWork/JS在浏览器中运行机制和事件循环',
-                        'jsHowWork/JS代码在nodejs环境下执行机制和事件循环',
-                        'jsHowWork/JS中异步方法',
-                    ]
-                },
                 'regularExpression',
                 '001-对象_构造函数_原型链',
                 '002-this_call_apply_bind',
@@ -93,6 +84,16 @@ module.exports = {
                 '007-作用域',
                 '008-排序算法',
                 '009-获取标签宽高及实例',
+                {
+                    title: 'JS代码执行机制和事件循环',
+                    collapsable: false,
+                    children: [
+                        // 'jsHowWork/',
+                        'jsHowWork/JS在浏览器中运行机制和事件循环',
+                        'jsHowWork/JS代码在nodejs环境下执行机制和事件循环',
+                        'jsHowWork/JS中异步方法',
+                    ]
+                },
                 {
                     title: '高级',
                     collapsable: false,
