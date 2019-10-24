@@ -1,3 +1,7 @@
+[[toc]]
+
+[TOC]
+
 # this、call、apply、bind
 
 ## 1. 什么是this

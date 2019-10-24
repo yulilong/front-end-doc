@@ -1,3 +1,7 @@
+[[TOC]]
+
+[TOC]
+
 # moment时间插件使用说明
 
 ## 1. moment代码片段

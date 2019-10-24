@@ -1,3 +1,7 @@
+[[TOC]]
+
+[TOC]
+
 # ES6模块import_export
 
 ## 1. 介绍

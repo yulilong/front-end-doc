@@ -1,3 +1,7 @@
+[[TOC]]
+
+[TOC]
+
 # react项目搭建
 
 ## 1. 安装create-react-app

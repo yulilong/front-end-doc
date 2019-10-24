@@ -1,3 +1,7 @@
+[[TOC]]
+
+[TOC]
+
 # 三、JS中异步方法
 
 ## 1. setTimeout、setInterval
