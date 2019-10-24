@@ -1,3 +1,7 @@
+[[TOC]]
+
+[TOC]
+
 # 高阶组件
 
 参考资料：https://www.jianshu.com/p/0aae7d4d9bc1

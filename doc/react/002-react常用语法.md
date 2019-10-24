@@ -1,3 +1,4 @@
+[[TOC]]
 [TOC]
 
 # react常用语法

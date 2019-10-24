@@ -61,7 +61,7 @@ onShowMoreQueryBtn = (a, b) => e => {
 ```js
 /**
  * 编辑弹窗确定按钮事件，获取数据，关闭弹窗
- * 																			这里要空一行
+ * 			这里要空一行
  * @param  {Object} data    选择的条件
  * @return {*}           		有返回值在写这个，没有不写return
  */
