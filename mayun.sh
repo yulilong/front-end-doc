@@ -39,3 +39,6 @@ cd -
 echo "恢复修改的文件"
 echo "git checkout ."
 git checkout .
+echo ""
+echo "打开码云 Gitee Pages 服务，手动更新服务"
+open https://gitee.com/dragon-li/front-end-doc/pages
