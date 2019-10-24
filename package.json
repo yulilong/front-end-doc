@@ -1,0 +1,24 @@
+{
+    "name": "front-end-doc",
+    "version": "1.0.0",
+    "description": "前端开发文档",
+    "main": "configMayun.js",
+    "directories": {
+        "doc": "doc"
+    },
+    "scripts": {
+        "start": "vuepress dev .",
+        "build": "bash deploy.sh",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/yulilong/front-end-doc.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/yulilong/front-end-doc/issues"
+    },
+    "homepage": "https://github.com/yulilong/front-end-doc#readme"
+}
