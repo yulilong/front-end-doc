@@ -157,6 +157,8 @@ static getDerivedStateFromProps(props, state)
 > ***注意：***
 >
 > 不管原因是什么，都会在*每次*渲染前触发此方法。这与 `UNSAFE_componentWillReceiveProps` 形成对比，后者仅在父组件重新渲染时触发，而不是在内部调用 `setState` 时。
+>
+> 如果`getDerivedStateFromProps`和`UNSAFE_componentWillReceiveProps`都写了，那么只会执行`getDerivedStateFromProps`。
 
 ### 2.3 render()
 
