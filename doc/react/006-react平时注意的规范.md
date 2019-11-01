@@ -104,6 +104,8 @@ HTML尽量使用`&nbsp;`空格实体，可使用CSS样式来添加边距。
 
 如果是切换的时候触发，使用`onChange`;
 
+事件名命名 on开头，方法名命名 handle开头
+
 可以参考[antd UI](https://ant.design/docs/react/introduce-cn)组件命名方式。
 
 
