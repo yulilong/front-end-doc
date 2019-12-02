@@ -157,6 +157,7 @@ module.exports = {
                 '004-浏览器兼容',
                 '005-normalize-reset',
                 '006-css常用代码片段',
+                '007-scss语法说明',
                 {
                     title: 'css深入浅出',
                     collapsable: false,

@@ -6,7 +6,7 @@ echo '删除config.js配置文件'
 rm .vuepress/config.js
 
 echo '复制符合码云的配置文件'
-cp configMayun.js .vuepress/config.js
+cp .vuepress/configMayun.js .vuepress/config.js
 
 # 生成静态文件
 echo '执行命令：vuepress build .'

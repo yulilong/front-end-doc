@@ -1,3 +1,6 @@
+/**
+ * 码云的配置文件，主要是设置：base: '/front-end-doc/',
+ */
 const path = require('path');
 
 module.exports = {
@@ -157,6 +160,7 @@ module.exports = {
                 '004-浏览器兼容',
                 '005-normalize-reset',
                 '006-css常用代码片段',
+                '007-scss语法说明',
                 {
                     title: 'css深入浅出',
                     collapsable: false,

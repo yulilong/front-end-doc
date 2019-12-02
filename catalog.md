@@ -71,6 +71,7 @@
     * [004-浏览器兼容](/doc/css/004-浏览器兼容.md)
     * [005-normalize-reset](/doc/css/005-normalize-reset.md)
     * [006-css常用代码片段](/doc/css/006-css常用代码片段.md)
+    * [007-scss语法说明](/doc/css/007-scss语法说明.md)
 * css深入浅出
     * [001-宽度与高度](/doc/css/depth/001-宽度与高度.md)
     * [002-堆叠上下文](/doc/css/depth/002-堆叠上下文.md)
