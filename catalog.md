@@ -95,3 +95,4 @@
 * [005-react开发遇到的问题](/doc/react/005-react开发遇到的问题.md)
 * [006-react平时注意的规范](/doc/react/006-react平时注意的规范.md)
 * [007-react生命周期](/doc/react/007-react生命周期.md)
+* [008-react类型检查PropTypes](/doc/react/008-react类型检查PropTypes.md)

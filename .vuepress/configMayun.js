@@ -190,6 +190,7 @@ module.exports = {
                 '005-react开发遇到的问题',
                 '006-react平时注意的规范',
                 '007-react生命周期',
+                '008-react类型检查PropTypes',
             ],
 
             '/doc/tool/bundle/webpack/': [
