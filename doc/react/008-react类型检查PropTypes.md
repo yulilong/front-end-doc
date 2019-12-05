@@ -149,6 +149,51 @@ MyComponent.propTypes = {
 
 所以我们要把问题消灭在萌芽中，就是申明对象的时候同时把类型也定义掉了， `react` 的自带方案是 `PropTypes` 组件
 
+## 4. 类型检查报错
+
+类型不一致报错：
+
+```jsx
+class Greeting extends React.Component {
+  render() {
+    return <h1>Hello, {this.props.name}</h1>
+  }
+}
+Greeting.propTypes = {
+  name: PropTypes.string
+}
+
+<div>
+  <Greeting name={123} />
+</div>
+```
+
+![](./img/006-react.png)
+
+限制单个子代:
+
+```jsx
+// 组件
+const OnlyOneChild = props => {
+  const children = props.children
+  return <div>{children}</div>
+}
+OnlyOneChild.propTypes = {
+  children: PropTypes.element.isRequired
+}
+// 容器
+<OnlyOneChild>
+  <h3>第一个子节点</h3>
+  <h3>第二个子节点</h3>
+</OnlyOneChild>
+```
+
+![](./img/007-react.png)
+
+
+
+
+
 
 
 ## 参考资料
