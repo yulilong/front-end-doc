@@ -10,7 +10,7 @@ SASS是世界上最成熟、最稳定、最强大的专业级CSS扩展语言！S
 
 下面scss语法可在线测试：https://www.sassmeister.com/
 
-## 1. 变量
+## 1. 变量$
 
 变量用来存储需要在CSS中复用的信息，例如颜色和字体。SASS通过`$`符号去声明一个变量。
 
@@ -38,7 +38,7 @@ nav {
 
 `sass`的变量名可以与`css`中的属性名和选择器名称相同，包括中划线和下划线。这完全取决于个人的喜好。
 
-### 1.1 默认变量`!default`
+### 1.1 默认变量!default
 
 一般情况下，反复声明一个变量，只有最后一处声明有效且会覆盖前面的值，如：
 
@@ -270,7 +270,7 @@ body {
 }
 ```
 
-## 5. 混合
+## 5. 混合@mixin、@include
 
 混合（Mixin）用来分组那些需要在页面中复用的CSS声明，开发人员可以通过向Mixin传递变量参数来让代码更加灵活，该特性在添加浏览器兼容性前缀的时候非常有用，SASS目前使用@mixin name指令来进行混合操作。
 
@@ -366,9 +366,79 @@ ul:visited { color: green; }
 
 
 
-## 6. 继承
+## 6. 继承@extend
+
+scss减少重复的主要特性就是选择器继承。
+
+选择器继承是指一个选择器可以继承另一个选择器定义的所有样式。通过`@extend`语法实现：
+
+```scss
+.error { border: 1px solid red; }
+ //应用到hl.seriousError
+h1.error { font-size: 1.2rem; }
+.seriousError {
+  @extend .error;
+  border-width: 3px;
+}
+
+/*编译后*/
+.error, .seriousError {  border: 1px solid red; }
+h1.error, h1.seriousError { font-size: 1.2rem; }
+.seriousError { border-width: 3px; }
+```
+
+### 6.1 仅给继承用的占位符选择器%
+
+有时，需要定义一套样式并不是给某个元素用，而是只通过 `@extend` 指令使用，如果不使用则不会编译到最终css文件中。
+
+```scss
+// 这段代码不会被输出到最终生成的CSS文件，因为它没有被任何代码所继承。
+%other-styles { display: flex; }
+// 下面代码会正常输出到生成的CSS文件，因为它被其接下来的代码所继承。
+%message-common { border: 1px solid #ccc; }
+.message { @extend %message-common; }
+
+/*编译后*/
+.message { border: 1px solid #ccc; }
+```
 
 
+
+### 6.1 继承的工作细节
+
+跟变量和混合器不同，继承不是仅仅用`css`样式替换@extend处的代码那么简单。
+
+`@extend`背后最基本的想法是，如果`.seriousError @extend .error`， 那么样式表中的任何一处`.error`都用`.error``.seriousError`这一选择器组进行替换。这就意味着相关样式会如预期那样应用到`.error`和`.seriousError`。当`.error`出现在复杂的选择器中，比如说`h1.error``.error a`或者`#main .sidebar input.error[type="text"]`，那情况就变得复杂多了，但是不用担心，`sass`已经为你考虑到了这些。
+
+关于`@extend`有两个要点你应该知道。
+
+- 跟混合器相比，继承生成的`css`代码相对更少。因为继承仅仅是重复选择器，而不会重复属性，所以使用继承往往比混合器生成的`css`体积更小。如果你非常关心你站点的速度，请牢记这一点。
+- 继承遵从`css`层叠的规则。当两个不同的`css`规则应用到同一个`html`元素上时，并且这两个不同的`css`规则对同一属性的修饰存在不同的值，`css`层叠规则会决定应用哪个样式。相当直观：通常权重更高的选择器胜出，如果权重相同，定义在后边的规则胜出。
+
+混合器本身不会引起`css`层叠的问题，因为混合器把样式直接放到了`css`规则中，而继承存在样式层叠的问题。被继承的样式会保持原有定义位置和选择器权重不变。通常来说这并不会引起什么问题，但是知道这点总没有坏处。
+
+
+
+## 7. 加减乘除、取整等运算 (`+, -, *, /, %`)
+
+SassScript 支持数字的加减乘除、取整等运算 (`+, -, *, /, %`)，如果必要会在不同单位间转换值。
+
+```scss
+.container { width: 100%; }
+article[role="main"] {
+  float: left;
+  width: 600px / 960px * 100%;
+}
+aside[role="complementary"] {
+  float: right;
+  width: 300px / 960px * 100%;
+}
+
+/*编译后*/
+.container { width: 100%; }
+article[role=main] {  float: left; width: 62.5%; }
+aside[role=complementary] { float: right; width: 31.25%; }
+```
 
 
 
