@@ -402,6 +402,18 @@ h1.error, h1.seriousError { font-size: 1.2rem; }
 .message { border: 1px solid #ccc; }
 ```
 
+### 6.2 !optional解决继承不存在报错
+
+如果 `@extend` 失败会收到错误提示，比如，这样写 `a.important {@extend .notice}`，当没有 `.notice` 选择器时，将会报错
+
+!optional标记前面的扩展不必须生成一个新的选择器。
+
+```scss
+a.important {
+  @extend .notice !optional; // .notice不存在时不会报错
+}
+```
+
 
 
 ### 6.1 继承的工作细节
