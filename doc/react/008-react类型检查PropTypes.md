@@ -133,7 +133,9 @@ MyComponent.propTypes = {
 
 
 
-## 3. 为什么要 类型检查
+## 3. 为什么要类型检查
+
+下面内容转载自：https://segmentfault.com/a/1190000015071373
 
 我们先来看一份 [rollbar](https://rollbar.com/) 公司对 `1000+` 项目的错误回收分析 `top10`
 
@@ -149,7 +151,7 @@ MyComponent.propTypes = {
 
 所以我们要把问题消灭在萌芽中，就是申明对象的时候同时把类型也定义掉了， `react` 的自带方案是 `PropTypes` 组件
 
-## 4. 类型检查报错
+## 4. 常见报错(类型检查)
 
 类型不一致报错：
 
