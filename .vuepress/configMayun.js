@@ -192,6 +192,7 @@ module.exports = {
                 '007-react生命周期',
                 '008-react类型检查PropTypes',
                 '009-react-Hook',
+                '010-react的diff算法',
             ],
 
             '/doc/tool/bundle/webpack/': [
