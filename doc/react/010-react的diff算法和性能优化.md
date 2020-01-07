@@ -4,7 +4,7 @@
 
 
 
-# react的diff算法
+# react的diff算法和性能优化
 
 React 中最值得称道的部分莫过于 Virtual DOM 与 diff 的完美结合，特别是其高效的 diff 算法，让用户可以无需顾忌性能问题而”任性自由”的刷新页面，让开发者也可以无需关心 Virtual DOM 背后的运作原理，因为 React diff 会帮助我们计算出 Virtual DOM 中真正变化的部分，并只针对该部分进行实际 DOM 操作，而非重新渲染整个页面，从而保证了每次操作更新后页面的高效渲染，因此 Virtual DOM 与 diff 是保证 React 性能口碑的幕后推手。
 
@@ -92,6 +92,91 @@ React 发现这类操作繁琐冗余，因为这些都是相同的节点，但�
 
 
 
+## 3. 性能优化
+
+转载、整理自：https://mp.weixin.qq.com/s/ZDxPD8fP5fGZC2Pf4dLUrw
+
+由于react中性能主要耗费在于update阶段的diff算法，因此性能优化也主要针对diff算法。
+
+### 3.1 减少diff算法
+
+减少diff算法触发次数实际上就是减少update流程的次数。
+
+正常进入update流程有三种方式：
+
+- setState
+
+  setState机制在正常运行时，由于批更新策略，已经降低了update过程的触发次数。
+
+  因此，setState优化主要在于非批更新阶段中(timeout/Promise回调)，减少setState的触发次数。
+
+  常见的业务场景即处理接口回调时，无论数据处理多么复杂，保证最后只调用一次setState。
+
+- 父组件render
+
+  父组件的render必然会触发子组件进入update阶段（无论props是否更新）。此时最常用的优化方案即为shouldComponentUpdate方法。
+
+  最常见的方式为进行this.props和this.state的浅比较来判断组件是否需要更新。或者直接使用PureComponent，原理一致。
+
+  需要注意的是，父组件的render函数如果写的不规范，将会导致上述的策略失效。
+
+  ```jsx
+  // Bad case
+  // 每次父组件触发render 将导致传入的handleClick参数都是一个全新的匿名函数引用。
+  // 如果this.list 一直都是undefined，每次传入的默认值[]都是一个全新的Array。
+  // hitSlop的属性值每次render都会生成一个新对象
+  class Father extends Component {
+      onClick() {}
+      render() {
+          return <Child
+                   handleClick={() => this.onClick() }
+                   list={this.list || []}
+                   hitSlop={{ top: 10, left: 10}}
+                 />
+      }
+  }
+  // Good case
+  // 在构造函数中绑定函数，给变量赋值
+  // render中用到的常量提取成模块变量或静态成员
+  const hitSlop = {top: 10, left: 10};
+  class Father extends Component {
+      constructor(props) {
+          super(props);
+          this.onClick = this.onClick.bind(this);
+          this.list = [];
+      }
+      onClick() {}
+      render() {
+          return <Child handleClick={this.onClick} list={this.list} hitSlop={hitSlop} />
+      }
+  }
+  ```
+
+- forceUpdate
+
+  forceUpdate方法调用后将会直接进入componentWillUpdate阶段，无法拦截，因此在实际项目中应该弃用。
+
+### 3.2 正确使用 diff算法
+
+- 不使用跨层级移动节点的操作。
+- 对于条件渲染多个节点时，尽量采用隐藏等方式切换节点，而不是替换节点。
+- 尽量避免将后面的子节点移动到前面的操作，当节点数量较多时，会产生一定的性能问题。
+
+### 3.3 其他优化策略
+
+1、shouldComponentUpdate
+
+使用shouldComponentUpdate钩子，根据具体的业务状态，减少不必要的props变化导致的渲染。如一个不用于渲染的props导致的update。
+另外， 也要尽量避免在shouldComponentUpdate 中做一些比较复杂的操作， 比如超大数据的pick操作等。
+
+2、合理设计state，不需要渲染的state，尽量使用实例成员变量。
+
+不需要渲染的 props，合理使用 context机制，或公共模块（比如一个单例服务）变量来替换。
+
+
+
+
+
 ## 参考资料
 
 [React 源码剖析系列 － 不可思议的 react diff 知乎](https://zhuanlan.zhihu.com/p/20346379)
@@ -99,4 +184,6 @@ React 发现这类操作繁琐冗余，因为这些都是相同的节点，但�
 [React源码分析 - Diff算法](https://zhuanlan.zhihu.com/p/34363711)
 
 [图解React Diff算法及新架构Fiber 阿里云](https://yq.aliyun.com/articles/586669)
+
+[[第14期] [长文预警] 掌握React 渲染原理及性能优化](https://mp.weixin.qq.com/s/ZDxPD8fP5fGZC2Pf4dLUrw)
 
