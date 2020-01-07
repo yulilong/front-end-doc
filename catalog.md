@@ -98,3 +98,4 @@
 * [008-react类型检查PropTypes](/doc/react/008-react类型检查PropTypes.md)
 * [009-react-Hook](/doc/react/009-react-Hook.md)
 * [010-react的diff算法和性能优化](/doc/react/010-react的diff算法和性能优化.md)
+* [011-react-Virtual-Dom](/doc/react/011-react-Virtual-Dom.md)
