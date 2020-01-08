@@ -199,6 +199,7 @@ module.exports = {
                 '009-react-Hook',
                 '010-react的diff算法和性能优化',
                 '011-react-Virtual-Dom',
+                '012-react-fiber',
             ],
 
             '/doc/tool/bundle/webpack/': [
