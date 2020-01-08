@@ -42,14 +42,16 @@ function integrateGitalk (router) {
         }
     }
     function renderGitalk () {
+        // 如果url路径有中文则使用decodeURIComponent，否则可以直接使用location.pathname
+        const path = decodeURIComponent(location.pathname)
         const gitalk = new Gitalk({
             clientID: '2fad63f5c69905c672f6',
             clientSecret: 'a452938fa0c8dad43a6b7f353f3ef336e4e426c0',
             repo: 'front-end-doc',
             owner: 'yulilong',
             admin: ['yulilong'],
-            title: location.pathname,
-            id: location.pathname,      // Ensure uniqueness and length less than 50
+            title: path.split('/').pop() || path,
+            id: path,
             language: 'zh-CN',
         });
         gitalk.render('gitalk-container');
