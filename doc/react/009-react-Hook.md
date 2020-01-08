@@ -16,7 +16,7 @@
 >
 > 只在 React 函数中调用 Hook:
 >
-> > **不要在普通的 JavaScript 函数中调用 Hook。**你可以：
+> > **不要在普通的 JavaScript 函数中调用 Hook**,你可以：
 > >
 > > - ✅ 在 React 的函数组件中调用 Hook
 > > - ✅ 在自定义 Hook 中调用其他 Hook 

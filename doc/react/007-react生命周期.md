@@ -16,6 +16,8 @@ React 的生命周期包括三个阶段：
 
 ![react生命周期版本](./img/001-react.png)
 
+https://github.com/facebook/react
+
 react生命周期变动和对应版本说明：
 
 - react 16.2 版本和以前的生命周期是旧的生命周期
@@ -312,6 +314,9 @@ componentWillUnmount()
 ## 5. 弃用的生命周期
 
 一下介绍的生命周期方法为过时的方法，这些方法仍然有效，但不建议在新代码中使用它们。过时的方法将支持到react17版本中，然后就会删除。
+
+- react 16.x版本：启用弃用警告`componentWillMount`，`componentWillReceiveProps`和`componentWillUpdate`。（旧的生命周期名称和新的别名都可以在此发行版中使用，但是旧名称将记录DEV模式警告。）
+- **react 17.0 版本**：删除`componentWillMount`，`componentWillReceiveProps`和`componentWillUpdate`。（从现在开始，只有新的“ UNSAFE_”生命周期名称将起作用。）
 
 ### 5.1 UNSAFE_componentWillMount()
 
