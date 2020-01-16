@@ -75,3 +75,9 @@ http://nodejs.cn/api/modules.html
 
 
 [CSS操作  阮一峰](http://javascript.ruanyifeng.com/dom/css.html)
+
+
+
+
+
+cookie、storge、indexDB、server worker、离线存储mainfest
