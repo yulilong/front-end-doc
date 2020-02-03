@@ -3,7 +3,7 @@
 
 # react代码片段
 
-### 1. setState异步执行，中立即使用的方法
+## 1. setState异步执行，中立即使用的方法
 
 ```jsx
 this.setState({
@@ -13,7 +13,7 @@ this.setState({
 });
 ```
 
-### 2. jsx中HTML三木运算
+## 2. jsx中HTML三木运算
 
 ```jsx
 {this.state.businessLine ? (
@@ -25,7 +25,7 @@ this.setState({
 )}
 ```
 
-### 3. 根据不同条件拼接字符串，用于类样式名字拼接
+## 3. 根据不同条件拼接字符串，用于类样式名字拼接
 
 ```jsx
 /**
@@ -56,7 +56,7 @@ return (
 )
 ```
 
-### 4. react中引入图片
+## 4. react中引入图片
 
 在react中，如果在样式文件中使用背景图片格式：
 
@@ -99,7 +99,7 @@ background: url('./../../../assets/images/arrow-up.png') no-repeat center;
 
 
 
-### 5. 把数组数据渲染到HTML中
+## 5. 把数组数据渲染到HTML中
 
 ```jsx
 let businessLine = [1, 2, 3];
@@ -111,7 +111,7 @@ let businessLine = [1, 2, 3];
 
 注意：箭头函数体是用`()`包围的，不是`{}`。
 
-### 6. HTML点击事件中获取数据
+## 6. HTML点击事件中获取数据
 
 一个数组数据，在HTML中渲染，点击元素时，获取到数据：
 
@@ -132,7 +132,7 @@ let businessLine = [1, 2, 3];
 
 箭头函数里面去直接调用这个方法，同时把参数传过去，如果需要点击事件，则在箭头函数中传参数，然后该参数传给方法即可。
 
-### 7. 当props属性变化时，组件做一些操作
+## 7. 当props属性变化时，组件做一些操作
 
 ```jsx
 // props数据更新前调用的生命周期
@@ -151,5 +151,51 @@ let businessLine = [1, 2, 3];
             }
         }
     }
+```
+
+
+
+## 8. html方法里面传参
+
+第一种是在HTML方法里面写箭头函数实现传参：
+
+```react
+handleAddPackageClick = (itemData) => {
+  addPackage(itemData)
+}
+<span 
+  onClick={() => { this.handleAddPackageClick(itemData) }}
+>
+</span>
+```
+
+第二种是方法里面返回函数，然后HTML中直接执行这个方法，把参数传过去
+
+```react
+handleNewDataSouce = ttt => () => {
+  console.log('ttt: ', ttt)
+}
+<Button
+  type="primary"
+  onClick={this.handleNewDataSouce('hello world')}
+>
+  新增数据源
+</Button>
+```
+
+第三种方法是HTML元素上添加`data-name`属性，然后出发事件后使用`e.target.dataset`方法来读取参数：
+
+```react
+handleNewDataSouce = ttt => (e) => {
+  console.log('ttt: ', ttt)
+  console.log('dataset:', e.target.dataset)
+}
+<Button
+  type="primary"
+  onClick={this.handleNewDataSouce('hello world')}
+  data-time="2020-02-03"
+>
+  新增数据源
+</Button>
 ```
 
