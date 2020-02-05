@@ -190,6 +190,7 @@ module.exports = {
                 '003-react代码片段',
                 '004-react高阶组件',
                 '005-react开发遇到的问题',
+                '005-react中eslint代码检查常见问题解决',
                 '006-react平时注意的规范',
                 '007-react生命周期',
                 '008-react类型检查PropTypes',
