@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-echo '开始执行命令'
+echo '开始执行部署码云命令'
 
 echo '删除config.js配置文件'
 rm .vuepress/config.js
@@ -42,3 +42,4 @@ git checkout .
 echo ""
 echo "打开码云 Gitee Pages 服务，手动更新服务"
 open https://gitee.com/dragon-li/front-end-doc/pages
+echo ''

@@ -1,6 +1,8 @@
 #!/usr/bin/env sh
 
-echo '开始执行命令'
+bash mayun.sh
+
+echo '开始执行部署github命令'
 # 生成静态文件
 echo '执行命令：vuepress build .'
 vuepress build .
@@ -35,8 +37,3 @@ git push -f https://github.com/yulilong/front-end-doc.git master:gh-pages
 # 返回到上一次的工作目录
 echo "回到刚才工作目录"
 cd -
-
-echo ''
-echo "开始部署码云代码"
-echo ''
-bash mayun.sh
