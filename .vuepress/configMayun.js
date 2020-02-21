@@ -202,6 +202,7 @@ module.exports = {
                 '011-react-Virtual-Dom',
                 '012-react-fiber',
                 '013-react-dnd拖动组件',
+                '014-react-refs引用dom',
             ],
 
             '/doc/tool/bundle/webpack/': [
