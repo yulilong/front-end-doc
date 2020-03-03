@@ -49,6 +49,24 @@ MyComponent..defaultProps = {
 }
 ```
 
+纯函数的用法：
+
+```jsx
+import PropTypes from 'prop-types';
+
+const FundManagement = props => {
+    const {children} = props;
+    return (
+        <div className="statistics">
+            {children}
+        </div>
+    );
+};
+FundManagement.propTypes = {
+    children: PropTypes.element.isRequired,
+};
+```
+
 
 
 ## 2. 不同类型的验证

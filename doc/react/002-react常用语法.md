@@ -548,45 +548,48 @@ if (this._compositeType === CompositeTypes.PureClass) {
 
 
 
-## 8. 使用prop-types检测props数据类型
+## 8. React Fragments
 
-在多人开发时，当被人使用自己定义的组件时，有可能出现类型传错的情况，而在自己的组件上加上prop-types，他可以对父组件传来的props进行检查，加入父组件中想传递的是字符串类型‘3’，而传递了一个数字类型3，如果没有类型检查系统不会给与提示，但是有了类型检查以后，再控制台会给你一个类型传递错误的提示。这样在工作中可以快速找到错误。
+`<React.Fragment>`是为了解决`render`函数必须有一个跟节点问题。
 
-https://www.npmjs.com/package/prop-types
+react版本15以前，`render`函数的返回必须有一个根节点，否则报错，为满足这一原则我会使用一个没有任何样式的 div 包裹一下。
 
-ES6类的使用法法：
+react版本16开始，render支持返回数据，这一特性已经可以减少不必要节点嵌套：
 
 ```jsx
 import React from 'react';
-import PropTypes from 'prop-types';
-class App extends React.Component {
-  static propTypes = {
-    children: PropTypes.element.isRequired,
-  };
-  render() {
-    const {children} = this.props;
-    return (
-      <div> {children} </div>
-    )
-  }
+export default function () {
+    return [ <div>一步 01</div>, <div>一步 02</div>, <div>一步 03</div> ];
 }
 ```
 
-纯函数的用法：
+如果你不喜欢用数组，React 16为我们提供了Fragments：
 
 ```jsx
-import PropTypes from 'prop-types';
-
-const FundManagement = props => {
-    const {children} = props;
+import React from 'react';
+export default function () {
     return (
-        <div className="statistics">
-            {children}
-        </div>
+        <React.Fragment>
+            <div>一步 01</div>
+            <div>一步 02</div>
+        </React.Fragment>
     );
-};
-FundManagement.propTypes = {
-    children: PropTypes.element.isRequired,
-};
+}
+```
+
+### 8.1 Fragments简写形式`<></>`
+
+`<></>`形式，前有些前端工具***支持的还不太好\***，用 create-react-app 创建的项目就不能通过编译
+
+```jsx
+import React from 'react';
+export default function () {
+    return (
+        <>
+            <div>一步 01</div>
+            <div>一步 02</div>
+        </>
+    );
+}
 ```
 
