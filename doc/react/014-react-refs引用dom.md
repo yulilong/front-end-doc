@@ -2,7 +2,7 @@
 
 [TOC]
 
-# refs引用dom或类子组件实例方法
+# refs引用dom
 
 Refs 提供了一种方式，允许我们访问 DOM 节点或在 render 方法中创建的 React 元素。
 
