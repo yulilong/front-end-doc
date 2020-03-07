@@ -48,6 +48,7 @@ module.exports = {
                 text: 'javascript', 
                 items: [
                     { text: 'js', link: '/doc/js/' },
+                    { text: 'js标准库', link: '/doc/js/standardLibrary/' },
                     { text: 'dom操作文档', link: '/doc/dom/' },
                     { text: '浏览器、网络', link: '/doc/browserNetwork/' },
                     { text: '设计模式', link: '/doc/designPattern/' },
@@ -76,6 +77,10 @@ module.exports = {
         // 侧边栏设置
         // sidebar: sidebarConfig,
         sidebar: {
+            '/doc/js/standardLibrary/': [
+                '',
+                '001-math',
+            ],
             '/doc/js/': [
                 '',
                 'regularExpression',
