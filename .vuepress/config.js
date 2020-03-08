@@ -42,7 +42,7 @@ module.exports = {
         // 导航栏设置
         nav: [
             // 根路径
-            { text: 'Home', link: '/' },
+            // { text: 'Home', link: '/' },
             { text: '目录', link: '/catalog' },
             {
                 text: 'javascript', 
@@ -80,6 +80,7 @@ module.exports = {
             '/doc/js/standardLibrary/': [
                 '',
                 '001-math',
+                '002-array',
             ],
             '/doc/js/': [
                 '',

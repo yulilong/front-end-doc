@@ -4,6 +4,10 @@
 
 ### 1.1 JS
 
+* JS标准库
+    * [math](/doc/js/standardLibrary/001-math.md)
+    * [array](/doc/js/standardLibrary/002-array.md)
+
 * JS代码执行机制和事件循环
     * [JS在浏览器中运行机制和事件循环](/doc/js/jsHowWork/JS在浏览器中运行机制和事件循环.md)
     * [JS代码在nodejs环境下执行机制和事件循环](/doc/js/jsHowWork/JS代码在nodejs环境下执行机制和事件循环.md)
