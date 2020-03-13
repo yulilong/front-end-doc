@@ -169,6 +169,7 @@ module.exports = {
                 '005-normalize-reset',
                 '006-css常用代码片段',
                 '007-scss语法说明',
+                '008-外边距合并',
                 {
                     title: 'css深入浅出',
                     collapsable: false,
