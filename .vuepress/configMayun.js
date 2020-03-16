@@ -69,7 +69,7 @@ module.exports = {
                     {
                         text: 'JS打包工具',
                         items: [
-                            {text: 'webpack', link: '/doc/tool/bundle/webpack/'}
+                            {text: 'webpack', link: '/doc/tool/webpack/'}
                         ]
                     },
                 ],
@@ -212,7 +212,7 @@ module.exports = {
                 '014-react-refs引用dom',
             ],
 
-            '/doc/tool/bundle/webpack/': [
+            '/doc/tool/webpack/': [
                 '',
             ],
             
