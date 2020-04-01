@@ -13,7 +13,7 @@
     * [JS代码在nodejs环境下执行机制和事件循环](/doc/js/jsHowWork/JS代码在nodejs环境下执行机制和事件循环.md)
     * [JS中异步方法](/doc/js/jsHowWork/JS中异步方法.md)
 * [regularExpression](/doc/js/regularExpression.md)
-* [对象_构造函数_原型链](/doc/js/001-对象_构造函数_原型链.md)
+* [对象原型继承](/doc/js/001-对象原型继承.md)
 * [this_call_apply_bind](/doc/js/002-this_call_apply_bind.md)
 * [数据类型转换](/doc/js/003-数据类型转换.md)
 * [跨域](/doc/js/004-跨域.md)

@@ -119,7 +119,7 @@ class AutoFocusTextInput extends React.Component {
 
 
 
-## 3. 讲Dom Reds暴露给父组件
+## 3. 将Dom Reds暴露给父组件
 
 在极少数情况下，你可能希望在父组件中引用子节点的 DOM 节点。通常不建议这样做，因为它会打破组件的封装，但它偶尔可用于触发焦点或测量子 DOM 节点的大小或位置。
 
