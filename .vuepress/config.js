@@ -82,6 +82,7 @@ module.exports = {
                 '001-math',
                 '002-array',
                 '003-object',
+                '004-attributes',
             ],
             '/doc/js/': [
                 '',

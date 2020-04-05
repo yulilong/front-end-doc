@@ -4,9 +4,10 @@
 
 ### 1.1 JS标准库
 
-* [math](/doc/js/standardLibrary/001-math.md)
-* [array](/doc/js/standardLibrary/002-array.md)
-* [object](/doc/js/standardLibrary/003-object.md)
+* [math 对象](/doc/js/standardLibrary/001-math.md)
+* [array 对象](/doc/js/standardLibrary/002-array.md)
+* [Object 对象](/doc/js/standardLibrary/003-object.md)
+* [属性描述符](/doc/js/standardLibrary/004-attributes.md)
 
 ### 1.2 JS
 
