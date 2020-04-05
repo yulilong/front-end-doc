@@ -2,12 +2,13 @@
 
 ## 1. JavaScript
 
-### 1.1 JS
+### 1.1 JS标准库
 
-* JS标准库
-    * [math](/doc/js/standardLibrary/001-math.md)
-    * [array](/doc/js/standardLibrary/002-array.md)
-    * [object](/doc/js/standardLibrary/003-object.md)
+* [math](/doc/js/standardLibrary/001-math.md)
+* [array](/doc/js/standardLibrary/002-array.md)
+* [object](/doc/js/standardLibrary/003-object.md)
+
+### 1.2 JS
 
 * JS代码执行机制和事件循环
     * [JS在浏览器中运行机制和事件循环](/doc/js/jsHowWork/JS在浏览器中运行机制和事件循环.md)
@@ -38,7 +39,7 @@
     * [011-react项目搭建](/doc/js/advanced/011-react项目搭建.md)
     * [012-vue项目搭建](/doc/js/advanced/012-vue项目搭建.md)
 
-### 1.2 dom
+### 1.3 dom
 
 * [dom](/doc/dom/readme.md)
 * [001-节点的类型](/doc/dom/001-节点的类型.md)
@@ -52,7 +53,7 @@
 * [009-事件模型](/doc/dom/009-事件模型.md)
 * [010-事件种类](/doc/dom/010-事件种类.md)
 
-### 1.3 浏览器、网络相关
+### 1.4 浏览器、网络相关
 
 * [cookie](/doc/browserNetwork/001-cookie.md)
 * [URL相关操作](/doc/browserNetwork/001-URL相关操作.md)
