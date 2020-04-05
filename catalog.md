@@ -7,6 +7,7 @@
 * JS标准库
     * [math](/doc/js/standardLibrary/001-math.md)
     * [array](/doc/js/standardLibrary/002-array.md)
+    * [object](/doc/js/standardLibrary/003-object.md)
 
 * JS代码执行机制和事件循环
     * [JS在浏览器中运行机制和事件循环](/doc/js/jsHowWork/JS在浏览器中运行机制和事件循环.md)
