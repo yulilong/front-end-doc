@@ -91,6 +91,18 @@ Array.isArray(arr) // true
 
 上面代码中，`typeof`运算符只能显示数组的类型是`Object`，而`Array.isArray`方法可以识别数组。
 
+假如不存在 Array.isArray()，则在其他代码之前运行下面的代码将创建该方法:
+
+```js
+if (!Array.isArray) {
+  Array.isArray = function(arg) {
+    return Object.prototype.toString.call(arg) === '[object Array]';
+  };
+}
+```
+
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray
+
 ## 实例方法
 
 ### valueOf()，toString()
