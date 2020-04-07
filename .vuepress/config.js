@@ -44,6 +44,7 @@ module.exports = {
             // 根路径
             // { text: 'Home', link: '/' },
             { text: '目录', link: '/catalog' },
+            { text: 'ES6', link: '/doc/es6/' },
             {
                 text: 'javascript', 
                 items: [
@@ -83,6 +84,9 @@ module.exports = {
                 '002-array',
                 '003-object',
                 '004-attributes',
+            ],
+            '/doc/es6/': [
+                '',
             ],
             '/doc/js/': [
                 '',
@@ -215,8 +219,8 @@ module.exports = {
                 '',
                 '001-require.context',
             ],
-            
-            '/': [
+            // 目录
+            '/catalog': [
                 'catalog',
             ]
         },
