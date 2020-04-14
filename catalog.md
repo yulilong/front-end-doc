@@ -2,6 +2,11 @@
 
 ## 1. JavaScript
 
+### 1.1 ES6部分
+
+* [数组新增方法](/doc/es6/001-数组新增方法.md)
+
+
 ### 1.1 JS标准库
 
 * [math 对象](/doc/js/standardLibrary/001-math.md)
