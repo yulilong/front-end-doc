@@ -45,6 +45,11 @@
       v-if="data.footer"
     >
       {{ data.footer }}
+      <div>
+          <a target="_blank" href="http://www.beian.miit.gov.cn/">
+                京ICP备20011510号
+            </a>
+      </div>
     </div>
   </div>
 </template>
