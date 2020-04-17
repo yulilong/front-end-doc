@@ -117,6 +117,7 @@
 * [012-react-fiber](/doc/react/012-react-fiber.md)
 * [013-react-dnd拖动组件](/doc/react/013-react-dnd拖动组件.md)
 * [014-react-refs引用dom](/doc/react/014-react-refs引用dom.md)
+* [015-react的setState说明](/doc/react/015-react的setState说明.md)
 
 ## 5. 工具
 
