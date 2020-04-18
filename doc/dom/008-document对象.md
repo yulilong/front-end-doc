@@ -1,3 +1,7 @@
+[[TOC]]
+
+[TOC]
+
 # 八、document对象
 
 ## 1. document对象概述

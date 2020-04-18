@@ -1,3 +1,7 @@
+[[TOC]]
+
+[TOC]
+
 # 四、动态集合NodeLIst-HTMLCollection等
 
 ## 1. NodeList
