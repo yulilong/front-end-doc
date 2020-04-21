@@ -80,8 +80,8 @@ https://html.spec.whatwg.org/multipage/webappapis.html#event-loops
 
 出现**Promise**后，JavaScript对于任务的定义除了广义的同步任务和异步任务，又对任务做了更精细的定义，macrotask（宏任务）和 microtask（微任务）：
 
-- **macrotask**（按优先级顺序排列）: `script`(你的全部JS代码，“同步代码”）, `setTimeout`, `setInterval`, `setImmediate(node的)`, `I/O`,`UI rendering`
-- **microtask**（按优先级顺序排列）:`process.nextTick(node的)`,`Promise`（这里指浏览器原生实现的 Promise）, `Object.observe`, `MutationObserver`
+- **宏任务**（按优先级顺序排列）: `script`(你的全部JS代码，“同步代码”）, `setTimeout`, `setInterval`, `setImmediate(node的)`, `I/O`,`UI rendering`
+- **微任务**（按优先级顺序排列）:`process.nextTick(node的)`,`Promise`（这里指浏览器原生实现的 Promise）, `Object.observe`, `MutationObserver`
 
 ***注意：***宏任务、微任务中出现的nodejs中的方法是nodejs专有的，浏览器的JavaScript环境暂时没有支持。
 
@@ -89,8 +89,8 @@ https://html.spec.whatwg.org/multipage/webappapis.html#event-loops
 
 有了宏任务和微任务后，JavaScript事件循环对此处理方法如下形式：
 
-- js引擎首先从macrotask queue中取出第一个任务，执行完毕后，将microtask queue中的所有任务取出，按顺序全部执行；
-- 然后再从**macrotask queue**（宏任务队列）中取下一个，执行完毕后，再次将**microtask queue**（微任务队列）中的全部取出；
+- js引擎首先从宏任务队列中取出第一个任务，执行完毕后，将微任务队列中的所有任务取出，按顺序全部执行；
+- 然后再从**宏任务队列**(macrotask queue)中取下一个，执行完毕后，再次将**微任务队列**(microtask queue)中的全部取出；
 - 循环往复，直到两个queue中的任务都取完。
 
 ![](./../../../assets/img/hong.png)
