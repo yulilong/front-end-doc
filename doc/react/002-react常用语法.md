@@ -546,7 +546,7 @@ if (this._compositeType === CompositeTypes.PureClass) {
 
 参考资料：https://blog.lbinin.com/frontEnd/React/React-SFC.html
 
-
+react官网关于PureComponent组件介绍：https://zh-hans.reactjs.org/docs/react-api.html#reactpurecomponent
 
 ## 8. React Fragments
 

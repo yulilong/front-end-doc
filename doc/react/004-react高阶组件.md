@@ -128,7 +128,7 @@ function refsHOC(WrappedComponent) {
 
 例子：在下面这个抽象 state 的例子中，我们幼稚地（原话是naively :D）抽象出了 name input 的 value 和 onChange。我说这是幼稚的是因为这样写并不常见，但是你会理解到点。
 
-```
+```jsx
 function ppHOC(WrappedComponent) {
   return class PP extends React.Component {
     constructor(props) {
@@ -158,7 +158,7 @@ function ppHOC(WrappedComponent) {
 
 然后这样使用它：
 
-```
+```jsx
 @ppHOC
 class Example extends React.Component {
   render() {

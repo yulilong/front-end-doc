@@ -86,6 +86,8 @@ session：
 
 ## 2. WebStorage
 
+![](./img/019-localStorage.png)
+
 WebStorage的目的是克服由cookie所带来的一些限制，当数据需要被严格控制在客户端时，不需要持续的将数据发回服务器。
 
 WebStorage两个主要目标：（1）提供一种在cookie之外存储会话数据的路径。（2）提供一种存储大量可以跨会话存在的数据的机制。
@@ -150,9 +152,18 @@ HTML5的WebStorage提供了两种API：localStorage（本地存储）和sessionS
 
 ​        　　key (index) —— 获取某个索引的key
 
+### 2.2 cookie、localStorage、sessionStorage区别
 
+| 特性           | Cookie                                                       | localStorage                         | sessionStorage                             |
+| -------------- | ------------------------------------------------------------ | ------------------------------------ | ------------------------------------------ |
+| 数据声明周期   | 一般都服务器生成，可设置失效时间。如果在浏览器端生成，默认是关闭浏览器后失效 | 除非被清除，否则永久保存             | 仅在当前会话有效，关闭页面或浏览器后被清除 |
+| 存放数据大小   | 4KB                                                          | 一般5MB                              | 一般5MB                                    |
+| 与服务器端通信 | 每次请求都会携带cookie，保存过多会带来性能问题               | 仅在浏览器端保存，不参与和服务器通信 | 同localStorage                             |
+| 用途           | 一般由服务器端生成，用于标识用户身份，少量浏览器数据也可保存在cookie | 用于浏览器端缓存数据                 | localStorage                               |
 
+相同点：
 
+三者都可以被用来浏览器端存储数据，而且都是字符串类型的键值对。
 
 ## 3. 参考资料
 
@@ -165,3 +176,7 @@ https://www.cnblogs.com/cencenyue/p/7604651.html
 https://blog.csdn.net/qq_35585701/article/details/81393361
 
 https://www.cnblogs.com/dolphinX/p/3348469.html
+
+[理解cookie、session、localStorage、sessionStorage之不同](https://blog.csdn.net/qq_35585701/article/details/81393361)
+
+https://zhidao.baidu.com/question/1887680473119326828.html
