@@ -299,7 +299,7 @@ promise.then(function(value) {
 
 > `then`方法接受一个回调函数，该回调函数会在请求成功时(Promise对象状态变为resolved)调用，参数是Promise对象传出的值
 >
-> `catch`方法接受一个回调函数，该回调函数会在请求成功时(Promise对象状态变为rejected)或报错时调用，参数是Promise对象传出的值
+> `catch`方法接受一个回调函数，该回调函数会在请求失败(Promise对象状态变为rejected)或报错时调用，参数是Promise对象传出的值
 >
 > 推荐使用这种方式调用
 
@@ -474,15 +474,15 @@ Promise.all([a, b, c])
 // res:  [ 2, undefined, 2 ]
 ```
 
-上面代码，a会resolve，b首先会rejected，但b有自己的catch方法，该方法返回一个新的Promise实例，b指向的实际上是这个实例。该实例执行完catch后，也会变成resolved，导致Promise.all()方法参数里面的两个实例都会resolved，因此会调用all后面的then方法指定的回调函数。
+上面代码，a会resolve，b首先会rejected，但b有自己的catch方法，该方法返回一个新的Promise实例，b指向的实际上是这个实例。该实例执行完catch后，也会变成resolved，导致Promise.all()方法参数里面的三个实例都会resolved，因此会调用all后面的then方法指定的回调函数。
 
 如果`b`没有自己的`catch`方法，就会调用`Promise.all()`的`catch`方法。
 
 ### 4.7 Promise.race()
 
-`Promise.race`方法同样是将多个 Promise 实例，包装成一个新的 Promise 实例。
+`Promise.race`方法将多个 Promise 实例，包装成一个新的 Promise 实例。
 
-race参数用多个实例有率先改变状态，Promise.race的状态就跟着改变。那个率先改变的实例的返回值，就是Promise.race的回调函数的参数。
+race的参数之中有一个实例率先改变状态，Promise.race的状态就跟着改变。那个率先改变的实例的返回值，就是Promise.race的回调函数的参数。
 
 `Promise.race`方法的参数与`Promise.all`方法一样，如果不是 Promise 实例，就会先调用下面讲到的`Promise.resolve`方法，将参数转为 Promise 实例，再进一步处理。
 
