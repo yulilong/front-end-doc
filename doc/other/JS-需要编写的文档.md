@@ -83,3 +83,14 @@ http://nodejs.cn/api/modules.html
 cookie、storge、indexDB、server worker、离线存储mainfest
 
 [前端模块化——彻底搞懂AMD、CMD、ESM和CommonJS](https://www.cnblogs.com/chenwenhao/p/12153332.html)
+
+
+
+console文档编辑：
+
+```js
+// 统计运行时间
+console.time("doIt");
+console.timeEnd("doIt");
+```
+
