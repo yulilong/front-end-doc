@@ -4,3 +4,6 @@
 .DS_Store
 
 node_modules
+
+# 测试JS代码的文件
+a.js

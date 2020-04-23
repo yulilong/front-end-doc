@@ -88,6 +88,7 @@ module.exports = {
             '/doc/es6/': [
                 '',
                 '001-数组新增方法',
+                '002-asyncawait函数说明',
             ],
             '/doc/js/': [
                 '',

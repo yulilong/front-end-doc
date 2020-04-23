@@ -5,6 +5,7 @@
 ### 1.1 ES6部分
 
 * [数组新增方法](/doc/es6/001-数组新增方法.md)
+* [async/await函数说明](/doc/es6/002-asyncawait函数说明.md)
 
 
 ### 1.1 JS标准库
