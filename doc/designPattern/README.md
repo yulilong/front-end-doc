@@ -32,3 +32,4 @@
 
 [javascript设计模式——单例模式](https://www.cnblogs.com/xiaohuochai/p/8029196.html)
 
+[前端需要了解的9种设计模式](https://zhuanlan.zhihu.com/p/133263261)
