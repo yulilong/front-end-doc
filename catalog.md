@@ -8,6 +8,7 @@
 * [async/await函数说明](/doc/es6/002-asyncawait函数说明.md)
 * [ES6新特性列表](/doc/es6/003-ES6新特性列表.md)
 * [ES6的类](/doc/es6/004-ES6的类.md)
+* [迭代器和for···of](/doc/es6/005-迭代器和for···of.md)
 
 
 ### 1.1 JS标准库
