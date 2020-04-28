@@ -95,6 +95,7 @@ module.exports = {
                 '003-ES6新特性列表',
                 '004-ES6的类',
                 '005-迭代器和for···of',
+                '006-生成器函数Generator',
             ],
             '/doc/js/': [
                 '',

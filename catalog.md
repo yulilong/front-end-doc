@@ -9,6 +9,7 @@
 * [ES6新特性列表](/doc/es6/003-ES6新特性列表.md)
 * [ES6的类](/doc/es6/004-ES6的类.md)
 * [迭代器和for···of](/doc/es6/005-迭代器和for···of.md)
+* [生成器函数Generator](/doc/es6/生成器函数Generator.md)
 
 
 ### 1.1 JS标准库
