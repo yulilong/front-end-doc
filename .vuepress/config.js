@@ -93,6 +93,7 @@ module.exports = {
                 '004-ES6的类',
                 '005-迭代器和for···of',
                 '006-生成器函数Generator',
+                '007-Proxy代理JS操作',
             ],
             '/doc/js/': [
                 '',
