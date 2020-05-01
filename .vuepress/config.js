@@ -94,6 +94,7 @@ module.exports = {
                 '005-迭代器和for···of',
                 '006-生成器函数Generator',
                 '007-Proxy代理JS操作',
+                '008-Reflect反射',
             ],
             '/doc/js/': [
                 '',
