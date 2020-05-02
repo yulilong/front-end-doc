@@ -13,6 +13,7 @@
 * [Proxy代理JS操作](/doc/es6/007-Proxy代理JS操作.md)
 * [Reflect反射](/doc/es6/008-Reflect反射.md)
 * [Symbol](/doc/es6/009-Symbol.md)
+* [Set和WeakSet](/doc/es6/010-Set和WeakSet.md)
 
 
 ### 1.1 JS标准库

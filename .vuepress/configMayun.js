@@ -99,6 +99,7 @@ module.exports = {
                 '007-Proxy代理JS操作',
                 '008-Reflect反射',
                 '009-Symbol',
+                '010-Set和WeakSet',
             ],
             '/doc/js/': [
                 '',
