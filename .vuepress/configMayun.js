@@ -100,6 +100,7 @@ module.exports = {
                 '008-Reflect反射',
                 '009-Symbol',
                 '010-Set和WeakSet',
+                '011-Map和WeakMap',
             ],
             '/doc/js/': [
                 '',
