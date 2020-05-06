@@ -84,6 +84,7 @@ module.exports = {
                 '002-array',
                 '003-object',
                 '004-attributes',
+                '005-String对象',
             ],
             '/doc/es6/': [
                 '',
