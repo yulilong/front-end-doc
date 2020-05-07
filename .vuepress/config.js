@@ -1,3 +1,6 @@
+/**
+ * 码云的配置文件，主要是设置：base: '/front-end-doc/',
+ */
 const path = require('path');
 
 module.exports = {
@@ -11,7 +14,7 @@ module.exports = {
         ['link', { rel: 'stylesheet', type: 'text/css', href: 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.css' }]
     ],
     // 如果github Pages绑定域名，则需要把base删除，否则域名访问会失败
-    // base: '/front-end-doc/',     // 仓库名字,用于github Pages 部署,
+    base: '/front-end-doc/',     // 仓库名字,用于github Pages 部署,
     // 设置本地开发端口号
     port: 4000,
     configureWebpack: {
@@ -87,10 +90,10 @@ module.exports = {
                 '005-String对象',
             ],
             '/doc/es6/': [
-                '',
-                '001-数组新增方法',
-                '002-asyncawait函数说明',
-                '003-ES6新特性列表',
+                // '',
+                '001-ES6新特性列表',
+                '002-数组新增方法',
+                '003-asyncawait函数说明',
                 '004-ES6的类',
                 '005-迭代器和for···of',
                 '006-生成器函数Generator',

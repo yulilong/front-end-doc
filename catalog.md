@@ -4,9 +4,9 @@
 
 ### 1.1 ES6部分
 
-* [数组新增方法](/doc/es6/001-数组新增方法.md)
-* [async/await函数说明](/doc/es6/002-asyncawait函数说明.md)
-* [ES6新特性列表](/doc/es6/003-ES6新特性列表.md)
+* [ES6新特性列表](/doc/es6/001-ES6新特性列表.md)
+* [数组新增方法](/doc/es6/002-数组新增方法.md)
+* [async/await函数说明](/doc/es6/003-asyncawait函数说明.md)
 * [ES6的类](/doc/es6/004-ES6的类.md)
 * [迭代器和for···of](/doc/es6/005-迭代器和for···of.md)
 * [生成器函数Generator](/doc/es6/生成器函数Generator.md)
