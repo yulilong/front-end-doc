@@ -88,6 +88,7 @@ module.exports = {
                 '003-object',
                 '004-attributes',
                 '005-String对象',
+                '006-Number对象',
             ],
             '/doc/es6/': [
                 // '',

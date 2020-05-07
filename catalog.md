@@ -24,6 +24,7 @@
 * [Object 对象](/doc/js/standardLibrary/003-object.md)
 * [属性描述符](/doc/js/standardLibrary/004-attributes.md)
 * [String对象](/doc/js/standardLibrary/005-String对象.md)
+* [Number对象](/doc/js/standardLibrary/006-Number对象.md)
 
 ### 1.2 JS
 
