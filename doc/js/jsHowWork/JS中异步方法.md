@@ -21,6 +21,18 @@ setTimeout(t, 0, 'hello');
 var id = setTimeout(t, 1000, '我不会被执行');
 setTimeout("console.log('类似evel方法')"); // nodejs中此处会报错
 clearTimeout(id)	// 取消了setTimeout函数的回调
+
+// setInterval()例子，执行了5次函数
+var i = 0;
+function fn(a) { 
+  console.log(a); console.log(i);
+  i++;
+  if (i > 5) {
+    // 清除setInterval执行
+    clearInterval(id)
+  }
+}
+var id = setInterval (fn, 1000, 'hello');
 ```
 
 参数(setTimeout、setInterval一样)：
@@ -39,7 +51,7 @@ clearTimeout(id)	// 取消了setTimeout函数的回调
 >
 > 这个值传递给`clearInterval()`可以用来来取消setInterval的定时。
 
-***注意：***IE9 及更早的 IE 浏览器不支持向延迟函数传递额外参数的功能。
+***注意***：IE9 及更早的 IE 浏览器不支持向延迟函数传递额外参数的功能。
 
 ### 1.1 关于延迟
 
