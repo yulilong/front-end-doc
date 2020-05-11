@@ -89,6 +89,7 @@ module.exports = {
                 '004-attributes',
                 '005-String对象',
                 '006-Number对象',
+                '007-Date对象',
             ],
             '/doc/es6/': [
                 // '',
