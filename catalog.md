@@ -26,6 +26,7 @@
 * [String对象](/doc/js/standardLibrary/005-String对象.md)
 * [Number对象](/doc/js/standardLibrary/006-Number对象.md)
 * [Date对象](/doc/js/standardLibrary/007-Date对象.md)
+* [008-JSON对象](/doc/js/standardLibrary/008-JSON对象.md)
 
 ### 1.2 JS
 

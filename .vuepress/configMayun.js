@@ -90,6 +90,7 @@ module.exports = {
                 '005-String对象',
                 '006-Number对象',
                 '007-Date对象',
+                '008-JSON对象',
             ],
             '/doc/es6/': [
                 // '',
