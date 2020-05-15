@@ -639,27 +639,22 @@ arr.filter(myFilter, obj) // [8, 4, 9]
 
 `some`方法是只要一个成员的返回值是`true`，则整个`some`方法的返回值就是`true`，否则返回`false`。
 
-```javascript
-var arr = [1, 2, 3, 4, 5];
-arr.some(function (elem, index, arr) {
-  return elem >= 3;
-});
-// true
-```
-
-上面代码中，如果数组`arr`有一个成员大于等于3，`some`方法就返回`true`。
-
 `every`方法是所有成员的返回值都是`true`，整个`every`方法才返回`true`，否则返回`false`。
 
 ```javascript
 var arr = [1, 2, 3, 4, 5];
+// 数组arr有一个成员大于等于3，some方法就返回true
+arr.some(function (elem, index, arr) {
+  return elem >= 3;
+});
+// true
+
+// 数组arr并非所有成员大于等于3，所以返回false
 arr.every(function (elem, index, arr) {
   return elem >= 3;
 });
 // false
 ```
-
-上面代码中，数组`arr`并非所有成员大于等于`3`，所以返回`false`。
 
 注意，对于空数组，`some`方法返回`false`，`every`方法返回`true`，回调函数都不会执行。
 
