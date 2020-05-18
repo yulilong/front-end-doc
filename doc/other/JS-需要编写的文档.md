@@ -1,11 +1,3 @@
-1、十进制的0.1转换成二级制：
-
-<https://zhidao.baidu.com/question/693903632703084164.html>
-
-[【转】为什么0.1无法被二进制小数精确表示？](https://www.cnblogs.com/scecit/p/5276943.html)
-
-[关于js浮点数计算精度不准确问题的解决办法](https://www.cnblogs.com/xinggood/p/6639022.html)
-
 
 
 1、BOM与文件编码
