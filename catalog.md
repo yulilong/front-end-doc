@@ -15,6 +15,7 @@
 * [Symbol](/doc/es6/009-Symbol.md)
 * [Set和WeakSet](/doc/es6/010-Set和WeakSet.md)
 * [Map和WeakMap](/doc/es6/011-Map和WeakMap.md)
+* [Promise](/doc/es6/012-Promise.md)
 
 
 ### 1.1 JS标准库
