@@ -3,7 +3,7 @@
 
 # transition:过度、transform:变形
 
-这三个属性都是CSS3版本的属性，所以会有兼容性问题。
+这两个属性都是CSS3版本的属性，所以会有兼容性问题。
 
 ## 1. transition:过度
 
