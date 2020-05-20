@@ -13,11 +13,28 @@ Internet Explorer 10、Firefox、Opera 和 Chrome 支持 transition 属性。
 Safari 支持替代的 -webkit-transition 属性。
 注释：Internet Explorer 9 以及更早版本的浏览器不支持 transition 属性。
 
+一个例子：
+
+```css
+/* 设置不同的transition-property，对应的transition-delay，transition-timing-function，transition-duration的属性相同时，设置一个即可。*/
+.test1 {
+  transition-property:width,background; // 过度的 属性
+  transition-duration:3s;								// 过度的 持续时间
+  transition-timing-function:ease;			// 过度的 时间函数
+  transition-delay:500ms;								// 过度的 延迟时间
+}
+/*相当于*/
+.test1 {
+  transition:width 3s ease 500ms,background 3s ease 500ms;
+}
+```
+
 ### 1.1 transition-property:过渡的属性
-  过渡的属性的名称，比如 transition-property:backgrond 就是指 backgound 参与这个过渡
-  值：none(没有指定任何样式)、 all(默认值，指定元素所有支持transition-property属性的样式)、` <transition-property>`(可选过度样式)
-  适用于：所有元素
-  继承性：无
+  过渡的属性的名称：
+
+可选值：none(没有指定任何样式)、 all(默认值，指定元素所有支持transition-property属性的样式)、` <transition-property>`(可选过度样式)
+适用于：所有元素
+继承性：无
 
 不是所有的CSS样式都可以过渡，只有具有中间值的属性才有过渡效果。
 
@@ -84,18 +101,6 @@ Safari 支持替代的 -webkit-transition 属性。
 其他用法
 
 ```less
-/* 设置不同的transition-property，对应的transition-delay，transition-timing-function，transition-duration的属性相同时，设置一个即可。*/
-.test1 {
-  transition-property:width,background;
-  transition-duration:3s;
-  transition-timing-function:ease;
-  transition-delay:500ms;
-}
-/*相当于*/
-.test1 {
-  transition:width 3s ease 500ms,background 3s ease 500ms;
-}
-
 /* 当transition-property的值的个数多余对应的其他属性时（属性值大于1个），则按顺序取值。*/
 .test{
   transition-property:width,background,opacity;
