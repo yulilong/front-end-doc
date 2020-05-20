@@ -9,7 +9,7 @@
 * [async/await函数说明](/doc/es6/003-asyncawait函数说明.md)
 * [ES6的类](/doc/es6/004-ES6的类.md)
 * [迭代器和for···of](/doc/es6/005-迭代器和for···of.md)
-* [生成器函数Generator](/doc/es6/生成器函数Generator.md)
+* [生成器函数Generator](/doc/es6/006-生成器函数Generator.md)
 * [Proxy代理JS操作](/doc/es6/007-Proxy代理JS操作.md)
 * [Reflect反射](/doc/es6/008-Reflect反射.md)
 * [Symbol](/doc/es6/009-Symbol.md)
