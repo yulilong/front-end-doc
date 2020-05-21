@@ -179,6 +179,7 @@ module.exports = {
                 '007-http报文和请求数据大小',
                 '008-http方法和状态码',
                 '010-浏览器渲染过程',
+                '011-Web前端性能优化',
             ],
 
             '/doc/designPattern/':[
