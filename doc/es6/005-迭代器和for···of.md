@@ -77,10 +77,10 @@ const obj = {
 
 ES6 的有些数据结构原生具备 Iterator 接口（比如数组），即不用任何处理，就可以被`for...of`循环遍历。原因在于，这些数据结构原生部署了`Symbol.iterator`属性（详见下文），另外一些数据结构没有（比如对象）。调用这个接口，就会返回一个遍历器对象。
 
-原生具备 Iterator 接口的数据结构如下。
+原生具备 Iterator 接口的数据结构如下：
 
-Array、Map、Set、String、TypedArray、函数的 arguments 对象、NodeList 对象
-
+-   Array
+-   Map
 -   Set
 -   String
 -   TypedArray
