@@ -89,7 +89,7 @@ background: url('./../../../assets/images/arrow-up.png') no-repeat center;
   <img src={require("./images/1.png")} alt=""/>
   ```
 
-- 如果是北京图的话操作style
+- 如果是背景图的话操作style
 
   ```react
   style={{background:`url(${require("./images/1.png")})` }}

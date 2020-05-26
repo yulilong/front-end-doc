@@ -106,6 +106,7 @@ module.exports = {
                 '010-Set和WeakSet',
                 '011-Map和WeakMap',
                 '012-Promise',
+                '013-手写Promise',
             ],
             '/doc/js/': [
                 '',

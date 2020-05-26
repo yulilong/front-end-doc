@@ -16,6 +16,7 @@
 * [Set和WeakSet](/doc/es6/010-Set和WeakSet.md)
 * [Map和WeakMap](/doc/es6/011-Map和WeakMap.md)
 * [Promise](/doc/es6/012-Promise.md)
+* [手写Promise](/doc/es6/013-手写Promise.md)
 
 
 ### 1.1 JS标准库

@@ -419,6 +419,25 @@ var reg = /\d*[\u4e00-\u9fa5]\/[\u4e00-\u9fa5]\,/	// 匹配（10元/斤,）
 
 
 
+## 5. 实际例子
+
+### 5.1 hello-world转为HelloWorld
+
+将`hello-world-jack` 转为`HelloWorldJack`.
+
+```js
+var str = 'hello-world-jack'
+function camelize(str) {
+   return  str.replace(/(^\w)|-(\w)/g, function(){
+      console.log(arguments)
+      var target = arguments[1] || arguments[2]
+      return target.toUpperCase()
+    })
+}
+```
+
+
+
 ## 参考资料
 
 - 饥人谷课件
