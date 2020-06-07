@@ -124,7 +124,7 @@ module.exports = {
                 '013-JS浮点数运算的精度问题',
                 {
                     title: 'JS代码执行机制和事件循环',
-                    collapsable: false,
+                    // collapsable: false,
                     children: [
                         // 'jsHowWork/',
                         'jsHowWork/JS在浏览器中运行机制和事件循环',
@@ -134,7 +134,7 @@ module.exports = {
                 },
                 {
                     title: '高级',
-                    collapsable: false,
+                    // collapsable: false,
                     children: [
                         'advanced/001-ES6模块import_export',
                         'advanced/002-错误处理try_catch',
@@ -150,6 +150,13 @@ module.exports = {
                         'advanced/012-vue项目搭建',
                     ]
                 },
+                {
+                    title: '文章',
+                    // collapsable: false,
+                    children: [
+                        'blog/001-JS常用的60余种工具方法',
+                    ]
+                }
             ],
             
             '/doc/dom/': [
@@ -217,6 +224,13 @@ module.exports = {
                     collapsable: false,
                     children: [
                         'css3/001-css3新属性介绍',
+                    ]
+                },
+                {
+                    title: 'less',
+                    collapsable: false,
+                    children: [
+                        'less/001-less代码片段',
                     ]
                 }
             ],

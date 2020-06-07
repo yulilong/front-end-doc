@@ -61,6 +61,8 @@
     * [010-moment时间插件使用说明](/doc/js/advanced/010-moment时间插件使用说明.md)
     * [011-react项目搭建](/doc/js/advanced/011-react项目搭建.md)
     * [012-vue项目搭建](/doc/js/advanced/012-vue项目搭建.md)
+* 文章
+    * [001-JS常用的60余种工具方法](/doc/js/blog/001-JS常用的60余种工具方法.md)
 
 ### 1.3 dom
 
@@ -115,6 +117,8 @@
     * [007-BFC](/doc/css/depth/007-BFC.md)
 * CSS3
     * [css3新属性介绍](/doc/css/css3/001-css3新属性介绍.md)
+* less
+    * [less代码片段](/doc/css/less/001-less代码片段)
 
 ## 3. html
 
