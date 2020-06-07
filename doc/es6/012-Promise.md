@@ -363,3 +363,7 @@ Promise.reject(thenable)
 
 [Promise 对象 阮一峰](http://es6.ruanyifeng.com/#docs/promise)
 
+[惊艳！可视化的 js：动态图演示 Promises & Async/Await 的过程！](https://zhuanlan.zhihu.com/p/145442030)
+
+
+
