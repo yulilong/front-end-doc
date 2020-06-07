@@ -24,3 +24,9 @@ aaa<span>1</ span>123 // 这样就会报错
 ```
 
 标点符号放在外面
+
+### 1.3 README.md名字要大写
+
+`README.md`文件名字要大写。
+
+编辑此页功能:`editLinks: true,`会打开github链接里面的对应文件，`README`文件会默认找大写名字。
