@@ -130,6 +130,7 @@ module.exports = {
                         'jsHowWork/JS在浏览器中运行机制和事件循环',
                         'jsHowWork/JS代码在nodejs环境下执行机制和事件循环',
                         'jsHowWork/JS中异步方法',
+                        'jsHowWork/EventLoop和浏览器渲染-帧动画-空闲回调的关系',
                     ]
                 },
                 {
