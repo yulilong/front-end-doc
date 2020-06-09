@@ -455,3 +455,6 @@ function camelize(str) {
   [String对象介绍](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String)
 
 [学习正则表达式 github](https://github.com/ziishaned/learn-regex)
+
+[RegExp 对象 阮一峰 ES5](https://wangdoc.com/javascript/stdlib/regexp.html#stringprototypereplace)
+

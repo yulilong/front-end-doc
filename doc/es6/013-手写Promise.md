@@ -28,9 +28,64 @@ fs.readdir(source, function (err, files) {
 })
 ```
 
+```js
+fs.readdir(source, function (err, files) {
+    if (err) {
+        console.log('Error finding files: ' + err)
+    } else {
+        files.forEach(function (filename, fileIndex) {
+            console.log(filename)
+            gm(source + filename).size(function (err, values) {
+                if (err) {
+                    console.log('Error identifying file size: ' + err)
+                } else {
+                    console.log(filename + ' : ' + values)
+                    aspect = (values.width / values.height)
+                    widths.forEach(function (width, widthIndex) {
+                        height = Math.round(width / aspect)
+                        console.log('resizing ' + filename + 'to ' + height + 'x' + height) this.resize(width, height)
+                            .write(dest + 'w' + width + '_' + filename, function (err) {
+                                if (err) console.log('Error writing file: ' + err)
+                            })
+                    }.bind(this))
+                }
+            })
+        })
+    }
+})
+```
+
 回调地狱真的是个问题吗？有没有可能是这个程序员水平不行？
 
 回调可以不地狱，回调没有问题，出现地狱是水平的问题。但是水平差的人就是多，所以妥协了。
+
+回调不地狱：
+
+```js
+fs.readdir(source, (err, files) => {
+    travalFiles = () => {
+        if (err) { return console.log('Error: 找不到目录 ' + err) }
+        files.forEach(gmFile)
+    }
+    gmFile = (filename) => {
+        console.log(filename)
+        gm(source + filename).size(afterGetSize)
+    }
+    afterGetSize = (err, values) => {
+        if (err) return console.log('无法读取文件尺寸: ' + err) console.log(filename + ' : ' + values)
+        aspect = (values.width / values.height) widths.forEach((width, widthIndex) => resize(width, aspect))
+    }
+    resize = (width, aspect) => {
+        height = Math.round(width / aspect)
+        console.log('将' + filename + '的尺寸变为 ' + width + 'x' + height) this.resize(width, height)
+            .write(dest + 'w' + width + '_' + filename, (err) => err && console.log('Error writing file: ' + err)
+            )
+    }
+    travalFiles(err, files)
+})
+```
+
+
 
 ## 2. Promise有什么优点？
 
