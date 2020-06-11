@@ -4,13 +4,11 @@
 
 
 
-# 一篇文章带你详解 HTTP 协议（网络协议篇一）
+# 一篇文章带你详解HTTP协议
 
 作者：涤生_Woo   
 链接：https://www.jianshu.com/p/6e9e4156ece3   
 来源：简书   
-
-https://www.jianshu.com/p/9f3e879a4c9c
 
 本篇文章篇幅比较长，先来个思维导图预览一下:
 
