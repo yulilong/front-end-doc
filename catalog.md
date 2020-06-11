@@ -94,6 +94,7 @@
 * [浏览器渲染过程](/doc/browserNetwork/010-浏览器渲染过程.md)
 * [Web前端性能优化](/doc/browserNetwork/011-Web前端性能优化.md)
 * [移动H5首屏秒开优化方案](/doc/browserNetwork/012-移动H5首屏秒开优化方案.md)
+* [一篇文章带你详解HTTP协议](/doc/browserNetwork/013-一篇文章带你详解HTTP协议.md)
 
 
 ## 2. CSS
