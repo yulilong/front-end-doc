@@ -91,6 +91,7 @@ module.exports = {
                 '006-Number对象',
                 '007-Date对象',
                 '008-JSON对象',
+                '009-RegExp对象',
             ],
             '/doc/es6/': [
                 // '',
@@ -110,7 +111,7 @@ module.exports = {
             ],
             '/doc/js/': [
                 '',
-                'regularExpression',
+                // 'regularExpression',
                 '001-对象原型继承',
                 '002-this_call_apply_bind',
                 '003-数据类型转换',

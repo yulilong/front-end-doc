@@ -28,7 +28,8 @@
 * [String对象](/doc/js/standardLibrary/005-String对象.md)
 * [Number对象](/doc/js/standardLibrary/006-Number对象.md)
 * [Date对象](/doc/js/standardLibrary/007-Date对象.md)
-* [008-JSON对象](/doc/js/standardLibrary/008-JSON对象.md)
+* [JSON对象](/doc/js/standardLibrary/008-JSON对象.md)
+* [RegExp对象](/doc/js/standardLibrary/009-RegExp对象.md)
 
 ### 1.2 JS
 
@@ -37,7 +38,7 @@
     * [JS代码在nodejs环境下执行机制和事件循环](/doc/js/jsHowWork/JS代码在nodejs环境下执行机制和事件循环.md)
     * [JS中异步方法](/doc/js/jsHowWork/JS中异步方法.md)
     * [EventLoop和浏览器渲染-帧动画-空闲回调的关系](/doc/js/jsHowWork/EventLoop和浏览器渲染-帧动画-空闲回调的关系.md)
-* [regularExpression](/doc/js/regularExpression.md)
+<!-- * [regularExpression](/doc/js/regularExpression.md) -->
 * [对象原型继承](/doc/js/001-对象原型继承.md)
 * [this_call_apply_bind](/doc/js/002-this_call_apply_bind.md)
 * [数据类型转换](/doc/js/003-数据类型转换.md)
