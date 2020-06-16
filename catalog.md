@@ -17,6 +17,7 @@
 * [Map和WeakMap](/doc/es6/011-Map和WeakMap.md)
 * [Promise](/doc/es6/012-Promise.md)
 * [手写Promise](/doc/es6/013-手写Promise.md)
+* [Decorator装饰器](/doc/es6/014-Decorator装饰器.md)
 
 
 ### 1.1 JS标准库

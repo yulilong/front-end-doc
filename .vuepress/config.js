@@ -108,6 +108,7 @@ module.exports = {
                 '011-Map和WeakMap',
                 '012-Promise',
                 '013-手写Promise',
+                '014-Decorator装饰器',
             ],
             '/doc/js/': [
                 '',
