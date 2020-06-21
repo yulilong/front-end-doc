@@ -211,6 +211,8 @@ module.exports = {
                 '006-css常用代码片段',
                 '007-scss语法说明',
                 '008-外边距合并',
+                '009-float浮动',
+                '010-css一些属性说明',
                 {
                     title: 'css深入浅出',
                     collapsable: false,

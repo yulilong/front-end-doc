@@ -112,6 +112,8 @@
     * [006-css常用代码片段](/doc/css/006-css常用代码片段.md)
     * [007-scss语法说明](/doc/css/007-scss语法说明.md)
     * [008-外边距合并](/doc/css/008-外边距合并.md)
+    * [009-float浮动](/doc/css/009-float浮动.md)
+    * [010-css一些属性说明](/doc/css/010-css一些属性说明.md)
 * css深入浅出
     * [001-宽度与高度](/doc/css/depth/001-宽度与高度.md)
     * [002-堆叠上下文](/doc/css/depth/002-堆叠上下文.md)
