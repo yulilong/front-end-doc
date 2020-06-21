@@ -548,7 +548,7 @@ if (this._compositeType === CompositeTypes.PureClass) {
 
 react官网关于PureComponent组件介绍：https://zh-hans.reactjs.org/docs/react-api.html#reactpurecomponent
 
-## 8. React Fragments
+## 8. Fragments:解决必须有一个根节点问题
 
 `<React.Fragment>`是为了解决`render`函数必须有一个跟节点问题。
 
