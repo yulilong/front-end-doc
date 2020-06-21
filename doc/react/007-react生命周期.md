@@ -378,19 +378,19 @@ UNSAFE_componentWillUpdate(nextProps, nextState)
 
 ## 6. react组件其他API
 
-### 6.1 forceUpdate()
+### 6.1 forceUpdate(callback)
 
 ```javascript
 component.forceUpdate(callback)
 ```
+
+强制更新整个应用，callback是更新完成后的回调函数。
 
 默认情况下，当组件的 state 或 props 发生变化时，组件将重新渲染。如果 `render()` 方法依赖于其他数据，则可以调用 `forceUpdate()` 强制让组件重新渲染。
 
 调用 `forceUpdate()` 将致使组件调用 `render()` 方法，此操作会跳过该组件的 `shouldComponentUpdate()`。但其子组件会触发正常的生命周期方法，包括 `shouldComponentUpdate()` 方法。如果标记发生变化，React 仍将只更新 DOM。
 
 通常你应该避免使用 `forceUpdate()`，尽量在 `render()` 中使用 `this.props` 和 `this.state`。
-
-
 
 ### 6.2 setState()
 
