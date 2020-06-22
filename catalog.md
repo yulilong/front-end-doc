@@ -18,6 +18,7 @@
 * [Promise](/doc/es6/012-Promise.md)
 * [手写Promise](/doc/es6/013-手写Promise.md)
 * [Decorator装饰器](/doc/es6/014-Decorator装饰器.md)
+* [对象的新增方法](/doc/es6/015-对象的新增方法.md)
 
 
 ### 1.1 JS标准库
