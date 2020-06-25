@@ -128,7 +128,9 @@
     * [css3新属性介绍](/doc/css/css3/001-css3新属性介绍.md)
 * less
     * [less代码片段](/doc/css/less/001-less代码片段)
-
+* 文章
+    * [7个关于background-image好用技巧](/doc/css/blog/001-7个关于background-image好用技巧.md)
+    
 ## 3. html
 
 * [001-HTML5特性说明](/doc/html/001-HTML5特性说明.md)

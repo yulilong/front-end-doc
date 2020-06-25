@@ -241,7 +241,14 @@ module.exports = {
                     children: [
                         'less/001-less代码片段',
                     ]
-                }
+                },
+                {
+                  title: 'CSS文章',
+                  // collapsable: false,
+                  children: [
+                      'blog/001-7个关于background-image好用技巧',
+                  ]
+                },
             ],
             
             '/doc/html/': [
