@@ -32,7 +32,7 @@ footer: MIT Licensed | Copyright © 2019-yulilong
 全局安装，打开终端，输入如下命令：
 
 ```
-~ npm install -g vuepress
+~ npm install -g vuepress@0.14.5 --registry=https://registry.npm.taobao.org/
 
 http fetch GET 200 https://registry.npm.taobao.org/caniuse-db/download/caniuse-db-1.0.30000909.tgz 3993ms
 /usr/local/bin/vuepress -> /usr/local/lib/node_modules/vuepress/bin/vuepress.js

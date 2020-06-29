@@ -30,7 +30,7 @@ echo "执行命令：commit -m 'deploy'"
 git commit -m 'deploy'
 
 # 发布到码云
-echo "代码推送的码云的gh-pages分支，用于部署"
+echo "代码推送到码云的gh-pages分支，用于部署"
 git push -f https://gitee.com/dragon-li/front-end-doc.git master:gh-pages
 
 # 返回到上一次的工作目录
