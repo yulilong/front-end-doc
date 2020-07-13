@@ -31,7 +31,8 @@ git commit -m 'deploy'
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
 
 # 发布到码云pages-aliyun分支上，用于阿里云拉取
-echo "代码推送到码云的pages-aliyun分支，用于阿里云拉取"
+echo "代码推送到码云的pages-aliyun分支，用于阿里云拉取:"
+echo "push -f https://gitee.com/dragon-li/front-end-doc.git master:pages-aliyun"
 git push -f https://gitee.com/dragon-li/front-end-doc.git master:pages-aliyun
 
 # 如果发布到 https://<USERNAME>.github.io/<REPO>
