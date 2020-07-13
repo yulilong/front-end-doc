@@ -154,6 +154,7 @@
 * [013-react-dnd拖动组件](/doc/react/013-react-dnd拖动组件.md)
 * [014-react-refs引用dom](/doc/react/014-react-refs引用dom.md)
 * [015-react的setState说明](/doc/react/015-react的setState说明.md)
+* [016-react中使用echarts](/doc/react/016-react中使用echarts.md)
 
 ## 5. 工具
 

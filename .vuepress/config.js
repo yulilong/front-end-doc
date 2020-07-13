@@ -274,6 +274,7 @@ module.exports = {
                 '013-react-dnd拖动组件',
                 '014-react-refs引用dom',
                 '015-react的setState说明',
+                '016-react中使用echarts',
             ],
 
             '/doc/tool/webpack/': [
