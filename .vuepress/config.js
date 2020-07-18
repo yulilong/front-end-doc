@@ -233,6 +233,7 @@ module.exports = {
                     collapsable: false,
                     children: [
                         'css3/001-css3新属性介绍',
+                        'css3/002-css3-media查询',
                     ]
                 },
                 {
