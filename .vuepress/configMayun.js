@@ -110,6 +110,7 @@ module.exports = {
                 '013-手写Promise',
                 '014-Decorator装饰器',
                 '015-对象的新增方法',
+                '016-Number-Math和数值的扩展',
             ],
             '/doc/js/': [
                 '',
