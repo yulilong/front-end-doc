@@ -216,6 +216,7 @@ module.exports = {
                 '008-外边距合并',
                 '009-float浮动',
                 '010-css一些属性说明',
+                '011-css的值和单位',
                 {
                     title: 'css深入浅出',
                     collapsable: false,
