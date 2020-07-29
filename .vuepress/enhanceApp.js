@@ -4,11 +4,16 @@
 // 或者增加额外的路由钩子等：https://v0.vuepress.vuejs.org/zh/guide/basic-config.html#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6
 function integrateGitalk (router) {
     const linkGitalk = document.createElement('link');
-    linkGitalk.href = 'https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css';
+    // linkGitalk.href = 'https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css';
+    // 引用本地文件中的资源：.vuepress/public/static/gitalk.css
+    linkGitalk.href = location.href + 'static/gitalk.css';
     linkGitalk.rel = 'stylesheet';
     document.body.appendChild(linkGitalk);
     const scriptGitalk = document.createElement('script');
-    scriptGitalk.src = 'https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js';
+    // scriptGitalk.src = 'https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js';
+    scriptGitalk.src = location.href + 'static/gitalk.min.js';
+    // 异步加载
+    scriptGitalk.defer = 'defer';
     document.body.appendChild(scriptGitalk);
     var path = '';
 

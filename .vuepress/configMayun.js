@@ -9,9 +9,9 @@ module.exports = {
     head: [
         ["link", { rel: "icon", href: "/logo.png" }],   // 添加网站的icon图标
         // add jquert and fancybox async添加异步执行
-        ['script', { defer: 'defer', src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js' }],
-        ['script', { defer: 'defer', src: 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.js' }],
-        ['link', { defer: 'defer', rel: 'stylesheet', type: 'text/css', href: 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.css' }]
+        ['script', { defer: 'defer', src: '/static/jquery.slim.min.js' }],
+        ['script', { defer: 'defer', src: '/static/jquery.fancybox.min.js' }],
+        ['link', { defer: 'defer', rel: 'stylesheet', type: 'text/css', href: '/static/jquery.fancybox.min.css' }]
     ],
     // 如果github Pages绑定域名，则需要把base删除，否则域名访问会失败
     base: '/front-end-doc/',     // 仓库名字,用于github Pages 部署,
