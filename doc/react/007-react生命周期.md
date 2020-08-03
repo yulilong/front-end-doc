@@ -140,7 +140,7 @@ constructor(props) {
 >
 > 在组件更新阶段，更新 prop 中的 `color` 时，并不会影响 state.
 >
-> **只有在你刻意忽略 prop 更新的情况下使用。**此时，应将 prop 重命名为 `initialColor` 或 `defaultColor`。必要时，你可以[修改它的 `key`](https://zh-hans.reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key)，以强制“重置”其内部 state。
+> **只有在你刻意忽略 prop 更新的情况下使用**，此时，应将 prop 重命名为 `initialColor` 或 `defaultColor`。必要时，你可以[修改它的 `key`](https://zh-hans.reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key)，以强制“重置”其内部 state。
 
 
 
@@ -168,11 +168,11 @@ static getDerivedStateFromProps(props, state)
 
 当`render()`被调用时，它会检查`this.props`和`this.state`的变化并返回以下类型之一：
 
-- **React元素：**通常是通过JSX语法创建。例如，`<div />`会被React渲染为DOM节点，`<MyComponent />`会被React渲染为自定义组件，`<div />`、`<MyComponent />`均为 React元素。
-- **数组或fragments：**render 方法可以返回多个元素，fragments是可以去掉render只能返回一个元素的限制。欲了解更多详细信息，请参阅 [fragments](https://zh-hans.reactjs.org/docs/fragments.html) 文档。
-- **Portals：**可以渲染子节点到不同的DOM子树中。欲了解更多详细信息，请参阅有关 [portals](https://zh-hans.reactjs.org/docs/portals.html) 的文档。
-- **字符串或数值类型：**他们在DOM中会被渲染为文本节点。
-- **布尔类型或null：**什么都不渲染。主要用于支持返回`condition && <Child />`的模式，其中`condition`为布尔类型。
+- **React元素**：通常是通过JSX语法创建。例如，`<div />`会被React渲染为DOM节点，`<MyComponent />`会被React渲染为自定义组件，`<div />`、`<MyComponent />`均为 React元素。
+- **数组或fragments**：render 方法可以返回多个元素，fragments是可以去掉render只能返回一个元素的限制。欲了解更多详细信息，请参阅 [fragments](https://zh-hans.reactjs.org/docs/fragments.html) 文档。
+- **Portals**：可以渲染子节点到不同的DOM子树中。欲了解更多详细信息，请参阅有关 [portals](https://zh-hans.reactjs.org/docs/portals.html) 的文档。
+- **字符串或数值类型**：他们在DOM中会被渲染为文本节点。
+- **布尔类型或null**：什么都不渲染。主要用于支持返回`condition && <Child />`的模式，其中`condition`为布尔类型。
 
 `render()`函数应该为纯函数，也就是在不修改`state`的情况下，每次调用都返回相同的结果，并且它不会直接与浏览器交互。
 
