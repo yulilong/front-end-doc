@@ -126,6 +126,7 @@ module.exports = {
                 '009-获取标签宽高及实例',
                 '010-从输入URL到页面渲染过程',
                 '013-JS浮点数运算的精度问题',
+                '014-Web-Worker使用教程',
                 {
                     title: 'JS代码执行机制和事件循环',
                     // collapsable: false,

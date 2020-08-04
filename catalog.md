@@ -53,6 +53,7 @@
 * [获取标签宽高及实例](/doc/js/009-获取标签宽高及实例.md)
 * [从输入URL到页面渲染过程](/doc/js/010-从输入URL到页面渲染过程.md)
 * [JS浮点数运算的精度问题](/doc/js/013-JS浮点数运算的精度问题.md)
+* [Web-Worker使用教程](/doc/js/014-Web-Worker使用教程.md)
 * 高级
     * [001-ES6模块import_export](/doc/js/advanced/001-ES6模块import_export.md)
     * [002-错误处理try_catch](/doc/js/advanced/002-错误处理try_catch.md)
