@@ -180,6 +180,12 @@ this.addEventListener('message', function (e) {
 addEventListener('message', function (e) {
   postMessage('You said: ' + e.data);
 }, false);
+
+// 另外一种直接写方法
+onmessage = function (e) {
+  const { data } = e;
+  console.log('data: ', data);
+};
 ```
 
 除了使用`self.addEventListener()`指定监听函数，也可以使用`self.onmessage`指定。监听函数的参数是一个事件对象，它的`data`属性包含主线程发来的数据。

@@ -309,7 +309,7 @@ trusty(1, 2, 3)
 
 ES6 在 Math 对象上新增了 17 个与数学相关的方法。所有这些方法都是静态方法，只能在 Math 对象上调用。
 
-### 7.1 Math.trunc()：去除小数，返回整数部分
+### 7.1 Math.trunc()去除小数，返回整数部分
 
 `Math.trunc`方法用于去除一个数的小数部分，返回整数部分。
 
@@ -390,7 +390,7 @@ Math.sign = Math.sign || function(x) {
 };
 ```
 
-### 7.3 Math.cbrt() 
+### 7.3 Math.cbrt()计算一个数的立方根
 
 `Math.cbrt()`方法用于计算一个数的立方根。
 
@@ -417,7 +417,7 @@ Math.cbrt = Math.cbrt || function(x) {
 };
 ```
 
-### 7.4 Math.clz32()
+### 7.4 Math.clz32()转为 32 位无符号整数,返回这个 32 位值里面有多少个前导0
 
 `Math.clz32()`方法将参数转为 32 位无符号整数的形式，然后返回这个 32 位值里面有多少个前导 0。
 
@@ -463,7 +463,7 @@ Math.clz32({}) // 32
 Math.clz32(true) // 31
 ```
 
-### 7.5 Math.imul() 
+### 7.5 Math.imul()返回两个数以32位带符号整数形式相乘的结果
 
 `Math.imul`方法返回两个数以 32 位带符号整数形式相乘的结果，返回的也是一个 32 位的带符号整数。
 
@@ -485,7 +485,7 @@ Math.imul(-2, -2) // 4
 Math.imul(0x7fffffff, 0x7fffffff) // 1
 ```
 
-### 7.6 Math.fround()
+### 7.6 Math.fround()返回一个数的32位单精度浮点数形式
 
 `Math.fround`方法返回一个数的32位单精度浮点数形式。
 
@@ -538,7 +538,7 @@ Math.fround = Math.fround || function (x) {
 };
 ```
 
-### 7.7 Math.hypot()
+### 7.7 Math.hypot()返回所有参数的平方和的平方根
 
 `Math.hypot`方法返回所有参数的平方和的平方根。
 
@@ -639,7 +639,7 @@ Math.log2 = Math.log2 || function(x) {
 };
 ```
 
-### 7.9 双曲函数方法 
+### 7.9 双曲函数方法
 
 ES6 新增了 6 个双曲函数方法。
 
