@@ -289,8 +289,19 @@ module.exports = {
     rules: [
       {
         test: /\.worker\.js$/,
-        use: { loader: 'worker-loader' },
-        // options: { fallback: true },
+        use: [
+          {
+            loader: 'worker-loader',
+            options: {
+              inline: 'fallback',
+            },
+          },
+          // 配置babel，让worker文件里面也能使用ES6语法。
+          {
+            loader: 'babel-loader',
+            options: { presets: ['babel-preset-env'], }, // 这行可以忽略
+          },
+        ],
       },
     ],
   },
