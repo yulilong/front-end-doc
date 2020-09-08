@@ -525,6 +525,69 @@ function camelize(str) {
 }
 ```
 
+### 6.2 匹配手机号、固定电话
+
+中国的座机号码是有三个部分，分别是代表当地的区号，分隔符及具体的号码。即：000-00000000；
+
+-   区号：以数字0开始，并跟随2-3个数字
+-   分隔符：以’-‘代替，便于书面的理解；
+-   具体的号码：大部分地区的号码是7-8位数字组成；
+
+```js
+/0\d{2,3}-\d{7,8}/.test('028-2580344');
+
+// 传真~
+/^(\d{3,4}-)?\d{7,8}$/
+```
+
+手机号：
+
+```js
+/^1\d{10}$/.test('13304278888');
+```
+
+### 6.3 匹配url
+
+一个url例子：http://wwww.baidu.com:80/wenku?user=yu&search=biaoshu#id
+
+URL地址匹配格式： protocol :// hostname[:port] / path /?query#fragment
+
+```js
+var reg = /^(https?:\/\/)?([0-9a-z.]+)(:[0-9]+)?([/0-9a-z.]+)?(\?[0-9a-z&=]+)?(#[0-9-a-z]+)?/i
+reg.test('http://wwww.baidu.com:80/wenku?user=yu&search=biaoshu#id')
+
+/^(https?:\/\/)?/ // 协议：http:// 或 https:// 可选
+/([0-9a-z.]+)/ // 域名：www.baidu.com
+/(:[0-9]+)?/ // 端口： :80 可选
+/([/0-9a-z.]+)?/ // 网页路径， 可选
+/(\?[0-9a-z&=]+)?/ // 网址参数， 可选
+/(#[0-9-a-z]+)?/ // 瞄点， 可选
+```
+
+另一个版本：
+
+````js
+// 参考： https://www.jb51.net/article/31550.htm
+function IsURL (str_url) { 
+  var strRegex = '^((https|http|ftp|rtsp|mms)?://)?' // 协议
+  + '(([0-9a-z_!~*\'().&=+$%-]+: )?[0-9a-z_!~*\'().&=+$%-]+@)?' //ftp的user@ 
+  + '(([0-9]{1,3}.){3}[0-9]{1,3}' // IP形式的URL- 199.194.52.184 
+  + '|' // 允许IP和DOMAIN（域名） 
+  + '([0-9a-z_!~*\'()-]+.)*' // 域名- www. 
+  + '([0-9a-z][0-9a-z-]{0,61})?[0-9a-z].' // 二级域名 
+  + '[a-z]{2,6})' // first level domain- .com or .museum 
+  + '(:[0-9]{1,4})?' // 端口- :80 
+  + '((/?)|' // 如果没有文件名，则不需要斜杠
+  + '(/[0-9a-z_!~*\'().;?:@&=+$,%#-]+)+/?)$'; 
+  var re=new RegExp(strRegex);
+  if (re.test(str_url)) { 
+    return (true); 
+  } else { 
+    return (false); 
+  } 
+}
+````
+
 
 
 

@@ -114,7 +114,6 @@ module.exports = {
             ],
             '/doc/js/': [
                 '',
-                // 'regularExpression',
                 '001-对象原型继承',
                 '002-this_call_apply_bind',
                 '003-数据类型转换',
