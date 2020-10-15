@@ -162,7 +162,12 @@
 * [016-react中使用echarts](/doc/react/016-react中使用echarts.md)
 * [017-render-props](/doc/react/017-render-props.md)
 
-## 5. 工具
+## 5. VUE
+
+* [vue遇到的问题](doc/vue/001-vue遇到的问题.md)  
+* [vue常用语法](doc/vue/002-vue常用语法.md)  
+
+## 6. 工具
 
 * webpack
     * [webpack教程](/doc/tool/webpack/readme.md)

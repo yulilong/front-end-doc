@@ -64,6 +64,7 @@ module.exports = {
             },
             { text: 'html', link: '/doc/html/' },
             { text: 'react', link: '/doc/react/' },
+            { text: 'vue', link: '/doc/vue/' },
             {
                 text: '工具',
                 items: [
@@ -280,6 +281,11 @@ module.exports = {
                 '015-react的setState说明',
                 '016-react中使用echarts',
                 '017-render-props',
+            ],
+
+            '/doc/vue/': [
+              '001-vue遇到的问题',
+              '002-vue常用语法',
             ],
 
             '/doc/tool/webpack/': [
