@@ -286,6 +286,7 @@ module.exports = {
             '/doc/vue/': [
               '001-vue遇到的问题',
               '002-vue常用语法',
+              '004-vue生命周期',
             ],
 
             '/doc/tool/webpack/': [
