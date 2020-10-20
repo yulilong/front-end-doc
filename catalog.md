@@ -164,9 +164,10 @@
 
 ## 5. VUE
 
-* [vue遇到的问题](doc/vue/001-vue遇到的问题.md)  
-* [vue常用语法](doc/vue/002-vue常用语法.md)  
-* [vue生命周期](doc/vue/004-vue生命周期.md)  
+* [vue遇到的问题](doc/vue/001-vue遇到的问题.md)
+* [vue常用语法](doc/vue/002-vue常用语法.md)
+* [vue教程](doc/vue/003-vue教程.md)
+* [vue生命周期](doc/vue/004-vue生命周期.md)
 
 ## 6. 工具
 
