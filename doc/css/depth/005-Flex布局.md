@@ -1,3 +1,9 @@
+[[TOC]]
+
+[TOC]
+
+
+
 # 五、Flex布局
 
 [
@@ -11,7 +17,7 @@ flex学习游戏：
 
 
 
-## Flex之前布局使用的技术
+## 1. Flex之前布局使用的技术
 
 - normal flow (正常流，也叫文档流)：内联元素从左到右，块元素从上到下
 - float + clear ： 左右、两列、三列布局
@@ -19,7 +25,7 @@ flex学习游戏：
 - display inline-block ： 一些横向布局：导航
 - 负 margin： 扩大宽度或产生位移
 
-## Flex 特点
+## 2. Flex 特点
 
 一种新的布局方式
 
@@ -29,7 +35,7 @@ flex学习游戏：
 
 
 
-## 基本概念
+## 3. 基本概念
 
 采用 Flex 布局的元素，称为 Flex 容器（flex container），简称"容器"。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称"项目"。
 
@@ -61,7 +67,7 @@ flex学习游戏：
 
 
 
-## flex container 的属性
+## 4. flex container 的属性
 
 | 属性            | 说明                        |
 | :-------------- | :-------------------------- |
@@ -72,7 +78,7 @@ flex学习游戏：
 | align-items     | 侧轴对齐方式                |
 | align-content   | 多行/列内容对齐方式(用得少) |
 
-### flex-direction 属性介绍
+### 4.1 flex-direction:设置主轴排列方向
 
 flex-direction有四个值：
 
@@ -99,7 +105,7 @@ flex-direction有四个值：
 </div>
 ```
 
-### flex-wrap属性介绍
+### 4.2 flex-wrap:换行设置，一行排不下时
 
 flex-wrap属性定义，如果一条轴线排不下，如何换行。 默认不换行。
 
@@ -111,7 +117,7 @@ flex-wrap的取值：
 
 
 
-### flex-flow
+### 4.3 flex-flow：flex-direction与flex-wrap的简写
 
 `flex-flow`属性是`flex-direction`属性和`flex-wrap`属性的简写形式，默认值为`row nowrap`.
 
@@ -125,7 +131,7 @@ flex-wrap的取值：
 
 
 
-### justify-content
+### 4.4. justify-content:主轴对齐方式
 
 定义项目在主轴上的对齐方式。
 
@@ -161,7 +167,7 @@ justify-content的取值：
 
 
 
-### align-items属性
+### 4.5 align-items:定义交叉轴上如何对齐
 
 定义项目在交叉轴上如何对齐。
 
@@ -192,7 +198,7 @@ align-items的取值：
 
 
 
-### align-content属性
+### 4.6 align-content:多个轴线的对齐方式
 
 定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。
 
@@ -207,7 +213,7 @@ align-content的取值：
 
 
 
-## item子元素的属性
+## 5. item子元素的属性
 
 
 
@@ -220,7 +226,7 @@ align-content的取值：
 | order       | 项目的排列顺序。数值越小，排列越靠前，默认为0                |
 | align-self  | 允许单个项目有与其他项目不一样的对齐方式，可覆盖`align-items`属性 |
 
-### flex-grow属性
+### 5.1 flex-grow:放大比例(空间有剩余)
 
 `flex-grow`属性定义项目的放大比例，默认为`0`，即如果存在剩余空间，也不放大。
 
@@ -241,7 +247,7 @@ align-content的取值：
 </div>
 ```
 
-### flex-shrink属性
+### 5.2 flex-shrink:缩小比例(空间不够时)
 
 `flex-shrink`属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。
 
@@ -265,7 +271,7 @@ align-content的取值：
 </div>
 ```
 
-### flex-basis属性
+### 5.3 flex-basis:不限定宽度时，占据的主轴空间
 
 `flex-basis`属性定义了不限定宽度前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为`auto`，即项目的本来大小。
 
@@ -286,7 +292,7 @@ align-content的取值：
 
 
 
-### flex属性
+### 5.4 flex：flex-grow、flex-shrink、flex-basis的缩写
 
 `flex`属性是`flex-grow`, `flex-shrink` 和 `flex-basis`的简写，默认值为`0 1 auto`。后两个属性可选。
 
@@ -296,7 +302,7 @@ align-content的取值：
 
 
 
-### order属性
+### 5.5 order：项目的排列顺序
 
 IE8浏览器不支持这个属性。
 
@@ -317,7 +323,7 @@ IE8浏览器不支持这个属性。
 </div
 ```
 
-### align-self属性
+### 5.6 align-self：允许单个项目有与其他项目不一样的对齐方式
 
 `align-self`属性允许单个项目有与其他项目不一样的对齐方式，可覆盖`align-items`属性。默认值为`auto`，表示继承父元素的`align-items`属性，如果没有父元素，则等同于`stretch`。
 
@@ -347,9 +353,9 @@ IE8浏览器不支持这个属性。
 
 
 
-## 使用flex编写的一些布局
+## 6. 使用flex编写的一些布局
 
-### 手机页面布局(toobar + main + tabs)
+### 6.1 手机页面布局(toobar + main + tabs)
 
 上面是header头部，中间是main主内容，下面是footer， header和footer固定， 中间出现滚动条。
 
@@ -385,7 +391,7 @@ IE8浏览器不支持这个属性。
 
 
 
-### 产品列表(ul>li*9)
+### 6.2 产品列表(ul>li*9)
 
 九宫格列表：
 
@@ -407,7 +413,7 @@ IE8浏览器不支持这个属性。
 
 
 
-### PC页面布局
+### 6.3 PC页面布局
 
 上面是头部，下面是footer，中间main分三列显示。
 
@@ -430,7 +436,7 @@ IE8浏览器不支持这个属性。
 <!-- http://js.jirengu.com/nuqif/5/edit -->
 ```
 
-### 完美居中
+### 6.4 完美居中
 
 父元素高度固定， 子元素宽高不确定， 水平垂直居中。
 
