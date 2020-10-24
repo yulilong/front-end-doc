@@ -168,6 +168,7 @@
 * [vue常用语法](doc/vue/002-vue常用语法.md)
 * [vue教程](doc/vue/003-vue教程.md)
 * [vue生命周期](doc/vue/004-vue生命周期.md)
+* [vue指令](doc/vue/005-vue指令.md)
 
 ## 6. 工具
 

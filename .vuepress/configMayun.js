@@ -288,6 +288,7 @@ module.exports = {
               '002-vue常用语法',
               '003-vue教程',
               '004-vue生命周期',
+              '005-vue指令',
             ],
 
             '/doc/tool/webpack/': [
