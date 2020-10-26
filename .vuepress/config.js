@@ -289,6 +289,7 @@ module.exports = {
               '003-vue教程',
               '004-vue生命周期',
               '005-vue指令',
+              '006-vue-scoped-css',
             ],
 
             '/doc/tool/webpack/': [

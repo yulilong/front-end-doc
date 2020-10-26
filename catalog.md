@@ -169,6 +169,7 @@
 * [vue教程](doc/vue/003-vue教程.md)
 * [vue生命周期](doc/vue/004-vue生命周期.md)
 * [vue指令](doc/vue/005-vue指令.md)
+* [vue-scoped-css](doc/vue/006-vue-scoped-css.md)
 
 ## 6. 工具
 
