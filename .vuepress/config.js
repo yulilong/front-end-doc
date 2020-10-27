@@ -219,6 +219,7 @@ module.exports = {
                 '009-float浮动',
                 '010-css一些属性说明',
                 '011-css的值和单位',
+                '012-css中min-max-clamp使用',
                 {
                     title: 'css深入浅出',
                     collapsable: false,
