@@ -65,23 +65,17 @@ module.exports = {
             { text: 'html', link: '/doc/html/' },
             { text: 'react', link: '/doc/react/' },
             { text: 'vue', link: '/doc/vue/' },
-            {
-                text: '工具',
-                items: [
-                    {
-                        text: 'JS打包工具',
-                        items: [
-                            {text: 'webpack', link: '/doc/tool/webpack/'}
-                        ]
-                    },
-                ],
-            },
+            { text: '工具', link: '/doc/tool/' },
         ],
         // 侧边栏标题显示的层数, 0:禁用标题（headers）链接， 1：提取到 h2 的标题， 2： 同时提取 h2 和 h3 标题
         sidebarDepth: 2,
         // 侧边栏设置
         // sidebar: sidebarConfig,
         sidebar: {
+            // 目录
+            '/catalog': [
+                'catalog',
+            ],
             '/doc/js/standardLibrary/': [
                 '',
                 '001-math',
@@ -293,14 +287,13 @@ module.exports = {
               '006-vue-scoped-css',
             ],
 
-            '/doc/tool/webpack/': [
-                '',
-                '001-require.context',
+            '/doc/tool/': [
+              '001-webpack',
+              '002-webpack-require.context',
+              '003-Moment日期处理类库',
+              '004-prettier代码格式化工具',
             ],
-            // 目录
-            '/catalog': [
-                'catalog',
-            ]
+
         },
     },
 }
