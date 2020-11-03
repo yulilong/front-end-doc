@@ -171,6 +171,7 @@
 * [vue生命周期](doc/vue/004-vue生命周期.md)
 * [vue指令](doc/vue/005-vue指令.md)
 * [vue-scoped-css](doc/vue/006-vue-scoped-css.md)
+* [vue访问根父子组件-依赖注入](doc/vue/007-vue访问根父子组件-依赖注入.md)
 
 ## 6. 工具
 

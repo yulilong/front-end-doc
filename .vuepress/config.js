@@ -296,6 +296,7 @@ module.exports = {
               '004-vue生命周期',
               '005-vue指令',
               '006-vue-scoped-css',
+              '007-vue访问根父子组件-依赖注入',
             ],
 
             '/doc/tool/': [
