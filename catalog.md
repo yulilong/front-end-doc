@@ -172,6 +172,7 @@
 * [vue指令](doc/vue/005-vue指令.md)
 * [vue-scoped-css](doc/vue/006-vue-scoped-css.md)
 * [vue访问根父子组件-依赖注入](doc/vue/007-vue访问根父子组件-依赖注入.md)
+* [vue知识点思维导图](doc/vue/008-vue知识点思维导图.md)
 
 ## 6. 工具
 
