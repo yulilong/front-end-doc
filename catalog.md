@@ -1,3 +1,7 @@
+[[TOC]]
+
+[TOC]
+
 # 所有的文档
 
 ## 1. JavaScript
