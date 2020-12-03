@@ -120,6 +120,28 @@ requireContext.keys().forEach((key, index) => { cache[index] = requireContext(ke
 
 
 
+另一个使用例子：
+
+```js
+const requireContext = require.context('./', true, /([a-z])\/$/)
+const res = {}
+requireContext.keys().forEach((path) => {
+    const name = path.replace(/^\.\//, '').replace(/\/$/, '')
+    // const filePath = require.resolve(`${path}index.js`)
+    // Object.keys(require.cache).forEach(key => {
+    //     if (key.endsWith(filePath)){
+    //         delete require.cache[key]
+    //     }
+    // })
+    // eslint-disable-next-line import/no-dynamic-require
+    res[name] = require(`${path}index.js`).default
+})
+
+export default {
+    ...res
+}
+```
+
 
 
 
