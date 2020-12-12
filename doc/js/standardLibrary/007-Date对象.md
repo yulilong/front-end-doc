@@ -450,6 +450,32 @@ d // Sun Jan 06 2013 06:00:00 GMT+0800 (CST)
 
 
 
+## 6. 一些常用方法
+
+### 6.1 返回'2020-12-12'类似的字符串
+
+```js
+// 获取时间的字符串
+// data：符合new Date的参数的参数都可以
+function getDateString(date) {
+  const time = new Date(date);
+  // 年
+  const year = time.getFullYear();
+  // 月
+  const month = time.getMonth() + 1; // //月份是从0开始的
+  // 日
+  const day = time.getDate();
+  const hour = time.getHours(),
+  const minute = time.getMinutes(),
+  const second = time.getSeconds()
+  // 添加0
+  const add0 = function(num){
+    return num < 10 ? '0' + num : num;
+  }
+  return year+'-'+this.add0(month)+'-'+ this.add0(day);
+},
+```
+
 
 
 
