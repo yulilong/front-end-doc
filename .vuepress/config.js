@@ -307,7 +307,7 @@ module.exports = {
             ],
 
             '/doc/tool/': [
-              '001-webpack',
+              '001-webpack教程',
               '002-webpack-require.context',
               '003-Moment日期处理类库',
               '004-prettier代码格式化工具',
