@@ -156,7 +156,13 @@ module.exports = {
                     children: [
                         'blog/001-JS常用的60余种工具方法',
                     ]
-                }
+                },
+                {
+                    title: '浏览器模型',
+                    children: [
+                        'browserModel/001-storage接口',
+                    ]
+                },
             ],
             
             '/doc/dom/': [

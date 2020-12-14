@@ -73,6 +73,9 @@
     * [012-vue项目搭建](/doc/js/advanced/012-vue项目搭建.md)
 * 文章
     * [001-JS常用的60余种工具方法](/doc/js/blog/001-JS常用的60余种工具方法.md)
+* 浏览器模型
+    * [storage接口](/doc/js/browserModel/001-storage接口.md)
+
 
 ### 1.3 dom
 
