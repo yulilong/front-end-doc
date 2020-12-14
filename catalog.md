@@ -181,5 +181,7 @@
 ## 6. 工具
 
 * webpack
-    * [webpack教程](/doc/tool/webpack/readme.md)
-    * [require.context](/doc/tool/webpack/001-require.context.md)
+    * [webpack教程](/doc/tool/001-webpack教程.md)
+    * [require.context](/doc/tool/002-webpack-require.context.md)
+    * [Moment日期处理类库](/doc/tool/003-Moment日期处理类库.md)
+    * [prettier代码格式化工具](/doc/tool/004-prettier代码格式化工具.md)
