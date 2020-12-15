@@ -54,7 +54,18 @@ window.localStorage['foo'] = '123';
 window.localStorage.setItem('foo', '123');
 ```
 
-### 2.3 Storage.getItem():清除某个键名对应的键值
+### 2.3 Storage.getItem()：读取数据
+
+`Storage.getItem()`方法用于读取数据。它只有一个参数，就是键名。如果键名不存在，该方法返回`null`。
+
+```js
+window.sessionStorage.getItem('key')
+window.localStorage.getItem('key')
+```
+
+键名应该是一个字符串，否则会被自动转为字符串。
+
+### 2.4 Storage.removeItem()：清除某个键名对应的键值
 
 `Storage.removeItem()`方法用于清除某个键名对应的键值。它接受键名作为参数，如果键名不存在，该方法不会做任何事情。
 
@@ -63,7 +74,7 @@ sessionStorage.removeItem('key');
 localStorage.removeItem('key');
 ```
 
-### 2.4 Storage.clear():清除所有保存的数据
+### 2.5 Storage.clear()：清除所有保存的数据
 
 `Storage.clear()`方法用于清除所有保存的数据。该方法的返回值是`undefined`。
 
@@ -72,7 +83,7 @@ window.sessionStorage.clear()
 window.localStorage.clear()
 ```
 
-### 2.5 Storage.key()
+### 2.6 Storage.key()：整数作为参数，返回该位置对应的键值
 
 `Storage.key()`接受一个整数作为参数（从零开始），返回该位置对应的键值。
 
@@ -111,7 +122,6 @@ window.addEventListener('storage', onStorageChange);
 function onStorageChange(e) {
   console.log(e.key);
 }
-
 window.addEventListener('storage', onStorageChange);
 ```
 
