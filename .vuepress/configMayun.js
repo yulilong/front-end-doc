@@ -155,6 +155,7 @@ module.exports = {
                     // collapsable: false,
                     children: [
                         'blog/001-JS常用的60余种工具方法',
+                        'blog/002-js数据类型判断',
                     ]
                 },
                 {

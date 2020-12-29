@@ -66,17 +66,6 @@ module.exports = {
             { text: 'react', link: '/doc/react/' },
             { text: 'vue', link: '/doc/vue/' },
             { text: '工具', link: '/doc/tool/' },
-            // {
-            //     text: '工具',
-            //     items: [
-            //         {
-            //             text: 'JS打包工具',
-            //             items: [
-            //                 {text: 'webpack', link: '/doc/tool/webpack/'}
-            //             ]
-            //         },
-            //     ],
-            // },
         ],
         // 侧边栏标题显示的层数, 0:禁用标题（headers）链接， 1：提取到 h2 的标题， 2： 同时提取 h2 和 h3 标题
         sidebarDepth: 2,
@@ -166,6 +155,7 @@ module.exports = {
                     // collapsable: false,
                     children: [
                         'blog/001-JS常用的60余种工具方法',
+                        'blog/002-js数据类型判断',
                     ]
                 },
                 {

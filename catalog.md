@@ -72,7 +72,8 @@
     * [011-react项目搭建](/doc/js/advanced/011-react项目搭建.md)
     * [012-vue项目搭建](/doc/js/advanced/012-vue项目搭建.md)
 * 文章
-    * [001-JS常用的60余种工具方法](/doc/js/blog/001-JS常用的60余种工具方法.md)
+    * [JS常用的60余种工具方法](/doc/js/blog/001-JS常用的60余种工具方法.md)
+    * [js数据类型判断](/doc/js/blog/002-js数据类型判断.md)
 * 浏览器模型
     * [storage接口](/doc/js/browserModel/001-storage接口.md)
 
