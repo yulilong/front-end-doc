@@ -199,3 +199,109 @@ handleNewDataSouce = ttt => (e) => {
 </Button>
 ```
 
+
+
+## 9 父组件调用子组件
+
+https://juejin.cn/post/6844904186564329486
+
+### 9.1 class 组件中
+
+通过传递this实例的方式
+
+父组件：
+
+```jsx
+class Father extends PureComponent {
+  componentDidMount(){
+    this.child.setModelDisplay(true); // 调用子组件
+	}
+  onRef(ref){this.child = ref}
+
+  render() {
+    return (
+      <div>
+        <Child onRef={this.onRef} />
+      </div>
+    );
+  }
+}
+```
+
+子组件：
+
+```jsx
+class Child extends PureComponent {
+  componentDidMount(){
+    this.props.onRef(this);
+  }
+  setModelDisplay = (flag) => {
+    this.show = flag;
+  }
+  render() {
+    return (
+      <div> 我是子组件 </div>
+    );
+  }
+}
+```
+
+### 9.2 函数式组件
+
+1、 useImperativeHandle + forwardRef [useimperativehandle官网](https://zh-hans.reactjs.org/docs/hooks-reference.html#useimperativehandle)
+
+```jsx
+function FancyInput(props, ref) {
+  const inputRef = useRef();
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      inputRef.current.focus();
+    }
+  }));
+  return <input ref={inputRef} ... />;
+}
+FancyInput = forwardRef(FancyInput);
+```
+
+在本例中，渲染 `<FancyInput ref={inputRef} />` 的父组件可以调用 `inputRef.current.focus()`。
+
+2、通过 props function 暴露出去
+
+父组件
+
+```jsx
+  const [dagRefFunc, setDagRefFunc] = useState(null)
+  ...
+  // 将子组件的方法存到state中
+  const updateDagRefFun = useCallback(
+    ref => {
+      if (ref) {
+        setDagRefFunc(ref())
+      }
+    },
+    [setDagRefFunc],
+  )
+  ...
+  <Child dagRef={updateDagRefFun}/>
+```
+
+子组件
+
+```jsx
+function ({dagRef}) {
+  ...
+  // 方法暴露出去
+  useEffect(() => {
+    if (dagRef) {
+      dagRef(() => {
+        return {
+          updateItem: (id, config) => { },
+          updateAction: config => { },
+        }
+      })
+      return () => dagRef(undefined)
+    }
+  }, [dagRef])
+}
+```
+
