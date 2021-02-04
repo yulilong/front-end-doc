@@ -310,13 +310,11 @@ module.exports = {
 
 option选项：
 
--   fallback
-
-    类型： `Boolean` 默认值： `false`，是否需要支持非 worker 环境的回退。
-
 -   inline
 
-    类型： `Boolean` 默认值： `false`，将 worker 内联为一个 BLOB。注意：内联模式还会为不支持内联 worker 的浏览器创建 chunk， 要禁用此行为，只需将 `fallback` 参数设置为 `false`。
+    类型：` 'fallback' | 'no-fallback'` 默认值：`undefined`，允许将内联的 web worker 作为 `BLOB`。
+
+    当 inline 模式设置为 `fallback` 时，会为不支持 web worker 的浏览器创建文件，要禁用此行为，只需将其设置为 `no-fallback` 即可。
 
 -   name
 
