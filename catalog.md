@@ -74,6 +74,7 @@
 * 文章
     * [JS常用的60余种工具方法](/doc/js/blog/001-JS常用的60余种工具方法.md)
     * [js数据类型判断](/doc/js/blog/002-js数据类型判断.md)
+    * [js开启摄像头照相人脸识别](/doc/js/blog/003-js开启摄像头照相人脸识别.md)
 * 浏览器模型
     * [storage接口](/doc/js/browserModel/001-storage接口.md)
 
