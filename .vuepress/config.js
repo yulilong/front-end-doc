@@ -255,6 +255,7 @@ module.exports = {
                   // collapsable: false,
                   children: [
                       'blog/001-7个关于background-image好用技巧',
+                      'blog/002-隐藏元素opacity-visibility-display对比',
                   ]
                 },
             ],

@@ -145,6 +145,7 @@
     * [less代码片段](/doc/css/less/001-less代码片段)
 * 文章
     * [7个关于background-image好用技巧](/doc/css/blog/001-7个关于background-image好用技巧.md)
+    * [隐藏元素opacity-visibility-display对比](/doc/css/blog/002-隐藏元素opacity-visibility-display对比.md)
     
 ## 3. html
 
