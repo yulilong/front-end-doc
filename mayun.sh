@@ -37,9 +37,10 @@ git push -f https://gitee.com/dragon-li/front-end-doc.git master:gh-pages
 # 返回到上一次的工作目录
 echo "回到刚才工作目录"
 cd -
-echo "恢复修改的文件"
-echo "git checkout ."
-git checkout .
+echo "恢复修改的.vuepress/config.js"
+echo "git checkout .vuepress/config.js"
+git checkout .vuepress/config.js
+
 echo ""
 echo "打开码云 Gitee Pages 服务，手动更新服务"
 open https://gitee.com/dragon-li/front-end-doc/pages
