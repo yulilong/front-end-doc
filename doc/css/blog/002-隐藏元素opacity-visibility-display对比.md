@@ -10,9 +10,12 @@
 
 ## 1. 说明
 
-[opacity ](http://www.w3school.com.cn/cssref/pr_opacity.asp)用来设置透明度
-[display](http://www.w3school.com.cn/css/pr_class_display.asp) 定义建立布局时元素生成的显示框类型
+[opacity ](http://www.w3school.com.cn/cssref/pr_opacity.asp)用来设置透明度。
+
+[display](https://www.w3school.com.cn/cssref/pr_class_display.asp) 定义建立布局时元素生成的显示框类型。
+
 [visibility](http://www.w3school.com.cn/cssref/pr_class_visibility.asp) 用来设置元素是否可见。
+
 opacity、visibility、display 这三个属性分别取值 0、hidden、none 都能使元素在页面上看不见，但是他们在方方面面都还是有区别的。
 
 |                                    | opacity: 0 | visibility: hidden | display: none |
