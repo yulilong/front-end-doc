@@ -65,6 +65,7 @@ module.exports = {
             { text: 'html', link: '/doc/html/' },
             { text: 'react', link: '/doc/react/' },
             { text: 'vue', link: '/doc/vue/' },
+            { text: 'node', link: '/doc/node/' },
             { text: '工具', link: '/doc/tool/' },
         ],
         // 侧边栏标题显示的层数, 0:禁用标题（headers）链接， 1：提取到 h2 的标题， 2： 同时提取 h2 和 h3 标题
@@ -296,6 +297,11 @@ module.exports = {
               '006-vue-scoped-css',
               '007-vue访问根父子组件-依赖注入',
               '008-vue知识点思维导图',
+            ],
+
+            '/doc/node/': [
+              '001-express-api总结',
+              '002-node中require引用缓存解决',
             ],
 
             '/doc/tool/': [
