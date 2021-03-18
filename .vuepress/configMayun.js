@@ -4,6 +4,8 @@
 const path = require('path');
 
 module.exports = {
+    // 如果github Pages绑定域名，则需要把base删除，否则域名访问会失败
+    base: '/front-end-doc/',     // 仓库名字,用于github Pages 部署,
     title: '前端知识',
     description: '一个总结前端知识的文档网站',
     head: [
@@ -13,8 +15,6 @@ module.exports = {
         ['script', { defer: 'defer', src: '/static/jquery.fancybox.min.js' }],
         ['link', { defer: 'defer', rel: 'stylesheet', type: 'text/css', href: '/static/jquery.fancybox.min.css' }]
     ],
-    // 如果github Pages绑定域名，则需要把base删除，否则域名访问会失败
-    base: '/front-end-doc/',     // 仓库名字,用于github Pages 部署,
     // 设置本地开发端口号
     port: 4000,
     configureWebpack: {
