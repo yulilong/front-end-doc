@@ -2,11 +2,14 @@
 
 echo '开始执行部署码云命令'
 
-echo '删除config.js配置文件'
-rm .vuepress/config.js
+# echo '删除config.js配置文件'
+# rm .vuepress/config.js
 
-echo '复制符合码云的配置文件'
-cp .vuepress/configMayun.js .vuepress/config.js
+# echo '复制符合码云的配置文件'
+# cp .vuepress/configMayun.js .vuepress/config.js
+
+echo '应用马云的配置，配置文件中添加base属性'
+git apply mayunConfig.patch
 
 # 生成静态文件
 echo '执行命令：vuepress build .'
