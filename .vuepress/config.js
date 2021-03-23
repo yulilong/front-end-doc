@@ -303,6 +303,7 @@ module.exports = {
             '/doc/node/': [
               '001-express-api总结',
               '002-node中require引用缓存解决',
+              '003-CommonJS规范',
             ],
 
             '/doc/tool/': [

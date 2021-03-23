@@ -185,7 +185,13 @@
 * [vue访问根父子组件-依赖注入](doc/vue/007-vue访问根父子组件-依赖注入.md)
 * [vue知识点思维导图](doc/vue/008-vue知识点思维导图.md)
 
-## 6. 工具
+## 6. node
+
+* [express-api总结](doc/node/001-express-api总结.md)
+* [node中require引用缓存解决](doc/node/002-node中require引用缓存解决.md)
+* [CommonJS规范](doc/node/003-CommonJS规范.md)
+
+## 7. 工具
 
 * webpack
     * [webpack教程](/doc/tool/001-webpack教程.md)
