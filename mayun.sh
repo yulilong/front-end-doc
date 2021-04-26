@@ -9,6 +9,7 @@ echo '开始执行部署码云命令'
 # cp .vuepress/configMayun.js .vuepress/config.js
 
 echo '应用马云的配置，配置文件中添加base属性'
+echo '执行命令：git apply mayunConfig.patch'
 git apply mayunConfig.patch
 
 # 生成静态文件
@@ -21,7 +22,7 @@ cd ./.vuepress/dist
 
 
 # 初始化一个仓库，仅仅是做了一个初始化的操作，项目里的文件还没有被跟踪
-echo "执行命令：git init\n"
+echo "执行命令：git init"
 git init
 
 # 保存所有的修改
@@ -46,5 +47,6 @@ git checkout .vuepress/config.js
 
 echo ""
 echo "打开码云 Gitee Pages 服务，手动更新服务"
+echo "open https://gitee.com/dragon-li/front-end-doc/pages"
 open https://gitee.com/dragon-li/front-end-doc/pages
 echo ''
