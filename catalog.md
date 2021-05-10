@@ -184,6 +184,7 @@
 * [vue-scoped-css](doc/vue/006-vue-scoped-css.md)
 * [vue访问根父子组件-依赖注入](doc/vue/007-vue访问根父子组件-依赖注入.md)
 * [vue知识点思维导图](doc/vue/008-vue知识点思维导图.md)
+* [vuex使用文档](doc/vue/009-vuex使用文档.md)
 
 ## 6. node
 

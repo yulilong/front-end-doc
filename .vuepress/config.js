@@ -298,6 +298,7 @@ module.exports = {
               '006-vue-scoped-css',
               '007-vue访问根父子组件-依赖注入',
               '008-vue知识点思维导图',
+              '009-vuex使用文档',
             ],
 
             '/doc/node/': [
