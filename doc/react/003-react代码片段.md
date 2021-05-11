@@ -1,4 +1,5 @@
 [[TOC]]
+
 [TOC]
 
 # react代码片段
@@ -302,6 +303,52 @@ function ({dagRef}) {
       return () => dagRef(undefined)
     }
   }, [dagRef])
+}
+```
+
+## 10. jsx中使用script标签调用JS文件
+
+在jsx中使用script标签调用一个JS文件来执行，发现并没有去请求这个文件：
+
+```jsx
+return (
+  <div>
+    <script src="http://..."></script>
+    <script
+      // 这里的console.log不会执行
+      dangerouslySetInnerHTML={{
+        __html: "console.log('我是测试')"
+      }}
+      />
+    <script>
+      {/* 这里的console.log不会执行 */}
+      console.log('我是111');
+    </script>
+  </div>
+)
+```
+
+经过查找需要使用JS来手动添加一个script标签，才会执行：
+
+```js
+setScript = () => {
+  let script = document.querySelector('#script-id');
+	// 如果script标签已经存在了，则做一些操作
+  if (script) {
+    script.setAttribute('value', 'test');
+  }
+  // 如果标签不存在，则创建一个script标签
+  if (!script) {
+    script = document.createElement('script');
+    script.id = 'script-id';
+    script.setAttribute('value', 'test');
+    script.setAttribute('src', 'https://www.domain.cn/exposure/runCallback.js');
+    // 标签插入的位置
+    const footer = window.document.querySelector('#portal-footer-logout');
+    if (footer) {
+      footer.appendChild(script);
+    }
+  }
 }
 ```
 
