@@ -521,66 +521,70 @@ var f = function (n) { return 'a' };
 function log(element, index, array) {
   console.log('[' + index + '] = ' + element);
 }
-
-[2, 5, 9].forEach(log);
-// [0] = 2
-// [1] = 5
-// [2] = 9
+[2, 5, 9].forEach(log); // [0] = 2  [1] = 5 [2] = 9
 ```
-
-上面代码中，`forEach`遍历数组不是为了得到返回值，而是为了在屏幕输出内容，所以不必使用`map`方法。
 
 `forEach`方法也可以接受第二个参数，绑定参数函数的`this`变量。
 
 ```javascript
 var out = [];
-
 [1, 2, 3].forEach(function(elem) {
-  this.push(elem * elem);
+  this.push(elem * elem); // this指向out变量
 }, out);
-
-out // [1, 4, 9]
+console.log('out: ', out) // [1, 4, 9]
 ```
 
-上面代码中，空数组`out`是`forEach`方法的第二个参数，结果，回调函数内部的`this`关键字就指向`out`。
-
-注意，`forEach`方法无法中断执行，总是会将所有成员遍历完。如果希望符合某种条件时，就中断遍历，要使用`for`循环。
-
-```javascript
-var arr = [1, 2, 3];
-
-for (var i = 0; i < arr.length; i++) {
-  if (arr[i] === 2) break;
-  console.log(arr[i]);
-}
-// 1
-```
-
-上面代码中，执行到数组的第二个成员时，就会中断执行。`forEach`方法做不到这一点。
-
-`forEach`方法也会跳过数组的空位。
+`forEach`方法不会跳过数组中的`undefined`和`null`，但会跳过空位:
 
 ```javascript
 var log = function (n) {
   console.log(n + 1);
 };
 
-[1, undefined, 2].forEach(log)
-// 2
-// NaN
-// 3
-
-[1, null, 2].forEach(log)
-// 2
-// 1
-// 3
-
-[1, , 2].forEach(log)
-// 2
-// 3
+[1, undefined, 2].forEach(log) // 2 NaN 3
+[1, null, 2].forEach(log) // 2 1 3
+[1, , 2].forEach(log) // 2 3
 ```
 
-上面代码中，`forEach`方法不会跳过`undefined`和`null`，但会跳过空位。
+注意，`forEach`方法无法中断执行，总是会将所有成员遍历完。如果希望符合某种条件时，就中断遍历，要使用`for`循环。
+
+```javascript
+var arr = [1, 2, 3];
+for (var i = 0; i < arr.length; i++) {
+  if (arr[i] === 2) break; // 执行到数组的第二个成员时，就会中断执行。
+  console.log(arr[i]);
+}
+// 1
+```
+
+如果想要中断遍历，可在达到条件后触发异常：
+
+```js
+var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+try {
+  arr.forEach((item) => {
+    console.log('www')
+    if (item === 3) throw new Error('eee'); // item等于3以后就不在遍历了
+    console.log(item);
+  })
+} catch(e) { console.log(e.message) }
+// www 1 www 2 www eee
+```
+
+forEach的回调方法中无法使用`break`和`continue`，但是可以是通过`return`语句达到类似效果：
+
+```js
+var arr = [1, 2, 3, 4, 5, 6, 7];
+arr.forEach((item) => {
+  console.log('row'); // 还是每次都会执行
+  if (item === 2) return; // 模拟continue效果。也可以使用：return true
+  if (item > 5) return; // 模拟break效果。也可以使用：return false
+  console.log(item);
+})
+// row 1 row row 3 row 4 row 5 row row 
+```
+
+
 
 ### 3.12 filter()：过滤，返回满足条件新数组
 
