@@ -18,29 +18,13 @@ https://juejin.im/post/5c2708cd6fb9a049f06a5744#comment
 
 
 
-webpack 、npm、package.json文件介绍
-
 less、SCSS 语法
 
 jQuery bootstrap
 
-XMLHttpRequest Promise 对象编写
-
 继承 dom
 
 
-
-http状态码 
-
-http1 http2 区别
-
-[HTTP1.0 HTTP1.1 HTTP2.0 主要特性对比](https://segmentfault.com/a/1190000013028798)
-
-[看图学HTTPS](https://segmentfault.com/a/1190000014954687) 
-
-http请求
-
-[HTTP请求行、请求头、请求体详解](https://blog.csdn.net/u010256388/article/details/68491509)
 
 
 
