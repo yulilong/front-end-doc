@@ -36,6 +36,7 @@ export const SOME_MUTATION = 'SOME_MUTATION'
 ```
 
 ```js
+// customInfo.js
 import { SOME_MUTATION } from './mutation-types'
 
 export default {
@@ -43,8 +44,10 @@ export default {
   state: {
     todos: [ { id: 1, text: '...', done: true } ]
   },
-  // getters: 从state中派生出一些状态 ////////////////////////////////////////////////////
-  // 就像计算属性一样，getter 的返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。
+  /** getters: 从state中派生出一些状态 ///////////////////////////
+   *  就像计算属性一样，getter 的返回值会根据它的依赖被缓存起来，
+   *  且只有当它的依赖值发生了改变才会被重新计算。
+   */
   getters: {
     // Getter 接受 state 作为其第一个参数
     doneTodos: state => {
@@ -53,19 +56,20 @@ export default {
     // Getter 也可以接受其他 getter 作为第二个参数
     doneTodosCount: (state, getters) => {
       return getters.doneTodos.length
-    }
+    },
     // 让 getter 返回一个函数，来实现给 getter 传参。
     getTodoById: (state) => (id) => {
       return state.todos.find(todo => todo.id === id)
     }
   },
     
-  // Mutation：同步更新 store 中的状态 ////////////////////////////////////////////////////
-  // mutation 也需要与使用 Vue 一样遵守一些注意事项：
-  // 1、最好提前在你的 store 中初始化好所有所需属性。
-  // 2、当需要在对象上添加新属性时，你应该：
-  //    使用Vue.set(obj, 'newProp', 123), 
-  //    以新对象替换老对象: state.obj = { ...state.obj, newProp: 123 }
+  /** Mutation：同步更新 store 中的状态 /////////////////////////
+   * mutation 也需要与使用 Vue 一样遵守一些注意事项：
+   *  1、最好提前在你的 store 中初始化好所有所需属性。
+   *  2、当需要在对象上添加新属性时，你应该：
+   *    2.1 使用Vue.set(obj, 'newProp', 123), 
+   *    2.2 以新对象替换老对象: state.obj = { ...state.obj, newProp: 123 }
+   */
   mutations: {
     increment (state) {
       state.count++
@@ -74,22 +78,29 @@ export default {
     increment (state, payload) {
       state.count += payload.amount
     },
-    // 使用常量替代 Mutation 事件类型
-    // 使用常量替代 mutation 事件类型在各种 Flux 实现中是很常见的模式。这样可以使 linter 之类的工具发挥作用，同时把这些常量放在单独的文件中可以让你的代码合作者对整个 app 包含的 mutation 一目了然
+    /** 使用常量替代 Mutation 事件类型
+     * 使用常量替代 mutation 事件类型在各种 Flux 实现中是很常见的模式。
+     * 这样可以使 linter 之类的工具发挥作用，
+     * 同时把这些常量放在单独的文件中可以让你的代码合作者对整个 app 包含的 mutation 一目了然
+     */
     [SOME_MUTATION] (state) {
       // mutate state
     }
   },
   
-  // Action：异步更新 store 中的状态 ////////////////////////////////////////////////////
-  // Action 类似于 mutation，不同在于：
-  // 		Action 提交的是 mutation，而不是直接变更状态。
-  // 		Action 可以包含任意异步操作。
-  // Action 通常是异步的， `store.dispatch` 可以处理被触发的 action 的处理函数返回的 Promise，并且 `store.dispatch` 仍旧返回 Promise。
-  // Action 函数接受一个与 store 实例具有相同方法和属性的 context 对象，因此你可以调用 `context.commit` 提交一个 mutation，或者通过 `context.state` 和 `context.getters` 来获取 state 和 getters。
-  // 一个 `store.dispatch` 在不同模块中可以触发多个 action 函数。在这种情况下，只有当所有触发函数完成后，返回的 Promise 才会执行。
+  /** Action：异步更新 store 中的状态 //////////////////////////
+   * Action 类似于 mutation，不同在于：
+   *  Action 提交的是 mutation，而不是直接变更状态。
+   *  Action 可以包含任意异步操作。
+   * Action 通常是异步的， `store.dispatch` 可以处理被触发的 action 的处理函数返回的 Promise，
+   * 并且 `store.dispatch` 仍旧返回 Promise。
+   * Action 函数接受一个与 store 实例具有相同方法和属性的 context 对象，
+   * 因此你可以调用 `context.commit` 提交一个 mutation，或者通过 `context.state` 和 `context.getters` 来获取 state 和 getters。
+   * 一个 `store.dispatch` 在不同模块中可以触发多个 action 函数。
+   * 在这种情况下，只有当所有触发函数完成后，返回的 Promise 才会执行。
+   */
   actions: {
-    increment (context) { context.commit('increment') }
+    increment (context) { context.commit('increment') },
     // 第二个参数是方法的参数
     increment ({ commit }, payload) { commit('increment') },
     // 使用参数解构来简化代码
@@ -98,18 +109,18 @@ export default {
         setTimeout(() => { commit('someMutation') resolve() }, 1000)
       })
     },
-     // 调用另外一个 action
-     actionB ({ dispatch, commit }) {
-       return dispatch('actionA').then(() => { commit('someOtherMutation') })
-     },
-     // 利用 async / await, 我们可以如下组合 action：
-     async actionC ({ commit }) {
-       commit('gotData', await getData())
-     },
-     async actionD ({ dispatch, commit }) {
-       await dispatch('actionA') // 等待 actionA 完成
-       commit('gotOtherData', await getOtherData())
-     }
+    // 调用另外一个 action
+    actionB ({ dispatch, commit }) {
+      return dispatch('actionA').then(() => { commit('someOtherMutation') })
+    },
+    // 利用 async / await, 我们可以如下组合 action：
+    async actionC ({ commit }) {
+      commit('gotData', await getData())
+    },
+    async actionD ({ dispatch, commit }) {
+      await dispatch('actionA') // 等待 actionA 完成
+      commit('gotOtherData', await getOtherData())
+    }
   },
 }
 ```
@@ -155,15 +166,15 @@ new Vue({
 
 ```js
 import {
-  mapState, // state 的辅助函数，帮助我们生成计算属性
-  mapGetters, // getter 的辅助函数,仅仅是将 store 中的 getter 映射到局部计算属性
+  mapState,     // state 的辅助函数，帮助我们生成计算属性
+  mapGetters,   // getter 的辅助函数,仅仅是将 store 中的 getter 映射到局部计算属性
   mapMutations, // Mutation 的辅助函数, 将组件中的 methods 映射为 store.commit 调用
-  mapActions // Action 的辅助函数, 将组件的 methods 映射为 store.dispatch 调用
+  mapActions    // Action 的辅助函数, 将组件的 methods 映射为 store.dispatch 调用
 } from 'vuex'
 
 export default {
   computed: {
-    // state 变量使用 ////////////////////////////////////////////////////////////////////////
+    // state 变量使用 ///////////////////////////////////////////
     // 直接使用：当store在根组件注入后，子组件能通过 `this.$store` 访问到
     count () { return this.$store.state.count },
     // 使用对象展开运算符将此对象混入到外部对象中
@@ -183,14 +194,13 @@ export default {
       'count'
     ]),
     
-    // Getter的使用 /////////////////////////////////////////////////////////////////////
+    // Getter的使用 //////////////////////////////////////////////
     // 直接使用
     doneTodos () {this.$store.getters.doneTodos}, // -> [{ id: 1, text: '...', done: true }]
     // 使用对象展开运算符将 getter 混入 computed 对象中
     ...mapGetters([
       'doneTodosCount',
       'anotherGetter',
-      // ...
     ]),
     // 如果你想将一个 getter 属性另取一个名字，使用对象形式：
     ...mapGetters({
@@ -199,7 +209,7 @@ export default {
     })
   },
   methods: {
-    // Mutation 的使用 /////////////////////////////////////////////////////////////////////
+    // Mutation 的使用 /////////////////////////////////////////////
     // 直接使用
     getIncrement() {
       this.$store.commit('increment')
@@ -208,7 +218,8 @@ export default {
       this.$store.commit({ type: 'increment', amount: 10 })
     },
     ...mapMutations([
-      'increment', // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
+      // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
+      'increment',
       // `mapMutations` 也支持载荷：
       // 将 `this.incrementBy(amount)` 映射为 `this.$store.commit('incrementBy', amount)`
       'incrementBy' 
@@ -218,7 +229,7 @@ export default {
       add: 'increment' // 将 `this.add()` 映射为 `this.$store.commit('increment')`
     }),
       
-    // action 的使用 /////////////////////////////////////////////////////////////////////
+    // action 的使用 /////////////////////////////////////////////////
     // 直接使用
     addIncrement() {
       this.$store.dispatch('increment')
@@ -237,7 +248,8 @@ export default {
       'incrementBy' 
     ]),
     ...mapActions({
-      add: 'increment' // 将 `this.add()` 映射为 `this.$store.dispatch('increment')`
+      // 将 `this.add()` 映射为 `this.$store.dispatch('increment')`
+      add: 'increment'
     })
   }
 }
@@ -256,15 +268,15 @@ Vuex 允许我们将 store 分割成**模块（module）**。每个模块拥有�
 ```js
 const moduleA = {
   state: () => ({ count: 0 }),
-	getters: {
+  getters: {
     // state是模块局部状态，getters是根节点的， rootState是根节点状态
     sumWithRootCount (state, getters, rootState) {
       return state.count + rootState.count
     }
   },
   mutations: {
-		increment (state) { state.count++; } // 这里的 `state` 对象是模块的局部状态
- 	},
+    increment (state) { state.count++; } // 这里的 `state` 对象是模块的局部状态
+  },
   actions: {
     // context.state为局部状态，context.rootState为根节点状态
     incrementIfOddOnRootSum ({ state, commit, rootState }) {
@@ -276,7 +288,6 @@ const moduleA = {
 }
 
 const moduleB = { state: () => ({ ... }), }
-
 const store = new Vuex.Store({
   modules: {
     a: moduleA,
