@@ -217,6 +217,7 @@ export default {
       // 对象风格的触发方式
       this.$store.commit({ type: 'increment', amount: 10 })
     },
+    // 使用Mutation 的辅助函数，参数是数组形式
     ...mapMutations([
       // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
       'increment',
@@ -224,6 +225,7 @@ export default {
       // 将 `this.incrementBy(amount)` 映射为 `this.$store.commit('incrementBy', amount)`
       'incrementBy' 
     ]),
+    // 使用Mutation 的辅助函数，参数是对象形式
     ...mapMutations({
       setTemplateSeq: 'SET_TEMPLATESEQ', // 常量
       add: 'increment' // 将 `this.add()` 映射为 `this.$store.commit('increment')`
@@ -240,6 +242,7 @@ export default {
       // 处理异步
       this.$store.dispatch('actionA').then(() => { })
     },
+    // 使用 Action 的辅助函数，参数是组数
     ...mapActions([
       // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
       'increment', 
@@ -247,6 +250,7 @@ export default {
       // 将 `this.incrementBy(amount)` 映射为 `this.$store.dispatch('incrementBy', amount)`
       'incrementBy' 
     ]),
+    // 使用 Action 的辅助函数，参数是对象
     ...mapActions({
       // 将 `this.add()` 映射为 `this.$store.dispatch('increment')`
       add: 'increment'
