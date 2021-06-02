@@ -39,12 +39,14 @@ module.exports.addX = addX;
 
 每个模块内部，都有一个`module`对象，代表当前模块。它有以下属性。
 
--   `module.id` 模块的识别符，通常是带有绝对路径的模块文件名。
--   `module.exports` 表示模块对外输出的值。
--   `module.parent` 返回一个对象，表示调用该模块的模块。
--   `module.filename` 模块的文件名，带有绝对路径。
--   `module.loaded` 返回一个布尔值，表示模块是否已经完成加载。
 -   `module.children` 返回一个数组，表示该模块要用到的其他模块。
+-   `module.exports` 表示模块对外输出的值。
+-   `module.filename` 模块的文件名，带有绝对路径。
+-   `module.id` 模块的识别符，通常是带有绝对路径的模块文件名。
+-   `module.loaded` 返回一个布尔值，表示模块是否已经完成加载。
+-   `module.parent` 返回一个对象，表示调用该模块的模块。新增于: v0.1.16弃用于: v14.6.0, v12.19.0
+-   `module.path` 模块的目录名称。通常与 module.id 的 path.dirname() 相同。
+-   `module.paths` 模块的搜索路径。
 
 如下代码：
 
@@ -451,9 +453,85 @@ Module.prototype._compile = function(content, filename) {
 
 `Module._compile`方法是同步执行的，所以`Module._load`要等它执行完成，才会向用户返回`module.exports`的值。
 
+## 6. 模块内环境变量
+
+### 6.1 __dirname
+
+新增于: v0.1.27
+
+当前模块的目录名。 相当于 [`__filename`](http://nodejs.cn/api/modules.html#modules_filename) 的 [`path.dirname()`](http://nodejs.cn/api/path.html#path_path_dirname_path)。
+
+从 `/Users/mjr` 运行 `node example.js`：
+
+```js
+console.log(__dirname);
+// 打印: /Users/mjr
+console.log(path.dirname(__filename));
+// 打印: /Users/mjr
+```
+
+### 6.2 __filename
+
+当前模块的文件名。 这是当前的模块文件的绝对路径（符号链接会被解析）。
+
+对于主程序，这不一定与命令行中使用的文件名相同。
+
+从 `/Users/mjr` 运行 `node example.js`：
+
+```js
+console.log(__filename);
+// 打印: /Users/mjr/example.js
+console.log(__dirname);
+// 打印: /Users/mjr
+```
+
+给定两个模块：`a` 和 `b`，其中 `b` 是 `a` 的依赖文件，且目录结构如下：
+
+- `/Users/mjr/app/a.js`
+- `/Users/mjr/app/node_modules/b/b.js`
+
+`b.js` 中的 `__filename` 的引用会返回 `/Users/mjr/app/node_modules/b/b.js`，而 `a.js` 中的 `__filename` 的引用会返回 `/Users/mjr/app/a.js`。
+
+### 6.3 exports
+
+这是一个对于 `module.exports` 的更简短的引用形式
+
+### 6.4 require.cache
+
+新增于: v0.3.0
+
+被引入的模块将被缓存在这个对象中。 从此对象中删除键值对将会导致下一次 `require` 重新加载被删除的模块。 这不适用于[原生插件](http://nodejs.cn/api/addons.html)，因为它们的重载将会导致错误。
+
+可以添加或替换入口。 在加载原生模块之前会检查此缓存，如果将与原生模块匹配的名称添加到缓存中，则引入调用将不再获取原生模块。 谨慎使用！
+
+### 6.5 require.main
+
+`Module` 对象，表示当 Node.js 进程启动时加载的入口脚本。
+
+### 6.6 require.resolve(request[, options])
+
+- `request` [](http://url.nodejs.cn/9Tw2bK) 需要解析的模块路径。
+- options
+  - `paths` (string)从中解析模块位置的路径。 如果存在，则使用这些路径而不是默认的解析路径，但 [GLOBAL_FOLDERS](http://nodejs.cn/api/modules.html#modules_loading_from_the_global_folders) 除外，例如 `$HOME/.node_modules`，它们总是包含在内。 这些路径中的每一个都用作模块解析算法的起点，这意味着从该位置开始检查 `node_modules` 层次结构。
+- 返回: string字符串
+
+使用内部的 `require()` 机制查询模块的位置，此操作只返回解析后的文件名，不会加载该模块。
+
+如果找不到模块，则会抛出 `MODULE_NOT_FOUND` 错误。
+
+### 6.7 require.resolve.paths(request)
+
+- request：字符串，被查询解析路径的模块的路径。
+
+返回一个数组，其中包含解析 `request` 过程中被查询的路径，如果 `request` 字符串指向核心模块（例如 `http` 或 `fs`）则返回 `null`。
+
+
+
 ## 参考资料
 
 [CommonJS规范 阮一峰](https://javascript.ruanyifeng.com/nodejs/module.html)
+
+[CommonJS 模块 node](http://nodejs.cn/api/modules.html)
 
 
 
