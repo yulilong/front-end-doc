@@ -287,6 +287,7 @@ module.exports = {
                 '015-react的setState说明',
                 '016-react中使用echarts',
                 '017-render-props',
+                '018-react父子组件执行顺序',
             ],
 
             '/doc/vue/': [

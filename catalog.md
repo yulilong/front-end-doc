@@ -173,6 +173,7 @@
 * [015-react的setState说明](/doc/react/015-react的setState说明.md)
 * [016-react中使用echarts](/doc/react/016-react中使用echarts.md)
 * [017-render-props](/doc/react/017-render-props.md)
+* [018-react父子组件执行顺序](/doc/react/018-react父子组件执行顺序.md)
 
 ## 5. VUE
 
