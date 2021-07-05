@@ -24,7 +24,7 @@
 
 以下属性是指向文档内部的某个节点的快捷方式。
 
-#### 2.1.1 document.defaultView
+#### 2.1.1 document.defaultView：返回所属的window对象
 
 `document.defaultView`属性返回`document`对象所属的`window`对象。如果当前文档不属于`window`对象，该属性返回`null`。
 
@@ -44,7 +44,7 @@ doctype.name // "html"
 
 `document.firstChild`通常就返回这个节点。
 
-#### 2.1.3 document.documentElement
+#### 2.1.3 document.documentElement：返回当前文档的根节点
 
 `document.documentElement`属性返回当前文档的根节点（root）。它通常是`document`节点的第二个子节点，紧跟在`document.doctype`节点后面。HTML网页的该属性，一般是`<html>`节点。
 
@@ -54,7 +54,7 @@ doctype.name // "html"
 
 这两个属性总是存在的，如果网页源码里面省略了`<head>`或`<body>`，浏览器会自动创建。另外，这两个属性是可写的，如果改写它们的值，相当于移除所有子节点。
 
-#### 2.1.5 document.scrollingElement 
+#### 2.1.5 document.scrollingElement：返回文档的滚动元素
 
 `document.scrollingElement`属性返回文档的滚动元素。也就是说，当文档整体滚动时，到底是哪个元素在滚动。
 
@@ -65,11 +65,11 @@ doctype.name // "html"
 document.scrollingElement.scrollTop = 0;
 ```
 
-#### 2.1.6 document.activeElement
+#### 2.1.6 activeElement：返回获得当前焦点的DOM元素
 
 `document.activeElement`属性返回获得当前焦点（focus）的 DOM 元素。通常，这个属性返回的是`<input>`、`<textarea>`、`<select>`等表单元素，如果当前没有焦点元素，返回`<body>`元素或`null`。
 
-#### 2.1.7 document.fullscreenElement
+#### 2.1.7 fullscreenElement：返回当前以全屏状态展示的 DOM 元素
 
 `document.fullscreenElement`属性返回当前以全屏状态展示的 DOM 元素。如果不是全屏状态，该属性返回`null`。
 
