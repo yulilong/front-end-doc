@@ -26,7 +26,7 @@ this.setState({
 )}
 ```
 
-## 3. 根据不同条件拼接字符串，用于类样式名字拼接
+## 3. CSS类名字拼接：对象属性判断拼接字符串
 
 ```jsx
 /**
@@ -34,19 +34,20 @@ this.setState({
  * @param  {Object} obj     样式名字和是否符合条件
  * @return {String}         计算后的样式名字 字符串
 */
-setClassNames = (obj) => {
-  if ( typeof obj !== 'object') {
-    return '';
-  }
-  let key;
+setClassNames = obj => {
   let str = '';
-  for (key in obj) {
-    if(obj[key]) {
-      str += ' ' + key;
-    }
+  // 如果是对象类型才处理
+  if (Object.prototype.toString.call(obj) === '[object Object]') {
+    Object.keys(obj).forEach(key => {
+      if (obj[key]) {
+        str += ` ${key}`;
+        // str += ' ' + key;
+      }
+    });
+    str = str.trim(); // 去除字符串两边的不可见字符
   }
   return str;
-}
+};
 return (
 <span
    className={this.setClassNames({
