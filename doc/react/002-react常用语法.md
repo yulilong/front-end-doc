@@ -8,17 +8,17 @@
 
 ```jsx
 var HelloWorld = React.createClass({  
-    render:function(){  
-        var styles = {   color: 'blue',  fontSize: '30'  }  
-        return (  
-            <div className="box">  
-                <h3 className="title" 
-                  style={{color:'red',backgroundColor:'lime'}}>默认标题</h3>  
-                <p className="subtitle" style={styles}>说明</p>  
-                <p className="details">这个是用来教学的案例</p>  
-            </div>  
-        )  
-    }  
+  render:function(){  
+    var styles = {   color: 'blue',  fontSize: '30'  }  
+    return (  
+      <div className="box">  
+        <h3 className="title" 
+          style={{color:'red',backgroundColor:'lime'}}>默认标题</h3>  
+        <p className="subtitle" style={styles}>说明</p>  
+        <p className="details">这个是用来教学的案例</p>  
+      </div>  
+    )  
+  }  
 })  
 ReactDOM.render(<HelloWorld/>,document.getElementById("app"))  
 ```
@@ -48,8 +48,7 @@ ReactDOM.render(<HelloWorld/>,document.getElementById("app"))
 ### 1.1 JSX中根据条件显示特殊样式
 
 ```jsx
-<div className={(this.state.menuIndex === i ? 'active' : '')} >
-</div>
+<div className={(this.state.menuIndex === i ? 'active' : '')} />
 ```
 
 ### 1.2 多个类样式根据不同条件来显示
@@ -89,8 +88,6 @@ return (
 https://segmentfault.com/a/1190000004168886
 
 https://segmentfault.com/a/1190000018490987
-
-
 
 React 的生命周期包括三个阶段：mount（挂载）、update（更新）和 unmount（移除）
 
@@ -134,21 +131,12 @@ mount 之后，如果数据有任何变动，就会来到 update 过程，这个
 
 ref是使用回调函数的方式去使用：
 
-```javascript
+```jsx
 class Input extends Component {
-    constructor(props){
-        super(props);
-    }   
-    focus = () => {
-        this.textInput.focus();
-    }
-    render(){
-        return (
-            <div>
-                <input ref={(input) => { this.textInput = input }} />
-            </div>
-        )
-    }
+  focus = () => { this.textInput.focus(); }
+  render(){
+    return (<input ref={(input) => { this.textInput = input }} />)
+	}
 }
 ```
 
@@ -156,21 +144,15 @@ class Input extends Component {
 
 当我们在DOM Element中使用`ref`时，回调函数将接收当前的DOM元素作为参数，然后存储一个指向这个DOM元素的引用。那么在示例代码中，我们已经把`input`元素存储在了`this.textInput`中，在`focus`函数中直接使用原生DOM API实现focus聚焦。
 
-
-
 父组件使用ref调用子组件方法:
 
 ```jsx
 class Son extends React.Component {
-   getShowData = (params) => {
-        console.log('params ', params)
-  }
-   render() {
-       return ( <div>12312</div> )
-   }
+  getShowData = (params) => { console.log('params ', params) }
+  render() { return ( <div>12312</div> ) }
 }
 class father extends React.Component {
-   // 获取子组件引用
+  // 获取子组件引用
   getRef = (ele) => {
     this.incomeTable = ele;
     if (ele) {
@@ -178,15 +160,11 @@ class father extends React.Component {
       ele.getShowData(params);
     }
   }
-   render() {
-       return (  <Son  ref={this.getRef} /> )
-   }
+  render() {
+    return (  <Son  ref={this.getRef} /> )
+  }
 }
 ```
-
-
-
-
 
 - ref的回调函数执行时间
 
@@ -194,18 +172,17 @@ class father extends React.Component {
 
 可以在组件实例中使用`ref`：
 
-```javascript
-//<Input>来源于上面的示例代码👆
+```jsx
+// <Input>来源于上面的示例代码👆
 class AutoFocusTextInput extends Component {
-    componentDidMount(){
-        this.textInput.focus();
-    }
-    
-    render(){
-        return (
-            <Input ref={(input) => { this.textInput = input }}>
-        )
-    }
+  componentDidMount(){
+    this.textInput.focus();
+  }
+  render(){
+    return (
+      <Input ref={(input) => { this.textInput = input }}>
+    )
+	}
 }
 ```
 
@@ -217,23 +194,16 @@ class AutoFocusTextInput extends Component {
 
 这是Facebook非常不推荐的做法，因为这样会打破组件的封装性，这种方法只是某些特殊场景下的权宜之计。我们看看如何实现，上代码：
 
-```javascript
+```jsx
 function CustomTextInput(props) {
-    return (
-        <div>
-            <input ref={props.inputRef} />
-        </div>
-    );
+  return (<input ref={props.inputRef} />);
 }
-
 class Parent extends React.Component {
-    render() {
-        return (
-            <CustomTextInput
-                inputRef={el => this.inputElement = el}
-            />
-        );
-    }
+  render() {
+    return (
+      <CustomTextInput inputRef={el => this.inputElement = el} />
+		);
+	}
 }
 ```
 
@@ -253,7 +223,7 @@ Context是react 16.0以上版本才支持的。
 
 - React.createContext
 
-  ```
+  ```jsx
   const {Provider, Consumer} = React.createContext(defaultValue);
   ```
 
@@ -263,7 +233,7 @@ Context是react 16.0以上版本才支持的。
 
 - Provider
 
-  ```
+  ```jsx
   <Provider value={/* some value */}>
   ```
 
@@ -273,7 +243,7 @@ Context是react 16.0以上版本才支持的。
 
 - Consumer
 
-  ```
+  ```jsx
   <Consumer>
     {value => /* render something based on the context value */}
   </Consumer>
@@ -283,13 +253,9 @@ Context是react 16.0以上版本才支持的。
 
   接收一个 [函数作为子节点](http://react.yubolun.com/docs/render-props.html#using-props-other-than-render). 函数接收当前 context 的值并返回一个 React 节点。传递给函数的 `value` 将等于组件树中上层 context 的最近的 Provider 的 `value` 属性。如果 context 没有 Provider ，那么 `value` 参数将等于被传递给 `createContext()` 的 `defaultValue` 。
 
-
-
 每当Provider的值发送改变时, 作为Provider后代的所有Consumers都会重新渲染。 从Provider到其后代的Consumers传播不受shouldComponentUpdate方法的约束，因此即使祖先组件退出更新时，后代Consumer也会被更新。
 
 通过使用与[Object.is](http://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Description)相同的算法比较新值和旧值来确定变化。
-
-
 
 #### 4.2 一个使用的例子：
 
@@ -298,48 +264,44 @@ Context是react 16.0以上版本才支持的。
 import React from 'react';
 export const {Provider, Consumer} = React.createContext();
 
-
 // app.jsx 把变量发布出去
 import { Provider } from './userContext'   
 class App extends React.Component {
-    render () {
-        return (
-        	<Provider value={this.state.userInfo}>
-            	<div>巴拉巴拉。。。</div>
-            </Provider>
-        )
-    }
+  render () {
+    return (
+      <Provider value={this.state.userInfo}>
+        <div>巴拉巴拉。。。</div>
+      </Provider>
+    )
+  }
 }
-
 // 获取变量有2中方式：
 // 1. 把获取的变量当组件的属性传给 组件
 // BusinessIncome.jsx 
 class BusinessIncome extends React.Component {
-    render () {
-        return (
-        	<Consumer>
-                {/*通过属性获取变量*/}
-                { value => (<IncomeTrend userInfo={value} />)}
-            </Consumer>
-        )
-    }
+  render () {
+    return (
+      <Consumer>
+        { value => (<IncomeTrend userInfo={value} />)} {/*通过属性获取变量*/}
+      </Consumer>
+    )
+  }
 }
 // 2. 直接在需要变量的组件中放回调方法，在回调方法里面获取变量
 // BusinessIncome.jsx 
 class ShowIncomeTable extends React.Component {
-    consumerCallback = (value) => {
-      console.log('consumerCallback -> value', value);
-    }
-    render () {
-        return (
-            <Consumer>
-                <div>
-                    <Consumer>{this.consumerCallback}</Consumer>
-                    <div></div>
-                </div>
-            </Consumer>
-        )
-    }
+  consumerCallback = (value) => {
+    console.log('consumerCallback -> value', value);
+  }
+  render () {
+    return (
+      <Consumer>
+        <div>
+          <Consumer>{this.consumerCallback}</Consumer>
+        </div>
+      </Consumer>
+    )
+  }
 }
 ```
 
@@ -367,9 +329,7 @@ this.setState({ tt: 50}, () => { console.log('tt: ', this.state.tt) });
 ```jsx
 constructor(props, context) {
   super(props, context)
-  this.state = {
-    value: 1,
-  };
+  this.state = { value: 1 };
 }
 // 第一次render后的生命周期
 componentDidMount () {
@@ -393,7 +353,7 @@ componentDidMount () {
 pp = () => { console.log('tt: ', this.state.tt) }
 ```
 
-或者使用**setTimeout**异步函数。
+可以使用**setTimeout**异步函数来替代。
 
 ```jsx
 componentDidMount () {
@@ -403,14 +363,12 @@ componentDidMount () {
 pp = () => { console.log('tt: ', this.state.tt) }
 ```
 
-或者需要实时的变量类变量里面：
+或者把需要的实时的变量放到类变量里面：
 
 ```jsx
 constructor(props, context) {
   super(props, context)
-  this.state = {
-    value: 1,
-  };
+  this.state = { value: 1 };
   this.value = 1; // 直接把变量放在这里
 }
 ```
@@ -428,8 +386,6 @@ this.setState(prevState => ({
   collapsed: !prevState.collapsed
 }));
 ```
-
-
 
 
 
@@ -452,12 +408,12 @@ ReactDOM.render(<HelloComponent name="marlon" />, mountNode)
 
 ```jsx
 const Todo = (props) => (
-    <li
-        onClick={props.onClick}
-        style={{textDecoration: props.complete ? "line-through" : "none"}}
-    >
-        {props.text}
-    </li>
+  <li
+    onClick={props.onClick}
+    style={{textDecoration: props.complete ? "line-through" : "none"}}
+  >
+    {props.text}
+  </li>
 )
 ```
 
@@ -465,13 +421,13 @@ const Todo = (props) => (
 
 ```jsx
 const Todo = ({ onClick, complete, text, ...props }) => (
-    <li
-        onClick={onClick}
-        style={{textDecoration: complete ? "line-through" : "none"}}
-        {...props}
-    >
-        {props.text}
-    </li>
+  <li
+    onClick={onClick}
+    style={{textDecoration: complete ? "line-through" : "none"}}
+    {...props}
+  >
+    {props.text}
+  </li>
 )
 ```
 
@@ -491,10 +447,8 @@ const Todo = ({ onClick, complete, text, ...props }) => (
 
 ```jsx
 function TestComp(props){
-    let ref;
-    return (
-        <div ref={(node) => ref = node}></div>
-    )
+  let ref;
+  return ( <div ref={(node) => ref = node}></div> )
 }
 ```
 
@@ -537,9 +491,8 @@ if (this._compositeType === CompositeTypes.PureClass) {
 
 3. 由于是 React15.3 之后才有的，所以可能需要进行兼容操作；
 
-   ```js
+   ```jsx
    import React { PureComponent, Component } from 'react';
-   
    class Foo extends (PureComponent || Component) {
      //...
    }
@@ -569,12 +522,12 @@ export default function () {
 ```jsx
 import React from 'react';
 export default function () {
-    return (
-        <React.Fragment>
-            <div>一步 01</div>
-            <div>一步 02</div>
-        </React.Fragment>
-    );
+  return (
+    <React.Fragment>
+      <div>一步 01</div>
+      <div>一步 02</div>
+    </React.Fragment>
+  );
 }
 ```
 
@@ -585,12 +538,47 @@ export default function () {
 ```jsx
 import React from 'react';
 export default function () {
-    return (
-        <>
-            <div>一步 01</div>
-            <div>一步 02</div>
-        </>
-    );
+  return (
+    <>
+    <div>一步 01</div>
+    <div>一步 02</div>
+    </>
+  );
 }
 ```
+
+## 9 react中DOM元素
+
+https://zh-hans.reactjs.org/docs/dom-elements.html
+
+React 实现了一套独立于浏览器的 DOM 系统，兼顾了性能和跨浏览器的兼容性。我们借此机会完善了浏览器 DOM 实现的一些特殊情况。
+
+在 React 中，所有的 DOM 特性和属性（包括事件处理）都应该是小驼峰命名的方式。例如，与 HTML 中的 `tabindex` 属性对应的 React 的属性是 `tabIndex`。例外的情况是 `aria-*` 以及 `data-*` 属性，一律使用小写字母命名。比如, 你依然可以用 `aria-label` 作为 `aria-label`。
+
+### 9.1 dangerouslySetInnerHTML
+
+使用代码直接设置 HTML 存在风险，因为很容易无意中使用户暴露于[跨站脚本（XSS）](https://en.wikipedia.org/wiki/Cross-site_scripting)的攻击。
+
+在react中html字符串不会渲染成真正的html，也不会执行脚本文件。
+
+`dangerouslySetInnerHTML` 是 React 为浏览器 DOM 提供 `innerHTML` 的替换方案。当你想设置 `dangerouslySetInnerHTML` 时，需要向其传递包含 key 为 `__html` 的对象，以此来警示：
+
+```jsx
+function MyComponent(item) {
+  const replaceHtml = (str) => { return str.replace('/', '')}
+  // return <div dangerouslySetInnerHTML={createMarkup()} />;
+  // <div dangerouslySetInnerHTML={{ __html: '<div>123</div>' }} />
+  return <div dangerouslySetInnerHTML={{__html:replaceHtml(item.process)}} />
+}
+```
+
+1、dangerouslySetInnerHTMl 是React标签的一个属性。2、有2个{{}}，第一{}代表jsx语法开始，第二个是代表dangerouslySetInnerHTML接收的是一个对象键值对。3、.既可以插入DOM，又可以插入字符串。
+
+
+
+
+
+
+
+
 
