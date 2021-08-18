@@ -122,7 +122,7 @@
     * [transition-transform](/doc/css/002-transition-transform.md)
     * [animation](/doc/css/002-animation.md)
     * [定位](/doc/css/003-定位.md)
-    * [浏览器兼容](/doc/css/004-浏览器兼容.md)
+    * [css兼容性](/doc/css/004-css兼容性.md)
     * [normalize-reset](/doc/css/005-normalize-reset.md)
     * [css常用代码片段](/doc/css/006-css常用代码片段.md)
     * [scss语法说明](/doc/css/007-scss语法说明.md)

@@ -215,7 +215,7 @@ module.exports = {
                 '002-transition-transform',
                 '002-animation',
                 '003-定位',
-                '004-浏览器兼容',
+                '004-css兼容性',
                 '005-normalize-reset',
                 '006-css常用代码片段',
                 '007-scss语法说明',
