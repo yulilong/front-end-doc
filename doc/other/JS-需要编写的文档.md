@@ -18,16 +18,6 @@ https://juejin.im/post/5c2708cd6fb9a049f06a5744#comment
 
 
 
-less、SCSS 语法
-
-jQuery bootstrap
-
-继承 dom
-
-
-
-
-
 解读uglifyJS: Javascript的变量名混淆 代码压缩, token扫描
 
 http://rapheal.sinaapp.com/tag/uglifyjs/
@@ -55,6 +45,19 @@ http://nodejs.cn/api/modules.html
 [前端模块化——彻底搞懂AMD、CMD、ESM和CommonJS](https://www.cnblogs.com/chenwenhao/p/12153332.html)
 
 
+
+前端使用js读取文件
+https://www.cnblogs.com/leungUwah/p/5907005.html
+
+
+JavaScript进阶(六)用JavaScript读取和保存文件
+https://www.php.cn/js-tutorial-351664.html
+
+前端使用js读取文件
+https://blog.csdn.net/u012794845/article/details/81068519
+
+JS操作文件(FileReader读取--node的fs)
+https://blog.csdn.net/weixin_41105030/article/details/85529681
 
 console文档编辑：
 

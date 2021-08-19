@@ -10,7 +10,7 @@ module.exports = {
     description: '一个总结前端知识的文档网站',
     head: [
         ["link", { rel: "icon", href: "/logo.png" }],   // 添加网站的icon图标
-        // add jquert and fancybox async添加异步执行
+        // add jquery and fancybox async添加异步执行
         ['script', { defer: 'defer', src: '/static/jquery.slim.min.js' }],
         ['script', { defer: 'defer', src: '/static/jquery.fancybox.min.js' }],
         ['link', { defer: 'defer', rel: 'stylesheet', type: 'text/css', href: '/static/jquery.fancybox.min.css' }]
@@ -122,6 +122,7 @@ module.exports = {
                 '010-从输入URL到页面渲染过程',
                 '013-JS浮点数运算的精度问题',
                 '014-Web-Worker使用教程',
+                '015-JS常见问题解决',
                 {
                     title: 'JS代码执行机制和事件循环',
                     // collapsable: false,
