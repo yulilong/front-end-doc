@@ -129,7 +129,7 @@
     * [scss语法说明](/doc/css/007-scss语法说明.md)
     * [外边距合并](/doc/css/008-外边距合并.md)
     * [float浮动](/doc/css/009-float浮动.md)
-    * [css一些属性说明](/doc/css/010-css一些属性说明.md)
+    * [css常用属性](/doc/css/010-css常用属性.md)
     * [css的值和单位](/doc/css/011-css的值和单位.md)
     * [css中min-max-clamp使用](/doc/css/012-css中min-max-clamp使用.md)
 * css深入浅出

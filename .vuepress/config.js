@@ -222,7 +222,7 @@ module.exports = {
                 '007-scss语法说明',
                 '008-外边距合并',
                 '009-float浮动',
-                '010-css一些属性说明',
+                '010-css常用属性',
                 '011-css的值和单位',
                 '012-css中min-max-clamp使用',
                 {
