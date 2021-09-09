@@ -154,6 +154,7 @@
 
 * [001-HTML5特性说明](/doc/html/001-HTML5特性说明.md)
 * [002-HTML字符实体](/doc/html/002-HTML字符实体.md)
+* [003-html常用标签说明](/doc/html/003-html常用标签说明.md)
 
 ## 4. react
 

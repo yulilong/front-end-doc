@@ -267,6 +267,7 @@ module.exports = {
             '/doc/html/': [
                 '001-HTML5特性说明',
                 '002-HTML字符实体',
+                '003-html常用标签说明',
             ],
 
             '/doc/react/': [
