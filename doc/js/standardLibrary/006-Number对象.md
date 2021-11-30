@@ -117,19 +117,28 @@ Number.MIN_SAFE_INTEGER // -9007199254740991
 
 ### 2.3 toFixed()转为指定小数位数的字符串
 
-`toFixed()`方法先将一个数转为指定位数的小数，然后返回这个小数对应的字符串。方法的参数为小数位数，有效范围为0到100，超出这个范围将抛出 RangeError 错误。
+[toFixed](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed)方法将一个Number转为指定位数的小数，返回对应的字符串。
+
+一个数值的字符串表现形式，不使用指数记数法，而是在小数点后有 digits（注：digits具体值取决于传入参数）位数字。该数值在必要时进行四舍五入(对小数5处理不准)，另外在必要时会用 0 来填充小数部分，以便小数部分有指定的位数。 如果数值大于 1e+21，该方法会简单调用 [`Number.prototype.toString()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/toString)并返回一个指数记数法格式的字符串。
+
+语法：`numObj.toFixed(digits)`
+
+参数 `digits` 表示小数点后数字的个数；介于 0 到 20(包括20)之间，如果忽略该参数，则默认为 0。
+
+报错：1、如果参数digits的值不在0~20之间则会报[`RangeError`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RangeError)异常。2、如果如果该方法在一个非类型的对象上调用则报[`TypeError`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/TypeError)错误。
 
 ```js
 // 10必须放在括号里，否则后面的点会被处理成小数点
-(10).toFixed(2) // "10.00"
-10.005.toFixed(2) // "10.01"
+(10).toFixed(2) // 10.00
+10.005.toFixed(2) // 10.01
 ```
 
-由于浮点数的原因，小数`5`的四舍五入是不确定的，使用的时候必须小心。
+***注：*** 由于浮点数的原因，小数`5`的四舍五入是不确定的，使用的时候必须小心。
 
 ```js
 (10.055).toFixed(2) // 10.05
 (10.005).toFixed(2) // 10.01
+(1.345).toFixed(2) // 1.34
 ```
 
 ### 2.4 toExponential()转为科学计数法
