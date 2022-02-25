@@ -126,7 +126,6 @@
     * [css兼容性](/doc/css/004-css兼容性.md)
     * [normalize-reset](/doc/css/005-normalize-reset.md)
     * [css常用代码片段](/doc/css/006-css常用代码片段.md)
-    * [scss语法说明](/doc/css/007-scss语法说明.md)
     * [外边距合并](/doc/css/008-外边距合并.md)
     * [float浮动](/doc/css/009-float浮动.md)
     * [css常用属性](/doc/css/010-css常用属性.md)
@@ -145,7 +144,9 @@
     * [css3新属性介绍](/doc/css/css3/001-css3新属性介绍.md)
     * [css3@media查询](/doc/css/css3/002-css3-media查询.md)
 * less
-    * [less代码片段](/doc/css/less/001-less代码片段)
+    * [less代码片段](/doc/css/less/001-less代码片段.md)
+* scss
+    * [scss语法说明](/doc/css/scss/001-scss语法说明.md)
 * 文章
     * [7个关于background-image好用技巧](/doc/css/blog/001-7个关于background-image好用技巧.md)
     * [隐藏元素opacity-visibility-display对比](/doc/css/blog/002-隐藏元素opacity-visibility-display对比.md)

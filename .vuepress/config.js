@@ -219,7 +219,6 @@ module.exports = {
                 '004-css兼容性',
                 '005-normalize-reset',
                 '006-css常用代码片段',
-                '007-scss语法说明',
                 '008-外边距合并',
                 '009-float浮动',
                 '010-css常用属性',
@@ -255,8 +254,15 @@ module.exports = {
                     ]
                 },
                 {
+                    title: 'scss',
+                    collapsable: false,
+                    children: [
+                        'scss/001-scss语法说明',
+                    ]
+                },
+                {
                   title: 'CSS文章',
-                  // collapsable: false,
+                  collapsable: false,
                   children: [
                       'blog/001-7个关于background-image好用技巧',
                       'blog/002-隐藏元素opacity-visibility-display对比',
