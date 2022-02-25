@@ -219,7 +219,7 @@ module.exports = {
                 '004-css兼容性',
                 '005-normalize-reset',
                 '006-css常用代码片段',
-                '008-外边距合并',
+                '008-margin外边距合并',
                 '009-float浮动',
                 '010-css常用属性',
                 '011-css的值和单位',

@@ -126,7 +126,7 @@
     * [css兼容性](/doc/css/004-css兼容性.md)
     * [normalize-reset](/doc/css/005-normalize-reset.md)
     * [css常用代码片段](/doc/css/006-css常用代码片段.md)
-    * [外边距合并](/doc/css/008-外边距合并.md)
+    * [margin外边距合并](/doc/css/008-margin外边距合并.md)
     * [float浮动](/doc/css/009-float浮动.md)
     * [css常用属性](/doc/css/010-css常用属性.md)
     * [css的值和单位](/doc/css/011-css的值和单位.md)
