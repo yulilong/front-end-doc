@@ -207,3 +207,4 @@
     * [require.context](/doc/tool/002-webpack-require.context.md)
     * [Moment日期处理类库](/doc/tool/003-Moment日期处理类库.md)
     * [prettier代码格式化工具](/doc/tool/004-prettier代码格式化工具.md)
+    * [webpack常见问题解决](/doc/tool/005-webpack常见问题解决.md)

@@ -326,6 +326,7 @@ module.exports = {
               '002-webpack-require.context',
               '003-Moment日期处理类库',
               '004-prettier代码格式化工具',
+              '005-webpack常见问题解决',
             ],
 
         },
