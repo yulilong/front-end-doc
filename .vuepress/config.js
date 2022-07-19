@@ -319,6 +319,7 @@ module.exports = {
               '002-node中require引用缓存解决',
               '003-CommonJS规范',
               '004-AMD规范',
+              '005-node环境常见问题',
             ],
 
             '/doc/tool/': [

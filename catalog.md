@@ -199,6 +199,8 @@
 * [express-api总结](doc/node/001-express-api总结.md)
 * [node中require引用缓存解决](doc/node/002-node中require引用缓存解决.md)
 * [CommonJS规范](doc/node/003-CommonJS规范.md)
+* [AMD规范](doc/node/004-AMD规范.md)
+* [node环境常见问题](doc/node/005-node环境常见问题.md)
 
 ## 7. 工具
 
