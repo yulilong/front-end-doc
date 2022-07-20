@@ -60,9 +60,29 @@ node --max_old_space_size=4096 node_modules/@vue/cli-service/bin/vue-cli-service
 npm install -g increase-memory-limit
 # 进入工程目录，执行：
 increase-memory-limit
+
+# 备用选项：https://www.pudn.com/news/62c43ba1502ed3121a92d0bb.html
+npm i -g cross-env
+#安装结束后，运行如下命令：
+cross-env LIMIT=10240  increase-memory-limit # LIMIT是分配的内存大小，有3027、4096、8192、10240
 ```
 
 注意：`increase-memory-limit`命令会操作`node_modules`里面对应文件，可能会导致git提交命令冲突，解决方法是删除`node_modules`文件夹，重新安装一个就好。
+
+当运行`increase-memory-limit`命令提示报错，`node --max-old-space-size=4096不是内部或外部命令`
+
+![](./img/004-node.png)
+
+这个问题，是因为执行 fix-memory-limit命令时，会在 当前项目的node_modules/.bin文件夹下的*.cmd文件中添加调整运行空间的命令，默认添加的为
+
+`"_prog%"`，但是项目的正常运行需要`_prog%`,也就是去掉双引号才可以。
+
+可以通过编辑器的 replace all的功能，全局进行替换，注意不要选错目录。由此目录也可以发现，当前的命令是只针对当前项目的，所以，如果新开了一个项目，或者删除了node_modules依赖后，需要重新执行命令才可以。
+如果vscode全局搜索搜不到 `"_prog%"`关键字，需要点一下下面按钮：
+
+![](./img/005-node.png)
+
+
 
 如果是mac电脑，可在终端环境脚本中添加上面命令，然后重启终端：
 
@@ -70,15 +90,6 @@ increase-memory-limit
 vi .zshrc
 export NODE_OPTIONS=--max_old_space_size=5120
 # 运行命令立即生效：source .zshrc
-```
-
-如果方法三报错，则尝试在项目中安装包，然后运行命令：
-
-```bash
-npm install increase-memory-limit 
-npm i cross-env --save-dev
-#安装结束后，运行如下命令：
-cross-env LIMIT=3072  increase-memory-limit # LIMIT是分配的内存大小，有3027、4096、8192、10240
 ```
 
 
