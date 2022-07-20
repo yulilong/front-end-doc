@@ -82,6 +82,8 @@ cross-env LIMIT=10240  increase-memory-limit # LIMIT是分配的内存大小，�
 
 ![](./img/005-node.png)
 
+参考链接：https://blog.csdn.net/Run_youngman/article/details/122474730
+
 
 
 如果是mac电脑，可在终端环境脚本中添加上面命令，然后重启终端：
