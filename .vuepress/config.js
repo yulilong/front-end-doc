@@ -320,6 +320,7 @@ module.exports = {
               '003-CommonJS规范',
               '004-AMD规范',
               '005-node环境常见问题',
+              '006-前端http-server开启本地https服务',
             ],
 
             '/doc/tool/': [

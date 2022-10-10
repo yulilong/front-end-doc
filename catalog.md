@@ -201,6 +201,7 @@
 * [CommonJS规范](doc/node/003-CommonJS规范.md)
 * [AMD规范](doc/node/004-AMD规范.md)
 * [node环境常见问题](doc/node/005-node环境常见问题.md)
+* [前端http-server开启本地https服务](doc/node/006-前端http-server开启本地https服务.md)
 
 ## 7. 工具
 
