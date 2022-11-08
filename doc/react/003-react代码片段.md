@@ -26,7 +26,23 @@ this.setState({
 )}
 ```
 
-## 3. CSS类名字拼接：对象属性判断拼接字符串
+## 3 html中css类名根据条件添加方法
+
+### 3.1 使用ES6语法的字符串拼接
+
+此方法适用于判断条件少的情况。
+
+```jsx
+return (
+  <span
+    className={`custom-content ${show ? '' : 'hidden-custom'}`}
+   >{item.name}</span>
+)
+```
+
+
+
+### 3.2 封装方法(返回字符串)：根据对象属性判断拼接字符串
 
 ```jsx
 /**
@@ -40,8 +56,7 @@ setClassNames = obj => {
   if (Object.prototype.toString.call(obj) === '[object Object]') {
     Object.keys(obj).forEach(key => {
       if (obj[key]) {
-        str += ` ${key}`;
-        // str += ' ' + key;
+        str += ` ${key}`; // str += ' ' + key;
       }
     });
     str = str.trim(); // 去除字符串两边的不可见字符
@@ -49,12 +64,12 @@ setClassNames = obj => {
   return str;
 };
 return (
-<span
-   className={this.setClassNames({
-       'active': this.state[e.key] === item.value,
-       'forbidden': this.state.dimensional === e.value,
-   })}
->{item.name}</span>
+  <span
+    className={this.setClassNames({
+      'active': this.state[e.key] === item.value,
+      'forbidden': this.state.dimensional === e.value,
+    })}
+    >{item.name}</span>
 )
 ```
 
@@ -62,7 +77,7 @@ return (
 
 在react中，如果在样式文件中使用背景图片格式：
 
-```
+```css
 background: url('./../../../assets/images/arrow-up.png') no-repeat center;
 ```
 
@@ -70,7 +85,7 @@ background: url('./../../../assets/images/arrow-up.png') no-repeat center;
 
 但是在react中HTML里面的img标签引入图片路径时：
 
-```
+```html
 <img src="./../../../../assets/images/arrow-up.png" alt=""/>
 ```
 
@@ -138,21 +153,21 @@ let businessLine = [1, 2, 3];
 
 ```jsx
 // props数据更新前调用的生命周期
-    componentWillReceiveProps(nextProps) {
-        const {showRangePicker} = this.props;
-        const {selectDateBtn} = this.state;
-        // 自定义时间组件显示与隐藏切换，主要是在读人次组件中用到
-        if (nextProps.showRangePicker !== showRangePicker) {
-            if (selectDateBtn === 0 && !nextProps.showRangePicker) {
-                // 选择的是自定义时间组件，并且需要隐藏自定义时间组件，则时间组件选择月组件
-                this.setState({selectDateBtn: DATATYPE.month});
-                this.returnDateTypeRange(DATATYPE.month);
-            }
-            else {
-                this.returnDateTypeRange(selectDateBtn);
-            }
-        }
+componentWillReceiveProps(nextProps) {
+  const {showRangePicker} = this.props;
+  const {selectDateBtn} = this.state;
+  // 自定义时间组件显示与隐藏切换，主要是在读人次组件中用到
+  if (nextProps.showRangePicker !== showRangePicker) {
+    if (selectDateBtn === 0 && !nextProps.showRangePicker) {
+      // 选择的是自定义时间组件，并且需要隐藏自定义时间组件，则时间组件选择月组件
+      this.setState({selectDateBtn: DATATYPE.month});
+      this.returnDateTypeRange(DATATYPE.month);
     }
+    else {
+      this.returnDateTypeRange(selectDateBtn);
+    }
+  }
+}
 ```
 
 
@@ -161,19 +176,17 @@ let businessLine = [1, 2, 3];
 
 第一种是在HTML方法里面写箭头函数实现传参：
 
-```react
+```jsx
 handleAddPackageClick = (itemData) => {
   addPackage(itemData)
 }
-<span 
-  onClick={() => { this.handleAddPackageClick(itemData) }}
->
+<span  onClick={() => { this.handleAddPackageClick(itemData) }} >
 </span>
 ```
 
 第二种是方法里面返回函数，然后HTML中直接执行这个方法，把参数传过去
 
-```react
+```jsx
 handleNewDataSouce = ttt => () => {
   console.log('ttt: ', ttt)
 }
@@ -187,7 +200,7 @@ handleNewDataSouce = ttt => () => {
 
 第三种方法是HTML元素上添加`data-name`属性，然后出发事件后使用`e.target.dataset`方法来读取参数：
 
-```react
+```jsx
 handleNewDataSouce = ttt => (e) => {
   console.log('ttt: ', ttt)
   console.log('dataset:', e.target.dataset)
