@@ -75,7 +75,7 @@ return (
 
 ## 4. react中引入图片
 
-在react中，如果在样式文件中使用背景图片格式：
+ 在react中，如果在样式文件中使用背景图片格式：
 
 ```css
 background: url('./../../../assets/images/arrow-up.png') no-repeat center;

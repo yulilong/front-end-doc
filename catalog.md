@@ -97,11 +97,12 @@
 
 ### 1.4 浏览器、网络相关
 
-* [cookie](/doc/browserNetwork/001-cookie.md)
+
 * [URL相关操作](/doc/browserNetwork/001-URL相关操作.md)
-* [cookie、session、WebStorage区别](/doc/browserNetwork/002-cookie、session、WebStorage区别.md)
+* [从输入URL到页面渲染过程](/doc/browserNetwork/002-从输入URL到页面渲染过程.md)
+* [cookie](/doc/browserNetwork/003-cookie.md)
+* [cookie、session、WebStorage区别](/doc/browserNetwork/004-cookie、session、WebStorage区别.md)
 * [浏览器缓存](/doc/browserNetwork/003-浏览器缓存.md)
-* [http协议](/doc/browserNetwork/004-http协议.md)
 * [CSRF攻击](/doc/browserNetwork/004-CSRF攻击.md)
 * [XSS攻击](/doc/browserNetwork/005-XSS攻击.md)
 * [http发展史](/doc/browserNetwork/006-http发展史.md)

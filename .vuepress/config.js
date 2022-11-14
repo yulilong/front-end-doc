@@ -187,9 +187,10 @@ module.exports = {
             // 浏览器、网络相关
             '/doc/browserNetwork/': [
                 '',
-                '001-cookie',
                 '001-URL相关操作',
-                '002-cookie、session、WebStorage区别',
+                '002-从输入URL到页面渲染过程',
+                '003-cookie',
+                '004-cookie、session、WebStorage区别',
                 '003-浏览器缓存',
                 '004-http协议',
                 '004-CSRF攻击',
