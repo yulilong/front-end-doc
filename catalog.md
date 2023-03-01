@@ -45,7 +45,6 @@
     * [JS代码在nodejs环境下执行机制和事件循环](/doc/js/jsHowWork/JS代码在nodejs环境下执行机制和事件循环.md)
     * [JS中异步方法](/doc/js/jsHowWork/JS中异步方法.md)
     * [EventLoop和浏览器渲染-帧动画-空闲回调的关系](/doc/js/jsHowWork/EventLoop和浏览器渲染-帧动画-空闲回调的关系.md)
-<!-- * [regularExpression](/doc/js/regularExpression.md) -->
 * [对象原型继承](/doc/js/001-对象原型继承.md)
 * [this_call_apply_bind](/doc/js/002-this_call_apply_bind.md)
 * [数据类型转换](/doc/js/003-数据类型转换.md)
