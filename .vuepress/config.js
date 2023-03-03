@@ -313,6 +313,7 @@ module.exports = {
               '008-vue知识点思维导图',
               '009-vuex使用文档',
               '010-vue-cli使用文档',
+              '011-router导航守卫',
             ],
 
             '/doc/node/': [
