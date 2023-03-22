@@ -300,6 +300,7 @@ module.exports = {
                 '016-react中使用echarts',
                 '017-render-props',
                 '018-react父子组件执行顺序',
+                '019-react类组件和函数组件区别',
             ],
 
             '/doc/vue/': [

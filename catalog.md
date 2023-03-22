@@ -179,6 +179,7 @@
 * [016-react中使用echarts](/doc/react/016-react中使用echarts.md)
 * [017-render-props](/doc/react/017-render-props.md)
 * [018-react父子组件执行顺序](/doc/react/018-react父子组件执行顺序.md)
+* [019-react类组件和函数组件区别](/doc/react/019-react类组件和函数组件区别.md)
 
 ## 5. VUE
 
