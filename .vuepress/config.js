@@ -315,6 +315,7 @@ module.exports = {
               '009-vuex使用文档',
               '010-vue-cli使用文档',
               '011-router导航守卫',
+              '012-一个vue组件代码写法',
             ],
 
             '/doc/node/': [
