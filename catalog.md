@@ -37,6 +37,7 @@
 * [Date对象](/doc/js/standardLibrary/007-Date对象.md)
 * [JSON对象](/doc/js/standardLibrary/008-JSON对象.md)
 * [RegExp对象](/doc/js/standardLibrary/009-RegExp对象.md)
+* [Error错误对象](/doc/js/standardLibrary/010-Error错误对象.md)
 
 ### 1.2 JS
 
