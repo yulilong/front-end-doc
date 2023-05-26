@@ -84,7 +84,7 @@ console.log( 'r2 = ' + r2);		// r2应该为undefined
 
 **完整的try ... catch ... finally：**
 
-```
+```js
 try {
     ...
 } catch (e) {
@@ -96,7 +96,7 @@ try {
 
 **只有try ... catch，没有finally：**
 
-```
+```js
 try {
     ...
 } catch (e) {
@@ -106,7 +106,7 @@ try {
 
  **只有try ... finally，没有catch：**
 
-```
+```js
 try {
     ...
 } finally {
@@ -116,11 +116,11 @@ try {
 
 
 
-## 3. 错误类型
+## 3. 错误类型(Error对象)
 
 JavaScript有一个标准的 `Error`对象表示错误，还有从 `Error`派生的 `TypeError`、`ReferenceError`等错误对象。我们在处理错误时，可以通过 `catch(e)`捕获的变量 `e`访问错误对象：
 
-```
+```js
 try {
     ...
 } catch (e) {
@@ -136,7 +136,7 @@ try {
 
 使用变量 `e`是一个习惯用法，也可以以其他变量名命名，如 `catch(ex)`。
 
-## 4. 抛出错误
+## 4. 抛出错误(throw)
 
 程序也可以主动抛出一个错误，让执行流程直接跳转到 `catch`块。抛出错误使用 `throw`语句。
 
@@ -166,7 +166,7 @@ try {
 
 最后，当我们用catch捕获错误时，一定要编写错误处理语句：
 
-```
+```js
 var n = 0, s;
 try {
     n = s.length;
@@ -178,7 +178,7 @@ console.log(n);
 
 哪怕仅仅把错误打印出来，也不要什么也不干：
 
-```
+```js
 var n = 0, s;
 try {
     n = s.length;
