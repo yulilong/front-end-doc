@@ -129,7 +129,29 @@ window.addEventListener('storage', onStorageChange);
 
 
 
+## 4. sessionStorage 多 Tab 标签页数据共享问题
 
+在 A 页面设置一些 `sessionStorage` 数据，然后`a` 标签 `_blank` 方式打开另一个 tab B 页面，发现 B 页面有A 页面的 `sessionStorage` 数据。此时两个页面的sessionStorage相互独立，修改不会影响对方，所以称为复制更为准确。
+
+为什么会共享呢？下面看下 sessionStorage 的官方 MDN 介绍：
+
+1. 页面会话在浏览器打开期间一直保持，并且重新加载或恢复页面仍会保持原来的页面会话。
+2. **在新标签或窗口打开一个页面时会复制顶级浏览会话的上下文作为新会话的上下文，这点和 session cookie 的运行方式不同。**
+3. 打开多个相同的 URL 的 Tabs 页面，会创建各自的 `sessionStorage`。
+4. 关闭对应浏览器标签或窗口，会清除对应的 `sessionStorage`。
+
+> - 存储在 sessionStorage 中的数据**特定于页面的协议**。意思就是：`http://example.com` 与 `https://example.com` 的 sessionStorage 相互隔离。
+> - 被存储的键值对总是以 UTF-16 [DOMString](https://link.segmentfault.com/?enc=vKErOO8gKC1AUgsh2xKV3w%3D%3D.klfqwJIngtWGoFB98fe2TQvic1QjmTlYpw29%2FEkeFzDdB7vmiMjmqSo66WvduqrmHotVzWwhByD2MR%2FLi58AVhwmyNUorJ5NXrYCW6WNVIrSF3WeZLbN9ujmEP2pFHCC) 的格式所存储，其使用两个字节来表示一个字符。对于对象、整数 key 值会自动转换成字符串形式。
+
+根据第二点，简单尝试后发现：
+
+- 通过新建标签页打开相同的页面（属于第三条）创建独立 sessionStorage。
+- 通过 window.open 打开新标签页，共享了原 tab 页中的 sessionStorage。
+- 通过 a 标签 _blank 方式打开新 tab 页，Chrome 86 浏览器共享了 sessionStorage，Chrome 113 和 Firefox 浏览器并没有共享。
+
+**所以对于 a 标签打开的页面，是否“共享”sessionStorage 属于浏览器兼容性问题。**
+
+在 Chrome 89 版本前，a 标签跳转会共享 sessionStorage。而在 2021年 3月 Chrome 89 版本后，通过 a 标签 target="_blank" 跳转到新页面时 sessionStorage 就会丢失。
 
 
 
