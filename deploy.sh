@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # 先执行码云Pages部署
-bash mayun.sh
+# bash mayun.sh
 
 echo '开始执行部署github命令'
 # 生成静态文件
@@ -30,9 +30,9 @@ git commit -m 'deploy'
 
 
 # 发布到码云pages-aliyun分支上，用于阿里云拉取
-echo "代码推送到码云的pages-aliyun分支，用于阿里云拉取:"
-echo "push -f https://gitee.com/dragon-li/front-end-doc.git master:pages-aliyun"
-git push -f https://gitee.com/dragon-li/front-end-doc.git master:pages-aliyun
+# echo "代码推送到码云的pages-aliyun分支，用于阿里云拉取:"
+# echo "push -f https://gitee.com/dragon-li/front-end-doc.git master:pages-aliyun"
+# git push -f https://gitee.com/dragon-li/front-end-doc.git master:pages-aliyun
 
 # 发布到 GitHub Pages
 echo "执行命令：git push -f git@github.com:yulilong/front-end-doc.git master:gh-pages"
