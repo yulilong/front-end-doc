@@ -194,7 +194,7 @@
 * [vue知识点思维导图](doc/vue/008-vue知识点思维导图.md)
 * [vuex使用文档](doc/vue/009-vuex使用文档.md)
 * [vue-cli使用文档](doc/vue/010-vue-cli使用文档.md)
-* [router导航守卫](doc/vue/011-router导航守卫.md)
+* [router导航守卫](doc/vue/011-router使用相关.md)
 * [一个vue组件代码写法](doc/vue/012-一个vue组件代码写法.md)
 
 ## 6. node
