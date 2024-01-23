@@ -30,7 +30,7 @@ window.localStorage.setItem('baz', 'c');
 window.localStorage.length // 3
 ```
 
-### 2.2 Storage.setItem()：存入数据
+### 2.2 Storage.setItem()：存入数据Storage.foo=
 
 `Storage.setItem()`方法用于存入数据。它接受两个参数，第一个是键名，第二个是保存的数据。如果键名已经存在，该方法会更新已有的键值。该方法没有返回值。
 
@@ -54,13 +54,17 @@ window.localStorage['foo'] = '123';
 window.localStorage.setItem('foo', '123');
 ```
 
-### 2.3 Storage.getItem()：读取数据
+### 2.3 Storage.getItem()：读取数据Storage.foo
 
 `Storage.getItem()`方法用于读取数据。它只有一个参数，就是键名。如果键名不存在，该方法返回`null`。
 
 ```js
 window.sessionStorage.getItem('key')
 window.localStorage.getItem('key')
+
+// 也可以直接使用对象方式读取
+window.sessionStorage.key
+window.localStorage['key']
 ```
 
 键名应该是一个字符串，否则会被自动转为字符串。
