@@ -34,9 +34,14 @@ git commit -m 'deploy'
 # echo "push -f https://gitee.com/dragon-li/front-end-doc.git master:pages-aliyun"
 # git push -f https://gitee.com/dragon-li/front-end-doc.git master:pages-aliyun
 
+
+## 新建一个分支，解决git init命令生成的默认分支名字不确定问题(旧版本是master，新版本(2.39.3)是main)
+echo "执行命令：git co -b front-end"
+git co -b front-end
+
 # 发布到 GitHub Pages
-echo "执行命令：git push -f git@github.com:yulilong/front-end-doc.git master:gh-pages"
-git push -f git@github.com:yulilong/front-end-doc.git master:gh-pages
+echo "执行命令：git push -f git@github.com:yulilong/front-end-doc.git front-end:gh-pages"
+git push -f git@github.com:yulilong/front-end-doc.git front-end:gh-pages
 
 # 返回到上一次的工作目录
 echo "回到刚才工作目录"
