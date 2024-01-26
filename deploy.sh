@@ -36,8 +36,8 @@ git commit -m 'deploy'
 
 
 ## 新建一个分支，解决git init命令生成的默认分支名字不确定问题(旧版本是master，新版本(2.39.3)是main)
-echo "执行命令：git co -b front-end"
-git co -b front-end
+echo "执行命令：git checkout -b front-end"
+git checkout -b front-end
 
 # 发布到 GitHub Pages
 echo "执行命令：git push -f git@github.com:yulilong/front-end-doc.git front-end:gh-pages"
