@@ -6,7 +6,9 @@
 
 # Object 对象
 
-本文转载整理自阮一峰老师的文章：https://wangdoc.com/javascript/stdlib/object.html
+本文参考整理阮一峰老师的文章：https://wangdoc.com/javascript/stdlib/object.html
+
+参考整理：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object
 
 JS原生提供`Object`对象(注意起首的`O`是大写)，本章介绍该对象原生的各种方法。JS的所有其他对象都继承自`Object`对象，都是`Object`的实例。
 
@@ -426,6 +428,51 @@ obj.bar.push('c');
 obj.bar // ["a", "b", "c"]
 ```
 
+### 2.15 is()确定两个值是否为[相同值](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Equality_comparisons_and_sameness#使用_object.is_进行同值相等比较)
+
+语法：`Object.is(value1, value2)`，value1要比较的第一个值，value2要比较的第二个值，返回一个布尔值，指示两个参数是否为相同的值。
+
+`Object.is()` 确定两个值是否为[相同值](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Equality_comparisons_and_sameness#使用_object.is_进行同值相等比较)。如果以下其中一项成立，则两个值相同：
+
+- 都是 [`undefined`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined)
+- 都是 [`null`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/null)
+- 都是 `true` 或者都是 `false`
+- 都是长度相同、字符相同、顺序相同的字符串
+- 都是相同的对象（意味着两个值都引用了内存中的同一对象）
+- 都是 [BigInt](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/BigInt) 且具有相同的数值
+- 都是 [symbol](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Symbol) 且引用相同的 symbol 值
+- 都是数字且
+  - 都是 `+0`
+  - 都是 `-0`
+  - 都是 [`NaN`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/NaN)
+  - 都有相同的值，非零且都不是 [`NaN`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/NaN)
+
+`Object.is()` 与 [`==`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Equality) 运算符并不等价。`==` 运算符在测试相等性之前，会对两个操作数进行类型转换（如果它们不是相同的类型），这可能会导致一些非预期的行为，例如 `"" == false` 的结果是 `true`，但是 `Object.is()` 不会对其操作数进行类型转换。
+
+`Object.is()` 也*不*等价于 [`===`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Strict_equality) 运算符。`Object.is()` 和 `===` 之间的唯一区别在于它们处理带符号的 0 和 `NaN` 值的时候。`===` 运算符（和 `==` 运算符）将数值 `-0` 和 `+0` 视为相等，但是会将 [`NaN`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/NaN) 视为彼此不相等。
+
+```js
+Object.is(value1, value2)
+
+// 案例 1：评估结果和使用 === 相同
+Object.is(25, 25); // true
+Object.is("foo", "foo"); // true
+Object.is("foo", "bar"); // false
+Object.is(null, null); // true
+Object.is(undefined, undefined); // true
+Object.is(window, window); // true
+Object.is([], []); // false
+
+// 案例 2: 带符号的 0
+Object.is(0, -0); // false
+Object.is(+0, -0); // false
+Object.is(-0, -0); // true
+
+// 案例 3: NaN
+Object.is(NaN, 0 / 0); // true
+Object.is(NaN, Number.NaN); // true
+```
+
 
 
 ## 3. Object原型上的方法
@@ -475,7 +522,7 @@ obj + ' ' + 'world' // "hello world"
 // "Tue May 10 2016 09:11:31 GMT+0800 (CST)"
 ```
 
-### 3.2.1 toString() 的应用：判断数据类型
+#### 3.2.1 toString() 的应用：判断数据类型
 
 `Object.prototype.toString`方法返回对象的类型字符串，因此可以用来判断一个值的类型。
 
