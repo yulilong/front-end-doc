@@ -126,10 +126,39 @@ PUT和PATCH都是更新资源，而PATCH用来对已知资源进行局部更新�
 **HTTP状态码**（英语：HTTP Status Code）用来表示请求的结果，状态码被分为五大类：
 
 1. `100-199` 信息，服务器收到请求，需要请求者继续执行操作。
+   - 100 (Continue)：请求已被服务器接收，客户端应继续发送请求的其余部分。
+   - 101 (Switching Protocols)：服务器理解了客户端的请求，并将根据请求切换协议
 2. `200-299` 表示请求成功，操作被成功接收并处理。
+   - 200 OK：请求已成功，且响应主体包含请求的资源
+   - 201 Created：请求已完成并导致了新资源的创建
+   - 202 Accepted：请求已被接受进行处理，但处理尚未完成
+   - 204 No Content：请求已成功处理，但没有内容返回
+   - 206 Partial Content：服务器已经执行了部分GET请求
 3. `300-399` 重定向，需要进一步的操作以完成请求。
+   - 301 Moved Permanently：永久重定向，新的URL在Location头中给出，浏览器应该自动地访问新的URL
+   - 302 Found：临时重定向
+   - 303 See Other： 临时重定向
+   - 304 Not Modified：未修改，使用缓存
+   - 305 Use Proxy：使用代理
+   - 307 Temporary Redirect：临时重定向
 4. `400-499` 表示浏览器方面出错。
-5. `500-599` 表示服务器方面出错。
+   - 400 Bad Request：客户端请求的语法错误，服务器无法理解。
+   - 401 Unauthorized：请求需要用户验证。
+   - 403 Forbidden：服务器理解请求但拒绝执行，无权限操作。
+   - 404 Not Found：服务器无法找到请求的资源。
+   - 405 Method Not Allowed：请求行中指定的请求方法不能被用于请求相应的资源。
+   - 406 Not Acceptable：服务器无法生成响应Accept头部列表中所接受的内容。
+   - 407 Proxy Authentication Required：请求需要代理身份验证。
+   - 408 Request Timeout：客户端请求超时。
+   - 409 Conflict：请求因冲突而失败。
+   - 410 Gone：请求的资源不再可用。
+5. `500-599` 表示服务器方面出错
+   - 500 Internal Server Error：服务器遇到了不知如何处理的情况，通常是服务器上的程序代码出错。
+   - 501 Not Implemented：请求的功能服务器不支持，例如服务器不支持请求方法时可能会出现这个状态码。
+   - 502 Bad Gateway：服务器作为网关或代理时收到了无效的响应。
+   - 503 Service Unavailable：服务器暂时无法处理请求，可能是因为超载或停机维护。
+   - 504 Gateway Timeout：服务器作为网关或代理，但是没有在允许的时间内从上游服务器收到请求。
+   - 505 HTTP Version Not Supported：服务器不支持请求中所指明的HTTP版本。
 
 | 状态代码 | 状态信息                        | 含义                                                         |
 | -------- | ------------------------------- | ------------------------------------------------------------ |
@@ -148,9 +177,9 @@ PUT和PATCH都是更新资源，而PATCH用来对已知资源进行局部更新�
 | 303      | See Other                       | 类似于301/302，不同之处在于，如果原来的请求是POST，Location头指定的重定向目标文档应该通过GET提取（HTTP 1.1新）。 |
 | 304      | Not Modified                    | 客户端有缓冲的文档并发出了一个条件性的请求（一般是提供If-Modified-Since头表示客户只想比指定日期更新的文档）。服务器告 诉客户，原来缓冲的文档还可以继续使用。 |
 | 305      | Use Proxy                       | 客户请求的文档应该通过Location头所指明的代理服务器提取（HTTP 1.1新）。 |
-| 307      | Temporary Redirect              | 和302 （Found）相同。许多浏览器会错误地响应302应答进行重定向，即使原来的请求是POST，即使它实际上只能在POST请求的应答是303时才能重定 向。由于这个原因，HTTP 1.1新增了307，以便更加清除地区分几个状态代码：当出现303应答时，浏览器可以跟随重定向的GET和POST请求；如果是307应答，则浏览器只 能跟随对GET请求的重定向。（HTTP 1.1新） |
-| 400      | Bad Request                     | 请求出现语法错误。                                           |
-| 401      | Unauthorized                    | 客户试图未经授权访问受密码保护的页面。应答中会包含一个WWW-Authenticate头，浏览器据此显示用户名字/密码对话框，然后在填 写合适的Authorization头后再次发出请求。 |
+| 307      | Temporary Redirect              | 和302 （Found）相同。许多浏览器会错误地响应302应答进行重定向，即使原来的请求是POST，即使它实际上只能在POST请求的应答是303时才能重定 向。由于这个原因，HTTP 1.1新增了307，以便更加清楚的区分几个状态代码：当出现303应答时，浏览器可以跟随重定向的GET和POST请求；如果是307应答，则浏览器只 能跟随对GET请求的重定向。（HTTP 1.1新） |
+| 400      | Bad Request                     | 客户端请求的语法错误，服务器无法理解。                       |
+| 401      | Unauthorized                    | 请求需要用户验证。客户试图未经授权访问受密码保护的页面。应答中会包含一个WWW-Authenticate头，浏览器据此显示用户名字/密码对话框，然后在填 写合适的Authorization头后再次发出请求。 |
 | 403      | Forbidden                       | 资源不可用。服务器理解客户的请求，但拒绝处理它。通常由于服务器上文件或目录的权限设置导致。 |
 | 404      | Not Found                       | 无法找到指定位置的资源。这也是一个常用的应答。               |
 | 405      | Method Not Allowed              | 请求方法（GET、POST、HEAD、DELETE、PUT、TRACE等）对指定的资源不适用。（HTTP 1.1新） |
@@ -171,9 +200,7 @@ PUT和PATCH都是更新资源，而PATCH用来对已知资源进行局部更新�
 | 504      | Gateway Timeout                 | 由作为代理或网关的服务器使用，表示不能及时地从远程服务器获得应答。（HTTP 1.1新） |
 | 505      | HTTP Version Not Supported      | 服务器不支持请求中所指明的HTTP版本。（HTTP 1.1新）           |
 
-![](https://raw.githubusercontent.com/for-GET/http-decision-diagram/master/httpdd.png)
 
-[图片来源](https://raw.githubusercontent.com/for-GET/http-decision-diagram/master/httpdd.png)
 
 ## 参考资料
 
