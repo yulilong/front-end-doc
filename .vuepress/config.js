@@ -5,7 +5,7 @@ const path = require('path');
 
 module.exports = {
     // 如果github Pages绑定域名，则需要把base删除，否则域名访问会失败
-    base: '/front-end-doc/',     // 仓库名字,用于github Pages 部署,
+    // base: '/front-end-doc/',     // 仓库名字,用于github Pages 部署,
     title: '前端知识',
     description: '一个总结前端知识的文档网站',
     head: [
