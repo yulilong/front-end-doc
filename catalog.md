@@ -51,13 +51,14 @@
 * [数据类型转换](/doc/js/003-数据类型转换.md)
 * [跨域](/doc/js/004-跨域.md)
 * [Ajax](/doc/js/005-Ajax.md)
-* [函数](/doc/js/006-函数.md)
 * [作用域](/doc/js/007-作用域-执行环境.md)
 * [排序算法](/doc/js/008-排序算法.md)
 * [获取标签宽高及实例](/doc/js/009-获取标签宽高及实例.md)
 * [JS数字计算精度和显示](/doc/js/013-JS数字计算精度和显示.md)
 * [Web-Worker使用教程](/doc/js/014-Web-Worker使用教程.md)
 * [JS常见问题解决](/doc/js/015-JS常见问题解决.md)
+* 函数
+    * [函数](/doc/js/006-函数.md)
 * 高级
     * [001-ES6模块import_export](/doc/js/advanced/001-ES6模块import_export.md)
     * [002-错误处理try_catch](/doc/js/advanced/002-错误处理try_catch.md)
