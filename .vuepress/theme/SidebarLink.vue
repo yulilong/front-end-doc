@@ -17,7 +17,10 @@ export default {
     const active = item.type === 'auto'
       ? selfActive || item.children.some(c => isActive($route, item.basePath + '#' + c.slug))
       : selfActive
+    // 左边有指示箭头 的链接
     const link = renderLink(h, item.path, item.title || item.path, active, chapter, true)
+    // 左边没有指示箭头 的链接
+    const link2 = renderLink(h, item.path, item.title || item.path, active, chapter)
     const configDepth = $page.frontmatter.sidebarDepth != null
       ? $page.frontmatter.sidebarDepth
       : $site.themeConfig.sidebarDepth
@@ -29,9 +32,14 @@ export default {
     } else if ((active || displayAllHeaders) && item.headers && !hashRE.test(item.path)) {
       // 侧边栏展开的状态
       const children = groupHeaders(item.headers)
-      return [link, renderChildren(h, children, item.path, $route, maxDepth)]
+      let linkResult = link;
+      // 如果md文件配置了不显示子标题，则显示 没有箭头的链接
+      if (item.frontmatter && item.frontmatter.sidebarDepth === 0) {
+        linkResult = link2;
+      }
+      return [linkResult, renderChildren(h, children, item.path, $route, maxDepth)]
     } else {
-      return link
+      return link2
     }
   }
 }
