@@ -59,6 +59,7 @@
 * [JS常见问题解决](/doc/js/015-JS常见问题解决.md)
 * 函数
     * [函数](/doc/js/006-函数.md)
+    * [函数柯里化](/doc/js/006-1函数柯里化.md)
 * 高级
     * [001-ES6模块import_export](/doc/js/advanced/001-ES6模块import_export.md)
     * [002-错误处理try_catch](/doc/js/advanced/002-错误处理try_catch.md)
