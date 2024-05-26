@@ -198,6 +198,7 @@
 * [vue-cli使用文档](doc/vue/010-vue-cli使用文档.md)
 * [router导航守卫](doc/vue/011-router使用相关.md)
 * [一个vue组件代码写法](doc/vue/012-一个vue组件代码写法.md)
+* [vue的diff算法详解](doc/vue/013-vue的diff算法详解.md)
 
 ## 6. node
 

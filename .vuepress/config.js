@@ -327,6 +327,7 @@ module.exports = {
               '010-vue-cli使用文档',
               '011-router使用相关',
               '012-一个vue组件代码写法',
+              '013-vue的diff算法详解',
             ],
 
             '/doc/node/': [
