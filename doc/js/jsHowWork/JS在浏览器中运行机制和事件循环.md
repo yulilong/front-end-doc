@@ -83,7 +83,7 @@ https://html.spec.whatwg.org/multipage/webappapis.html#event-loops
 - **宏任务**（按优先级顺序排列）: `script`(你的全部JS代码，“同步代码”）, `setTimeout`, `setInterval`, `setImmediate(node的)`, `I/O`,`UI rendering`
 - **微任务**（按优先级顺序排列）:`process.nextTick(node的)`,`Promise`（这里指浏览器原生实现的 Promise）, `Object.observe`, `MutationObserver`
 
-***注意：***宏任务、微任务中出现的nodejs中的方法是nodejs专有的，浏览器的JavaScript环境暂时没有支持。
+***注意***：宏任务、微任务中出现的nodejs中的方法是nodejs专有的，浏览器的JavaScript环境暂时没有支持。
 
 ### 3.1 事件循环对宏任务和微任务的处理
 
@@ -149,7 +149,7 @@ console.log('9');
 
 
 
-***注意：***浏览器环境JavaScript的执行机制和node中JavaScript的执行机制是不同的。
+***注意***：浏览器环境JavaScript的执行机制和node中JavaScript的执行机制是不同的。
 
 
 
