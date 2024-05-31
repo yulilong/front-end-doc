@@ -24,11 +24,9 @@ var a = await 3
 
 
 
-## 1. asyne起什么作用
+## 1. asyne函数返回一个 Promise 对象
 
-这个问题的关键在于，async 函数是怎么处理它的返回值的！
-
-我们当然希望它能直接通过 `return` 语句返回我们想要的值，但是如果真是这样，似乎就没 await 什么事了。所以，写段代码来试试，看它到底会返回什么：
+写段代码来试试，看它到底会返回什么：
 
 ```js
 async function async1() {}
@@ -40,9 +38,7 @@ console.log('async2(): ', async2());
 // async2():  Promise { 'hello async' }
 ```
 
-可以看到async函数返回的是一个 Promise 对象。
-
-所以，async 函数返回的是一个 Promise 对象。从[文档](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function)中也可以得到这个信息。async 函数（包含函数语句、函数表达式、Lambda表达式）会返回一个 Promise 对象，如果在函数中 `return` 一个直接量，async 会把这个直接量通过 `Promise.resolve()` 封装成 Promise 对象。
+可以看到async函数返回的是一个 Promise 对象。从[文档](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function)中也可以得到这个信息。async 函数（包含函数语句、函数表达式、Lambda表达式）会返回一个 Promise 对象，如果在函数中 `return` 一个直接量，async 会把这个直接量通过 `Promise.resolve()` 封装成 Promise 对象。
 
 由于async函数返回的是一个 Promise 对象，所以在不使用await的情况下，可以使用`then()` 链来处理这个 Promise 对象，就像这样：
 
@@ -55,6 +51,61 @@ async2().then( res => { console.log('res: ', res) })
 联想一下 Promise 的特点——无等待，所以在没有 `await` 的情况下执行 async 函数，它会立即执行，返回一个 Promise 对象，并且，绝不会阻塞后面的语句。这和普通返回 Promise 对象的函数并无二致。
 
 那么下一个关键点就在于 await 关键字了。
+
+### 1.1 关于async函数返回值
+
+根据上面的定义，async函数会返回一个 Promise 对象，当返回一个直接量的时候，会把这个直接量通过 `Promise.resolve()` 封装成 Promise 对象。但是根据实测，在浏览器中，返回直接量和返回 Promise 对象在特定情况下是有区别的，比如如下代码：
+
+```js
+async function async2() { console.log('2'); return 21; }
+async function async3() { console.log('3'); return Promise.resolve(31); }
+console.log('async2(): ', async2()); // 
+console.log('async3(): ', async3());
+console.log('async2().then(): ', async2().then());
+console.log('async3().then(): ', async3().then());
+```
+
+输出结果如下图：
+
+![](./img/001-async.png)
+
+可以看到在不使用`.then`方法的时候，async函数返回直接量自动封装的 Promise 对象的状态是`Promise {<fulfilled>: 21}`，这个状态在同步主线任务中执行没有问题，但是在等待处理异步任务的时候，浏览器环境 会优先处理 fulfilled 状态的 Promise，例如如下代码：
+
+```js
+async function async1() { console.log('1'); }
+async function async2() { console.log('2'); return 21; }
+async function async3() { console.log('3'); return Promise.resolve(31); }
+async function async4() { console.log('4'); return Promise.resolve(41); }
+async function async5() {
+  console.log(await async1());
+  console.log(5);
+  console.log(await async2());
+  console.log(6);
+  console.log(await async3());
+  console.log(7);
+}
+async function async6() { // 第13行
+  console.log(8)
+  console.log(await async4()) // 第15行
+  console.log(9)
+}
+async5()
+async6()
+```
+
+输出结果如下图：
+
+![](./img/002-async.png)
+
+当同步主线任务都执行结束后，在异步中，可以看到在浏览器环境和nodejs环境对`await async2()`的处理方式是不一样的：
+
+1、浏览器环境中，`async2()`方法结束后，直接就等待处理了`async2方法的`返回值。然后接着执行`async5()`方法的后面代码。
+
+2、在nodejs环境中，`async2()`方法结束后，`async5()`方法暂停，去处理`async6()`方法未执行的部分。
+
+因此，在遇到定义的多个async方法，有的返回直接量的时候。如果他们同时都可以调用了，那么返回直接量的 在浏览器环境优先级高，会优先执行。
+
+
 
 ## 2. await 到底在等啥
 
@@ -321,19 +372,19 @@ console.log('14') // 第21行
 
 第一步、执行一个宏任务，执行同步代码：
 
-从第11行开始，console输出12，执行async5()异步函数，console输出8，执行`await async1()`，执行async1()方法，输出1，默认返回一个 Promise的回调。由于`await async1()`阻塞了async5 ()方法，接着执行第19行代码，输出13。开始执行async6()，输出10，执行`await async3()`，开始执行async3()函数，输出4，同时返回一个 Promise回调。回到async6()，由于await阻塞了async6() ，开始执行第21行代码，输出14，这次宏任务结束执行。
+从第17行开始，console输出12，执行async5()异步函数，console输出8，执行`await async1()`，执行async1()方法，输出1，默认返回一个 Promise的回调。由于`await async1()`阻塞了async5 ()方法，接着执行第19行代码，输出13。开始执行async6()，输出10，执行`await async3()`，开始执行async3()函数，输出4，同时返回一个 Promise回调。回到async6()，由于await阻塞了async6() ，开始执行第21行代码，输出14，这次宏任务结束执行。
 
 此时输出的结果：12、8、1、13、10、4、14。微任务回调队列有2个回调：async1()的回调、async3()的回调
 
 第二步、执行所有可执行的微任务：
 
-执行async1()的回调返回了undefined，所以第7行输出undefined，await取消阻塞，接着执行async5()函数，执行`await async2()`，执行async2()方法，输出2，接着返回一个Promise回调。
+执行async1()的回调返回了undefined，所以第7行输出undefined，await取消阻塞，接着执行async5()函数，执行`await async2()`，执行async2()方法，输出2，接着返回一个Promise回调。此次所有微任务执行完毕
 
 此时输出的结果：undefined、2。微任务回调队列有2个回调：async3()的回调、async2()的回调
 
-微任务回调队列有2个回调：async3()的回调、async2()的回调
 
-***注意，接下来代码运行顺序在浏览器和本地node环境运行的有所差别：***
+
+***注意，接下来代码运行顺序在浏览器和本地node环境运行的有所差别(具体参考1.1的说明)：***
 
 -   在浏览器中运行的顺序：
 
@@ -346,10 +397,6 @@ console.log('14') // 第21行
 此时输出的结果：3、9、5、6
 
 所以在浏览器环境中最终输出：`12、8、1、13、10、4、14、undefined、2、3、9、5、6`
-
-在浏览器中，可执行的微任务中，async5()中的所有微任务优先级都比async6()中的高，在上面代码的第8行下面加一行代码`console.log(await async2())`然后在浏览器里面运行，就会看到效果。
-
-![](./img/001-async.png)
 
 -   在node环境中运行的顺序：
 
@@ -365,13 +412,15 @@ console.log('14') // 第21行
 
 所以在node环境中最终输出：`12、8、1、13、10、4、14、undefined、2、5、6、3、9`
 
+执行结果：
 
+![](./img/003-async.png)
 
 ## 参考资料
 
 [理解 JavaScript 的 async/await](https://segmentfault.com/a/1190000007535316)
 
-[async 函数 ES6 阮一峰
+[async 函数 ES6 阮一峰](https://es6.ruanyifeng.com/#docs/async)
 
 [async function MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/async_function)
 
