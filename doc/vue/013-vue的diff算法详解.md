@@ -95,8 +95,9 @@ diff算法分两种情况：
 
 ## 参考资料
 
-[解析vue2.0的diff算法 **杨敬卓**](https://github.com/aooy/blog/issues/2)
+[解析vue2.0的diff算法 杨敬卓](https://github.com/aooy/blog/issues/2)
 
 [面试官：你了解vue的diff算法吗？说说看](https://vue3js.cn/interview/vue/diff.html)
 
 [Vue diff 算法探秘：如何实现快速渲染 阿里云](https://developer.aliyun.com/article/1428813)
+
