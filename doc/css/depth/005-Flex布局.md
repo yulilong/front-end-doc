@@ -33,8 +33,6 @@ flex学习游戏：
 - Flex布局可以实现**空间自动分配、自动对齐**(flexble:弹性、灵活)
 - Flex 适用于**简单的线性布局**，更复杂的布局交给grid布局(还没发布)
 
-
-
 ## 3. 基本概念
 
 采用 Flex 布局的元素，称为 Flex 容器（flex container），简称"容器"。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称"项目"。
@@ -271,9 +269,21 @@ align-content的取值：
 </div>
 ```
 
-### 5.3 flex-basis:不限定宽度时，占据的主轴空间
+### 5.3 flex-basis:主轴上的初始尺寸
 
-`flex-basis`属性定义了不限定宽度前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为`auto`，即项目的本来大小。
+设置的是元素在主轴上的初始尺寸，所谓的初始尺寸就是元素在`flex-grow`和`flex-shrink`生效前的尺寸
+
+浏览器根据这个属性，计算主轴是否有多余空间，默认值为`auto`，即项目的本来大小，如设置了`width`则元素尺寸由`width/height`决定（主轴方向），没有设置则由内容决定
+
+```css
+.item {
+   flex-basis: <length> | auto; /* default auto */
+}
+```
+
+当设置为0时，会根据内容撑开。
+
+它可以设为跟`width`或`height`属性一样的值（比如350px），则项目将占据固定空间。
 
 在下面的例子中，设置了第一个子元素宽度为200px(在空间足够的情况下)，如果空间不足，则此设置无效。
 
@@ -298,7 +308,20 @@ align-content的取值：
 
 该属性有两个快捷值：`auto` (`1 1 auto`) 和 none (`0 0 auto`)。
 
-建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。
+一些属性有：
+
+- `flex: 1` 等于 `flex: 1 1 0%`
+- `flex: 2` 等于 `flex: 2 1 0%`
+- `flex: auto` 等于 `flex: 1 1 auto`
+- `flex: none` 等于 `flex: 0 0 auto`，常用于固定尺寸不伸缩
+
+`flex:1` 和 `flex:auto` 的区别，可以归结于`flex-basis:0`和`flex-basis:auto`的区别。
+
+当设置为0时（绝对弹性元素），此时相当于告诉`flex-grow`和`flex-shrink`在伸缩的时候不需要考虑我的尺寸。
+
+当设置为`auto`时（相对弹性元素），此时则需要在伸缩时将元素尺寸纳入考虑。
+
+注意：建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。
 
 
 
@@ -329,7 +352,7 @@ IE8浏览器不支持这个属性。
 
 该属性可能取6个值，除了auto，其他都与align-items属性完全一致。
 
-```
+```css
 .item {
   align-self: auto | flex-start | flex-end | center | baseline | stretch;
 }
@@ -386,7 +409,7 @@ IE8浏览器不支持这个属性。
         </ul>
     </footer>
 </div>
-<!-- http://js.jirengu.com/pinug/6/edit?html,output -->
+<!-- https://jsbin.com/dogeyoz/1/edit?html,output -->
 ```
 
 
@@ -408,7 +431,7 @@ IE8浏览器不支持这个属性。
     <li></li><li></li><li></li>
     <li></li><li></li><li></li>
 </ul>
-<!-- http://js.jirengu.com/semuz/2/edit -->
+<!-- https://jsbin.com/tolajem/edit?html,output -->
 ```
 
 
@@ -433,7 +456,7 @@ IE8浏览器不支持这个属性。
     <nav></nav>
 </div>
 <footer></footer>
-<!-- http://js.jirengu.com/nuqif/5/edit -->
+<!-- https://jsbin.com/pivusux/1/edit?html,output -->
 ```
 
 ### 6.4 完美居中
@@ -455,5 +478,5 @@ IE8浏览器不支持这个属性。
         dsadasdsa
     </div>
 </div>
-<!-- http://js.jirengu.com/kosam/2/edit?html,output -->
+<!-- https://jsbin.com/yuxomej/1/edit?html,output -->
 ```
