@@ -97,12 +97,12 @@ Object.create()方法是ECMAScript 5中新增的方法，这个方法用于创�
 
 `Object.create`方法生成的对象，继承了它的原型对象的构造函数。
 
->   语法：Object.create(proto[, propertiesObject])
->   参数：
->   proto: 新创建对象的原型对象, 不能为空，或者不是对象，否则会报错。
+>   语法：Object.create(proto[, propertiesObject])     
+>   参数：        
+>   proto: 新创建对象的原型对象, 不能为空，或者不是对象，否则会报错。    
 >   **propertiesObject**:可选。如果没有指定为 [`undefined`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined)，该参数是一个属性描述对象，它所描述的对象属性，会添加到实例对象，作为该对象自身的属性。
 
-如果值需要第一个参数，那么还可以以如下方式实现create：
+如果只需要第一个参数，那么还可以以如下方式实现create：
 
 ```js
 if (typeof Object.create !== 'function') {
