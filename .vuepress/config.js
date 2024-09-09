@@ -189,10 +189,6 @@ module.exports = {
             "blog/004-浏览器控制台反调试",
           ],
         },
-        {
-          title: "浏览器模型",
-          children: ["browserModel/001-storage接口"],
-        },
       ],
 
       "/doc/dom/": [
@@ -232,6 +228,7 @@ module.exports = {
             "100-浏览器缓存",
             "101-cookie、session、WebStorage区别",
             "102-cookie使用介绍",
+            "103-storage接口",
           ],
         },
         {
