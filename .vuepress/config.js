@@ -62,19 +62,21 @@ module.exports = {
           { text: "js", link: "/doc/js/" },
           { text: "js标准库", link: "/doc/js/standardLibrary/" },
           { text: "dom操作文档", link: "/doc/dom/" },
-          { text: "浏览器、网络", link: "/doc/browserNetwork/" },
           { text: "设计模式", link: "/doc/designPattern/" },
         ],
       },
-      {
-        text: "CSS",
-        link: "/doc/css/",
-      },
-      { text: "html", link: "/doc/html/" },
+      { text: "浏览器", link: "/doc/browserNetwork/", },
+      { text: "CSS", link: "/doc/css/", },
       { text: "react", link: "/doc/react/" },
       { text: "vue", link: "/doc/vue/" },
-      { text: "node", link: "/doc/node/" },
-      { text: "工具", link: "/doc/tool/" },
+      {
+        text: "其他",
+        items: [
+          { text: "html", link: "/doc/html/" },
+          { text: "node", link: "/doc/node/" },
+          { text: "工具", link: "/doc/tool/" },
+        ],
+      },
     ],
     // 侧边栏标题显示的层数, 0:禁用标题（headers）链接， 1：提取到 h2 的标题， 2： 同时提取 h2 和 h3 标题
     sidebarDepth: 2,
@@ -83,6 +85,7 @@ module.exports = {
     sidebar: {
       // 目录
       "/catalog": ["catalog"],
+      // js标准库
       "/doc/js/standardLibrary/": [
         // 如果只是想显示这个页面的名字，那么可以在md文件的顶部写如下代码：
         // ---
@@ -104,6 +107,7 @@ module.exports = {
         "009-RegExp对象",
         "010-Error错误对象",
       ],
+      // ES6
       "/doc/es6/": [
         // '',
         "001-ES6新特性列表",
@@ -123,6 +127,7 @@ module.exports = {
         "015-对象的新增方法",
         "016-Number-Math和数值的扩展",
       ],
+      // javascript
       "/doc/js/": [
         "",
         "001-对象原型继承",
