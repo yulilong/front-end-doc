@@ -20,7 +20,7 @@ Storage 接口用于脚本在浏览器保存数据。两个对象部署了这个
 
 ## 2. 属性和方法
 
-### 2.1 Storage.length：返回保存的数据项个数
+### 2.1 Storage.length：获取存储数据量
 
 ```js
 window.localStorage.setItem('foo', 'a');
@@ -30,7 +30,7 @@ window.localStorage.setItem('baz', 'c');
 window.localStorage.length // 3
 ```
 
-### 2.2 Storage.setItem()：存入数据Storage.foo=
+### 2.2 Storage.setItem()：存入数据
 
 `Storage.setItem()`方法用于存入数据。它接受两个参数，第一个是键名，第二个是保存的数据。如果键名已经存在，该方法会更新已有的键值。该方法没有返回值。
 
@@ -54,7 +54,7 @@ window.localStorage['foo'] = '123';
 window.localStorage.setItem('foo', '123');
 ```
 
-### 2.3 Storage.getItem()：读取数据Storage.foo
+### 2.3 Storage.getItem()：读取数据
 
 `Storage.getItem()`方法用于读取数据。它只有一个参数，就是键名。如果键名不存在，该方法返回`null`。
 
@@ -69,7 +69,7 @@ window.localStorage['key']
 
 键名应该是一个字符串，否则会被自动转为字符串。
 
-### 2.4 Storage.removeItem()：清除某个键名对应的键值
+### 2.4 Storage.removeItem()：清除数据
 
 `Storage.removeItem()`方法用于清除某个键名对应的键值。它接受键名作为参数，如果键名不存在，该方法不会做任何事情。
 
@@ -78,7 +78,7 @@ sessionStorage.removeItem('key');
 localStorage.removeItem('key');
 ```
 
-### 2.5 Storage.clear()：清除所有保存的数据
+### 2.5 Storage.clear()：清除所有数据
 
 `Storage.clear()`方法用于清除所有保存的数据。该方法的返回值是`undefined`。
 
