@@ -3,6 +3,12 @@
 # 先执行码云Pages部署
 # bash mayun.sh
 
+echo '执行命令：git push'
+git push
+
+echo '执行命令：git push mayun'
+git push mayun
+
 echo '开始执行部署github命令'
 # 生成静态文件
 echo '执行命令：vuepress build .'
