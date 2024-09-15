@@ -169,7 +169,6 @@ module.exports = {
             "advanced/002-错误处理try_catch",
             "advanced/003-常用的代码片段",
             "advanced/004-轮播代码实现",
-            "advanced/005-浏览器兼容",
             "advanced/006-手机端页面开发",
             "advanced/007-SEO搜索引擎优化",
             "advanced/008-前端数据模拟Mock",
@@ -216,9 +215,11 @@ module.exports = {
             "002-从输入URL到页面渲染过程",
             "004-浏览器渲染过程",
             "005-Web前端性能优化",
-            "012-移动H5首屏秒开优化方案",
+            "006-工作遇到的浏览器兼容问题",
+            "007-移动H5首屏秒开优化方案",
             "008-CSRF攻击",
             "009-XSS攻击",
+            "010-WebSocket介绍",
           ],
         },
         {
@@ -243,7 +244,6 @@ module.exports = {
             "905-HTTPS是如何保证安全的",
           ],
         },
-        "016-WebSocket介绍",
       ],
 
       "/doc/designPattern/": [""],

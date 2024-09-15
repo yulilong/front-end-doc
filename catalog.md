@@ -65,7 +65,6 @@
     * [002-错误处理try_catch](/doc/js/advanced/002-错误处理try_catch.md)
     * [003-常用的代码片段](/doc/js/advanced/003-常用的代码片段.md)
     * [004-轮播代码实现](/doc/js/advanced/004-轮播代码实现.md)
-    * [005-浏览器兼容](/doc/js/advanced/005-浏览器兼容.md)
     * [006-手机端页面开发](/doc/js/advanced/006-手机端页面开发.md)
     * [007-SEO搜索引擎优化](/doc/js/advanced/007-SEO搜索引擎优化.md)
     * [008-前端数据模拟Mock](/doc/js/advanced/008-前端数据模拟Mock.md)
@@ -101,10 +100,11 @@
 * [从输入URL到页面渲染过程](/doc/browserNetwork/002-从输入URL到页面渲染过程.md)
 * [浏览器渲染过程](/doc/browserNetwork/004-浏览器渲染过程.md)
 * [Web前端性能优化](/doc/browserNetwork/005-Web前端性能优化.md)
+* [工作中遇到的浏览器兼容问题](/doc/browserNetwork/006-工作遇到的浏览器兼容问题.md)
+* [移动H5首屏秒开优化方案](/doc/browserNetwork/007-移动H5首屏秒开优化方案.md)
 * [CSRF攻击](/doc/browserNetwork/008-CSRF攻击.md)
 * [XSS攻击](/doc/browserNetwork/009-XSS攻击.md)
-* [移动H5首屏秒开优化方案](/doc/browserNetwork/012-移动H5首屏秒开优化方案.md)
-* [WebSocket介绍](/doc/browserNetwork/016-WebSocket介绍.md)
+* [WebSocket介绍](/doc/browserNetwork/010-WebSocket介绍.md)
 
 浏览器存储
 
