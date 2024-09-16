@@ -98,6 +98,7 @@
 
 * [URL相关操作](/doc/browserNetwork/001-URL相关操作.md)
 * [从输入URL到页面渲染过程](/doc/browserNetwork/002-从输入URL到页面渲染过程.md)
+* [浏览器间差异](/doc/browserNetwork/004-浏览器间差异.md)
 * [浏览器渲染过程](/doc/browserNetwork/004-浏览器渲染过程.md)
 * [Web前端性能优化](/doc/browserNetwork/005-Web前端性能优化.md)
 * [工作中遇到的浏览器兼容问题](/doc/browserNetwork/006-工作遇到的浏览器兼容问题.md)
