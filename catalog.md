@@ -101,6 +101,7 @@
 * [Web前端性能优化](/doc/browserNetwork/003-Web前端性能优化.md)
 * [浏览器渲染过程](/doc/browserNetwork/004-浏览器渲染过程.md)
 * [浏览器间差异](/doc/browserNetwork/005-浏览器间差异.md)
+* [常见浏览器兼容问题解决汇总](/doc/browserNetwork/006-常见浏览器兼容问题解决汇总.md)
 * [工作中遇到的浏览器兼容问题](/doc/browserNetwork/006-工作遇到的浏览器兼容问题.md)
 * [移动H5首屏秒开优化方案](/doc/browserNetwork/007-移动H5首屏秒开优化方案.md)
 * [CSRF攻击](/doc/browserNetwork/008-CSRF攻击.md)
