@@ -9,7 +9,7 @@ git push
 echo '执行命令：git push mayun'
 git push mayun
 
-echo '开始执行部署github命令'
+echo '开始执行前端项目构建命令'
 # 生成静态文件
 echo '执行命令：vuepress build .'
 vuepress build .
