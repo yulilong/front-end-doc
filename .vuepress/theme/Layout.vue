@@ -152,9 +152,10 @@ export default {
       this.isSidebarOpen = typeof to === 'boolean' ? to : !this.isSidebarOpen
       // 2024-09-14 PC端浏览器不设置 sidebar-open 类
       // 当这个类是true的时候，点击页面正文部分会导致触发 toggleSidebar 方法，导致切换了侧边栏菜单
-      const str = 'Android|WebOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|phone|pad|pod|'
+      const str = 'Android|WebOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini|phone|pod|'
         + 'ios|Mobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|Symbian|Windows Phone'
       const reg = new RegExp(str, 'i')
+      // PC端
       if (!reg.test(navigator.userAgent)) {
         this.isSidebarOpen = false
       }
