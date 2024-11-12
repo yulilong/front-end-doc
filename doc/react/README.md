@@ -15,3 +15,10 @@ react框架内容相关的文档。
 [阿姨，React源码好难懂，我不想努力了](https://juejin.im/post/5efb2ece6fb9a07e6e114629)
 
 react源码分析：https://react.iamkasong.com/
+
+## react 发展历史
+
+![](./img/000-react-history.png)
+
+[图片来源](https://www.processon.com/view/64ce574e4e9d0b766f1462f2)
+
