@@ -60,7 +60,7 @@ JavaScript是单线程的，那么这个单线程就成为主线程。而事件�
 
 知道了这个后，下面代码例子输出结果你因该知道结果吧：
 
-```
+```js
 setTimeout(function(){
     console.log(1);
 },0);
