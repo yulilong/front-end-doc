@@ -180,7 +180,7 @@ module.exports = {
         },
         {
           title: "文章",
-          // collapsable: false,
+          collapsable: false,
           children: [
             "blog/001-JS常用的60余种工具方法",
             "blog/002-js数据类型判断",
@@ -358,6 +358,7 @@ module.exports = {
         "004-AMD规范",
         "005-node环境常见问题",
         "006-前端http-server开启本地https服务",
+        "007-node版本管理n包使用",
       ],
 
       "/doc/tool/": [
