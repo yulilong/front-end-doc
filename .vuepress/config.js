@@ -75,6 +75,7 @@ module.exports = {
           { text: "html", link: "/doc/html/" },
           { text: "node", link: "/doc/node/" },
           { text: "工具", link: "/doc/tool/" },
+          { text: "常见问题", link: "/doc/problem/" },
         ],
       },
     ],
@@ -368,6 +369,10 @@ module.exports = {
         "003-Moment日期处理类库",
         "004-prettier代码格式化工具",
         "005-webpack常见问题解决",
+      ],
+      // 常见问题
+      "/doc/problem/": [
+        "001-antd组件在react遇到的问题",
       ],
     },
   },
