@@ -8,6 +8,8 @@
 
 ## 1. Form.Item name属性is only used for validate React element
 
+antd版本：`^4.23.2`
+
 ![](./img/001-antd.png)
 
 原因：Form.Item组件下没有可Input或Select组件之类的组件，如果不需要校验或输入内容，可以去掉属性name。
