@@ -120,3 +120,58 @@ const fn = (info: strong | null | undefined) => {}
 
 参考链接：https://blog.csdn.net/qq_36375343/article/details/143480012
 
+## 4. 类型断言as
+
+当 TypeScript 不确定一个联合类型的变量到底是哪个类型的时候，我们**只能访问此联合类型的所有类型中共有的属性或方法**：
+
+```tsx
+interface Cat { name: string; run(): void; }
+interface Fish { name: string; swim(): void; }
+
+function getName(animal: Cat | Fish) {
+    return animal.name;
+}
+```
+
+而有时候，我们确实需要在还不确定类型的时候就访问其中一个类型特有的属性或方法:
+
+```tsx
+interface Cat { name: string; run(): void; }
+interface Fish { name: string; swim(): void; }
+function isFish(animal: Cat | Fish) {
+  // index.ts:11:23 - error TS2339: Property 'swim' does not exist on type 'Cat | Fish'. Property 'swim' does not exist on type 'Cat'.
+  if (typeof animal.swim === 'function') {
+    return true;
+  }
+  return false;
+}
+
+// 此时可以使用类型断言，将 animal 断言成 Fish。这样就可以解决访问 animal.swim 时报错的问题了。
+function isFish(animal: Cat | Fish) {
+  if (typeof (animal as Fish).swim === 'function') {
+    return true;
+  }
+  return false;
+}
+```
+
+需要注意的是，类型断言只能够「欺骗」TypeScript 编译器，无法避免运行时的错误，反而滥用类型断言可能会导致运行时错误：
+
+```tsx
+function swim(animal: Cat | Fish) {
+  (animal as Fish).swim();
+}
+const tom: Cat = {
+  name: 'Tom',
+  run() { console.log('run') }
+};
+swim(tom);
+// Uncaught TypeError: animal.swim is not a function`
+```
+
+原因是 `(animal as Fish).swim()` 这段代码隐藏了 `animal` 可能为 `Cat` 的情况，将 `animal` 直接断言为 `Fish` 了，而 TypeScript 编译器信任了我们的断言，故在调用 `swim()` 时没有编译错误。
+
+可是 `swim` 函数接受的参数是 `Cat | Fish`，一旦传入的参数是 `Cat` 类型的变量，由于 `Cat` 上没有 `swim` 方法，就会导致运行时错误了。
+
+总之，使用类型断言时一定要格外小心，尽量避免断言后调用方法或引用深层属性，以减少不必要的运行时错误。
+
