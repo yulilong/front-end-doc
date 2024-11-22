@@ -335,6 +335,7 @@ module.exports = {
         "018-react父子组件执行顺序",
         "019-react类组件和函数组件区别",
         "020-typescript部分语法说明",
+        "021-在react中使用TypeScript",
       ],
 
       "/doc/vue/": [

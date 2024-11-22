@@ -186,10 +186,11 @@
 * [014-react-refs引用dom](/doc/react/014-react-refs引用dom.md)
 * [015-react的setState说明](/doc/react/015-react的setState说明.md)
 * [016-react中使用echarts](/doc/react/016-react中使用echarts.md)
-* [017-render-props](/doc/react/017-render-props.md)
-* [018-react父子组件执行顺序](/doc/react/018-react父子组件执行顺序.md)
-* [019-react类组件和函数组件区别](/doc/react/019-react类组件和函数组件区别.md)
-* [020-typescript部分语法说明](/doc/react/020-typescript部分语法说明.md)
+* [render-props](/doc/react/017-render-props.md)
+* [react父子组件执行顺序](/doc/react/018-react父子组件执行顺序.md)
+* [react类组件和函数组件区别](/doc/react/019-react类组件和函数组件区别.md)
+* [typescript部分语法说明](/doc/react/020-typescript部分语法说明.md)
+* [在react中使用TypeScript](/doc/react/021-在react中使用TypeScript.md)
 
 ## 5. VUE
 
