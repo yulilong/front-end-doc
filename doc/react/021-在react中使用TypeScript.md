@@ -39,17 +39,20 @@ interface Props {
   };
   // 基本上和 dict1 相同，用了 TS 内置的 Record 类型。
   dict2: Record<string, Base>;
+  
   /** 任意的函数类型 ❌ 不推荐 不能规定参数以及返回值类型 */
-  onSomething: Function;
+  onSomething: Function; // 等同于 () => {}
   /** 没有参数的函数 不需要返回值 😁 常用 */
   onClick: () => void;
   /** 带函数的参数 😁 非常常用 */
   onChange: (id: number) => void;
   /** 另一种函数语法 参数是 React 的按钮事件 😁 非常常用 */
   onClickOne: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  /** 可选参数类型 😁 非常常用 */
-  optional?: Base;
-
+  // 需要有返回值的类型 import { ReactNode } from 'react';
+  renderTmp: () => ReactNode;
+  // 可选函数，注意：此时不能直接执行函数了(TS会报错)，需要先判断函数存在才能执行
+	renderTmp?: () => ReactNode;
+  
   children2: JSX.Element | JSX.Element[]; // ❌ 不推荐 没有考虑字符串 children
   children4: React.ReactChild[]; // 稍微好点 但是没考虑 null
   children: React.ReactNode; // ✅ 包含所有 children 情况
@@ -63,6 +66,22 @@ interface Props {
   onClickButton: React.ComponentProps<'button'>['onClick'];
 }
 ```
+
+普通函数类型声明：
+
+```tsx
+// 有返回值的
+type UncertaintyType = Object | number[] 
+function fucExp(): UncertaintyType {
+    if (0 < 3) { return { "aa": 123 } } else { return [1, 2, 3] }
+}
+// 没有返回值
+function neverFunc():never{
+    throw new Error('Throw my error');
+}
+```
+
+
 
 ## 2. 类组件声明
 
