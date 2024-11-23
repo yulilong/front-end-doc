@@ -160,7 +160,7 @@ sudo n latest
 
 ## 4. n包安装node存放路径
 
-Mac系统：`/usr/local/n/versions/node`
+Mac系统：/usr/local/n/versions/node
 
 ![](./img/018-node.png)
 
@@ -223,7 +223,32 @@ Current 版本：
 
 在实际开发中，并不需要及时更新到最新版本，我们完全可以按照项目技术栈依赖的最低 Node.js 版本决定是否升级，如果条件允许，还是建议至少把大版本升级到最新的 LTS 版本。
 
+## 7. 常见问题
 
+### 7.1 n切换版本后node相关命令被killed
+
+当使用n命令切换node版本后，node相关的命令(npm命令，使用npm安装的工具)都失效了，显示被killed掉了：
+
+```bash
+~ node -v
+[1]    30404 killed     node -v
+~ npm -v
+[1]    30416 killed     npm -v
+```
+
+同时使用n命令，进入已安装node版本选择里面，发现没有node版本被选中，键盘上下键切换版本也无效了。
+
+![](./img/023-n.png)
+
+1、产生问题原因：
+
+本人修改了npm全局安装的包里面的文件：`/usr/local/lib/node_modules/gitbook-cli/node_modules/npm/node_modules/graceful-fs/polyfills.js`，修改这个文件的目的是解决gitbook命令报错问题。
+
+2、解决方法：
+
+重启电脑。重启电脑后，node相关命令就都能正确执行了。
+
+以后修改npm全局安装的包的文件需要注意，修改完后，如果需要切换node版本，则需要重启电脑后才能操作。
 
 
 
