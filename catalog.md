@@ -208,7 +208,12 @@
 * [一个vue组件代码写法](doc/vue/012-一个vue组件代码写法.md)
 * [vue的diff算法详解](doc/vue/013-vue的diff算法详解.md)
 
-## 6. node
+## 6. VUE
+
+* [在react中使用TypeScript](/doc/typeScript/001-在react中使用TypeScript.md)
+* [typescript部分语法说明](/doc/typeScript/002-typescript部分语法说明.md)
+
+## 7. node
 
 * [express-api总结](doc/node/001-express-api总结.md)
 * [node中require引用缓存解决](doc/node/002-node中require引用缓存解决.md)
@@ -218,7 +223,7 @@
 * [前端http-server开启本地https服务](doc/node/006-前端http-server开启本地https服务.md)
 * [node版本管理n包使用](doc/node/007-node版本管理n包使用.md)
 
-## 7. 工具
+## 8. 工具
 
 * webpack
     * [webpack教程](/doc/tool/001-webpack教程.md)
@@ -227,6 +232,6 @@
     * [prettier代码格式化工具](/doc/tool/004-prettier代码格式化工具.md)
     * [webpack常见问题解决](/doc/tool/005-webpack常见问题解决.md)
 
-## 8. 常见问题
+## 9. 常见问题
 
 * [antd组件在react遇到的问题](/doc/problem/001-antd组件在react遇到的问题)

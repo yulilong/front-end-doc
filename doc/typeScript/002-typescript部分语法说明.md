@@ -309,9 +309,9 @@ type Readonly<T> = {
 
 TypeScript 2.1版本支持
 
-### 6.5 Record<Keys, Type>构造新类型
+### 6.5 Record构造新类型
 
-构造一个类型，其属性名的类型为`Keys`，属性值的类型为`Type`。这个工具可用来将某个类型的属性映射到另一个类型上。
+`Record<Keys, Type>`：构造一个类型，其属性名的类型为`Keys`，属性值的类型为`Type`。这个工具可用来将某个类型的属性映射到另一个类型上。
 
 ```ts
 interface PageInfo { title: string }
@@ -330,9 +330,9 @@ type Record<K extends keyof any, T> = {
 
 TypeScript 2.1版本支持
 
-### 6.6 Pick<Type, Keys> 挑选部分属性
+### 6.6 Pick 挑选部分属性
 
-从类型`Type`中挑选部分属性`Keys`来构造类型
+`Pick<Type, Keys> `：从类型`Type`中挑选部分属性`Keys`来构造类型
 
 ```ts
 interface Todo {
@@ -354,9 +354,9 @@ type Pick<T, K extends keyof T> = {
 
 TypeScript 2.1版本支持
 
-### 6.7 Exclude<T, Excluded> 排除部分属性
+### 6.7 Exclude 排除部分属性
 
-从联合类型`T`中剔除所有可以赋值给`Excluded`的属性，然后构造一个类型。也就是从一个联合类型中排除掉属于另一个联合类型的子集
+`Exclude<T, Excluded> `：从联合类型`T`中剔除所有可以赋值给`Excluded`的属性，然后构造一个类型。也就是从一个联合类型中排除掉属于另一个联合类型的子集
 
 ```ts
 type T0 = Exclude<'a' | 'b' | 'c', 'a'>;                     // "b" | "c"
@@ -370,9 +370,9 @@ type T4 = Exclude1<'a' | 'b' | 'c', 'a'>;
 
 TypeScript 2.8版本支持
 
-### 6.8 Extract<Type, Union> 提取部分属性
+### 6.8 Extract 提取部分属性
 
-从类型`Type`中提取所有可以赋值给`Union`的类型，然后构造一个类型。
+`Extract<Type, Union> `：从类型`Type`中提取所有可以赋值给`Union`的类型，然后构造一个类型。
 
 ```tsx
 type T0 = Extract<'a' | 'b' | 'c', 'a' | 'f'>;                 // "a"
@@ -381,9 +381,9 @@ type T1 = Extract<string | number | (() => void), Function>;   // () => void
 
 TypeScript 2.8版本支持
 
-### 6.9 Omit<Type, Keys> 对象排除部分属性
+### 6.9 Omit 对象排除部分属性
 
-从类型`Type`中获取所有属性，然后从中剔除`Keys`属性后构造一个类型。
+`Omit<Type, Keys>`：从类型`Type`中获取所有属性，然后从中剔除`Keys`属性后构造一个类型。
 
 ```ts
 interface Todo { title: string; description: string; completed: boolean; }

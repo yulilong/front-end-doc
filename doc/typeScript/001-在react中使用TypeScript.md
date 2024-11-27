@@ -16,7 +16,7 @@ TypeScript在react中两种类型文件：
 
 ## 1. props、state等变量属性声明接口
 
-```tsx
+```js
 interface Base {
   // 基本类型
   message: string;
@@ -56,7 +56,7 @@ interface Props {
   // 需要有返回值的类型 import { ReactNode } from 'react';
   renderTmp: () => ReactNode;
   // 可选函数，注意：此时不能直接执行函数了(TS会报错)，需要先判断函数存在才能执行
-	renderTmp?: () => ReactNode;
+  renderTmp?: () => ReactNode;
   
   children2: JSX.Element | JSX.Element[]; // ❌ 不推荐 没有考虑字符串 children
   children4: React.ReactChild[]; // 稍微好点 但是没考虑 null
@@ -311,7 +311,7 @@ const commentNode: Comment = document.createComment('This is a comment node.');
 
 文件路径：node_modules/@types/react/index.d.ts，所有声明都定义在`IntrinsicElements`接口中
 
-![](./img/023-ts.png)
+![](./img/001-ts.png)
 
 常见的标签及类型如下：
 

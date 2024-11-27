@@ -69,6 +69,7 @@ module.exports = {
       { text: "CSS", link: "/doc/css/", },
       { text: "react", link: "/doc/react/" },
       { text: "vue", link: "/doc/vue/" },
+      { text: "TypeScript", link: "/doc/typeScript/" },
       {
         text: "其他",
         items: [
@@ -334,8 +335,6 @@ module.exports = {
         "017-render-props",
         "018-react父子组件执行顺序",
         "019-react类组件和函数组件区别",
-        "020-typescript部分语法说明",
-        "021-在react中使用TypeScript",
       ],
 
       "/doc/vue/": [
@@ -352,6 +351,11 @@ module.exports = {
         "011-router使用相关",
         "012-一个vue组件代码写法",
         "013-vue的diff算法详解",
+      ],
+      // TypeScript部分文档
+      "/doc/typeScript/": [
+        "001-在react中使用TypeScript",
+        "002-typescript部分语法说明",
       ],
 
       "/doc/node/": [
