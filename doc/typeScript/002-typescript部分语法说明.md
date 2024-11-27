@@ -431,7 +431,7 @@ TypeScript 2.8版本支持
 
 ### 1. interface 和 type介绍
 
-type：类型别名用来给一个类型起个新名字，使用 type 创建类型别名，类型别名不仅可以用来表示基本类型，还可以用来表示对象类型、联合类型、元组和交集。让我们看一些例子：
+1、type：类型别名用来给一个类型起个新名字，使用 type 创建类型别名，类型别名不仅可以用来表示基本类型，还可以用来表示对象类型、联合类型、元组和交集。让我们看一些例子：
 
 ```tsx
 type userName = string; // 基本类型
@@ -448,13 +448,16 @@ type Tree<T> = { value: T };
 const user: Person = { id: "901", name: "椿", age: 22, gender: "女", };
 ```
 
-interface：接口，是命名数据结构（例如对象）的另一种方式；与type 不同，interface仅限于描述对象类型。
+2、interface：接口，是命名数据结构（例如对象）的另一种方式；与type 不同：
+
+- interface仅限于描述对象类型。
+- interface可以通过多次声明来扩展。
 
 ```tsx
 interface Person { name: string; age: number; } // interface仅限于描述对象类型
 ```
 
-### 2. interface和type的相似之处   
+### 2. interface和type的相似之处
 
 - 都可以描述 Object和Function
 - 二者都可以被继承extends
