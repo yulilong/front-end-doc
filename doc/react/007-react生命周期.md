@@ -1,3 +1,5 @@
+
+
 [[TOC]]
 
 [TOC]
@@ -147,7 +149,8 @@ constructor(props) {
 ### 2.2 getDerivedStateFromProps()
 
 ```javascript
-static getDerivedStateFromProps(props, state)
+static getDerivedStateFromProps(nextProps, nextState)
+// 参数：nextProps 父组件新传递的 props。nextState 组件在此次更新后的 state 。
 ```
 
 `getDerivedStateFromProps` 会在调用 render 方法之前调用，并且在初始挂载及后续更新时都会被调用。它应返回一个对象来更新 state，如果返回 null 则不更新任何内容。
@@ -156,11 +159,45 @@ static getDerivedStateFromProps(props, state)
 
 此方法无权访问组件实例。如果你需要，可以通过提取组件 props 的纯函数及 class 之外的状态，在`getDerivedStateFromProps()`和其他 class 方法之间重用代码。
 
-> ***注意：***
->
-> 不管原因是什么，都会在*每次*渲染前触发此方法。这与 `UNSAFE_componentWillReceiveProps` 形成对比，后者仅在父组件重新渲染时触发，而不是在内部调用 `setState` 时。
->
-> 如果`getDerivedStateFromProps`和`UNSAFE_componentWillReceiveProps`都写了，那么只会执行`getDerivedStateFromProps`。
+**注意：**     
+1、不管原因是什么，都会在*每次*渲染前触发此方法。这与 `UNSAFE_componentWillReceiveProps` 形成对比，后者仅在父组件重新渲染时触发，而不是在内部调用 `setState` 时。        
+2、如果`getDerivedStateFromProps`和`UNSAFE_componentWillReceiveProps`都写了，那么只会执行`getDerivedStateFromProps`。       
+3、如果你在`getDerivedStateFromProps`中修改了state，这些修改会在当前的更新中反映出来。
+
+一个使用例子：
+
+```jsx
+import React from 'react';
+let count = 0;
+class Demo extends React.Component {
+  state = { num: 1 }
+  static getDerivedStateFromProps(props, state) {
+    console.log('getDerived 里面的state:', state)   //点击按钮对num+1之后，这里会输出+1之后的值{num：2}
+    if (state.num === 3) { return { num: 30 } }
+    return null;
+  }
+  handleClick = () => {
+    this.setState({ num: this.state.num + 1 })
+  }
+  render() {
+    const {num} = this.state;
+    console.log('render里面num: ', num);
+    count++;
+    console.log('render执行计数count: ', count);
+    return (<div> <button onClick={this.handleClick}>num值+1</button> num的值为：{num} </div>)
+  }
+}
+export default Demo;
+// 当num值变为3时：
+// 第一个log输出：{num: 3}
+// 第二个log输出：30
+// 第三个log输出：3
+// 输出结束，没有其他输出了
+```
+
+通过这个例子可以知道：   
+1、getDerivedStateFromProps方法的第二个参数state是修改后的最新state值。     
+2、getDerivedStateFromProps方法修改了state后，会立刻更新，并在这次render中体现，不会再触发一次更新了
 
 ### 2.3 render()
 
