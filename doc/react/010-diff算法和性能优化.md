@@ -4,7 +4,7 @@
 
 
 
-# react的diff算法和性能优化
+# react diff 算法和性能优化
 
 React 中最值得称道的部分莫过于 Virtual DOM 与 diff 的完美结合，特别是其高效的 diff 算法，让用户可以无需顾忌性能问题而”任性自由”的刷新页面，让开发者也可以无需关心 Virtual DOM 背后的运作原理，因为 React diff 会帮助我们计算出 Virtual DOM 中真正变化的部分，并只针对该部分进行实际 DOM 操作，而非重新渲染整个页面，从而保证了每次操作更新后页面的高效渲染，因此 Virtual DOM 与 diff 是保证 React 性能口碑的幕后推手。
 
@@ -181,9 +181,7 @@ React 发现这类操作繁琐冗余，因为这些都是相同的节点，但�
 
 [React 源码剖析系列 － 不可思议的 react diff 知乎](https://zhuanlan.zhihu.com/p/20346379)
 
-[React源码分析 - Diff算法](https://zhuanlan.zhihu.com/p/34363711)
-
 [图解React Diff算法及新架构Fiber 阿里云](https://yq.aliyun.com/articles/586669)
 
-[[第14期] [长文预警] 掌握React 渲染原理及性能优化](https://mp.weixin.qq.com/s/ZDxPD8fP5fGZC2Pf4dLUrw)
+[[第14期] [长文预警] 掌握React 渲染原理及性能优化](https://mp.weixin.qq.com/s?__biz=Mzk0OTIwOTc5Ng==&mid=2247486739&idx=1&sn=31f3c87844a6b3c74e60132f46b39865)
 

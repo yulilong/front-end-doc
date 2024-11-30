@@ -179,7 +179,7 @@
 * [007-react生命周期](/doc/react/007-react生命周期.md)
 * [008-react类型检查PropTypes](/doc/react/008-react类型检查PropTypes.md)
 * [009-react-Hook](/doc/react/009-react-Hook.md)
-* [010-react的diff算法和性能优化](/doc/react/010-react的diff算法和性能优化.md)
+* [diff算法和性能优化](/doc/react/010-diff算法和性能优化.md)
 * [011-react-Virtual-Dom](/doc/react/011-react-Virtual-Dom.md)
 * [012-react-fiber](/doc/react/012-react-fiber.md)
 * [013-react-dnd拖动组件](/doc/react/013-react-dnd拖动组件.md)
@@ -189,8 +189,6 @@
 * [render-props](/doc/react/017-render-props.md)
 * [react父子组件执行顺序](/doc/react/018-react父子组件执行顺序.md)
 * [react类组件和函数组件区别](/doc/react/019-react类组件和函数组件区别.md)
-* [typescript部分语法说明](/doc/react/020-typescript部分语法说明.md)
-* [在react中使用TypeScript](/doc/react/021-在react中使用TypeScript.md)
 
 ## 5. VUE
 
@@ -208,7 +206,7 @@
 * [一个vue组件代码写法](doc/vue/012-一个vue组件代码写法.md)
 * [vue的diff算法详解](doc/vue/013-vue的diff算法详解.md)
 
-## 6. VUE
+## 6. TypeScript
 
 * [在react中使用TypeScript](/doc/typeScript/001-在react中使用TypeScript.md)
 * [typescript部分语法说明](/doc/typeScript/002-typescript部分语法说明.md)
