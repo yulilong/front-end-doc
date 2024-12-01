@@ -362,16 +362,26 @@ import { useEffect } from 'react';
 useEffect(setup, dependencies?)
 ```
 
-- setup：处理 Effect 的函数。setup 函数选择性返回一个 **清理（cleanup）** 函数。当组件被添加到 DOM 的时候，React 将运行 setup 函数。在每次依赖项变更重新渲染后，React 将首先使用旧值运行 cleanup 函数（如果你提供了该函数），然后使用新值运行 setup 函数。在组件从 DOM 中移除后，React 将最后一次运行 cleanup 函数。
-- dependencies：可选参数，数组，`setup` 代码中引用的所有响应式值的列表。响应式值包括 props、state 以及所有直接在组件内部声明的变量和函数。依赖项里面的值改变，执行上一次setup 返回的 **清理（cleanup）** 函数，和执行新的 effect 第一个参数 setup 。React 将使用 [`Object.is`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/is) 来比较每个依赖项和它先前的值。如果省略此参数，则在每次重新渲染组件之后，将重新运行 Effect 函数。
+- setup：处理 Effect 的函数。setup 函数选择性返回一个 **清理(cleanup)** 函数，作为下一次setup执行前调用，用于清理上一次setup执行产生的副作用。
+- dependencies：可选参数，类型是数组，作为执行setup处理函数的依赖项。当依赖项改变，会触发useEffect执行。React 将使用 [`Object.is`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/is) 来比较每个依赖项和它先前的值。这个参数分为三种情况：
+  - 传有值的数组([dep1, dep2])：当依赖项改变，会触发useEffect执行。
+  - 传空数组([])：只在初始挂载后执行一次，相当于componentDidMount方法
+  - 不传：每次重新渲染组件后都会运行 Effect 函数
 
+**React 在必要时会调用 setup 和 cleanup，这可能会发生多次**：
 
+- 1、初次挂载到页面后，运行 setup 代码
+- 2、每次重新渲染组件结束后(如果传了第二个参数，那么只有在依赖项值发生改变才执行)：
+  - 2.1 首先，使用旧的 props 和 state 运行**清理（cleanup）** 函数。
+  - 2.2 然后，使用新的 props 和 state 运行 setup 代码。
+- 3、组件从页面卸载之前，cleanup 代码 将运行最后一次。
+
+一个使用例子：
 
 ```jsx
 import React, { useEffect, useRef, useState } from "react"
 
-/* 模拟数据交互 */
-function getUserInfo(a){
+function getUserInfo(a){ // 模拟数据交互
   return new Promise((resolve)=>{
       setTimeout(()=>{ resolve({ name:a, age:16, }) }, 500)
   })
@@ -380,25 +390,23 @@ const Demo = ({ a }) => {
   const [ userMessage , setUserMessage ] :any= useState({})
   const div= useRef()
   const [number, setNumber] = useState(0)
-  const handleResize =()=>{} // 模拟事件监听处理函数
-  /* useEffect使用 ，这里如果不加限制 ，会是函数重复执行，陷入死循环*/
+  const handleResize =()=>{}    // 模拟事件监听处理函数
   useEffect(()=>{
-     /* 请求数据 */
-     getUserInfo(a).then(res=>{
+     getUserInfo(a).then(res=>{ // 请求数据
          setUserMessage(res)
      })
-     /* 定时器 延时器等 */
      const timer = setInterval(()=>console.log(666),1000)
-     /* 操作dom  */
-     console.log(div.current) /* div */
-     /* 事件监听等 */
-     window.addEventListener('resize', handleResize)
+     console.log(div.current)                        // 操作dom 
+     window.addEventListener('resize', handleResize) // 事件监听
      return function(){ // 此函数用于清除副作用
          clearInterval(timer) 
          window.removeEventListener('resize', handleResize)
      }
-  /* 只有当props->a和state->number改变的时候 ,useEffect副作用函数重新执行 ，如果此时数组为空[]，证明函数只有在初始化的时候执行一次相当于componentDidMount */
-  },[ a ,number ])
+  // 只有当 a 和 number 改变的时候,useEffect 函数才会重新执行
+  },[ a ,number ]) // 这里如果不加限制 ，会是函数重复执行，陷入死循环
+  useEffect(() => {
+    console.log('useEffect1111 只执行一次');
+  }, []); // 数组为空[],只在初始挂载后执行一次，相当于componentDidMount方法
   return (<div ref={div} >
       <span>{ userMessage.name }</span> <span>{ userMessage.age }</span>
       <div onClick={ ()=> setNumber(1) } >{ number }</div>
@@ -406,9 +414,7 @@ const Demo = ({ a }) => {
 }
 ```
 
-
-
-
+官方文档：https://zh-hans.react.dev/reference/react/useEffect
 
 
 
