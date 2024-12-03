@@ -574,11 +574,262 @@ function MyComponent(item) {
 
 1、dangerouslySetInnerHTMl 是React标签的一个属性。2、有2个{{}}，第一{}代表jsx语法开始，第二个是代表dangerouslySetInnerHTML接收的是一个对象键值对。3、.既可以插入DOM，又可以插入字符串。
 
+## 10. props.children(容器类组件、插槽)
 
+在编写html页面的时候，标签嵌套是很常见的。有时候你会希望以同样的方式嵌套自己开发的组件。当组件标签有子节点时，组件将在名为 `children` 的 props 中接收到该内容。
 
+**children 属性**：表示组件标签的子节点。children 属性与普通的props一样，可以是任意值（文本、JSX、组件，甚至是函数）
 
+```jsx
+function ListItem ({ children }) {
+  children() // 当函数执行，需要加判断
+  return (<div>{ children } </div>);
+}
+{/* 当写了子组件， 那么props.children的值就是子组件，手动传的children属性无效*/}
+<ListItem children="手写的">
+  普通文本
+  <div>标签</div>
+  {() => console.log('函数')}
+</ListItem>
+```
 
+`props.children` 就可以获得组件的子节点，有以下几种情况：       
+1、组件没有子节点，`props.children` 类型为 undefined；       
+2、组件有一个子节点，`props.children` 类型为 子节点的类型(原始类型、对象、函数等)；        
+3、组件有多个子节点，`props.children` 类型为 array。
 
+注意：JSX将会自动删除`每行开头和结尾`的`空格`，以及空行。它还会把`字符串中间`的`空白行`压缩为一个空格。以下的这些例子都会渲染出一样的情况：
 
+```jsx
+<Grid>Hello world!</Grid>
+<Grid>
+  
+  Hello
+  
+  world!
+</Grid>
+```
 
+为什么 children 属性并不总是一个数组？
 
+在 React 中，`children` 属性是被视为 **不透明的** 数据结构。这意味着你不应该依赖它的结构。如果要转换，过滤，或者统计子节点，你应该使用 `React.Children` 方法。
+
+实际操作过程中，`children` 在底层常常被表示为数组。但是如果这里只有一个子节点，那么 React 将不会创建数组，因为这将导致不必要的内存开销。只要你使用 `React.Children` 方法而不是直接操作 `children` 底层结构，即使 React 改变了 `children` 数据结构的实际实现方式，你的代码也不会被中断。
+
+当 `children` 是一个数组时，`Children.map` 会有许多有用的特性。比如，`Children.map` 将被返回元素上的 [key](https://zh-hans.react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key) 和 你传递给它的 `children` 上的 key 绑定。这保证了原本的 JSX 子元素不会“丢失” key，即使它们上面的例子中那样被包裹。
+
+## 11. React.Children：处理和转化props.children
+
+由于 props.children 可以是任何类型，比如原始类型、数组、函数、对象等等。因此React提供了一系列的函数助手来使得操作children更加方便。
+
+官方文档地址：https://zh-hans.react.dev/reference/react/Children
+
+**注意**：使用 `Children` 的场景并不常见，使用它可能会削弱代码的健壮性。[查看常见的替代方案](https://zh-hans.react.dev/reference/react/Children#alternatives)。
+
+- [Children.count(children)](https://zh-hans.react.dev/reference/react/Children#children-count)：获取 `children` 中的节点数量
+- [Children.forEach(children, fn, thisArg?)](https://zh-hans.react.dev/reference/react/Children#children-foreach)：遍历 `children` 中的节点
+- [Children.map(children, fn, thisArg?)](https://zh-hans.react.dev/reference/react/Children#children-map)：遍历 `children` 中的节点，返回新的处理后的节点
+- [Children.only(children)](https://zh-hans.react.dev/reference/react/Children#children-only)：断言 `children` 代表一个 React 元素
+- [Children.toArray(children)](https://zh-hans.react.dev/reference/react/Children#children-toarray)：将 `children` 转换成数组
+
+### 11.1 Children.count 统计子节点数量
+
+因为`this.props.children` 可以是任何类型的，检查一个组件有多少个children是非常困难的。而片面的使用this.props.children.length时, 当传入的是字符串或者函数时，不会得到想要的结果，比如有个child：`"Hello World!"` ，但是使用 `.length` 的方法将会显示为12。
+
+这就是为什么我们有 `React.Children.count` 方法的原因。
+
+```jsx
+class ChildrenCounter extends React.Component {
+  render() {
+    return <p>React.Children.count(this.props.children)</p>
+  }
+}
+<ChildrenCounter> {/* 1个 */}
+  Second!
+</ChildrenCounter>
+<ChildrenCounter> {/* 2个 */}
+  <p>First</p>
+  <ChildComponent />
+</ChildrenCounter>
+<ChildrenCounter> {/* 2个, 函数不统计，实测结果 */}
+  {() => <h1>First!</h1>}
+  Second!
+  <p>Third!</p>
+</ChildrenCounter>
+```
+
+**注意**：空节点（`null`，`undefined` 以及布尔值），字符串，数字和 [React 元素](https://zh-hans.react.dev/reference/react/createElement) 都会被统计为一个节点。**在遍历统计的过程中，React 元素不会被渲染，所以其子节点不会被统计**。 [Fragment](https://zh-hans.react.dev/reference/react/Fragment) 也不会被统计。函数不统计。对于数组，它本身也不会被统计，但其中的元素遵循上述规则。
+
+### 11.2 遍历子节点
+
+遍历处理子节点方法 `React.Children.map` 和 `React.Children.forEach` 。它们在对应数组的情况下能起作用，除此之外，当函数、对象或者任何东西作为children传递时，它们也会起作用。
+
+```jsx
+function IgnoreFirstChild({ children }) {
+  return (<div>
+    {React.Children.map(children, (child, i) => {
+      if (i < 1) return null; // 忽略第一个元素
+      return child;
+    })}
+  </div>);
+}
+{/* 使用 */}
+<IgnoreFirstChild>
+  <ListItem /> {/* 忽略这个元素 */}
+  <p>Third!</p>
+</IgnoreFirstChild>
+```
+
+上面的例子，我们也可以使用children.map方法。但是如果将一个函数作为child传递过来。children就会变成一个函数而不是数组，由于函数没有map方法，所以会导致报错。而使用 `React.Children.map` 函数，无论什么都不会报错。
+
+```jsx
+<IgnoreFirstChild>
+  {() => <h1>First!</h1>} {/* React.Children 会忽略这个函数 */}
+</IgnoreFirstChild>
+```
+
+map、forEach参数说明(children, fn, thisArg?)：
+
+- `children`：组件接收到的 [`children` 属性](https://zh-hans.react.dev/learn/passing-props-to-a-component#passing-jsx-as-children)。
+- `fn`：和 [数组的 `forEach` 方法](https://zh-hans.react.dev/(https:/developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)) 中的回调类似，是你希望为每个子节点执行的函数。当这个函数执行时，对应的子节点和其下标将分别作为函数的第一、第二个参数，下标从 `0` 开始自增。
+- **可选** `thisArg`：为 `fn` 函数绑定 [`this`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)。默认值为 `undefined`。
+
+返回值：
+
+- forEach 返回值： `undefined`。
+- map返回值：如果 `children` 是 `null` 或者 `undefined`，那么就返回这个值。否则就返回一个由 `fn` 函数返回节点组成的一维数组。这个数组将包含除 `null` 和 `undefined` 以外的所有节点。
+
+注意事项
+
+- 空节点（`null`，`undefined` 以及布尔值），字符串，数字和 [React 元素](https://zh-hans.react.dev/reference/react/createElement) 都会被统计为单个节点。**在遍历统计的过程中，React 元素不会被渲染，所以其子节点不会被统计**。[Fragment](https://zh-hans.react.dev/reference/react/Fragment) 也不会被统计。对于数组，它本身也不会被统计，但其中的元素遵循上述规则。
+- 如果你在 `fn` 中返回了一个具有 key 的元素或者元素数组，**各个元素的 key 将自动与其在 `children` 中对应的原始项的 key 绑定**。当你在 `fn` 中返回了一个包含了多个元素的数组时，其中的每个元素的 key 都需要保证在这个数组中是独一无二的。
+
+### 11.3 Children.toArray(children)：将 `children` 转换成数组
+
+如果以上的方法你都不适合，你能将children转换为数组通过 `React.Children.toArray` 方法。如果你需要对它们进行排序，这个方法是非常有用的。
+
+```scala
+class Sort extends React.Component {
+  render() {
+    const children = React.Children.toArray(this.props.children)
+    return <p>{children.sort().join(' ')}</p> // 对子元素排序渲染
+  }
+}
+<Sort>
+  {/* 我们使用表达式容器来确保我们的字符串，作为三个子字符串传递，而不是作为一个字符串传递  */}
+  {'bananas'}{'oranges'}{'apples'}
+</Sort>
+```
+
+上例会渲染为三个排好序的字符串。
+
+### 11.4 Children.only(children)：断言children是React元素
+
+```jsx
+const element = Children.only(children);
+```
+
+参数
+
+- `children`：组件接收到的 [`children` 属性](https://zh-hans.react.dev/learn/passing-props-to-a-component#passing-jsx-as-children)。
+
+返回值
+
+如果 `children` [是一个合法的元素](https://zh-hans.react.dev/reference/react/isValidElement)，那么就会返回这个元素。否则会抛出一个异常。
+
+注意事项
+
+- 如果传入一个数组（比如 `Children.map` 的返回值）作为 `children`，那么这个方法会抛出异常。也就是说，这个方法强制要求 `children` 是一个 React 元素，而不是一个元素数组。
+
+## 12 React.Children 替代方案
+
+使用 `Children` 方法操作子节点通常会削弱代码的健壮性。在 JSX 中将子节点传递给组件时，通常不希望操作或转换子节点。如果能够的话，尽量避免使用 `Children` 方法。
+
+### 12.1 暴露多个组件
+
+如果你希望 `RowList` 的每一个子节点都被 `<div className="Row">` 包裹，那么可以导出一个 `Row` 组件，然后像下面这样手动把包裹每一行：
+
+```jsx
+export function RowList({ children }) {
+  return (<div className="RowList"> 1{children} </div>);
+}
+
+export function Row({ children }) {
+  return (<div className="Row">{children}</div>);
+}
+export default function App() {
+  return (
+    <RowList>
+      <Row><p>这是第一项。</p></Row>
+      <Row><p>这是第二项。</p></Row>
+      <Row><p>这是第三项。</p></Row>
+    </RowList>
+  );
+}
+```
+
+和使用 `Children.map` 不同，这种方式不会自动包裹每个子节点。但是，和 [上文中关于 `Children.map` 例子](https://zh-hans.react.dev/reference/react/Children#transforming-children) 相比，这种方式具有明显的优势，因为即使你继续抽离更多的组件，它也仍然有效。
+
+### 21.2 接收对象数组作为参数
+
+你也可以显示地传递一个数组作为组件的参数。例如，下面的 `RowList` 接收了一个 `rows` 数组作为组件的参数，因为 `rows` 是一个常规的 JavaScript 数组，`RowList` 组件可以对其使用 [`map`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/map) 等数组内置方法。：
+
+```jsx
+export function RowList({ rows }) {
+  return (
+    <div className="RowList">
+      {rows.map(row => (
+        <div className="Row" key={row.id}>
+          {row.content}
+        </div>
+      ))}
+    </div>
+  );
+}
+export default function App() {
+  return (
+    <RowList rows={[
+      { id: 'first', content: <p>这是第一项。</p> },
+      { id: 'second', content: <p>这是第二项。</p> },
+      { id: 'third', content: <p>这是第三项。</p> }
+    ]} />
+  );
+}
+```
+
+和将子节点作为 JSX 传递不同，这个方法允许你将一些额外的数据，比如 `header`，与每个子项关联。因为你直接使用 `tabs`，并且它是一个数组，所以你并不需要 `Children` 方法。
+
+### 12.3 调用渲染属性以自定义渲染
+
+除了为每一个子项生成 JSX，你还可以传递一个返回值类型是 JSX 的函数，并且在必要的时候调用这个函数。在这个示例中，`App` 组件向 `TabSwitcher` 组件传递了一个 `renderContent` 函数。`TabSwitcher` 组件仅对被选中的 tab 调用 `renderContent`。
+
+```jsx
+export function TabSwitcher({ tabIds, getHeader, renderContent }) {
+  const [selectedId, setSelectedId] = React.useState(tabIds[0]);
+  return (
+    <div>
+      {tabIds.map(tabId => (
+        <button key={tabId} onClick={() => setSelectedId(tabId)}>
+          {getHeader(tabId)}
+        </button>
+      ))}
+      <hr />
+      <div key={selectedId}>
+        <h3>{getHeader(selectedId)}</h3>
+        {renderContent(selectedId)}
+      </div>
+    </div>
+  );
+}
+export function App() {
+  return (
+    <TabSwitcher
+      tabIds={['first', 'second', 'third']}
+      getHeader={tabId => tabId[0].toUpperCase() + tabId.slice(1)}
+      renderContent={tabId => <p>This is the {tabId} item.</p>}
+    />
+  );
+}
+```
+
+这是如何在不操纵子组件的情况下，父组件和子组件进行协作的另一个示例。
