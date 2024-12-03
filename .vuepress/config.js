@@ -316,7 +316,7 @@ module.exports = {
       "/doc/react/": [
         "",
         "001-react编程规范",
-        "002-react常用语法",
+        "002-react使用手册",
         "003-react代码片段",
         "004-react高阶组件",
         "005-react开发遇到的问题",
