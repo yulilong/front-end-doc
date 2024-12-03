@@ -2,7 +2,7 @@
 
 [TOC]
 
-# react常用语法
+# react使用手册
 
 ## 1. react样式的写法
 
