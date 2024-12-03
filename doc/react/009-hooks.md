@@ -359,7 +359,13 @@ React hooks也提供了 api ，用于弥补函数组件没有生命周期的缺�
 
 ```jsx
 import { useEffect } from 'react';
-useEffect(setup, dependencies?)
+useEffect(setup, dependencies?);
+
+// 真正使用的时候是这种形式的
+useEffect(() => {
+  // 执行副作用操作
+  return () => {}; // 清理操作执行方法，可选
+}, [dependencies]); // 依赖数组
 ```
 
 - setup：处理 Effect 的函数。setup 函数选择性返回一个 **清理(cleanup)** 函数，作为下一次setup执行前调用，用于清理上一次setup执行产生的副作用。
@@ -372,9 +378,9 @@ useEffect(setup, dependencies?)
 
 - 1、初次挂载到页面后，运行 setup 代码
 - 2、每次重新渲染组件结束后(如果传了第二个参数，那么只有在依赖项值发生改变才执行)：
-  - 2.1 首先，使用旧的 props 和 state 运行**清理（cleanup）** 函数。
+  - 2.1 首先，使用旧的 props 和 state 运行**清理(cleanup)**函数。
   - 2.2 然后，使用新的 props 和 state 运行 setup 代码。
-- 3、组件从页面卸载之前，cleanup 代码 将运行最后一次。
+- 3、组件卸载之前，**清理(cleanup)** 函数 将运行最后一次。
 
 一个使用例子：
 
@@ -416,13 +422,94 @@ const Demo = ({ a }) => {
 
 官方文档：https://zh-hans.react.dev/reference/react/useEffect
 
+### 3.2 useLayoutEffect
 
+useLayoutEffect 是 useEffect 的一个版本。useLayoutEffect 是在 DOM 更新之后，浏览器绘制之前，这样可以方便获取 DOM，修改 DOM 信息，这样浏览器只会绘制一次。
 
+如果修改 DOM 布局放在 useEffect ，那 useEffect 执行是在浏览器绘制视图之后，接下来又改 DOM ，就可能会导致浏览器再次回流和重绘。而且由于两次绘制，视图上可能会造成闪现突兀的效果。
 
+**陷阱**：由于useLayoutEffect 是在修改dom后，在浏览器重新绘制屏幕之前触发。是同步执行，如果在其中执行的操作耗时较长，会阻塞页面的渲染，可能导致页面卡顿，影响用户体验。尽可能使用 `useEffect`。
 
+useLayoutEffect使用、参数说明：
 
+```jsx
+import { useLayoutEffect } from 'react';
+useLayoutEffect(setup, dependencies?);
+// 真正使用的时候是这种形式的
+useLayoutEffect(() => {
+  // 执行副作用操作
+  return () => {}; // 清理操作执行方法，可选
+}, [dependencies]); // 依赖数组
+```
 
+useLayoutEffect参数和执行都跟useEffect一样，唯一区别就是useLayoutEffect方法在dom修改后，浏览器渲染前执行。useEffect方法是在 修改dom后并且已经渲染到浏览器之后才执行。
 
+关于 useLayoutEffect 和 useEffect 区别使用例子：
 
+```jsx
+import React from 'react';
+let h = 30;
+function Index() {
+  const [count, setCount] = React.useState(100)
+  const divRef = React.useRef(null);
+  // 用来测试 useEffect 和 useLayoutEffect 的执行顺序，把flag变量值改成对应的值即可
+  // 标记一和标记二分别测试dom和状态变化前后的执行结果
+  const print = (name) => {
+    // console.log(`${name}`);
+    const flag = 'useLayoutEffect';
+    if (divRef.current) {
+      if (flag === name) {
+        // h += 10; divRef.current.innerText = h;                // 标记一
+        if (count === 0) { setCount(Math.random() + 99); } // 标记二
+      }
+      console.log(`${name}`, count, divRef.current.innerText);
+    }
+  };
+  React.useEffect(() => {
+    print('useEffect');
+  });
+  React.useLayoutEffect(() => {
+    print('useLayoutEffect');
+  });
+  // console.log('函数组件体,', count);
+  if (divRef.current) {
+    console.log('函数组件体', count, divRef.current.innerText);
+  }
+  return (<div className="hook-test">
+    <div ref={divRef} style={{ border: '1px solid' }}>This is</div>
+    <h4>count: {count}</h4>
+    {/* 标记一：setCount(count+1)，标记二：setCount(0) */}
+    <button onClick={e => setCount(0)}>设置为count</button>
+  </div>);
+}
+export default Index;
+// 组件渲染步骤：
+// 1. 函数组件执行，返回了 经过处理逻辑的的dom
+// 2. useLayoutEffect 执行
+// 3. 经过修改的dom渲染到浏览器中。
+// 4. useEffect 执行，这次渲染结束
 
+// 测试修改dom：
+// 在 useLayoutEffect 中修改：在第三步就渲染了
+// 在 useEffect 中修改，额外又重新渲染了一次dom到浏览器中。
+
+// 修改状态：
+// useLayoutEffect 和 useEffect 效果一样
+```
+
+关于 useEffect 和 useLayoutEffect 区别：
+
+1、执行时机：      
+1.1 useEffect：在组件渲染到屏幕之后异步执行。这意味着它不会阻塞浏览器的绘制和更新，适用于大多数与数据获取、订阅事件、手动修改`DOM`等不会直接影响页面布局和视觉呈现的操作。    
+1.2 useLayoutEffect：会在浏览器进行布局和绘制之前同步执行。如果在`useLayoutEffect`中执行的操作会修改`DOM`样式或结构，并且这些修改可能会影响页面的布局，那么使用`useLayoutEffect`可以在浏览器绘制之前就完成这些修改，避免页面的重绘和回流带来的性能问题。
+
+2、**性能影响**：     
+2.1 `useEffect`：由于是异步执行，不会阻塞页面的渲染，对用户交互的响应性影响较小，但如果副作用操作耗时较长，可能会在用户操作后有短暂的延迟才看到效果。       
+2.2 `useLayoutEffect`：因为是同步执行，如果在其中执行的操作耗时较长，会阻塞页面的渲染，可能导致页面卡顿，影响用户体验。
+
+3、**使用场景**：      
+3.1 一般情况下，如果您的副作用操作不会影响页面的布局，建议使用`useEffect`。例如发送网络请求获取数据、添加事件监听器、更新本地存储等。       
+3.2 如果您的副作用操作会直接影响页面的布局和视觉呈现，例如直接修改`DOM`元素的样式、位置、大小等，为了避免页面的闪烁和重绘，建议使用`useLayoutEffect`。
+
+官方文档：https://zh-hans.react.dev/reference/react/useLayoutEffect
 
