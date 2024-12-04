@@ -231,7 +231,8 @@ export const UserContext = React.createContext(defaultValue);
   <Content />
 </UserContext.Provider>
 
-// 3. 使用变量：Consumer接收一个函数作为子节点函数接收当前 context 的值并返回一个 React 节点。传递给函数的 value 将等于组件树中上层 context 的最近的 Provider 的 value 属性。如果 context 没有 Provider ，那么 value 参数将等于被传递给 createContext() 的 defaultValue 。
+// 3. 使用变量：Consumer接收一个函数作为子节点函数接收当前 context 的值并返回一个 React 节点。传递给函数的 value 将等于组件树中上层 context 的最近的 Provider 的 value 属性。
+// 如果 context 没有 Provider ，那么 value 参数将等于被传递给 createContext() 的 defaultValue 。
 // 要引入UserContext文件
 <UserContext.Consumer>
   { value => (<div>名字：{value.name}，年龄：{value.age}</div>)}
@@ -279,14 +280,14 @@ export default function UserInfo() {
   </div>);
 }
 
-// class 上的 contextType 属性会被重赋值为一个由 React.createContext() 创建的 Context 对象。这能让你使用 this.context 来消费最近 Context 上的那个值。你可以在任何生命周期中访问到它，包括 render 函数中。如果你正在使用实验性的 public class fields 语法，你可以使用 static 这个类属性来初始化你的 contextType。
-
+// class 上的 contextType 属性会被重赋值为一个由 React.createContext() 创建的 Context 对象。
+// 这能让你使用 this.context 来消费最近 Context 上的那个值。你可以在任何生命周期中访问到它，包括 render 函数中。
+// 如果你正在使用实验性的 public class fields 语法，你可以使用 static 这个类属性来初始化你的 contextType。
 // 类组件使用变量：1、通过contextType。2、通过Consumer使用(跟上面的函数组件一样，这里不写了)
 class UserInfo extends React.PureComponent {
   static contextType = UserContext;
   componentDidMount() {
-    // 使用contexType可以在任意生命周期访问数据
-    // 使用 this.context 来消费最近 Context 上的那个值
+    // 使用contexType可以在任意生命周期访问数据，使用 this.context 来消费最近 Context 上的那个值
     const value = this.context;
     console.log(value);
   }
