@@ -433,13 +433,10 @@ return (
     <script src="http://..."></script>
     <script
       // 这里的console.log不会执行
-      dangerouslySetInnerHTML={{
-        __html: "console.log('我是测试')"
-      }}
+      dangerouslySetInnerHTML={{ __html: "console.log('我是测试')" }}
       />
     <script>
-      {/* 这里的console.log不会执行 */}
-      console.log('我是111');
+      console.log('我是111'); {/* 这里的console.log不会执行 */}
     </script>
   </div>
 )
@@ -466,6 +463,46 @@ setScript = () => {
       footer.appendChild(script);
     }
   }
+}
+```
+
+## 11. 给peops.children传参(插槽、容器类组件)
+
+组件嵌套的时候，既需要再书写的地方传参，又需要嵌套的父组件传参，则可以使用如下两种方式。
+
+1、使用cloneElement，使用这种方式，既可以在写子组件的地方传参，也可以在父组件中传参：
+
+```jsx
+export function Father({ children }) {
+  const name = 'jack';
+  // 如果children 不确定，还可以使用这种方式
+  // {React.Children.map(children, child => React.cloneElement(child, { name: name }))}
+  return (<div>
+    父组件，引入的子组件{React.cloneElement(children, { name: name })}
+  </div>);
+}
+export function Show({ name, age }) {
+  return (<p>我是子组件 名字：{name}, 年龄：{age}</p>);
+}
+export function App() {
+  return (<Father><Show age="18" /></Father>);
+}
+```
+
+cloneElement 官方文档：https://zh-hans.react.dev/reference/react/cloneElement
+
+2、不用组件嵌套，给组件调用渲染方法，这样也达到了在写子组件的地方传参，也可以在父组件中传参：
+
+```jsx
+export function Father({ renderShow }) {
+  const name = 'jack11';
+  return (<div> {renderShow && renderShow(name)} </div>);
+}
+export function Show({ name, age }) {
+  return (<p>我是子组件 名字：{name}, 年龄：{age}</p>);
+}
+export function App() {
+  return (<Father renderShow={name => <Show name={name} age="18" />} />);
 }
 ```
 
