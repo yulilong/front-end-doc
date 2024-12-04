@@ -833,3 +833,50 @@ export function App() {
 ```
 
 这是如何在不操纵子组件的情况下，父组件和子组件进行协作的另一个示例。
+
+## 13. cloneElement克隆元素
+
+cloneElement 官方文档：https://zh-hans.react.dev/reference/react/cloneElement
+
+使用方式：cloneElement(element, props, ...children)
+
+说明：调用 `cloneElement` 方法会基于 `element` 创建一个新的 React 元素，但新元素具有不同的 `props` 和 `children`
+
+参数
+
+- `element`：`element` 参数必须是一个有效的 React 元素。例如，它可以是一个类似 `<Something />` 这样的 JSX 节点，也可以是 [`createElement`](https://zh-hans.react.dev/reference/react/createElement) 调用的结果，或者也可以是另一个 `cloneElement` 调用的结果。
+- `props`：`props` 参数必须是一个对象或 `null`。如果传 `null`，克隆后的元素将保留所有原始的 `element.props`。否则，对于 `props` 对象中的每个 prop 属性，返回的元素将“优先”使用 `props` 中的值而不是 `element.props` 中的值。其余的 props 将从原始的 `element.props` 中填充。如果你传递 `props.key` 或者 `props.ref`，它们将替换原来的。
+- **可选** `...children`：零个或多个子节点。它们可以是任何 React 节点，包括 React 元素、字符串、数字、[portals](https://zh-hans.react.dev/reference/react-dom/createPortal)、空节点（`null`、`undefined`、`true` 和 `false`），和 React 元素数组。如果你不传递任何 `...children` 参数，则原始的 `element.props.children` 将被保留。
+
+返回值
+
+`cloneElement` 返回一个具有一些属性的 React element 对象：
+
+- `type`：与 `element.type` 相同。
+- `props`：将 `element.props` 与你传递的 `props` 浅合并的结果。
+- `ref`：原始的 `element.ref`，除非它被 `props.ref` 覆盖。
+- `key`：原始的 `element.key`，除非它被 `props.key` 覆盖。
+
+通常，你将从组件返回该元素或使其成为另一个元素的子元素。尽管你可以读取元素的属性，但最好在创建每个元素后将其视为不透明的，并且仅渲染它。
+
+使用例子：
+
+```jsx
+export function Father({ children }) {
+  const name = 'jack';
+  return (<div>
+    父组件，引入的子组件{React.cloneElement(children, { name: name })}
+  </div>);
+}
+export function Show({ name, age }) {
+  return (<p>我是子组件 名字：{name}, 年龄：{age}</p>);
+}
+export function App() {
+  return (<Father><Show age="18" /></Father>);
+}
+```
+
+用法：覆盖元素的 props 
+
+想象一个 `List` 组件将其 [`children`](https://zh-hans.react.dev/learn/passing-props-to-a-component#passing-jsx-as-children) 渲染为可选择行的列表，并带有可更改的“下一步”按钮选择了哪一行。`List` 组件需要以不同的方式渲染所选的 `Row`，因此它克隆它收到的每个 `<Row>` 子级，并添加额外的 `isHighlighted: true` 或 `isHighlighted: false` 属性。则可以使用克隆元素。具体例子参考官方文档。
+
