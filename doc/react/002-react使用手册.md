@@ -221,91 +221,120 @@ Context是react 16.0以上版本才支持的。
 
 ### 4.1 API说明
 
-- React.createContext
+```jsx
+// 1. 创建一个Context文件，所有地方都只能引入这一个文件{Provider, Consumer}
+export const UserContext = React.createContext(defaultValue);
 
-  ```jsx
-  const {Provider, Consumer} = React.createContext(defaultValue);
-  ```
+// 2. 设置变量，Provider接收一个 value 属性，这个变量就是Context用到的变量，所有用到的变量的组件都要包裹在Provider下面。
+// 要引入UserContext文件
+<UserContext.Provider value={{ name: 'Alice', age: age, setAge: setAge }}>
+  <Content />
+</UserContext.Provider>
 
-  创建一对 `{ Provider, Consumer }`。当 React 渲染 context 组件 Consumer 时，它将从组件树的上层中最接近的匹配的 Provider 读取当前的 context 值。
+// 3. 使用变量：Consumer接收一个函数作为子节点函数接收当前 context 的值并返回一个 React 节点。传递给函数的 value 将等于组件树中上层 context 的最近的 Provider 的 value 属性。如果 context 没有 Provider ，那么 value 参数将等于被传递给 createContext() 的 defaultValue 。
+// 要引入UserContext文件
+<UserContext.Consumer>
+  { value => (<div>名字：{value.name}，年龄：{value.age}</div>)}
+</UserContext.Consumer>
 
-  如果上层的组件树没有一个匹配的 Provider，而此时你需要渲染一个 Consumer 组件，那么你可以用到 `defaultValue` 。这有助于在不封装它们的情况下对组件进行测试。
-
-- Provider
-
-  ```jsx
-  <Provider value={/* some value */}>
-  ```
-
-  React 组件允许 Consumers 订阅 context 的改变。
-
-  接收一个 `value` 属性传递给 Provider 的后代 Consumers。一个 Provider 可以联系到多个 Consumers。Providers 可以被嵌套以覆盖组件树内更深层次的值。
-
-- Consumer
-
-  ```jsx
-  <Consumer>
-    {value => /* render something based on the context value */}
-  </Consumer>
-  ```
-
-  一个可以订阅 context 变化的 React 组件。
-
-  接收一个 [函数作为子节点](http://react.yubolun.com/docs/render-props.html#using-props-other-than-render). 函数接收当前 context 的值并返回一个 React 节点。传递给函数的 `value` 将等于组件树中上层 context 的最近的 Provider 的 `value` 属性。如果 context 没有 Provider ，那么 `value` 参数将等于被传递给 `createContext()` 的 `defaultValue` 。
+// 4. 其他方式使用变量
+// 4.1 函数组件：使用React.useContext(UserContext)，具体看下面例子
+// 4.1 类组件：使用 contextType，具体看下面例子
+```
 
 每当Provider的值发送改变时, 作为Provider后代的所有Consumers都会重新渲染。 从Provider到其后代的Consumers传播不受shouldComponentUpdate方法的约束，因此即使祖先组件退出更新时，后代Consumer也会被更新。
 
 通过使用与[Object.is](http://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Description)相同的算法比较新值和旧值来确定变化。
 
-#### 4.2 一个使用的例子：
+### 4.2 一个使用的例子(使用变量、修改变量)：
 
 ```jsx
-// theme-context.js  声明一个Context
+// contextTest.js：定义一个context 文件，所有用到这个context的组件都要引用这个文件
 import React from 'react';
-export const {Provider, Consumer} = React.createContext();
+export const UserContext = React.createContext();
 
-// app.jsx 把变量发布出去
-import { Provider } from './userContext'   
-class App extends React.Component {
-  render () {
-    return (
-      <Provider value={this.state.userInfo}>
-        <div>巴拉巴拉。。。</div>
-      </Provider>
-    )
-  }
+// 共同的父组件发布变量
+import React from 'react';
+import { UserContext } from '@views/contextTest.js'; // 引入共同的 Context
+const Content = () => (<div> <UserInfo /> </div>);
+const App = () => (
+  const [age, setAge] = React.useState(256); // 让子组件可以修改 Context
+  <UserContext.Provider value={{ name: 'Alice', age: age, setAge: setAge }}>
+    <Content />
+  </UserContext.Provider>
+);
+
+// 函数组件使用变量：1、通过useContext使用。2、通过Consumer使用
+// 修改变量可以通过给useContext 传方法，然后调用方法修改变量
+import React, { useContext } from 'react';
+import { UserContext } from '@views/contextTest.js'; // 引入共同的 Context
+export default function UserInfo() {
+  const user = useContext(UserContext); // 1、通过useContext获取变量
+  return (<div>
+    <p>用户名: {user.name}</p> <p>年龄: {user.age}</p>
+    <button onClick={() => { user.setAge(user.age + 1); }}>增加年龄</button>
+    <UserContext.Consumer> {/* 2、通过Consumer获取变量 */}
+      { value => (<div>名字：{value.name}，年龄：{value.age}</div>)}
+    </UserContext.Consumer>
+  </div>);
 }
-// 获取变量有2中方式：
-// 1. 把获取的变量当组件的属性传给 组件
-// BusinessIncome.jsx 
-class BusinessIncome extends React.Component {
-  render () {
-    return (
-      <Consumer>
-        { value => (<IncomeTrend userInfo={value} />)} {/*通过属性获取变量*/}
-      </Consumer>
-    )
+
+// class 上的 contextType 属性会被重赋值为一个由 React.createContext() 创建的 Context 对象。这能让你使用 this.context 来消费最近 Context 上的那个值。你可以在任何生命周期中访问到它，包括 render 函数中。如果你正在使用实验性的 public class fields 语法，你可以使用 static 这个类属性来初始化你的 contextType。
+
+// 类组件使用变量：1、通过contextType。2、通过Consumer使用(跟上面的函数组件一样，这里不写了)
+class UserInfo extends React.PureComponent {
+  static contextType = UserContext;
+  componentDidMount() {
+    // 使用contexType可以在任意生命周期访问数据
+    // 使用 this.context 来消费最近 Context 上的那个值
+    const value = this.context;
+    console.log(value);
   }
-}
-// 2. 直接在需要变量的组件中放回调方法，在回调方法里面获取变量
-// BusinessIncome.jsx 
-class ShowIncomeTable extends React.Component {
-  consumerCallback = (value) => {
-    console.log('consumerCallback -> value', value);
-  }
-  render () {
-    return (
-      <Consumer>
-        <div>
-          <Consumer>{this.consumerCallback}</Consumer>
-        </div>
-      </Consumer>
-    )
+  render() {
+    return (<div>name:{this.context.name}age:{this.context.age}</div>);
   }
 }
 ```
 
-参考资料：http://react.yubolun.com/docs/context.html
+### 4.3 多个Context使用例子
+
+```jsx
+// 多个context 文件
+const SchoolContext = React.createContext({
+  name: '南师附中',
+  location: '南京',
+});
+const StudentContext = React.createContext({
+  name: 'chengzhu',
+  age: 17,
+});
+export { SchoolContext, StudentContext };
+
+// 共同父组件发布变量， 直接写调用的地方
+<SchoolContext.Provider value={school}>
+  <StudentContext.Provider value={student}>
+    <MiddlePage />
+  </StudentContext.Provider>
+</SchoolContext.Provider>
+
+// 使用变量，直接写调用的地方
+<SchoolContext.Consumer>
+  {school => (
+    <StudentContext.Consumer>
+      {student => {
+        return (
+          <div>
+            学校: {school.name}，位置: {school.location}
+            学生姓名: {student.name}，学生年龄: {student.age}
+          </div>
+        );
+      }}
+    </StudentContext.Consumer>
+  )}
+</SchoolContext.Consumer>
+```
+
+参考资料：https://blog.csdn.net/qq_34307801/article/details/109774612
 
 ## 5. setState()说明
 
