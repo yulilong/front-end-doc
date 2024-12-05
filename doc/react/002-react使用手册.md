@@ -247,7 +247,7 @@ export const UserContext = React.createContext(defaultValue);
 
 通过使用与[Object.is](http://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Description)相同的算法比较新值和旧值来确定变化。
 
-### 4.2 一个使用的例子(使用变量、修改变量)：
+### 4.2 使用的例子(发布、使用、修改变量)：
 
 ```jsx
 // contextTest.js：定义一个context 文件，所有用到这个context的组件都要引用这个文件
@@ -280,10 +280,10 @@ export default function UserInfo() {
   </div>);
 }
 
+// 类组件使用变量：1、通过contextType。2、通过Consumer使用(跟上面的函数组件一样，这里不写了)
 // class 上的 contextType 属性会被重赋值为一个由 React.createContext() 创建的 Context 对象。
 // 这能让你使用 this.context 来消费最近 Context 上的那个值。你可以在任何生命周期中访问到它，包括 render 函数中。
 // 如果你正在使用实验性的 public class fields 语法，你可以使用 static 这个类属性来初始化你的 contextType。
-// 类组件使用变量：1、通过contextType。2、通过Consumer使用(跟上面的函数组件一样，这里不写了)
 class UserInfo extends React.PureComponent {
   static contextType = UserContext;
   componentDidMount() {
