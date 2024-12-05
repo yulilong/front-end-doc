@@ -521,3 +521,27 @@ export default Index;
 
 官方文档：https://zh-hans.react.dev/reference/react/useLayoutEffect
 
+### 3.3 useInsertionEffect
+
+`useInsertionEffect` 是为 CSS-in-JS 库的作者特意打造的。除非你正在使用 CSS-in-JS 库并且需要注入样式，否则你应该使用 [`useEffect`](https://zh-hans.react.dev/reference/react/useEffect) 或者 [`useLayoutEffect`](https://zh-hans.react.dev/reference/react/useLayoutEffect)。
+
+useInsertionEffect 使用例子：
+
+```jsx
+export default function Index(){
+  React.useInsertionEffect(()=>{
+    /* 动态创建 style 标签插入到 head 中 */
+    const style = document.createElement('style')
+    style.innerHTML = `
+       .css-in-js{
+         color: red;
+         font-size: 20px;
+       }
+     `
+    document.head.appendChild(style)
+  },[])
+  return <div className="css-in-js" > hello , useInsertionEffect </div>
+}
+```
+
+官方文档：https://zh-hans.react.dev/reference/react/useInsertionEffect
