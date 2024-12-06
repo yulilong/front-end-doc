@@ -906,3 +906,64 @@ export function App() {
 
 想象一个 `List` 组件将其 [`children`](https://zh-hans.react.dev/learn/passing-props-to-a-component#passing-jsx-as-children) 渲染为可选择行的列表，并带有可更改的“下一步”按钮选择了哪一行。`List` 组件需要以不同的方式渲染所选的 `Row`，因此它克隆它收到的每个 `<Row>` 子级，并添加额外的 `isHighlighted: true` 或 `isHighlighted: false` 属性。则可以使用克隆元素。具体例子参考官方文档。
 
+## 14. 函数和函数组件在JSX中区别
+
+由于函数组件在JSX中既可以当组件用，也可以当函数调用。但是会有一些细微的差别。
+
+首先关于函数和函数组件的区别：   
+1、函数组件：用函数描述的组件，本质上还是一个组件。因此它可以：使用hooks、拥有自己的状态、使用memo缓存上次渲染；在devtools里显示为组件、设置displayName；渲染可中断、可恢复；有自己的生命周期。     
+2、函数：返回值为JSX的函数仅仅是代码片段的复用而已，相当于直接在写JSX。
+
+在实际使用中会发现：     
+1、函数当组件用：在类组件和函数组件中都没问题。     
+2、无hooks函数当函数执行：在类组件和函数组件中都没问题。    
+3、有hooks函数当函数执行：在类组件中会报错，在函数组件中没问题
+
+有hooks的函数在 函数组件中当函数执行：     
+1、函数中的hooks依旧有效，但是也会触发父组件的hooks，首先执行父组件中的hooks，然后在执行函数中的hooks。      
+2、如果调用了多次函数，每个函数里面触发的hooks，其他的函数组件里面的hooks也会触发。首先是父组件hooks执行，然后在按照函数代码顺序依次执行每个函数的hooks。
+
+**注意**：由于函数和函数组件的区别，在代码拆分的时候，一定要注意，有的地方只能拆分成JSX形式，也就是只能是使用执行函数。比如form表单子项，需要自定绑定输入框之类的JSX元素，如果在代码拆分的时候变成了组件，那么就会失去对输入框的控制，导致form表单不能自动更新至和自动校验了。
+
+下面是测试代码：
+
+```jsx
+function ShowName({ id }) { // 有hooks状态的函数
+  const [name, setName] = React.useState('hello');
+  React.useEffect(() => {
+    console.log(`${id} name:`, name);
+  });
+  return (<div>
+    <div>{name}</div>
+    <button onClick={() => setName(`${name} o`)}>{id} name</button>
+  </div>);
+}
+function ShowAge({ age }) { // 无状态的纯函数
+  return (<div>{age}</div>);
+}
+// 在类组件中测试
+class Home extends React.Component {
+  render() {
+    return (<div>
+      <ShowName />
+      {/* {ShowName()} */} {/* 执行有hooks的函数会报错：Uncaught Error: Invalid hook call. Hooks can only be called inside of the body of a function component. */}
+      <ShowAge age={18} />
+      {ShowAge({ age: 19 })}
+    </div>);
+  }
+}
+// 在函数组件中测试
+function People(params) {
+  React.useEffect(() => {
+    console.log('父 useEffect');
+  });
+  return (<div>
+    <ShowName />
+    {ShowName({ id: 'one' })}
+    {ShowName({ id: 'two' })}
+    <ShowAge age={18} />
+    {ShowAge({ age: 19 })}
+  </div>);
+}
+```
+
