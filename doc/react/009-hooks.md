@@ -545,3 +545,45 @@ export default function Index(){
 ```
 
 官方文档：https://zh-hans.react.dev/reference/react/useInsertionEffect
+
+## 4. 状态获取与传递
+
+### 4.1 useContext
+
+可以使用 useContext ，来获取父级组件传递过来的 context 值，这个当前值就是最近的父级组件 Provider 设置的 value 值，useContext 参数一般是由 createContext 方式创建的 ,也可以父级上下文 context 传递的 ( 参数为 context )。useContext 可以代替 context.Consumer 来获取 Provider 中保存的 value 值。
+
+useContext 接受一个参数，一般都是 context 对象，返回值为 context 对象内部保存的 value 值。
+
+使用例子：
+
+```jsx
+// contextTest.js：定义一个context 文件，所有用到这个context的组件都要引用这个文件
+export const UserContext = React.createContext();
+
+// 共同的父组件发布变量
+import { UserContext } from '@views/contextTest.js'; // 引入共同的 Context
+const App = () => (
+  const [age, setAge] = React.useState(256); // 让子组件可以修改 Context
+  <UserContext.Provider value={{ name: 'Alice', age: age, setAge: setAge }}>
+    <UserInfo />
+  </UserContext.Provider>
+);
+
+// 函数组件使用变量：1、通过useContext使用。
+import { useContext } from 'react';
+import { UserContext } from '@views/contextTest.js'; // 引入共同的 Context
+export default function UserInfo() {
+  const user = useContext(UserContext); // 1、通过useContext获取变量
+  return (<div>
+    <p>用户名: {user.name}</p> <p>年龄: {user.age}</p>
+    <button onClick={() => { user.setAge(user.age + 1); }}>增加年龄</button>
+  </div>);
+}
+```
+
+官方文档：https://zh-hans.react.dev/reference/react/useContext
+
+
+
+
+

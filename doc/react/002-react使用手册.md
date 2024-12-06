@@ -271,7 +271,7 @@ const App = () => (
 
 // 函数组件使用变量：1、通过useContext使用。2、通过Consumer使用
 // 修改变量可以通过给useContext 传方法，然后调用方法修改变量
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { UserContext } from '@views/contextTest.js'; // 引入共同的 Context
 export default function UserInfo() {
   const user = useContext(UserContext); // 1、通过useContext获取变量
