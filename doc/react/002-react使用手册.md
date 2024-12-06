@@ -49,6 +49,7 @@ ReactDOM.render(<HelloWorld/>,document.getElementById("app"))
 
 ```jsx
 <div className={(this.state.menuIndex === i ? 'active' : '')} />
+<div className={(this.state.menuIndex === i ? 'active button' : 'button')} />
 ```
 
 ### 1.2 多个类样式根据不同条件来显示
@@ -58,27 +59,22 @@ ReactDOM.render(<HelloWorld/>,document.getElementById("app"))
 或者自己根据条件来拼字符串：
 
 ```jsx
+// 参数是对象，对象的属性是类名，属性值判断是否加这个类名
 setClassNames = (obj) => {
-  if ( typeof obj !== 'object') {
-    return '';
-  }
+  if ( typeof obj !== 'object') {return '';} // 参数不是对象直接返回空不处理
   let key;
   let str = '';
   for (key in obj) {
-    if(obj[key]) {
-      str += ' ' + key;
-    }
+    if(obj[key]) { str += ' ' + key; } // 如果对象属性值是true，则加上这个类
   }
   return str;
 }
-return (
-<span
+return (<span
    className={this.setClassNames({
        'active': this.state[e.key] === item.value,
        'forbidden': this.state.dimensional === e.value,
    })}
->{item.name}</span>
-)
+>{item.name}</span>)
 ```
 
 
