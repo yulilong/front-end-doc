@@ -213,13 +213,21 @@ class Parent extends React.Component {
 
 Context是react 16.0以上版本才支持的。
 
-注意：使用Context共享变量时，要是一个React.createContext创建的才能共享
+在react中数据是通过props属性自上而下传递，当组件层级数量增多时，在每一层传递数据就变得很繁琐。Context提供了一种新的组件之间共享数据的方式，允许数据隔代传递，而不必显示的通过组件树逐层传递。
+
+使用方式：      
+1、创建一个文件，所有用Context的组件都要引用这个文件，这个文件里面声明Context。      
+2、共同的父组件里面使用`Provider`发布数据，子组件使用`Consumer`来使用数据    
+3、函数组件还可以使用useContext hooks方法接收数据。类组件可以使用静态属性ContextType接收数据。      
+4、子组件如果需要修改数据，在`Provider`里面传修改数据的方法。
 
 ### 4.1 API说明
 
 ```jsx
+import React from 'react';
 // 1. 创建一个Context文件，所有地方都只能引入这一个文件{Provider, Consumer}
 export const UserContext = React.createContext(defaultValue);
+// 也可以用这个：export default React.createContext({});
 
 // 2. 设置变量，Provider接收一个 value 属性，这个变量就是Context用到的变量，所有用到的变量的组件都要包裹在Provider下面。
 // 要引入UserContext文件
