@@ -325,6 +325,7 @@ module.exports = {
         "007-react生命周期",
         "008-react类型检查PropTypes",
         "009-react-Hook",
+        "009-hooks",
         "010-diff算法和性能优化",
         "011-react-Virtual-Dom",
         "012-react-fiber",

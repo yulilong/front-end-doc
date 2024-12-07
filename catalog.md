@@ -179,6 +179,7 @@
 * [react生命周期](/doc/react/007-react生命周期.md)
 * [react类型检查PropTypes](/doc/react/008-react类型检查PropTypes.md)
 * [react-Hook](/doc/react/009-react-Hook.md)
+* [React Hooks详解](/doc/react/009-hooks.md)
 * [diff算法和性能优化](/doc/react/010-diff算法和性能优化.md)
 * [react-Virtual-Dom](/doc/react/011-react-Virtual-Dom.md)
 * [react-fiber](/doc/react/012-react-fiber.md)
