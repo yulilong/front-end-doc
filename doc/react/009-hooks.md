@@ -643,7 +643,7 @@ React.useImperativeHandle(ref, createHandle, dependencies?)
 - createHandle：处理函数，返回值作为暴露给父组件的 ref 对象。
 - dependencies：可选参数，类型是数组，作为执行setup处理函数的依赖项。当依赖项改变，会执行createHandle生成新的 ref 对象。React 将使用 [`Object.is`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/is) 来比较每个依赖项和它先前的值。这个参数分为三种情况：
   - 传有值的数组([dep1, dep2])：当依赖项改变，执行createHandle生成新的 ref 对象。
-  - 传空数组([])：只在初始挂载后生成新的 ref 对象，相当于componentDidMount方法
+  - 传空数组([])：只在初始挂载后生成新的 ref 对象，相当于componentDidMount方法。这么做会导致一个问题，详情见下面的**注意**说明
   - 不传：每次重新渲染组件后都会执行createHandle生成新的 ref 对象
 
 useImperativeHandle使用例子：
@@ -652,7 +652,7 @@ useImperativeHandle使用例子：
 import React from 'react';
 // 父组件
 const Parent = () => {
-  const ChildRef = React.createRef();
+  const ChildRef = React.createRef(); // React.useRef() 也一样
   return (
     <div>
       <button onClick={() => { ChildRef.current.func(); }}>click</button>
@@ -668,7 +668,7 @@ const Child = React.forwardRef((props, ref) => {
       setCount(count + 1);
       console.log('我是子组件1，count：', count);
     },
-  }), []);
+  }));
   return <div>子组件</div>;
 });
 // 子组件：父组件使用<Child onRef={ChildRef} /> 这种自定义props属性来获取函数组件的自定义 ref 对象
@@ -679,9 +679,26 @@ const Child = (props) => {
       setCount(count + 1);
       console.log('我是子组件，count：', count);
     },
-  }), []);
+  }));
   return <div>子组件</div>;
 };
+```
+
+**注意**：关于useImperativeHandle 方法依赖项传空数组产生的问题：    
+createHandle 只会在组件挂载后执行一次，当父组件执行 ref 对象里面的方法时：读取子组件的state的值永远不会变(初始值)，调用子组件的setCount方法只有第一次有效，以后都是无效的。当为了性能优化而给依赖项传空数组的时候需要特别注意这一点。详情见如下例子：
+
+```jsx
+const Child = React.forwardRef((props, ref) => {
+  const [count, setCount] = React.useState(10);
+  React.useImperativeHandle(ref, () => ({
+    func: () => {
+      setCount(count + 1);
+      console.log('我是子组件1，count：', count);
+    },
+  }), []);
+  return <div>子组件：{count}</div>;
+});
+// 父组件执行 func 方法，console.log里面的count值永远是10， 页面count值只有在第一次点击后变成了11，后面的点击都没变化
 ```
 
 官方文档：https://zh-hans.react.dev/reference/react/useImperativeHandle
