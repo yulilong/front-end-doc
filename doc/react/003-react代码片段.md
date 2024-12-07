@@ -224,7 +224,7 @@ handleNewDataSouce = ttt => (e) => {
 
 ### 9.1 父-类组件、子-类组件
 
-1、使用`React.createRef()`
+1、父组件使用`React.createRef()`，子组件不需要任何操作
 
 ```jsx
 // 经过实际测试
@@ -255,7 +255,7 @@ class Child extends Component {
 export default Parent;
 ```
 
-2、子组件通过传递this实例的方式：
+2、子组件把this传给父组件，父组件使用子组件的this
 
 ```jsx
 // 经过实际测试
@@ -356,13 +356,14 @@ const Parent = () => {
 
 ### 9.4 父-函数组件、子-函数组件
 
-1、子组件使用useImperativeHandle
+1、父组件使用`React.createRef()`，子组件使用useImperativeHandle
 
 - 优点： 1、写法简单易懂 2、假如子组件嵌套了HOC，也可以指向真实子组件
 - 缺点： 1、需要自定义props属性 2、需要自定义暴露的方法
 
 ```jsx
 // 经过测试
+// 父组件
 import React, { useImperativeHandle } from 'react';
 const Parent = () => {
   const ChildRef = React.createRef(); // TS: ChildRef: any 
@@ -376,6 +377,7 @@ const Parent = () => {
     </div>
   );
 };
+// 子组件
 const Child = (props) => {
   // 用useImperativeHandle暴露一些外部ref能访问的属性
   useImperativeHandle(props.onRef, () => {
@@ -392,7 +394,7 @@ export default Parent;
 
 ```
 
-2、子组件使用useImperativeHandle和forwardRef组合：
+2、父组件使用useRef，子组件使用useImperativeHandle和forwardRef组合：
 
 使用forwardRef抛出子组件的ref。这个方法其实更适合自定义HOC。但问题是，withRouter、connect、Form.create等方法并不能抛出ref，假如Child本身就需要嵌套这些方法，那基本就不能混着用了。forwardRef本身也是用来抛出子元素，如input等原生元素的ref的，并不适合做组件ref抛出，因为组件的使用场景太复杂了。
 
