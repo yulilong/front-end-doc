@@ -583,10 +583,10 @@ export default function UserInfo() {
 
 官方文档：https://zh-hans.react.dev/reference/react/useContext
 
-### 4.1 useRef
+### 4.2 useRef
 
 useRef 方法主要有下面两个作用：     
-1、保存 DOM 引用：react内置了对它的支持。当在HTML元素设置了ref后当，React 创建 DOM 节点并将其渲染到屏幕时，会把 DOM 节点设置为 ref 对象的 `current` 属性。现在可以借助 ref 对象访问 DOM 节点。    
+1、保存 DOM 引用：react内置了对它的支持。当把useRef变量传递给 JSX 中的 `ref` 属性时，react 会在创建DOM并渲染到页面后，把节点赋值给 ref 对象的 `current` 属性。    
 2、保存状态：只要当前组件不被销毁，那么状态就会一直存在。改变 `ref.current` 属性时，React 不会重新渲染组件。React 不知道它何时会发生改变，因为 ref 是一个普通的 JavaScript 对象。
 
 使用方法、参数说明：
@@ -624,6 +624,69 @@ function Counter() {
 ```
 
 官方文档：https://zh-hans.react.dev/reference/react/useRef
+
+### 4.3 useImperativeHandle
+
+useImperativeHandle 方法可以让函数组件自定义暴露给父组件的实例。
+
+对于子组件，如果是 类组件，我们可以通过 ref 获取类组件的实例。但是在子组件是函数组件的情况下(函数组件没有ref属性)，则可以通过 forwardRef 方法来让函数组件拥有 ref 属性。
+
+**注意**：由于react规定函数组件不能有ref属性(react19版本取消这个限制了)，函数组件也可以通过自定义的props属性达到 ref 的效果，详情见下面的例子。
+
+使用方法、参数说明：
+
+```jsx
+React.useImperativeHandle(ref, createHandle, dependencies?)
+```
+
+- ref：从 [`forwardRef` 渲染函数](https://zh-hans.react.dev/reference/react/forwardRef#render-function) 中获得的第二个参数。或者是props里面的自定义 ref 属性。父组件传过来的
+- createHandle：处理函数，返回值作为暴露给父组件的 ref 对象。
+- dependencies：可选参数，类型是数组，作为执行setup处理函数的依赖项。当依赖项改变，会执行createHandle生成新的 ref 对象。React 将使用 [`Object.is`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/is) 来比较每个依赖项和它先前的值。这个参数分为三种情况：
+  - 传有值的数组([dep1, dep2])：当依赖项改变，执行createHandle生成新的 ref 对象。
+  - 传空数组([])：只在初始挂载后生成新的 ref 对象，相当于componentDidMount方法
+  - 不传：每次重新渲染组件后都会执行createHandle生成新的 ref 对象
+
+useImperativeHandle使用例子：
+
+```jsx
+import React from 'react';
+// 父组件
+const Parent = () => {
+  const ChildRef = React.createRef();
+  return (
+    <div>
+      <button onClick={() => { ChildRef.current.func(); }}>click</button>
+      <Child ref={ChildRef} />
+    </div>
+  );
+};
+// 子组件：和 forwardRef 方法配合 暴露自定义的 ref 对象给父组件
+const Child = React.forwardRef((props, ref) => {
+  const [count, setCount] = React.useState(100);
+  React.useImperativeHandle(ref, () => ({
+    func: () => {
+      setCount(count + 1);
+      console.log('我是子组件1，count：', count);
+    },
+  }), []);
+  return <div>子组件</div>;
+});
+// 子组件：父组件使用<Child onRef={ChildRef} /> 这种自定义props属性来获取函数组件的自定义 ref 对象
+const Child = (props) => {
+  const [count, setCount] = React.useState(100);
+  React.useImperativeHandle(props.onRef, () => ({
+    func: () => {
+      setCount(count + 1);
+      console.log('我是子组件，count：', count);
+    },
+  }), []);
+  return <div>子组件</div>;
+};
+```
+
+官方文档：https://zh-hans.react.dev/reference/react/useImperativeHandle
+
+
 
 
 
