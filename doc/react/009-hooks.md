@@ -600,7 +600,8 @@ const ref = React.useRef(initialValue);
 
 **注意**：   
 1、除了 [初始化](https://zh-hans.react.dev/reference/react/useRef#avoiding-recreating-the-ref-contents) 外不要在渲染期间写入或者读取 `ref.current`，否则会使组件行为变得不可预测。     
-2、在严格模式下，React 将会 **调用两次组件方法**，这是为了 [帮助发现意外问题](https://zh-hans.react.dev/reference/react/useState#my-initializer-or-updater-function-runs-twice)。但这只是开发模式下的行为，不会影响生产模式。每个 ref 对象都将会创建两次，但是其中一个版本将被丢弃。如果使用的是组件纯函数（也应当如此），那么这不会影响其行为。
+2、在严格模式下，React 将会 **调用两次组件方法**，这是为了 [帮助发现意外问题](https://zh-hans.react.dev/reference/react/useState#my-initializer-or-updater-function-runs-twice)。但这只是开发模式下的行为，不会影响生产模式。每个 ref 对象都将会创建两次，但是其中一个版本将被丢弃。如果使用的是组件纯函数（也应当如此），那么这不会影响其行为。     
+3、`const ref = useRef()` 等同于 `const [ref, _] = useState(() => createRef(null))`。详情见：[react.createRef](https://zh-hans.react.dev/reference/react/createRef)，在实际代码中React.createRef() 跟 React.useRef() 效果一样。
 
 使用例子：
 
