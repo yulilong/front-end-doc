@@ -10,7 +10,7 @@
 
 ## 1. 概述
 
-*Hooks* 是 React 16.8 的新增特性。并在React 18版本新增了一些功能。Hooks可以让函数组件也可以实现部分类组件的功能，比如state状态管理、部分React生命周期钩子、*以及其他的React特性*。
+**Hooks** 是 React 16.8 的新增特性。并在React 18版本新增了一些功能。Hooks可以让函数组件也可以实现部分类组件的功能，比如state状态管理、部分React生命周期钩子、*以及其他的React特性*。
 
 在Hooks出现以前，开发遇到的问题：
 
@@ -582,6 +582,52 @@ export default function UserInfo() {
 ```
 
 官方文档：https://zh-hans.react.dev/reference/react/useContext
+
+### 4.1 useRef
+
+useRef 方法主要有下面两个作用：     
+1、保存 DOM 引用：react内置了对它的支持。当在HTML元素设置了ref后当，React 创建 DOM 节点并将其渲染到屏幕时，会把 DOM 节点设置为 ref 对象的 `current` 属性。现在可以借助 ref 对象访问 DOM 节点。    
+2、保存状态：只要当前组件不被销毁，那么状态就会一直存在。改变 `ref.current` 属性时，React 不会重新渲染组件。React 不知道它何时会发生改变，因为 ref 是一个普通的 JavaScript 对象。
+
+使用方法、参数说明：
+
+```jsx
+const ref = React.useRef(initialValue);
+```
+
+- `initialValue`：ref 对象的 `current` 属性的初始值。可以是任意类型的值。这个参数在首次渲染后被忽略。
+- ref：返回一个只有一个属性的对象(ref.current)，current初始值为传递的 `initialValue`。之后可以将其设置为其他值。如果将 ref 对象作为一个 JSX 节点的 `ref` 属性传递给 React，React 将为它设置 `current` 属性。在后续的渲染中，`useRef` 将返回同一个对象。
+
+**注意**：   
+1、除了 [初始化](https://zh-hans.react.dev/reference/react/useRef#avoiding-recreating-the-ref-contents) 外不要在渲染期间写入或者读取 `ref.current`，否则会使组件行为变得不可预测。     
+2、在严格模式下，React 将会 **调用两次组件方法**，这是为了 [帮助发现意外问题](https://zh-hans.react.dev/reference/react/useState#my-initializer-or-updater-function-runs-twice)。但这只是开发模式下的行为，不会影响生产模式。每个 ref 对象都将会创建两次，但是其中一个版本将被丢弃。如果使用的是组件纯函数（也应当如此），那么这不会影响其行为。
+
+使用例子：
+
+```jsx
+import React from 'react';
+let text = 30;
+function Counter() {
+  const ref = React.useRef(0);       // 保存变量，组件在变量在，修改不触发更新
+  const divRef = React.useRef(null); // 保存dom。
+  React.useEffect(() => { console.log('useEffect'); }); // 只执行了一次
+  function handleClick() {
+    ref.current += 1;
+    console.log('ref.current:', ref.current);
+    text += 10; divRef.current.innerText = `dom修改${text}`;   
+  }
+  return (<div>
+    <div ref={divRef}>This is</div>
+    <button onClick={handleClick}>点击</button>
+  </div>);
+}
+```
+
+官方文档：https://zh-hans.react.dev/reference/react/useRef
+
+
+
+
 
 
 
