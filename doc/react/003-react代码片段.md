@@ -235,9 +235,7 @@ class Parent extends Component {
     super(props);
     this.sub = React.createRef();
   }
-  handleOnClick = () => {
-    this.sub.current.callback();
-  }
+  handleOnClick = () => { this.sub.current.callback(); }
   render() {
     return (<div>
       <button onClick={this.handleOnClick}>click2</button>
@@ -327,8 +325,6 @@ const Child = (props) => {
 export default Parent;
 ```
 
-
-
 ### 9.3 父-函数组件、子-类组件
 
 子组件通过传递this实例的方式：
@@ -391,7 +387,6 @@ const Child = (props) => {
   return <div>子组件</div>;
 };
 export default Parent;
-
 ```
 
 2、父组件使用useRef，子组件使用useImperativeHandle和forwardRef组合：
@@ -401,6 +396,17 @@ export default Parent;
 ```jsx
 // 经过测试
 import React, { useRef, useImperativeHandle } from 'react';
+// 父组件
+const App = props => {
+  const fancyInputRef = useRef();
+  return (
+    <div>
+      <FancyInput ref={fancyInputRef} />
+      <button onClick={() => fancyInputRef.current.focus()}>父组件调用子组件的 focus</button>
+    </div>
+  )
+}
+// 子组件
 const FancyInput = React.forwardRef((props, ref) => {
   const inputRef = useRef();
   useImperativeHandle(ref, () => ({
@@ -411,15 +417,6 @@ const FancyInput = React.forwardRef((props, ref) => {
   }));
   return <input ref={inputRef} type="text" />
 });
-const App = props => {
-  const fancyInputRef = useRef();
-  return (
-    <div>
-      <FancyInput ref={fancyInputRef} />
-      <button onClick={() => fancyInputRef.current.focus()}>父组件调用子组件的 focus</button>
-    </div>
-  )
-}
 export default App;
 ```
 
