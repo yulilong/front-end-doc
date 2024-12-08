@@ -135,7 +135,7 @@ function Example(props) {
 }
 ```
 
-## 4. 类组件构造函数中 super(*props*) 已弃用
+## 4. 类组件构造函数中 super(props) 已弃用
 
 在类组件的构造函数里面必须写 `super()` 才能初始化并使用 `this`。不写`super()`就会报错。之前一直在构造函数中使用`super(props)`方式。但是在react版本更新后。在类组件的构造函数中内部写`super(props)`的时候，编辑器提示这种方式已废弃。如下图所示：
 

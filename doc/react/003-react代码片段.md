@@ -218,9 +218,14 @@ handleNewDataSouce = ttt => (e) => {
 
 ## 9 父组件调用子组件方法
 
-参考：https://juejin.cn/post/6977367229960552455
+要实现父组件调用子组件方式，主要是通过子组件的 ref 属性 来获取子组件的实例，通过子组件实例来执行方法。
 
-**注意**：每个例子中的子组件引用名`ref`和`onRef`不要弄混了。
+而函数组件有两个问题：
+
+- 1、没有实例给父组件调用。解决办法：通过 hooks 的 useImperativeHandle 方法实现自定义实例对象用来给父组件调用。
+- 2、没有 ref 属性，解决办法有两种：
+  - 2.1 使用自定义属性，例如props.onRef，这样函数组件 useImperativeHandle 方法可以使用这个 自定义onRef。
+  - 2.2 函数组件使用React.forwardRef方法包裹，就可以有 ref属性了。
 
 ### 9.1 父-类组件、子-类组件
 
@@ -230,25 +235,22 @@ handleNewDataSouce = ttt => (e) => {
 // 经过实际测试
 import React, { Component } from 'react';
 // 父组件
-class Parent extends Component {
+class Parent extends React.Component {
   constructor(props) {
-    super(props);
+    super();
     this.sub = React.createRef();
   }
-  handleOnClick = () => { this.sub.current.callback(); }
   render() {
     return (<div>
-      <button onClick={this.handleOnClick}>click2</button>
+      <button onClick={() => { this.sub.current.callback(); }}>click0</button>
       <Child ref={this.sub} />
     </div>);
   }
 }
 // 子组件
-class Child extends Component {
-  callback() { console.log('执行回调'); }
-  render() {
-    return <div>子组件</div>;
-  }
+class Child extends React.Component {
+  callback = () => { console.log('执行回调'); }
+  render() { return <div>子组件</div>; }
 }
 export default Parent;
 ```
@@ -260,17 +262,11 @@ export default Parent;
 import React from 'react';
 // 父组件
 class Parent extends React.PureComponent {
-  handleOnClick = () => {
-    this.child.setModelDisplay();
-  };
-  onRef = (ref) => { this.child = ref; };
   render() {
-    return (
-      <div>
-        <button onClick={this.handleOnClick}>click1</button>
-        <Child onRef={this.onRef} />
-      </div>
-    );
+    return (<div>
+      <button onClick={() => { this.child.setModelDisplay(); }}>click10</button>
+      <Child onRef={(ref) => { this.child = ref; }} />
+    </div>);
   }
 }
 // 子组件
@@ -279,16 +275,14 @@ class Child extends React.PureComponent {
     this.props.onRef(this);
   }
   setModelDisplay = () => { console.log('我是子组件，执行我'); };
-  render() {
-    return <div>子组件</div>;
-  }
+  render() { return <div>子组件</div>; }
 }
 export default Parent;
 ```
 
 ### 9.2 父-类组件、子-函数组件
 
-父组件使用`React.createRef()`，子组件使用`useImperativeHandle`
+父组件使用`React.createRef()`，子组件使用自定义ref属性和`useImperativeHandle`
 
 ```jsx
 // 经过测试
@@ -296,30 +290,25 @@ import React, { useImperativeHandle } from 'react';
 // 父组件
 class Parent extends React.Component {
   constructor(props) {
-    super(props);
-    this.sub = React.createRef();
-  }
-  handleOnClick = () => {
-    this.sub.current.func();
+    super();
+    this.sub = React.createRef(); // React.useRef() 也一样
   }
   render() {
     return (<div>
-      <button onClick={this.handleOnClick}>click2</button>
+      <button onClick={() => { this.sub.current.func(); }}>click3</button>
       <Child onRef={this.sub} />
     </div>);
   }
 }
 // 子组件
 const Child = (props) => {
-  // 用useImperativeHandle暴露一些外部ref能访问的属性
-  useImperativeHandle(props.onRef, () => {
-    return {
-      func: sunFunc, // 需要将暴露的接口返回出去
-    };
-  });
-  function sunFunc() {
-    console.log('我是子组件，执行我1111');
-  }
+  const [count, setCount] = React.useState(100);
+  React.useImperativeHandle(props.onRef, () => ({
+    func: () => {
+      setCount(count + 1);
+      console.log('我是子组件，count：', count);
+    },
+  }));
   return <div>子组件</div>;
 };
 export default Parent;
@@ -327,32 +316,53 @@ export default Parent;
 
 ### 9.3 父-函数组件、子-类组件
 
-子组件通过传递this实例的方式：
+1、父组件使用`React.useRef()`
+
+```jsx
+// 父组件
+const Parent = () => {
+  const childRef = React.useRef();
+  return (
+    <div>
+      <button onClick={() => { childRef.current.setModelDisplay(); }}>click ref</button>
+      <Child ref={childRef} />
+    </div>
+  );
+};
+// 子组件
+class Child extends React.PureComponent {
+  setModelDisplay = () => { console.log('我是子组件，执行我'); };
+  render() { return <div>子组件</div>; }
+}
+```
+
+2、子组件把this传给父组件：
 
 ```jsx
 // 经过实际测试
 // 父组件
 const Parent = () => {
-  const [childRef, setChildRef] = useState('');
-  const handleOnClick = () => {
-    childRef.setModelDisplay();
-  };
-  const onRef = (ref) => {
-    setChildRef(ref);
-  };
+  const [childRef, setChildRef] = React.useState('');
   return (
     <div>
-      <button onClick={handleOnClick}>click</button>
-      <Child onRef={onRef} />
+      <button onClick={() => { childRef.setModelDisplay(); }}>click</button>
+      <Child onRef={(ref) => { setChildRef(ref); }} />
     </div>
   );
 };
-// 子组件参考 9.1 中的 子组件通过传递this实例的方式 代码
+// 子组件
+class Child extends React.PureComponent {
+  componentDidMount() {
+    this.props.onRef(this);
+  }
+  setModelDisplay = () => { console.log('我是子组件，执行我'); };
+  render() { return <div>子组件</div>; }
+}
 ```
 
 ### 9.4 父-函数组件、子-函数组件
 
-1、父组件使用`React.createRef()`，子组件使用useImperativeHandle
+1、父组件使用`React.useRef()`，子组件使用自定义ref属性和useImperativeHandle
 
 - 优点： 1、写法简单易懂 2、假如子组件嵌套了HOC，也可以指向真实子组件
 - 缺点： 1、需要自定义props属性 2、需要自定义暴露的方法
@@ -362,28 +372,23 @@ const Parent = () => {
 // 父组件
 import React, { useImperativeHandle } from 'react';
 const Parent = () => {
-  const ChildRef = React.createRef(); // TS: ChildRef: any 
-  const handleOnClick = () => {
-    ChildRef.current.func();
-  };
+  const ChildRef = React.useRef();
   return (
     <div>
-      <button onClick={handleOnClick}>click</button>
+      <button onClick={() => { ChildRef.current.func(); }}>click1</button>
       <Child onRef={ChildRef} />
     </div>
   );
 };
 // 子组件
 const Child = (props) => {
-  // 用useImperativeHandle暴露一些外部ref能访问的属性
-  useImperativeHandle(props.onRef, () => {
-    return {
-      func: sunFunc, // 需要将暴露的接口返回出去
-    };
-  });
-  function sunFunc() {
-    console.log('我是子组件，执行我');
-  }
+  const [count, setCount] = React.useState(100);
+  React.useImperativeHandle(props.onRef, () => ({
+    func: () => {
+      setCount(count + 1);
+      console.log('我是子组件，count：', count);
+    },
+  }));
   return <div>子组件</div>;
 };
 export default Parent;
@@ -397,25 +402,23 @@ export default Parent;
 // 经过测试
 import React, { useRef, useImperativeHandle } from 'react';
 // 父组件
-const App = props => {
-  const fancyInputRef = useRef();
-  return (
-    <div>
-      <FancyInput ref={fancyInputRef} />
-      <button onClick={() => fancyInputRef.current.focus()}>父组件调用子组件的 focus</button>
-    </div>
-  )
-}
+const Parent = (props) => {
+  const fancyInputRef = React.useRef();
+  return (<div>
+    <FancyInput ref={fancyInputRef} />
+    <button onClick={() => fancyInputRef.current.focus()}>调用子组件的 focus</button>
+  </div>);
+};
 // 子组件
 const FancyInput = React.forwardRef((props, ref) => {
-  const inputRef = useRef();
-  useImperativeHandle(ref, () => ({
+  const inputRef = React.useRef();
+  React.useImperativeHandle(ref, () => ({
     focus: () => {
       inputRef.current.focus();
       console.log('子组件执行了');
     },
   }));
-  return <input ref={inputRef} type="text" />
+  return <input ref={inputRef} type="text" />;
 });
 export default App;
 ```
