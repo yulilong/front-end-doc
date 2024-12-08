@@ -133,6 +133,28 @@ function Example(props) {
 }
 ```
 
+## 4. 类组件构造函数中 super(*props*) 已弃用
+
+在类组件的构造函数里面必须写 `super()` 才能初始化并使用 `this`。不写`super()`就会报错。之前一直在构造函数中使用`super(props)`方式。但是在react版本更新后。在类组件的构造函数中内部写`super(props)`的时候，编辑器提示这种方式已废弃。如下图所示：
+
+![](./img/025-react-error.png)
+
+经过查找在React 16.x及以上版本中，如果你需要访问`props`属性，构造函数中可以直接使用`props`参数，在其他地方直接使用`this.props`。
+
+首先说明一下super方法传不传props参数的区别：     
+1、不传props参数：构造函数里面 `this.props` 的值是 `undefined`     
+2、传props参数：构造函数里面 `this.props` 的值是`props`
+
+在构造函数中使用`props`属性绝大部分情况都可以直接使用构造函数的props参数。因此大多时候可以直接使用`super()`方法，而不必传`props`。除非有必须要使用`this.props`的情况再传。这也是为什么`super(props)`只是提示废弃而没有报错的原因。
+
+```jsx
+constructor(props) {
+  super();
+  // super(props); // 给super传props后，this.props就有值了，可以使用了
+  this.sub = React.createRef(); // 调用了super后才能使用this变量
+}
+```
+
 
 
 
