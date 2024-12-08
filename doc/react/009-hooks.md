@@ -628,7 +628,7 @@ function Counter() {
 
 ### 4.3 useImperativeHandle
 
-useImperativeHandle 方法可以让函数组件自定义暴露给父组件的实例。
+useImperativeHandle 可以让函数组件自定义实例对象用来给父组件调用。
 
 对于子组件，如果是 类组件，我们可以通过 ref 获取类组件的实例。但是在子组件是函数组件的情况下(函数组件没有ref属性)，则可以通过 forwardRef 方法来让函数组件拥有 ref 属性。
 
@@ -704,9 +704,29 @@ const Child = React.forwardRef((props, ref) => {
 
 官方文档：https://zh-hans.react.dev/reference/react/useImperativeHandle
 
+## 5. 状态派生与保存
+
+### 5.1 useMemo
+
+useMemo 可以在函数组件 render 上下文中同步执行一个函数逻辑，这个函数的返回值可以作为一个新的状态缓存起来。
+
+使用方法、参数说明：
+
+```jsx
+const visible = React.useMemo(calculate, deps)
+```
+
+- calculate：计算缓存值的函数。这个函数没有参数，并且可以返回任意类型。React 将会在首次渲染时调用该函数；在之后的渲染中会根据 `deps` 参数情况而定。
+- deps：类型是数组，作为执行 calculate 函数的依赖项。React 将使用 [`Object.is`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/is) 来比较每个依赖项和它先前的值。这个参数分为三种情况：
+  - 传有值的数组([dep1, dep2])：当依赖项改变，会触发 useMemo 执行。
+  - 传空数组([])：只在初始挂载时执行一次，相当于componentDidMount方法。这个参数会导致 useMemo 再也不执行，也就获取不到后续更新了。失去了 useMemo 的意义
+  - 不传：每次重新渲染组件时都会运行 useMemo 函数。这么做等于每次都重新计算结果，失去了 useMemo 的意义
 
 
 
+
+
+官方文档：https://zh-hans.react.dev/reference/react/useMemo
 
 
 
