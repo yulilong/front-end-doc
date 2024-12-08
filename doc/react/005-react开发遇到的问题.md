@@ -87,53 +87,37 @@ This is a no-op, but it indicates a memory leak in your application.
 
 大致意思：不能在组件销毁后设置state，防止出现内存泄漏的情况。
 
-一般都是在组件卸载后，进行了异步操作，比如ajax请求、设置了定时器、绑定的dom事件等。
+一般产生这种的可能原因，组件在卸载后，一些异步操作回调执行了。在这些回调中有设置state。比如接口请求、定时器、绑定的 dom 事件 等这些回调方法里面修改了state。
+
+解决方法：
 
 1、在卸载生命周期方法里面清除定时器：
 
 ```js
+// 1、在卸载生命周期里面 清除异步请求，比如取消接口请求、清除定时器等
 componentWillUnMount = () => {
   $.ajax.abort() //1.ajax请求
   clearTimeout(timer) //2.定时器
 }
-```
-
-2、设置一个flag，当卸载后，这个属性设置false：
-
-```js
+// 2、设置一个锁(默认打开)，在卸载里面把锁关上。 在有问题的异步回调方法设置state前判断，如果锁上了就不修改state
 componentDidMount = () => {
   this._isMounted = true;
-  $.ajax('你的请求',{})
-    .then(res => {
-    if(this._isMounted){
-      this.setState({ aa:true })
-    }
+  $.ajax('你的请求',{}).then(res => {
+    if(this._isMounted){this.setState({ aa:true })}
   })
 }
 componentWillUnMount = () => {
   this._isMounted = false;
 }
-```
 
-3、适合任何方法，直接在卸载中：
-
-```js
-componentDidMount = () => {
-  $.ajax('你的请求',{})
-    .then(res => {
-    this.setState({ data: datas, });
-  })
-}
+// 3、直接把 setState方法重置， 修改后，所有使用setState的地方就都不能修改state了
 componentWillUnmount = () => {
   this.setState = (state,callback)=>{
     return;
- 	};
+  };
 }
-```
 
-函数组件中：
-
-```js
+// 4、函数组件中：使用第二个方法
 function Example(props) {
   const [loading, setloading] = useState(true)
   useEffect(() => {
@@ -148,6 +132,8 @@ function Example(props) {
   return <div>{loading ? <p>loading...</p> : <p>Fetched!!</p>}</div>
 }
 ```
+
+
 
 
 
