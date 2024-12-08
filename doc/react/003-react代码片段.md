@@ -218,7 +218,7 @@ handleNewDataSouce = ttt => (e) => {
 
 ## 9 父组件调用子组件方法
 
-要实现父组件调用子组件方式，主要是通过子组件的 ref 属性 来获取子组件的实例，通过子组件实例来执行方法。
+要实现父组件调用子组件方式，主要是通过子组件的 ref 属性 来获取子组件的实例，通过子组件实例来执行方法。如果子组件是类组件，还可以把子组件的this传给父组件，通过子组件this调用方法。
 
 而函数组件有两个问题：
 
@@ -423,9 +423,41 @@ const FancyInput = React.forwardRef((props, ref) => {
 export default App;
 ```
 
+## 10. 父组件操作子组件里面的 dom 元素
+
+主要有以下几种方式实现：
+
+- 1、父组件获取到子组件实例，通过子组件里面的方法操作dom元素
+- 2、子组件声明ref变量，绑定到 dom 元素后，主动调用父组件方法，把 ref 传给父组件
+- 3、函数组件使用forwardRef包裹后，可以直接把 ref 赋值给 dom 元素的 ref，这样父组件直接就获取到了子组件的dom 的 ref
+
+一些例子：
+
+```jsx
+// 1、父组件获取子组件实例，通过子组件实例操作dom 元素
+const FancyInput = React.forwardRef((props, ref) => {
+  const inputRef = React.useRef();
+  React.useImperativeHandle(ref, () => ({
+    focus: () => {
+      inputRef.current.focus();
+      console.log('子组件执行了');
+    },
+  }));
+  return <input ref={inputRef} type="text" />;
+});
+
+// 3、函数组件直接把 ref 属性传给 dom
+// 3.1 使用自定义ref 属性，父组件使用 <Child onRef={this.sub} />
+const Child = props => <div ref={props.onRef}>子组件 自定义ref属性</div>;
+// 3.2 使用 forwardRef 包裹，直接把 ref 赋值给 dom，父组件使用 <Child ref={this.sub} />
+const Child2 = React.forwardRef((props, ref) => {
+  return <div ref={ref}>子组件 forwardRef 形式</div>;
+});
+```
 
 
-## 10. jsx中使用script标签调用JS文件
+
+## 11. jsx中使用script标签调用JS文件
 
 在jsx中使用script标签调用一个JS文件来执行，发现并没有去请求这个文件：
 
@@ -468,7 +500,7 @@ setScript = () => {
 }
 ```
 
-## 11. 给peops.children传参(插槽、容器类组件)
+## 12. 给peops.children传参(插槽、容器类组件)
 
 组件嵌套的时候，既需要再书写的地方传参，又需要嵌套的父组件传参，则可以使用如下两种方式。
 
