@@ -846,3 +846,40 @@ const DemoUseCallback=({ id })=>{
 
 与字面量对象 `{}` 总是会创建新对象类似，**在 JavaScript 中，`function () {}` 或者 `() => {}` 总是会生成不同的函数**。正常情况下，这不会有问题。但是在函数组件中，把函数传给子组件的props。这会导致每次渲染props都是不同的。并且 [`memo`](https://zh-hans.react.dev/reference/react/memo) 对性能的优化永远不会生效。而这就是 `useCallback` 起作用的地方
 
+## 6. 工具 hooks
+
+### 6.1 useDebugValue
+
+可以让你在 [React 开发工具](https://zh-hans.react.dev/learn/react-developer-tools) 中为自定义 Hook 添加标签。**注意**：只有自定义hooks组件才有效，其他函数组件无效。并且需要浏览器安装 [React 开发工具](https://zh-hans.react.dev/learn/react-developer-tools) 插件。
+
+使用方法、参数说明：
+
+```jsx
+useDebugValue(value, date => date.toDateString());
+```
+
+- `value`：你想在 React 开发工具中显示的值。可以是任何类型。
+- **可选** `format`：它接受一个格式化函数。当组件被检查时，React 开发工具将用 `value` 作为参数来调用格式化函数，然后显示返回的格式化值（可以是任何类型）。如果不指定格式化函数，则会显示 `value`。在某些情况下，格式化值的显示可能是一项开销很大的操作。除非需要检查 Hook，否则没有必要这么做。
+
+使用例子：
+
+```jsx
+function useTestDebug(data) {
+  // const [age, setAge] = React.useState(11);
+  React.useDebugValue(data);
+  return data;
+}
+function MyApp() {
+  const [count, setCount] = React.useState(10);
+  useTestDebug(count);
+  return (<div>
+    <button onClick={() => { setCount(count + 1); }}>add count</button>
+    count: {count}
+  </div>);
+}
+```
+
+浏览器终端显示：
+
+![](./img/026-hooks.png)
+
