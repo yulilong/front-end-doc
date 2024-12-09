@@ -708,7 +708,7 @@ const Child = React.forwardRef((props, ref) => {
 
 ### 5.1 useMemo
 
-useMemo 可以在函数组件 render 上下文中同步执行一个函数逻辑，这个函数的返回值可以作为一个新的状态缓存起来。
+useMemo 可以在函数组件 render 上下文中同步执行一个函数逻辑，这个函数的返回值可以作为一个新的状态缓存起来。`useMemo` 不会让首次渲染更快，它只会帮助你跳过不必要的更新工作。
 
 使用方法、参数说明：
 
@@ -722,9 +722,85 @@ const visible = React.useMemo(calculate, deps)
   - 传空数组([])：只在初始挂载时执行一次，相当于componentDidMount方法。这个参数会导致 useMemo 再也不执行，也就获取不到后续更新了。失去了 useMemo 的意义
   - 不传：每次重新渲染组件时都会运行 useMemo 函数。这么做等于每次都重新计算结果，失去了 useMemo 的意义
 
+使用例子：
 
+```jsx
+function Scope() {
+  const keeper = useKeep()
+  const { cacheDispatch, cacheList, hasAliveStatus } = keeper
+  const contextValue = useMemo(() => { /* 通过 useMemo 得到派生出来的新状态 contextValue  */
+    return {
+      hasAliveStatus: hasAliveStatus.bind(keeper),
+      cacheDestory: (payload) => cacheDispatch.call(keeper, { type: ACTION_DESTORY, payload })
+    }
+  }, [keeper])
+  return <KeepaliveContext.Provider value={contextValue}></KeepaliveContext.Provider>
+}
+```
 
+需要用到 useMemo 的地方：      
+1、跳过代价昂贵的重新计算：默认情况下，React 会在每次重新渲染时重新运行整个组件。如果计算速度很快，这将不会产生问题。但是，当正在过滤转换一个大型数组，或者进行一些昂贵的计算，而数据没有改变，那么可能希望跳过这些重复计算。这种缓存行为叫做 [记忆化](https://en.wikipedia.org/wiki/Memoization)。        
+2、跳过组件的重新渲染：**默认情况下，当一个组件重新渲染时，React 会递归地重新渲染它的所有子组件**。这对于不需要太多计算来重新渲染的组件来说很好。但是如果你已经确认重新渲染很慢，你可以通过将它包装在 [`memo`](https://zh-hans.react.dev/reference/react/memo) 中，这样当它的 props 跟上一次渲染相同的时候它就会跳过本次渲染。      
+3、防止过于频繁地触发 Effect：     
 
+```jsx
+function ChatRoom({ roomId }) {
+  const options = { serverUrl: 'https://localhost:1234', roomId: roomId };
+  useEffect(() => {
+    const connection = createConnection(options);
+    connection.connect();
+    return () => connection.disconnect();
+  }, [options]);
+}
+// 1. 但是这样做会带来一些问题。因为 Effect 中的每一个响应式值都应该声明为其依赖。 然而如果你将 options 声明为依赖，会导致在 Effect 在每次渲染后都会重新执行
+// 2. 为了解决这个场景，你可以使用 useMemo 将 Effect 中使用的对象包装起来
+const options = useMemo(() => {
+  return { serverUrl: 'https://localhost:1234', roomId: roomId };
+}, [roomId]); // ✅ 只有当 roomId 改变时才会被改变
+// 3. 然而，因为 useMemo 只是一个性能优化手段，而并不是语义上的保证，所以 React 在 特定场景下 会丢弃缓存值。这也会导致重新触发 Effect，因此 最好通过将对象移动到 Effect 内部来消除对函数的依赖：
+useEffect(() => {
+  // ✅ 不需要将 useMemo 或对象作为依赖！
+  const options = {  serverUrl: 'https://localhost:1234', roomId: roomId }
+  const connection = createConnection(options);
+  connection.connect();
+  return () => connection.disconnect();
+}, [roomId]); // ✅ 只有当 roomId 改变时才会被改变
+```
+
+4、记忆一个函数，这个跟另外一个 hooks 的 useCallback 方法一样。像 `function() {}` 这样的函数声明和像 `() => {}` 这样的表达式在每次重新渲染时都会产生一个 **不同** 的函数。就其本身而言，创建一个新函数不是问题。这不是可以避免的事情！但是，如果 `Form` 组件被记忆了，大概你想在没有 props 改变时跳过它的重新渲染。**总是** 不同的 props 会破坏你的记忆化。
+
+```jsx
+export default function ProductPage({ productId, referrer }) {
+  function handleSubmit(orderDetails) {
+    post('/product/' + productId + '/buy', { referrer, orderDetails });
+  }
+  // 使用 useMemo 记忆 handleSubmit 函数
+  const handleSubmit = useMemo(() => {
+    return (orderDetails) => {
+      post('/product/' + productId + '/buy', { referrer, orderDetails });
+    };
+  }, [productId, referrer]);
+  return <Form onSubmit={handleSubmit} />;
+}
+```
+
+如何衡量计算过程的开销是否昂贵？
+
+一般来说，除非要创建或循环遍历数千个对象，否则开销可能并不大。如果你想获得更详细的信息，可以在控制台来测量花费这上面的时间：
+
+```jsx
+console.time('filter array');
+const visibleTodos = filterTodos(todos, tab);
+console.timeEnd('filter array');
+// 使用 useMemo 测试
+console.time('filter array useMemo');
+const visibleTodos = useMemo(() => { return filterTodos(todos, tab);  }, [todos, tab]);
+console.timeEnd('filter array useMemo');
+```
+
+然后执行你正在监测的交互（例如，在输入框中输入文字）。你将会在控制台看到如下的日志 `filter array: 0.15ms`。如果全部记录的时间加起来很长（`1ms` 或者更多），那么记忆此计算结果是有意义的。作为对比，你可以将计算过程包裹在 `useMemo` 中，以验证该交互的总日志时间是否减少了。
+
+请记住，你的开发设备可能比用户的设备性能更强大，因此最好人为降低当前浏览器性能来测试。例如，Chrome 提供了 [CPU Throttling](https://developer.chrome.com/blog/new-in-devtools-61/#throttling) 选项来降低浏览器性能。另外，请注意，在开发环境中测量性能无法为你提供最准确的结果（例如，当开启 [严格模式](https://zh-hans.react.dev/reference/react/StrictMode) 时，你会看到每个组件渲染两次而不是一次）。要获得最准确的时间，请构建用于生产的应用程序并在用户使用的设备上对其进行测试。
 
 官方文档：https://zh-hans.react.dev/reference/react/useMemo
 
