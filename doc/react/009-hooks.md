@@ -716,11 +716,12 @@ useMemo 可以在函数组件 render 上下文中同步执行一个函数逻辑�
 const visible = React.useMemo(calculate, deps)
 ```
 
-- calculate：计算缓存值的函数。这个函数没有参数，并且可以返回任意类型。React 将会在首次渲染时调用该函数；在之后的渲染中会根据 `deps` 参数情况而定。
+- calculate：计算缓存值的函数。这个函数没有参数，并且可以返回任意类型。React 将会在首次渲染时执行该函数返回结果；在之后的渲染中会根据 `deps` 参数情况而定。
 - deps：类型是数组，作为执行 calculate 函数的依赖项。React 将使用 [`Object.is`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/is) 来比较每个依赖项和它先前的值。这个参数分为三种情况：
-  - 传有值的数组([dep1, dep2])：当依赖项改变，会触发 useMemo 执行。
+  - 传有值的数组([dep1, dep2])：当依赖项改变，会触发 calculate 执行并返回结果。
   - 传空数组([])：只在初始挂载时执行一次，相当于componentDidMount方法。这个参数会导致 useMemo 再也不执行，也就获取不到后续更新了。失去了 useMemo 的意义
   - 不传：每次重新渲染组件时都会运行 useMemo 函数。这么做等于每次都重新计算结果，失去了 useMemo 的意义
+- visible：需要缓存的变量。calculate 函数执行后的返回值。
 
 使用例子：
 
@@ -752,7 +753,7 @@ function ChatRoom({ roomId }) {
     return () => connection.disconnect();
   }, [options]);
 }
-// 1. 但是这样做会带来一些问题。因为 Effect 中的每一个响应式值都应该声明为其依赖。 然而如果你将 options 声明为依赖，会导致在 Effect 在每次渲染后都会重新执行
+// 1. 上面代码中，因为 Effect 中的每一个响应式值都应该声明为其依赖。 然而如果你将 options 声明为依赖，会导致在 Effect 在每次渲染后都会重新执行
 // 2. 为了解决这个场景，你可以使用 useMemo 将 Effect 中使用的对象包装起来
 const options = useMemo(() => {
   return { serverUrl: 'https://localhost:1234', roomId: roomId };
@@ -804,9 +805,44 @@ console.timeEnd('filter array useMemo');
 
 官方文档：https://zh-hans.react.dev/reference/react/useMemo
 
+### 5.2 useCallback
 
+useMemo 和 useCallback 接收的参数都是一样，都是在其依赖项发生变化后才执行，都是返回缓存的值，区别在于 useMemo 返回的是函数运行的结果，useCallback 返回的是函数。
 
+使用方法、参数说明：
 
+```jsx
+const cachedFn = React.useCallback(fn, deps)
+// useCallback 等于 如下实现，或者 const cachedFn = useMemo(() => fn, dependencies)
+function myUseCallback(fn, dependencies) {
+  return useMemo(() => fn, dependencies); 
+}
+```
 
+- fn：想要缓存的函数。在初次渲染时，React 将把函数返回给你。在之后的渲染中会根据 `deps` 参数情况而定。
+- deps：类型是数组，作为执行 useCallback 的依赖项。跟 useMemo 方法的参数一样。
+- cachedFn：缓存函数的名字
 
+使用例子：
+
+```jsx
+/* 用react.memo */
+const DemoChildren = React.memo((props)=>{
+  /* 只有初始化的时候打印了 子组件更新 */
+  console.log('子组件更新')
+  useEffect(()=>{ props.getInfo('子组件') },[])
+  return <div>子组件</div>
+})
+const DemoUseCallback=({ id })=>{
+  const [number, setNumber] = useState(1)
+  const getInfo  = useCallback((sonName)=>{ console.log(sonName) },[id])
+  return <div>
+    {/* 点击按钮触发父组件更新 ，但是子组件没有更新 */}
+    <button onClick={ ()=>setNumber(number+1) } >增加</button>
+    <DemoChildren getInfo={getInfo} />
+  </div>
+}
+```
+
+与字面量对象 `{}` 总是会创建新对象类似，**在 JavaScript 中，`function () {}` 或者 `() => {}` 总是会生成不同的函数**。正常情况下，这不会有问题。但是在函数组件中，把函数传给子组件的props。这会导致每次渲染props都是不同的。并且 [`memo`](https://zh-hans.react.dev/reference/react/memo) 对性能的优化永远不会生效。而这就是 `useCallback` 起作用的地方
 
