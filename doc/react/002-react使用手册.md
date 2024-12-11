@@ -975,3 +975,49 @@ function People(params) {
 }
 ```
 
+## 15. React.memo
+
+组件中状态（State）发生改变会导致该组件重新渲染，其中的子组件也会被重新渲染。如果子组件中并未使用该状态（State），重复渲染会导致无效的性能损耗。
+
+在阻止重新渲染这个需求的基础上，诞生了memo函数，memo是react的一种缓存技术，这个函数可以检测从父组件接收的props,并且在父组件改变state的时候比对这个state是否是本组件在使用，如果不是，则不会重新渲染子组件。
+
+**注意**： memo React 16.6.0版本出现的，只有版本高于这个才能使用
+
+基本使用：
+
+```jsx
+const SomeComponent = memo(Component, arePropsEqual?)
+```
+
+- Component：要进行记忆化的组件。`memo` 不会修改该组件，而是返回一个新的、记忆化的组件。它接受任何有效的 React 组件，包括函数组件和 [`forwardRef`](https://zh-hans.react.dev/reference/react/forwardRef) 组件。
+- arePropsEqual：**可选参数**，一个函数，接受两个参数：组件的前一个 props 和新的 props。如果旧的和新的 props 相等，即组件使用新的 props 渲染的输出和表现与旧的 props 完全相同，则它应该返回 `true`。否则返回 `false`。通常情况下，你不需要指定此函数。默认情况下，React 将使用 [`Object.is`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/is) 比较每个 prop。
+- 返回值：`memo` 返回一个新的 React 组件。它的行为与提供给 `memo` 的组件相同，只是当它的父组件重新渲染时 React 不会总是重新渲染它，除非它的 props 发生了变化。
+
+测试例子：
+
+```jsx
+function Head() {
+  return <div>Head,{Math.random()}</div>;
+}
+const HeadOne = React.memo(() => <div>HeadOne,{Math.random()}</div>);
+function App() {
+  const [count, setCount] = React.useState(1);
+  const list = [10, 20];
+  const show = () => {};
+  return (<div>
+    <div>App count={count}</div>
+    <button onClick={() => { setCount(count + 1); }}>添加</button>
+    <Head />
+    <HeadOne name="jack" />
+    <HeadOne list={list} />
+    <HeadOne onClick={show} />
+  </div>);
+}
+```
+
+经过上面例子可以发现：    
+1、正常的组件，每次父组件渲染，即使没有传props，子组件都会渲染。     
+2、使用memo后，如果props没有修改，父组件渲染，子组件不会渲染。      
+3、父组件中，每次渲染，没有使用useState声明的变量和函数 都是新创建的，即使值没有变，但是传到子组件中依然是不同的props，还是会导致子组件重新渲染，可以使用 useMemo  方法包裹缓存变量
+
+memo 官方文档：https://zh-hans.react.dev/reference/react/memo
