@@ -1013,11 +1013,26 @@ function App() {
     <HeadOne onClick={show} />
   </div>);
 }
+// 类组件中，由于this在类存在期间不会变，所以绑定到this上的变量和方法不会变，当props属性传给子组件，值不变不会触发子组件渲染
+class App extends React.PureComponent {
+  constructor(props) { super(); this.state = { count: 0 }; this.list = [10, 20]; }
+  show = () => {};
+  render() {
+    const { count } = this.state;
+    return (<div className="">
+      <div>App11 count={count}</div>
+      <button onClick={() => { this.setState({ count: count + 1 }); }}>添加</button>
+      <HeadOne list={this.list} />
+      <HeadOne onClick={this.show} />
+    </div>);
+  }
+}
 ```
 
 经过上面例子可以发现：    
 1、正常的组件，每次父组件渲染，即使没有传props，子组件都会渲染。     
-2、使用memo后，如果props没有修改，父组件渲染，子组件不会渲染。      
-3、父组件中，每次渲染，没有使用useState声明的变量和函数 都是新创建的，即使值没有变，但是传到子组件中依然是不同的props，还是会导致子组件重新渲染，可以使用 useMemo  方法包裹缓存变量
+2、使用memo后，如果props没有修改，父组件渲染，子组件不会渲染。         
+3、父组件是函数组件：每次渲染，使用const声明的变量和函数都是新创建的，即使值没有变。传到子组件中依然是不同的props，还是会导致子组件重新渲染。可以使用可以使用 useMemo  方法包裹缓存变量。       
+4、父组件是类组件：使用this变量和组件内的方法每次都是不变的。没有函数组件的问题。
 
 memo 官方文档：https://zh-hans.react.dev/reference/react/memo
