@@ -848,7 +848,9 @@ const DemoUseCallback=({ id })=>{
 }
 ```
 
-与字面量对象 `{}` 总是会创建新对象类似，**在 JavaScript 中，`function () {}` 或者 `() => {}` 总是会生成不同的函数**。正常情况下，这不会有问题。但是在函数组件中，把函数传给子组件的props。这会导致每次渲染props都是不同的。并且 [`memo`](https://zh-hans.react.dev/reference/react/memo) 对性能的优化永远不会生效。而这就是 `useCallback` 起作用的地方
+与字面量对象 `{}` 总是会创建新对象类似，**在 JavaScript 中，`function () {}` 或者 `() => {}` 总是会生成不同的函数**。正常情况下，这不会有问题。但是在函数组件中，把函数传给子组件的props。这会导致每次渲染props都是不同的。并且 [`memo`](https://zh-hans.react.dev/reference/react/memo) 对性能的优化永远不会生效。而这就是 `useCallback` 起作用的地方。
+
+官方文档：https://zh-hans.react.dev/reference/react/useCallback
 
 ## 6. 工具 hooks
 
@@ -955,3 +957,21 @@ function Demo(){
 ```
 
 那么如果组件是 Selective Hydration , 那么注册组件的顺序服务端和客户端有可能不统一，这样表现就会不一致了。那么用 useId 动态生成 id 就不会有这个问题产生了，所以说 useId 保障了 React v18 中 **streaming renderer （流式渲染）** 中 id 的稳定性。
+
+## 7. 函数组件使用注意事项
+
+### 7.1 关于严格模式hooks的影响
+
+严格模式启用了以下仅在开发环境下有效的行为：
+
+- 组件将 [额外重新渲染一次](https://zh-hans.react.dev/reference/react/StrictMode#fixing-bugs-found-by-double-rendering-in-development) 以查找由于非纯渲染而引起的错误。
+- 组件将 [额外重新运行一次 Effect ](https://zh-hans.react.dev/reference/react/StrictMode#fixing-bugs-found-by-re-running-effects-in-development)以查找由于缺少 Effect 清理而引起的错误。
+- 组件将 [额外重新运行一次 refs 回调](https://zh-hans.react.dev/reference/react/StrictMode#fixing-bugs-found-by-re-running-ref-callbacks-in-development) 以查找由于缺少 ref 清理函数而引起的错误。
+- 组件将被 [检查是否使用了已弃用的 API](https://zh-hans.react.dev/reference/react/StrictMode#fixing-deprecation-warnings-enabled-by-strict-mode)。
+
+- Effect 方法：修复在开发中通过重新运行 Effect 发现的错误。React 会在实际运行 setup 之前额外运行一次 setup 和 cleanup。这是一个压力测试，用于验证 Effect 的逻辑是否正确实现。如果出现可见问题，则 cleanup 函数缺少某些逻辑。cleanup 函数应该停止或撤消 setup 函数所做的任何操作。一般来说，用户不应该能够区分 setup 被调用一次（如在生产环境中）和调用 setup → cleanup → setup 序列（如在开发环境中）。
+- 函数组件中的方法：React 将调用你的某些函数两次而不是一次，这是符合预期的，不应对你的代码逻辑产生影响。这种 **仅限开发环境下的** 行为可帮助你 [保持组件纯粹](https://zh-hans.react.dev/learn/keeping-components-pure)。React 使用其中一次调用的结果，而忽略另一次的结果。只要你的组件和计算函数是纯函数，这就不会影响你的逻辑。但是，如果你不小心写出带有副作用的代码，这可以帮助你发现并纠正错误。
+
+严格模式官方文档：https://zh-hans.react.dev/reference/react/useMemo
+
+当发现hooks 某些方法执行了两次可以考虑是否开启了严格模式。
