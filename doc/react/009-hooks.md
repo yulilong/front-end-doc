@@ -53,7 +53,7 @@ const [ state , setState ] = useState(initData)
 - setState：用于更新状态值的函数。当使用这个函数设置新的状态时，React 会根据新的状态重新渲染组件。     
 - initData：状态的初始值。分为三种情况：第一种是不传，则 state 的初始值为undefined。第二种情况是非函数，将作为 state 初始化的值。 第三种情况是函数，函数的返回值作为 useState 初始化的值。
 
-useState例子：
+使用例子：
 
 ```jsx
 const DemoState = (props) => {
@@ -100,9 +100,11 @@ export default function Index(){
 }
 ```
 
-3、设置的state值，在当前执行上下文中获取不到最新的 state, 只有再下一次组件 rerender 中才能获取到。
+3、当执行`setState`时，在当前执行上下文中获取不到最新的 state, 只有再下一次组件 rerender 中才能获取到。
 
-4、当调用 setstate 设置state值时，React 将跳过子组件的渲染及 effect 的执行。需要注意的是，React 可能仍需要在跳过渲染前渲染该组件。不过由于 React 不会对组件树的“深层”节点进行不必要的渲染，所以大可不必担心。如果你在渲染期间执行了高开销的计算，则可以使用 `useMemo` 来进行优化。
+4、当执行`setState`设置state值时，React 将跳过子组件的渲染及 effect 的执行。需要注意的是，React 可能仍需要在跳过渲染前渲染该组件。不过由于 React 不会对组件树的“深层”节点进行不必要的渲染，所以大可不必担心。如果你在渲染期间执行了高开销的计算，则可以使用 `useMemo` 来进行优化。
+
+官方文档：https://zh-hans.react.dev/reference/react/useState
 
 ### 2.2 useReducer
 
@@ -121,7 +123,7 @@ const [ ①state , ②dispatch ] = useReducer(③reducer, initialState, processI
 - initialState：状态的初始值。如果不传则 state 的初始值为undefined。注意不能使用函数返回值形式设置。
 - processInitState：选填，处理初始值的方法，initialState 可以当这个函数的参数使用。
 
-useReducer 例子：
+使用例子：
 
 ```jsx
 function Index({ dispatch, State }) {
@@ -157,7 +159,7 @@ const DemoUseReducer = ({size}) => {
 export default DemoUseReducer;
 ```
 
-
+官方文档：https://zh-hans.react.dev/reference/react/useReducer
 
 ### 2.3 useSyncExternalStore(v18新增)
 
@@ -174,7 +176,7 @@ useSyncExternalStore( subscribe, getSnapshot, getServerSnapshot)
 - getSnapshot：可以理解成一个带有记忆功能的选择器。当 store 变化的时候，会通过 getSnapshot 生成新的状态值，这个状态值可提供给组件作为数据源使用，getSnapshot 可以检查订阅的值是否改变，改变的话那么会触发更新。
 - getServerSnapshot：用于 hydration 模式下的 getSnapshot。
 
-useSyncExternalStore 例子：
+使用例子：
 
 ```jsx
 import { combineReducers , createStore  } from 'redux'
@@ -207,6 +209,8 @@ function Index(){
 ```
 
 点击按钮，会触发 reducer ，然后会触发 store.subscribe 订阅函数，执行 getSnapshot 得到新的 number ，判断 number 是否发生变化，如果变化，触发更新。
+
+官方文档：https://zh-hans.react.dev/reference/react/useSyncExternalStore
 
 ### 2.4 useTransition(v18新增)
 
@@ -261,9 +265,9 @@ export default function Index(){
 }
 ```
 
-### 2.5 useDeferredValue(v18新增)
+官方文档：https://zh-hans.react.dev/reference/react/useTransition
 
-官方说明：https://zh-hans.react.dev/reference/react/useDeferredValue
+### 2.5 useDeferredValue(v18新增)
 
 useDeferredValue用来接受一个值，并返回该值的新副本，该副本将推迟到更紧急地更新之后。由于React 18 将UI更新标记为高优先级的或者可中断的低优先级操作。所以我们可以在高优先级任务结束后，再得到新的状态，而这个新的状态就称之为 DeferredValue。
 
@@ -349,7 +353,7 @@ export default function App() {
 // 例子链接：https://zh-hans.react.dev/reference/react/useDeferredValue#examples
 ```
 
-
+官方文档：https://zh-hans.react.dev/reference/react/useDeferredValue
 
 ## 3. 执行副作用
 
