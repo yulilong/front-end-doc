@@ -6,11 +6,11 @@
 
 # React Hooks详解
 
-本文整理自：https://juejin.cn/post/7118937685653192735，作者：我不是外星人
+
 
 ## 1. 概述
 
-**Hooks** 是 React 16.8 的新增特性。并在React 18版本新增了一些功能。Hooks可以让函数组件也可以实现部分类组件的功能，比如state状态管理、部分React生命周期钩子、*以及其他的React特性*。
+**Hooks** 是 React 16.8 的新增特性。并在React 18版本新增了一些功能。Hooks可以让函数组件也可以实现部分类组件的功能，比如state状态管理、部分React生命周期钩子、以及其他的React特性。
 
 在Hooks出现以前，开发遇到的问题：
 
@@ -970,8 +970,65 @@ function Demo(){
 - 组件将被 [检查是否使用了已弃用的 API](https://zh-hans.react.dev/reference/react/StrictMode#fixing-deprecation-warnings-enabled-by-strict-mode)。
 
 - Effect 方法：修复在开发中通过重新运行 Effect 发现的错误。React 会在实际运行 setup 之前额外运行一次 setup 和 cleanup。这是一个压力测试，用于验证 Effect 的逻辑是否正确实现。如果出现可见问题，则 cleanup 函数缺少某些逻辑。cleanup 函数应该停止或撤消 setup 函数所做的任何操作。一般来说，用户不应该能够区分 setup 被调用一次（如在生产环境中）和调用 setup → cleanup → setup 序列（如在开发环境中）。
-- 函数组件中的方法：React 将调用你的某些函数两次而不是一次，这是符合预期的，不应对你的代码逻辑产生影响。这种 **仅限开发环境下的** 行为可帮助你 [保持组件纯粹](https://zh-hans.react.dev/learn/keeping-components-pure)。React 使用其中一次调用的结果，而忽略另一次的结果。只要你的组件和计算函数是纯函数，这就不会影响你的逻辑。但是，如果你不小心写出带有副作用的代码，这可以帮助你发现并纠正错误。
+- 函数组件中的方法(useMemo)：React 将调用你的某些函数两次而不是一次，这是符合预期的，不应对你的代码逻辑产生影响。这种 **仅限开发环境下的** 行为可帮助你 [保持组件纯粹](https://zh-hans.react.dev/learn/keeping-components-pure)。React 使用其中一次调用的结果，而忽略另一次的结果。只要你的组件和计算函数是纯函数，这就不会影响你的逻辑。但是，如果你不小心写出带有副作用的代码，这可以帮助你发现并纠正错误。
 
 严格模式官方文档：https://zh-hans.react.dev/reference/react/useMemo
 
 当发现hooks 某些方法执行了两次可以考虑是否开启了严格模式。
+
+## 8. hooks 使用规则
+
+参考资料：
+
+https://juejin.cn/post/7020811068955951135
+
+https://zh-hans.legacy.reactjs.org/docs/hooks-rules.html
+
+在[react 文档](https://zh-hans.legacy.reactjs.org/docs/hooks-rules.html)中说明了使用hooks的两个规则：
+
+> ### 1、只在最顶层使用 Hook。不要在循环，条件或嵌套函数中调用 Hook
+>
+> 确保总是在你的 React 函数的最顶层调用他们。遵守这条规则，你就能确保 Hook 在每一次渲染中都按照同样的顺序被调用。这让 React 能够在多次的 `useState` 和 `useEffect` 调用之间保持 hook 状态的正确。
+>
+> ### 2、只在 React 函数中调用 Hook。不要在普通的 JavaScript 函数中调用 Hook。你可以：
+>
+> -   ✅ 在 React 的函数组件中调用 Hook
+> -   ✅ 在自定义 Hook 中调用其他 Hook
+
+这些规则确保了`Hooks`的调用顺序在多次渲染之间保持一致。由于`React`内部没有办法追踪到底有多少个状态或副作用需要被管理，它依赖于`Hooks`的调用顺序来关联状态和副作用。
+
+### 8.1 为什么不能在循环、条件或嵌套函数中调用Hooks
+
+这么做的主要原因是**保证有序调用hooks**。React依赖于Hooks调用的顺序来正确地关联Hook的状态。如果在循环或条件语句中调用Hooks，每次迭代或条件判断都可能产生新的Hook状态，这会导致React无法正确地关联状态和更新。
+
+1、每次调用 `hooks` 都会生成 `hook` 对象，在函数组件中多次使用`hooks`，这会产生多个 `hook` 对象，这些`hook` 对象通过对象内的`next`属性连接形成链表，连接是在挂载时进行的，
+
+2、在更新时，每个hooks对象都是调用更新函数处理生成新的hook对象并连接形成hook链以供下次更新时使用。
+
+3、正确使用hooks时，遍历hook链，复用hook上次更新的hook，没有问题，但如果某个hooks的调用与否是有条件的，那么情况就不同了。举个简单例子，如下使用hooks：
+
+```jsx
+function FunComponent(props) {
+    if (props.condition) {
+        useEffect()
+    }
+    const [counter, setCounter] = useState(0)
+    const memo = useMemo()
+}
+```
+
+3.1 假设第一次更新时`props.condition === true`，那么 hook链是这样的：`useEffect hook` => `useState hook` =>`useMemo hook`。      
+3.2 第二次更新时`props.condition === false`，useState首先执行，由于上一次的 hooks 链第一个是useEffect，返回的是`effect`对象，`counter`从数字变成了对象，渲染或利用`counter`计算时肯定会报错的。
+
+### 8.2 为什么只能在函数组件中调用 hooks ？
+
+我们使用的hooks函数中都没有直接实现代码，而是调用一个叫做`dispatcher`的对象中相应函数。[源码地址](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Ffacebook%2Freact%2Fblob%2Fmain%2Fpackages%2Freact%2Fsrc%2FReactHooks.js%23L74)
+
+函数组件是在 [renderWithHooks](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Ffacebook%2Freact%2Fblob%2Fmain%2Fpackages%2Freact-reconciler%2Fsrc%2FReactFiberHooks.new.js%23L370) 函数内执行的。
+
+因此只有函数当组件去使用才会调用hooks相关功能去实现hooks，
+
+
+
+
+
