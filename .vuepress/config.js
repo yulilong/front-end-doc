@@ -339,15 +339,6 @@ module.exports = {
       ],
 
       "/doc/vue/": [
-        {
-          title: "VUE3",
-          collapsable: false, // 让一个组永远都是展开状态
-          children: [
-            'vue3/'
-            // 侧边栏显示的标题跟md中的标题不一致使用如下方式
-            // ["006-1函数柯里化", "函数柯里化"],
-          ],
-        },
         "001-vue遇到的问题",
         "002-vue常用语法",
         "003-vue教程",
@@ -361,6 +352,13 @@ module.exports = {
         "011-router使用相关",
         "012-一个vue组件代码写法",
         "013-vue的diff算法详解",
+        {
+          title: "VUE3",
+          collapsable: false, // 让一个组永远都是展开状态
+          children: [
+            'vue3/001-vue3开发遇到的问题',
+          ],
+        },
       ],
       // TypeScript部分文档
       "/doc/typeScript/": [
