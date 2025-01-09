@@ -356,6 +356,7 @@ module.exports = {
           title: "VUE3",
           collapsable: false, // 让一个组永远都是展开状态
           children: [
+            ['vue3/', '简介'],
             'vue3/001-vue3开发遇到的问题',
           ],
         },

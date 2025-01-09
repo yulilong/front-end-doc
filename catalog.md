@@ -207,6 +207,7 @@
 * [一个vue组件代码写法](doc/vue/012-一个vue组件代码写法.md)
 * [vue的diff算法详解](doc/vue/013-vue的diff算法详解.md)
 * VUE3
+    * [简介](doc/vue/vue3/README.md)
     * [vue3开发遇到的问题](doc/vue/vue3/001-vue3开发遇到的问题.md)
 
 ## 6. TypeScript
