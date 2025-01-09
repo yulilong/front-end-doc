@@ -358,6 +358,7 @@ module.exports = {
           children: [
             ['vue3/', '简介'],
             'vue3/001-vue3开发遇到的问题',
+            'vue3/002-vue3核心语法',
           ],
         },
       ],

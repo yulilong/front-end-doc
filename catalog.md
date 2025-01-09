@@ -209,6 +209,7 @@
 * VUE3
     * [简介](doc/vue/vue3/README.md)
     * [vue3开发遇到的问题](doc/vue/vue3/001-vue3开发遇到的问题.md)
+    * [vue3核心语法](doc/vue/vue3/002-vue3核心语法.md)
 
 ## 6. TypeScript
 
