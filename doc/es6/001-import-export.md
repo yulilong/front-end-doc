@@ -2,7 +2,7 @@
 
 [TOC]
 
-# ES6模块import_export
+# import export
 
 ## 1. 介绍
 

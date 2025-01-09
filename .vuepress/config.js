@@ -113,6 +113,7 @@ module.exports = {
       "/doc/es6/": [
         // '',
         "001-ES6新特性列表",
+        '001-import-export',
         "002-数组新增方法",
         "003-asyncawait函数说明",
         "004-ES6的类",
@@ -167,7 +168,6 @@ module.exports = {
           title: "高级",
           // collapsable: false,
           children: [
-            "advanced/001-ES6模块import_export",
             "advanced/002-错误处理try_catch",
             "advanced/003-常用的代码片段",
             "advanced/004-轮播代码实现",

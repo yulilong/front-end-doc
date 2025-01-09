@@ -9,6 +9,7 @@
 ### 1.1 ES6部分
 
 * [ES6新特性列表](/doc/es6/001-ES6新特性列表.md)
+* [import export](/doc/es6/001-import-export.md)
 * [数组新增方法](/doc/es6/002-数组新增方法.md)
 * [async/await函数说明](/doc/es6/003-asyncawait函数说明.md)
 * [ES6的类](/doc/es6/004-ES6的类.md)
@@ -61,7 +62,6 @@
     * [函数](/doc/js/006-函数.md)
     * [函数柯里化](/doc/js/006-1函数柯里化.md)
 * 高级
-    * [001-ES6模块import_export](/doc/js/advanced/001-ES6模块import_export.md)
     * [002-错误处理try_catch](/doc/js/advanced/002-错误处理try_catch.md)
     * [003-常用的代码片段](/doc/js/advanced/003-常用的代码片段.md)
     * [004-轮播代码实现](/doc/js/advanced/004-轮播代码实现.md)
