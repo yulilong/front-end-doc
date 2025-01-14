@@ -233,8 +233,10 @@
     * [webpack教程](/doc/tool/001-webpack教程.md)
     * [require.context](/doc/tool/002-webpack-require.context.md)
     * [webpack常见问题解决](/doc/tool/003-webpack常见问题解决.md)
-    * [prettier代码格式化工具](/doc/tool/004-prettier代码格式化工具.md)
-    * [Moment日期处理类库](/doc/tool/005-Moment日期处理类库.md)
+* [prettier代码格式化工具](/doc/tool/004-prettier代码格式化工具.md)
+* [Moment日期处理类库](/doc/tool/005-Moment日期处理类库.md)
+* echarts图表
+    * [简介](doc/tool/echarts/README.md)
 
 ## 9. 常见问题
 

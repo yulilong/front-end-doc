@@ -380,9 +380,23 @@ module.exports = {
       ],
 
       "/doc/tool/": [
-        "001-webpack教程",
-        "002-webpack-require.context",
-        "003-webpack常见问题解决",
+        {
+          title: "echarts图表",
+          collapsable: false, // 让一个组永远都是展开状态
+          children: [
+            ['echarts/', '简介'],
+            // 'echarts/001-vue3开发遇到的问题',
+          ],
+        },
+        {
+          title: "webpack教程",
+          collapsable: false,
+          children: [
+            "001-webpack教程",
+            "002-webpack-require.context",
+            "003-webpack常见问题解决",
+          ],
+        },
         "004-prettier代码格式化工具",
         "005-Moment日期处理类库",
       ],
