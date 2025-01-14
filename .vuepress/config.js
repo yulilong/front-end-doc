@@ -385,7 +385,7 @@ module.exports = {
           collapsable: false, // 让一个组永远都是展开状态
           children: [
             ['echarts/', '简介'],
-            // 'echarts/001-vue3开发遇到的问题',
+            "echarts/001-饼图-pie1",
           ],
         },
         {
