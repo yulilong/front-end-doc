@@ -360,6 +360,7 @@ module.exports = {
             'vue3/001-vue3开发遇到的问题',
             'vue3/002-vue3核心语法',
             'vue3/003-vue3常用语法',
+            'vue3/004-vue3的路由',
           ],
         },
       ],
