@@ -212,6 +212,7 @@
     * [vue3核心语法](doc/vue/vue3/002-vue3核心语法.md)
     * [vue3常用语法](doc/vue/vue3/003-vue3常用语法.md)
     * [vue3的路由](doc/vue/vue3/004-vue3的路由.md)
+    * [弄懂npm-create-vue@latest](doc/vue/vue3/100-弄懂npm-create-vue@latest.md)
 
 ## 6. TypeScript
 
