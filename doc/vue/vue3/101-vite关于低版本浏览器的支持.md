@@ -14,7 +14,7 @@
 # 线上环境报这个错误
 Uncaught Syntaxerror: Unexpected token '?'
 
-# 本地使用 npm start 命令启动前端服务，包如下错误
+# 本地使用 npm start 命令启动前端服务，显示如下错误
 Uncaught Syntaxerror: Unexpected token '.'
 ```
 
