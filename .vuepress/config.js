@@ -363,6 +363,7 @@ module.exports = {
             'vue3/004-vue3的路由',
             'vue3/005-pinia状态管理',
             'vue3/100-弄懂npm-create-vue',
+            'vue3/101-vite关于低版本浏览器的支持',
           ],
         },
       ],
