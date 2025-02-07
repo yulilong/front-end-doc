@@ -8,7 +8,50 @@
 
 [官方文档](https://cli.vuejs.org/zh/)
 
-## 1. [运行模式和环境变量](https://cli.vuejs.org/zh/guide/mode-and-env.html)
+> 备注：目前`vue-cli`已处于维护模式，官方推荐基于 `Vite` 创建项目。
+
+## 1. 安装、使用
+
+[安装介绍](https://cli.vuejs.org/zh/guide/creating-a-project.html)
+
+1、安装：
+
+```bash
+npm install -g @vue/cli
+# OR
+yarn global add @vue/cli
+
+# 卸载命令
+npm uninstall -g @vue/cli
+
+# 查看是否安装成功：显示出版本号则表示安装成功，2025-02-07这天安装的版本是5.0.8
+vue --version
+@vue/cli 5.0.8
+```
+
+2、[创建项目](https://cli.vuejs.org/zh/guide/creating-a-project.html)
+
+```bash
+## 执行创建命令
+vue create vue_test
+
+## 之后进行一些选择，第一步就是选择使用vue2还是使用vue3
+## Vue CLI v5.0.8
+## ? Please pick a preset: (Use arrow keys)
+## ❯ Default ([Vue 3] babel, eslint)
+##   Default ([Vue 2] babel, eslint)
+##   Manually select features
+
+## 打开项目，直接启动服务，已经自动安装完依赖包了
+cd vue_test
+npm run serve
+```
+
+
+
+## 2. 运行模式和环境变量
+
+[官方文档介绍](https://cli.vuejs.org/zh/guide/mode-and-env.html)
 
 一个 Vue CLI 项目有三个模式：
 
@@ -26,7 +69,7 @@ vue-cli-service build --mode development
 
 > `NODE_ENV` 将决定您的应用运行的模式，是开发，生产还是测试，因此也决定了创建哪种 webpack 配置。如果在开发环境中有默认的 `NODE_ENV`，你应该移除它或在运行 `vue-cli-service` 命令的时候明确地设置 `NODE_ENV`。
 
-### 1.1 环境变量文件
+### 2.1 环境变量文件
 
 在项目的根目录中放置下列文件来指定环境变量：
 
@@ -45,7 +88,7 @@ BAR=bar
 CONCAT=$FOO$BAR # CONCAT=foobar
 ```
 
-### 1.2 环境文件加载优先级
+### 2.2 环境文件加载优先级
 
 为一个特定模式准备的环境文件 (例如 `.env.production`) 将会比一般的环境文件 (例如 `.env`) 拥有更高的优先级。此外，Vue CLI 启动时已经存在的环境变量拥有最高优先级，并不会被 `.env` 文件覆写(比如NODE_ENV变量声明无效)。`.env` 环境文件是通过运行 `vue-cli-service` 命令载入的，因此环境文件发生变化，你需要重启服务。
 
@@ -67,7 +110,7 @@ VUE_APP_TITLE=My App (staging)
 
 这两种情况下，根据 `NODE_ENV`，构建出的应用都是生产环境应用，但是在 staging 版本中，`process.env.VUE_APP_TITLE` 被覆写成了另一个值。
 
-### 1.3 在客户端侧代码中使用环境变量
+### 2.3 在客户端侧代码中使用环境变量
 
 请注意，只有 `NODE_ENV`，`BASE_URL` 和以 `VUE_APP_` 开头的变量将通过 `webpack.DefinePlugin` 静态地嵌入到*客户端侧*的代码中。
 
@@ -93,7 +136,7 @@ process.env.VUE_APP_VERSION = require('./package.json').version
 module.exports = {}
 ```
 
-## 2.  vue.config.js配置文件参数说明
+## 3.  vue.config.js配置文件参数说明
 
 
 
