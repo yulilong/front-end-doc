@@ -213,6 +213,7 @@
     * [vue3常用语法](doc/vue/vue3/003-vue3常用语法.md)
     * [vue3的路由](doc/vue/vue3/004-vue3的路由.md)
     * [pinia状态管理](doc/vue/vue3/005-pinia状态管理.md)
+    * [vite](doc/vue/vue3/006-vite.md)
     * [弄懂npm-create-vue](doc/vue/vue3/100-弄懂npm-create-vue.md)
     * [vite关于低版本浏览器的支持](doc/vue/vue3/101-vite关于低版本浏览器的支持.md)
 
