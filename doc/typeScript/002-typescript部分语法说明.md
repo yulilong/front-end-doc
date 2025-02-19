@@ -66,7 +66,7 @@ const a = !isNumber(input);
 
 ### 2.2 `!:` 属性不能为空
 
-```tsx
+```js
 // 因为接口B里面name被定义为可空的值，但是实际情况是不为空的，
 // 那么我们就可以通过在class里面使用！，重新强调了name这个不为空值
 class A implemented B {
@@ -81,14 +81,13 @@ interface B {
 
 非空断言，告诉 TypeScript 确定某个值不为空(null或undefined)，可以绕过类型检查，但其本身不处理 null 或 undefined 的问题。
 
-```tsx
+```js
+// 定义输入框，初始化是null，但是你在调用他的时候，要取输入框的value，这时候dom实例一定是有值的，所以用断言，这样就不会报错了
 const inputRef = useRef<HTMLEInputlement>(null);
-// 定义了输入框，初始化是null，但是你在调用他的时候相取输入框的value，这时候dom实例一定是有值的，所以用断言
 const value: string = inputRef.current!.value;
-// 这样就不会报错了
 
-let user = { name: 'Alice', age: 25 };
 // 直接用user.address.length，TypeScript 会认为 user.address 可能是 undefined，因为它没有在 user 对象中定义
+let user = { name: 'Alice', age: 25 };
 // 使用非空断言，告诉 TypeScript 我确信 user.address 存在，可以强制将其视为有效的对象。
 console.log(user.address!.length);
 ```
