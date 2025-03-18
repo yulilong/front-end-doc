@@ -8,7 +8,7 @@
 
 ## 1. node告警：Maxlistenersexceededwarning
 
-![](./img/001-node.png)
+![](./img/001-node-error-01.png)
 
 告警的意思是对一个事件添加了11个监听器，溢出了监听器的最大值，需要通过setMaxListeners()增加监听器限制最大值。
 
@@ -22,7 +22,7 @@ require('events').EventEmitter.defaultMaxListeners = 20; // 将MaxListeners的�
 require('events').EventEmitter.defaultMaxListeners = 0; // 解除限制
 ```
 
-![](./img/002-node.png)
+![](./img/001-node-error-02.png)
 
 参考：https://segmentfault.com/a/1190000040710342
 
@@ -39,7 +39,7 @@ FATAL ERROR: CALL_AND_RETRY_LAST Allocation failed - JavaScript heap out of memo
  3: 00007FF7E1B7E610
 ```
 
-![](./img/003-node.png)
+![](./img/001-node-error-03.png)
 
 针对windows系统，解决方法，安装`increase-memory-limit`npm包，使用该包增加运行内存：
 
@@ -57,14 +57,14 @@ cross-env LIMIT=10240  increase-memory-limit # LIMIT是分配的内存大小，�
 
 当运行`increase-memory-limit`命令提示报错，`node --max-old-space-size=4096不是内部或外部命令`
 
-![](./img/004-node.png)
+![](./img/001-node-error-04.png)
 
 这个问题，是因为执行 fix-memory-limit命令时，会在 当前项目的node_modules/.bin文件夹下的*.cmd文件中添加调整运行空间的命令，默认添加的`"%_prog%"`，但是项目的正常运行需要`%_prog%`,也就是去掉双引号才可以。
 
 可以通过编辑器的 replace all的功能，全局进行替换，注意不要选错目录。由此目录也可以发现，当前的命令是只针对当前项目的，所以，如果新开了一个项目，或者删除了node_modules依赖后，需要重新执行命令才可以。
 如果vscode全局搜索搜不到 `"%_prog%"`关键字，需要点一下下面按钮：
 
-![](./img/005-node.png)
+![](./img/001-node-error-05.png)
 
 参考链接：https://blog.csdn.net/Run_youngman/article/details/122474730
 
