@@ -94,11 +94,90 @@ node --max_old_space_size=4096 node_modules/@vue/cli-service/bin/vue-cli-service
 
 
 
+## 3. 监听文件数量超限 ENOSPC：system limit for number of file watchers reached
 
+当我在 统信桌面操作系统(UOS)的类Linux系统启动node服务的时候，报错。
 
+### 3.1 错误信息
 
+`node:internal/errors:490 errorCaptureStackTrace(err)   Error：ENOSPC：system limit for number of file watchers reached `
 
+![](./img/001-node-error-06.jpg)
 
+### 3.2 错误原因
+
+ `ENOSPC: system limit for number of file watchers reached` 是 **Linux/Unix 系统**中常见的文件监视器（inotify）数量超限问题。该错误通常发生在使用 Node.js 工具（如 Webpack、Nodemon、Vite 等）或文件监控类程序时，系统默认的文件监视器数量不足以支持当前应用的需求。
+
+- **文件监视器（inotify）**：Linux 系统通过 `inotify` 机制监控文件变化（如文件修改、新增、删除）。每个文件/目录的监控会占用一个“监视器”。
+- **默认限制过低**：Linux 系统默认的 `max_user_watches`（单个用户可用的最大监视器数量）通常为 `8192`，对于大型项目或频繁文件操作的应用（如前端开发工具），此限制容易被触发。
+
+查看默认数量命令：`cat /proc/sys/fs/inotify/max_user_watches`
+
+### 3.3 解决方案
+
+- 永久调整限制(推荐)
+
+  ```bash
+  # 编辑 sysctl 配置文件
+  sudo vi /etc/sysctl.conf
+  
+  # 在文件末尾添加以下行（示例值为 524288）
+  fs.inotify.max_user_watches=524288
+  
+  # 保存退出后，执行以下命令使配置生效
+  sudo sysctl -p
+  ```
+
+- 临时调整限制(重启电脑后失效)
+
+  ```bash
+  # 将限制提升到 524288（根据需求调整数值）
+  sudo sysctl fs.inotify.max_user_watches=524288
+  ```
+
+- 针对特定工具优化
+
+  - **Webpack**：在 `watchOptions` 中忽略 `node_modules` 等无需监控的目录：
+
+    ```js
+    // webpack.config.js
+    module.exports = {
+      watchOptions: {
+        ignored: /node_modules/
+      }
+    };
+    ```
+
+  - **Vite**：在 `vite.config.js` 中使用 `server.watch.ignored` 选项。
+
+    ```js
+    import { defineConfig } from 'vite';
+    export default defineConfig({
+      server: {
+        watch: {
+          ignored: ['**/node_modules', '**/dist']
+        }
+      }
+    });
+    ```
+
+  - **Nodemon**：在 `nodemon.json` 中配置忽略目录：
+
+    ```json
+    {
+      "ignore": ["node_modules/**"]
+    }
+    ```
+
+### 3.4 扩展知识
+
+- **`fs.inotify` 参数**：
+  - `max_user_watches`：单个用户可监视的文件/目录数量。
+  - `max_user_instances`：单个用户可创建的监视器实例数量。
+  - `max_queued_events`：事件队列的最大长度。
+- **其他系统**：
+  - **macOS**：无此问题（使用不同的文件监控机制）。
+  - **Windows**：通过 WSL 运行时需在 Linux 子系统中调整。
 
 
 
