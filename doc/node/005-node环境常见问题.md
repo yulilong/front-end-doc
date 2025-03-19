@@ -28,10 +28,10 @@ require('events').EventEmitter.defaultMaxListeners = 0; // 解除限制
 
 ## 2. node 内存不足：JavaScript heap out of memory
 
-在运行vue cli项目的时候，有时候会报如下错误：
+在vue2项目使用webpack打包报错
 
 ```
-- JS stacktrace --->
+<--- JS stacktrace --->
 
 FATAL ERROR: CALL_AND_RETRY_LAST Allocation failed - JavaScript heap out of memory
  1: 00007FF7E1BA3D05
@@ -41,7 +41,75 @@ FATAL ERROR: CALL_AND_RETRY_LAST Allocation failed - JavaScript heap out of memo
 
 ![](./img/001-node-error-03.png)
 
-针对windows系统，解决方法，安装`increase-memory-limit`npm包，使用该包增加运行内存：
+在vue3项目使用vite报如下错误：
+
+![](./img/001-node-error-03-1.jpg)
+
+### 2.1 错误原因
+
+是由于 Node.js 进程的内存不足导致的 JavaScript 堆内存溢出。这种问题常见于处理大型项目或复杂依赖时，Node.js 默认的内存限制（通常为 2GB）不足以支持打包过程。
+
+#### 2.1.1 查看node运行内存大小命令
+
+```bash
+node -e "console.log('node内存上限:', v8.getHeapStatistics().heap_size_limit / 1024 / 1024 + 'MB')"
+```
+
+### 2.2 解决方法
+
+**注意**：修改的内存单位是MB。
+
+#### 2.2.1 通过环境变量全局设置（推荐）
+
+通过环境变量 `NODE_OPTIONS` 设置 Node.js 的默认内存限制，适用于所有通过命令行启动的 Node.js 进程。
+
+配置完成后可以使用`查看node运行内存`命令查看是否修改成功。
+
+**1、Linux/macOS**
+
+在用户配置文件（如 `~/.bashrc`、`~/.zshrc`）中添加以下内容：
+
+```bash
+# 设置 Node.js 堆内存上限为 4GB（根据需求调整）
+export NODE_OPTIONS=--max-old-space-size=4096
+```
+
+保存后执行以下命令使配置生效：
+
+```bash
+source ~/.bashrc  # 或 source ~/.zshrc（取决于你的终端）
+```
+
+**2、Windows**
+
+通过系统环境变量配置：
+
+1. 右键点击“此电脑” → “属性” → “高级系统设置” → “环境变量”。
+2. 在“用户变量”或“系统变量”中，点击“新建”：
+   - **变量名**：`NODE_OPTIONS`
+   - **变量值**：`--max-old-space-size=4096`
+3. 重启所有命令行工具（如 CMD、PowerShell）使配置生效。
+
+#### 2.2.2 修改npm命令脚本
+
+在 `package.json` 的脚本命令中添加 `--max-old-space-size` 参数显式提高 Node.js 的堆内存上限。
+
+```json
+{
+  "scripts": {
+    "": "对于vue2 webpack打包工具，使用如下命令：",
+    "build": "node --max_old_space_size=4096 node_modules/@vue/cli-service/bin/vue-cli-service.js build",
+    
+    "": "对于vue3 vite打包工具，使用如下命令：",
+    "start": "node --max-old-space-size=4096 src/index.js",
+    "build": "node --max-old-space-size=4096 ./node_modules/vite/bin/vite.js build"
+  }
+}
+```
+
+之后运行 `npm run build` 或 `npm start` 时，会自动应用内存限制。
+
+#### 2.2.3 使用increase-memory-limit工具修改
 
 ```bash
 # 全局安装increase-memory-limit
@@ -55,7 +123,7 @@ npm i -g cross-env
 cross-env LIMIT=10240  increase-memory-limit # LIMIT是分配的内存大小，有3027、4096、8192、10240
 ```
 
-当运行`increase-memory-limit`命令提示报错，`node --max-old-space-size=4096不是内部或外部命令`
+在windows系统中，当运行`increase-memory-limit`命令提示报错，`node --max-old-space-size=4096不是内部或外部命令`
 
 ![](./img/001-node-error-04.png)
 
@@ -70,27 +138,33 @@ cross-env LIMIT=10240  increase-memory-limit # LIMIT是分配的内存大小，�
 
 注意：`increase-memory-limit`命令可能会导致git提交命令冲突，解决方法是删除`node_modules`文件夹，重新安装一个就好。
 
-苹果Mac电脑，可在终端环境脚本中添加上面命令，然后重启终端：
 
-```bash
-vi .zshrc
-export NODE_OPTIONS=--max_old_space_size=5120
-# 运行命令立即生效：source .zshrc
-```
 
-其他方法尝试：
+### 2.3 注意事项
 
-1、终端运行如下命令：
+1. **合理设置内存大小**：
 
-```bash
-npx --max_old_space_size=4095 vue-cli-service build --modern
-```
+   - 建议值为物理内存的 50%~80%（如 8GB 物理内存可设置为 `4096`）。
+   - 设置过高可能导致系统卡顿甚至崩溃。
 
-2、终端运行如下命令：
+2. **场景优先级**：
 
-```bash
-node --max_old_space_size=4096 node_modules/@vue/cli-service/bin/vue-cli-service.js build --mode development
-```
+   - **开发环境**：推荐使用方法一（环境变量）或方法二（npm 脚本）。
+   - **生产环境**：在启动命令中显式指定参数（如 `node --max-old-space-size=4096 server.js`）。
+
+3. **容器化部署（如 Docker）**：
+
+   - 在 Dockerfile 中通过环境变量设置：
+
+     ```bash
+     ENV NODE_OPTIONS=--max-old-space-size=4096
+     ```
+
+4. 为什么默认内存限制是 2GB？
+
+   Node.js（基于 V8 引擎）默认堆内存上限为约 **2GB**（64 位系统），这是为了平衡性能和稳定性。对于内存密集型任务（如构建工具、大数据处理），需手动调整此限制。
+
+
 
 
 
