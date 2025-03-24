@@ -426,11 +426,11 @@ TypeScript 2.8版本支持
 
 
 
-## 接口声明interface 和 type 的区别
+## 7. 接口声明interface 和 type 的区别
 
-### 1. interface 和 type介绍
+### 7.1 interface 和 type介绍
 
-1、type：类型别名用来给一个类型起个新名字，使用 type 创建类型别名，类型别名不仅可以用来表示基本类型，还可以用来表示对象类型、联合类型、元组和交集。让我们看一些例子：
+1、type：类型别名。用来给一个类型起个新名字，类型别名不仅可以用来表示基本类型，还可以用来表示对象类型、联合类型、元组和交集。例如：
 
 ```tsx
 type userName = string; // 基本类型
@@ -447,7 +447,7 @@ type Tree<T> = { value: T };
 const user: Person = { id: "901", name: "椿", age: 22, gender: "女", };
 ```
 
-2、interface：接口，是命名数据结构（例如对象）的另一种方式；与type 不同：
+2、interface：接口。是命名数据结构（例如对象）的另一种方式。与type 的不同点：
 
 - interface仅限于描述对象类型。
 - interface可以通过多次声明来扩展。
@@ -456,7 +456,7 @@ const user: Person = { id: "901", name: "椿", age: 22, gender: "女", };
 interface Person { name: string; age: number; } // interface仅限于描述对象类型
 ```
 
-### 2. interface和type的相似之处
+### 7.2 interface和type的相似之处
 
 - 都可以描述 Object和Function
 - 二者都可以被继承extends
@@ -500,7 +500,7 @@ class Student implements Person {
 }
 ```
 
-### 3. interface和type的区别
+### 7.3 interface和type的区别
 
 只有type能做的：定义基本类型别名、声明联合类型、 声明元组
 
@@ -523,7 +523,7 @@ type Person1 = { name: string; }
 type Person1 = { age: number; } // 报错：标识符“Person1”重复。ts(2300)
 ```
 
-### 4. 索引签名问题
+### 7.4 索引签名问题
 
 如果你经常使用TypeScript, 一定遇到过相似的错误：
 
