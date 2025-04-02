@@ -391,6 +391,7 @@ module.exports = {
       "/doc/tool/echarts/": [
         ['', '简介'],
         "001-饼图-pie1",
+        "002-折线图-line1",
       ],
       "/doc/tool/": [
         // {
