@@ -76,6 +76,7 @@ module.exports = {
           { text: "html", link: "/doc/html/" },
           { text: "node", link: "/doc/node/" },
           { text: "工具", link: "/doc/tool/" },
+          { text: "echarts", link: "/doc/tool/echarts/" },
           { text: "常见问题", link: "/doc/problem/" },
         ],
       },
@@ -387,16 +388,19 @@ module.exports = {
         "006-前端http-server开启本地https服务",
         "007-node版本管理n包使用",
       ],
-
+      "/doc/tool/echarts/": [
+        ['', '简介'],
+        "001-饼图-pie1",
+      ],
       "/doc/tool/": [
-        {
-          title: "echarts图表",
-          collapsable: false, // 让一个组永远都是展开状态
-          children: [
-            ['echarts/', '简介'],
-            "echarts/001-饼图-pie1",
-          ],
-        },
+        // {
+        //   title: "echarts图表",
+        //   collapsable: false, // 让一个组永远都是展开状态
+        //   children: [
+        //     ['echarts/', '简介'],
+        //     "echarts/001-饼图-pie1",
+        //   ],
+        // },
         {
           title: "webpack教程",
           collapsable: false,
@@ -409,6 +413,7 @@ module.exports = {
         "004-prettier代码格式化工具",
         "005-Moment日期处理类库",
       ],
+      
       // 常见问题
       "/doc/problem/": [
         "001-antd组件在react遇到的问题",
