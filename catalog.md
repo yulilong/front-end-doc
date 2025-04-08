@@ -77,6 +77,7 @@
     * [js数据类型判断](/doc/js/blog/002-js数据类型判断.md)
     * [js开启摄像头照相人脸识别](/doc/js/blog/003-js开启摄像头照相人脸识别.md)
     * [浏览器控制台反调试](/doc/js/blog/004-浏览器控制台反调试.md)
+    * [JS调用iframe中页面dom](/doc/js/blog/006-JS调用iframe中页面dom.md)
 
 
 

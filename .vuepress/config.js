@@ -189,6 +189,7 @@ module.exports = {
             "blog/002-js数据类型判断",
             "blog/003-js开启摄像头照相人脸识别",
             "blog/004-浏览器控制台反调试",
+            "blog/006-JS调用iframe中页面dom",
           ],
         },
       ],
