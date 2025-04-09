@@ -148,19 +148,6 @@ B页面代码：
 </html>
 ```
 
-关键点说明
-
-1. **通信流程**：
-   - **步骤 1**：子页面加载完成后，主动发送`READY`消息通知父页面
-   - **步骤 2**：父页面收到`READY`后，发送携带操作指令的消息
-   - **步骤 3**：子页面执行DOM操作，并通过`postMessage`反馈结果
-2. **安全措施**：
-   - 双方均通过`event.origin`验证消息来源
-   - `postMessage`时明确指定目标域名（第二个参数）
-3. **跨域限制**：
-   - 不能直接操作iframe的DOM（会报跨域错误）
-   - 所有操作必须通过消息传递间接完成
-
 测试方法
 
 1. **模拟跨域环境**（两种方式任选其一）：
@@ -183,3 +170,171 @@ B页面代码：
 
    - 打开父页面后，会自动填充子页面输入框并触发按钮点击
    - 最终会看到子页面的弹窗提示
+
+### 1.3 关键点说明
+
+1. **通信流程**：
+   - **步骤 1**：子页面加载完成后，主动发送`READY`消息通知父页面
+   - **步骤 2**：父页面收到`READY`后，发送携带操作指令的消息
+   - **步骤 3**：子页面执行DOM操作，并通过`postMessage`反馈结果
+2. **安全措施**：
+   - 双方均通过`event.origin`验证消息来源
+   - `postMessage`时明确指定目标域名（第二个参数）
+3. **跨域限制**：
+   - 不能直接操作iframe的DOM（会报跨域错误）
+   - 所有操作必须通过消息传递间接完成
+
+
+
+## 2. vue3中实现
+
+### 2.1 同源场景实现（父页面与子页面在同一域名）
+
+父页面（Vue3 组件）`A.vue`
+
+```vue
+<template>
+  <div>
+    <h1>Vue3 父页面</h1>
+    <iframe 
+      ref="iframeRef" 
+      src="/b.html"  <!-- 子页面路径（假设放在public目录） -->
+      @load="handleIframeLoad"
+      width="600" height="400"
+    ></iframe>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const iframeRef = ref(null);
+// iframe加载完成后的操作
+const handleIframeLoad = () => {
+  const iframeDoc = iframeRef.value.contentDocument;
+  // 操作子页面输入框
+  const input = iframeDoc.getElementById('bInput');
+  input.value = '来自Vue父页面的内容';
+  // 触发子页面按钮点击
+  const button = iframeDoc.getElementById('bButton');
+  button.click();
+};
+</script>
+```
+
+子页面 `public/b.html`
+
+```vue
+<!DOCTYPE html>
+<html>
+<head>
+  <title>子页面B</title>
+</head>
+<body>
+  <h2>子页面内容</h2>
+  <input type="text" id="bInput">
+  <button id="bButton" onclick="showMessage()">提交</button>
+  <script>
+    function showMessage() {
+      const value = document.getElementById('bInput').value;
+      alert(`子页面收到：${value}`);
+    }
+  </script>
+</body>
+</html>
+```
+
+### 2.2 跨域场景实现（使用 postMessage）
+
+父页面（Vue3 组件）`A.vue`
+
+```vue
+<template>
+  <div>
+    <h1>Vue3 父页面（跨域）</h1>
+    <iframe
+      ref="iframeRef"
+      src="http://another-domain.com/b.html"
+      @load="sendCrossDomainCommand"
+      width="600" height="400"
+    ></iframe>
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+
+const iframeRef = ref(null);
+// 发送跨域指令
+const sendCrossDomainCommand = () => {
+  iframeRef.value.contentWindow.postMessage({
+    type: 'FILL_INPUT',
+    value: '跨域传递的内容'
+  }, 'http://another-domain.com'); // 必须明确指定目标域名
+};
+// 监听子页面反馈
+window.addEventListener('message', (event) => {
+  if (event.origin !== 'http://another-domain.com') return;
+  console.log('收到子页面反馈:', event.data);
+});
+</script>
+```
+
+子页面 `http://another-domain.com/b.html`
+
+```html
+<!DOCTYPE html>
+<html>
+<head> <title>跨域子页面B</title> </head>
+<body>
+  <input type="text" id="bInput">
+  <button id="bButton">提交</button>
+  <script>
+    // 监听父页面消息
+    window.addEventListener('message', (event) => {
+      if (event.origin !== 'http://parent-domain.com') return;
+      if (event.data.type === 'FILL_INPUT') {
+        const input = document.getElementById('bInput');
+        input.value = event.data.value;
+        // 发送操作反馈
+        event.source.postMessage({
+          status: 'SUCCESS',
+          value: input.value
+        }, event.origin);
+      }
+    });
+    // 按钮点击处理
+    document.getElementById('bButton').addEventListener('click', () => {
+      alert('输入内容：' + document.getElementById('bInput').value);
+    });
+  </script>
+</body>
+</html>
+```
+
+### 2.3 关键说明
+
+1. **同源操作要点**：
+   - 使用 `@load` 事件确保iframe加载完成
+   - 通过 `contentDocument` 直接操作DOM
+   - 需要父子页面在同一域名下
+2. **跨域操作要点**：
+   - 使用 `postMessage` 进行安全通信
+   - 必须验证 `event.origin`
+   - 明确指定目标域名（`postMessage` 的第二个参数）
+   - 通过消息类型（`type`）实现多指令处理
+3. **Vue3 特性应用**：
+   - 使用 `ref` 绑定iframe元素
+   - 在 `script setup` 语法中管理逻辑
+   - 通过组合式API组织代码
+
+### 2.4 常见问题解决
+
+1. **无法获取 contentDocument**：
+   - 检查控制台是否报跨域错误
+   - 确认使用 `@load` 事件等待加载完成
+   - 确保父页面地址栏域名与iframe的src同源
+2. **postMessage 不生效**：
+   - 检查目标域名是否完全匹配（包含协议和端口）
+   - 验证 `event.origin` 过滤逻辑
+   - 使用 `console.log` 调试消息流
