@@ -82,7 +82,7 @@ module.exports = {
       },
     ],
     // 侧边栏标题显示的层数, 0:禁用标题（headers）链接， 1：提取到 h2 的标题， 2： 同时提取 h2 和 h3 标题
-    sidebarDepth: 2,
+    sidebarDepth: 1,
     // 侧边栏设置
     // sidebar: sidebarConfig,
     sidebar: {
