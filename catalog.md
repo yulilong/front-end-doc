@@ -213,6 +213,7 @@
     * [vue3核心语法](doc/vue/vue3/002-vue3核心语法.md)
     * [vue3其他API和新组件](doc/vue/vue3/003-vue3其他API和新组件.md)
     * [组件通信](doc/vue/vue3/004-vue3组件通信.md)
+    * [vue3事件](doc/vue/vue3/005-vue3事件.md)
     * [vue3常用语法](doc/vue/vue3/006-vue3常用语法.md)
     * [vue3生命周期](doc/vue/vue3/007-vue3生命周期.md)
     * [vue3单文件CSS](doc/vue/vue3/009-vue3单文件CSS.md)

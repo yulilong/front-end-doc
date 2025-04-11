@@ -363,6 +363,7 @@ module.exports = {
             'vue3/002-vue3核心语法',
             'vue3/003-vue3其他API和新组件',
             'vue3/004-vue3组件通信',
+            'vue3/005-vue3事件',
             'vue3/006-vue3常用语法',
             'vue3/007-vue3生命周期',
             'vue3/009-vue3单文件CSS',
