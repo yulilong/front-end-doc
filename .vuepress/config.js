@@ -380,6 +380,7 @@ module.exports = {
       "/doc/typeScript/": [
         "001-在react中使用TypeScript",
         "002-typescript部分语法说明",
+        "020-TS中常见问题解决",
       ],
 
       "/doc/node/": [

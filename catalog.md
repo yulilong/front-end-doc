@@ -228,6 +228,7 @@
 
 * [在react中使用TypeScript](/doc/typeScript/001-在react中使用TypeScript.md)
 * [typescript部分语法说明](/doc/typeScript/002-typescript部分语法说明.md)
+* [TS中常见问题解决](/doc/typeScript/020-TS中常见问题解决.md)
 
 ## 7. node
 
