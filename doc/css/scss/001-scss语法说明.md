@@ -8,7 +8,9 @@ SASS是世界上最成熟、最稳定、最强大的专业级CSS扩展语言！S
 
 而SCSS是Sass3版本当中引入的新语法特性，完全兼容CSS3的同时继承了Sass强大的动态功能。
 
-下面scss语法可在线测试：https://www.sassmeister.com/
+scss语法在线测试：https://sass-lang.com/playground/
+
+
 
 ## 1. 变量$
 
@@ -24,7 +26,7 @@ nav {
   border: $highlight-border;
 }
 
-//编译后
+// 编译后
 nav {
   width: 100px;
   color: #F90;
@@ -60,7 +62,7 @@ a { color: red; }
 ```scss
 $fancybox-width: 400px !default;
 .fancybox {
-width: $fancybox-width;
+  width: $fancybox-width;
 }
 ```
 
@@ -83,6 +85,7 @@ SASS允许开发人员以嵌套的方式使用CSS，
 #content article h1 { color: #333 }
 #content article p { margin-bottom: 1.4em }
 #content aside { background-color: #EEE }
+
 /* --------------------------------------------------- */
 article {
   ~ article { border-top: 1px dashed #ccc }
@@ -128,7 +131,7 @@ article a:hover { color: red }
   body.ie & { color: green }
 }
 
-/*编译后*/
+/* 编译后 */
 #content aside {color: red};
 body.ie #content aside { color: green }
 ```
@@ -137,7 +140,7 @@ body.ie #content aside { color: green }
 
 ### 2.2 嵌套属性
 
-CSS许多属性都位于相同的命名空间（例如`border-style``border-width``border-color`以及`border-*`等都位于border命名空间下），Scss当中只需要编写命名空间一次，后续嵌套的子属性都将会位于该命名空间之下
+CSS许多属性都位于相同的命名空间（例如`border-style` `border-width` `border-color`以及`border-*` 等都位于border命名空间下），Scss当中只需要编写命名空间一次，后续嵌套的子属性都将会位于该命名空间之下
 
 ```scss
 nav {
@@ -148,7 +151,7 @@ nav {
   }
 }
 
-/*编译后*/
+/* 编译后 */
 nav {
   border-style: solid;
   border-width: 1px;
@@ -162,7 +165,7 @@ nav {
     weight: bold;
   }
 }
-/*编译后*/
+/* 编译后 */
 .demo {
   font: 20px/24px fantasy;
   font-weight: bold;
@@ -185,7 +188,7 @@ scss也有`@import`规则，不同的是，scss会在生成css文件时就把相
 
 当通过`@import`把scss样式分散到多个文件时，有的scss文件并不需要生成独立的css文件，这样的文件称为局部文件。scss有一个特殊的约定来命名这些文件。
 
-scss局部文件的文件名以下划线开头(`_variable.scss`)，这样，scss就不会在编译时单独编译这个文件输出css，而只把这个文件用作导入。
+scss局部文件的文件名以下划线开头(`_variable.scss`)，这样，scss就不会在编译时单独编译这个文件输出css，而只把这个文件用做导入。
 
 ```scss
 // _reset.scss
@@ -201,14 +204,16 @@ body {
   background-color: #efefef;
 }
 
-/*编译后*/
+/* 编译后 */
 html, body, ul, ol {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+}
 
 body {
   font: 100% Helvetica, sans-serif;
-  background-color: #efefef; }
+  background-color: #efefef;
+}
 ```
 
 ### 3.2 嵌套导入
@@ -221,11 +226,20 @@ aside {
   background: blue;
   color: white;
 }
+```
 
+在`base.scss`文件的局部引入：
+
+```scss
 // base.scss
-.blue-theme {@import "blue-theme"}
+.blue-theme {
+	@import "blue-theme"
+}
+```
 
-//生成的结果跟你直接在.blue-theme选择器内写_blue-theme.scss文件的内容完全一样。
+编译后，生成的结果跟你直接在`.blue-theme`选择器内写`_blue-theme.scss`文件的内容完全一样：
+
+```scss
 .blue-theme {
   aside {
     background: blue;
@@ -250,25 +264,31 @@ aside {
 
 ## 4. 静默注释
 
-css注释格式：`/* ... */`，这个注释会显示到源码中。
+在 scss 文件中 css 注释格式`/* ... */`会显示到源码中。
 
-scss提供了一种静默注释，其注释内容不会出现在生成的css文件中，格式: `//`
+静默注释：
 
-```scss
-body {
-  color: #333; // 这种注释内容不会出现在生成的css文件中
-  padding: 0; /* 这种注释内容会出现在生成的css文件中 */
-}
-```
+- 在 scss 中，`//` 注释内容不会出现在生成的css文件中。
 
-scss在默写情况下，`/* ... */`注释也会在生成的css文件中抹去：当注释出现在原生css不允许的地方，如在`css`属性或选择器中，`sass`将不知如何将其生成到对应`css`文件中的相应位置，于是这些注释被抹掉：
+  ```scss
+  body {
+    color: #333; // 这种注释内容不会出现在生成的css文件中
+    padding: 0; /* 这种注释内容会出现在生成的css文件中 */
+  }
+  ```
 
-```scss
-body {
-  color /* 这块注释内容不会出现在生成的css中 */: #333;
-  padding: 1; /* 这块注释内容也不会出现在生成的css中 */ 0;
-}
-```
+scss 在特殊情况下 `/* ... */` 注释也会在生成的 css 文件中删除：
+
+- 当注释出现在原生css不允许的地方，如在`css`属性或选择器中，`sass`将不知如何将其生成到对应`css`文件中的相应位置，于是这些注释被抹掉：
+
+  ```scss
+  body {
+    color /* 这块注释内容不会出现在生成的css中 */: #333;
+    padding: 1; /* 这块注释内容也不会出现在生成的css中 */ 0;
+  }
+  ```
+
+  
 
 ## 5. 混合@mixin、@include
 
@@ -283,10 +303,11 @@ notice {
   @include rounded-corners;
 }
 
-/*编译后*/
+/* 编译后 */
 notice {
   border: 2px solid #00aa00;
-  border-radius: 5px;}
+  border-radius: 5px;
+}
 ```
 
 ### 5.1 混合器中有css规则
@@ -302,7 +323,8 @@ ul.plain {
   color: #444;
   @include no-bullets;
 }
-/*编译后*/
+
+/* 编译后 */
 ul.plain {
   color: #444;
   list-style: none;
@@ -332,7 +354,7 @@ ul {
   );
 }
 
-/*编译后*/
+/* 编译后 */
 a { color: blue; }
 a:hover { color: red; }
 a:visited { color: green; }
@@ -362,9 +384,7 @@ ul:visited { color: green; }
 
 ### 5.4 何时使用混合器
 
-判断一组属性是否应该组合成一个混合器，一条经验法则就是你能否为这个混合器想出一个好的名字。比如`rounded-corners``fancy-font`或者`no-bullets`，那么往往能够构造一个合适的混合器。如果你找不到，这时候构造一个混合器可能并不合适。
-
-
+判断一组属性是否应该组合成一个混合器，一条经验法则就是你能否为这个混合器想出一个好的名字。比如 `rounded-corners` `fancy-font` 或者 `no-bullets`，那么往往能够构造一个合适的混合器。如果你找不到，这时候构造一个混合器可能并不合适。
 
 ## 6. 继承@extend
 
@@ -374,14 +394,14 @@ scss减少重复的主要特性就是选择器继承。
 
 ```scss
 .error { border: 1px solid red; }
- //应用到hl.seriousError
+// 应用到 hl.seriousError
 h1.error { font-size: 1.2rem; }
 .seriousError {
   @extend .error;
   border-width: 3px;
 }
 
-/*编译后*/
+/* 编译后 */
 .error, .seriousError {  border: 1px solid red; }
 h1.error, h1.seriousError { font-size: 1.2rem; }
 .seriousError { border-width: 3px; }
@@ -398,15 +418,15 @@ h1.error, h1.seriousError { font-size: 1.2rem; }
 %message-common { border: 1px solid #ccc; }
 .message { @extend %message-common; }
 
-/*编译后*/
+/* 编译后 */
 .message { border: 1px solid #ccc; }
 ```
 
 ### 6.2 !optional解决继承不存在报错
 
-如果 `@extend` 失败会收到错误提示，比如，这样写 `a.important {@extend .notice}`，当没有 `.notice` 选择器时，将会报错
+如果 `@extend` 失败会收到错误提示，比如，这样写 `a.important {@extend .notice}`，当没有 `.notice` 选择器时，将会报错。
 
-!optional标记前面的扩展不必须生成一个新的选择器。
+`!optional`标记前面的扩展不必须生成一个新的选择器。
 
 ```scss
 a.important {
@@ -414,13 +434,11 @@ a.important {
 }
 ```
 
-
-
 ### 6.1 继承的工作细节
 
 跟变量和混合器不同，继承不是仅仅用`css`样式替换@extend处的代码那么简单。
 
-`@extend`背后最基本的想法是，如果`.seriousError @extend .error`， 那么样式表中的任何一处`.error`都用`.error``.seriousError`这一选择器组进行替换。这就意味着相关样式会如预期那样应用到`.error`和`.seriousError`。当`.error`出现在复杂的选择器中，比如说`h1.error``.error a`或者`#main .sidebar input.error[type="text"]`，那情况就变得复杂多了，但是不用担心，`sass`已经为你考虑到了这些。
+`@extend`背后最基本的想法是，如果`.seriousError @extend .error`， 那么样式表中的任何一处`.error`都用`.error` `.seriousError`这一选择器组进行替换。这就意味着相关样式会如预期那样应用到`.error`和`.seriousError`。当`.error`出现在复杂的选择器中，比如说`h1.error` `.error a`或者`#main .sidebar input.error[type="text"]`，那情况就变得复杂多了，但是不用担心，`sass`已经为你考虑到了这些。
 
 关于`@extend`有两个要点你应该知道。
 
@@ -446,7 +464,7 @@ aside[role="complementary"] {
   width: 300px / 960px * 100%;
 }
 
-/*编译后*/
+/* 编译后 */
 .container { width: 100%; }
 article[role=main] {  float: left; width: 62.5%; }
 aside[role=complementary] { float: right; width: 31.25%; }
