@@ -176,7 +176,7 @@ const classes = useCssModule()
 
 ## 2. 动态样式
 
-### 2.1 响应式 CSS 变量：`v-bind()`
+### 2.1 响应式 CSS 变量 v-bind()
 
 单文件组件的 `<style>` 标签支持使用 `v-bind` CSS 函数将 CSS 的值链接到动态的组件状态：
 
@@ -232,6 +232,18 @@ p {
   }"></div>
 </template>
 ```
+
+### 2.3 动态内联style样式
+
+```vue
+<template>
+  <div 
+     :style="{ width: `${number}px`}"
+  />
+</template>
+```
+
+
 
 ## 3. 预处理器支持
 
