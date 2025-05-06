@@ -251,9 +251,9 @@
 * [Moment日期处理类库](/doc/tool/005-Moment日期处理类库.md)
 * echarts图表
     * [简介](doc/tool/echarts/README.md)
-    * [饼图(pie)示例1](doc/tool/echarts/001-饼图-pie1.md)
-    * [折线图(line)示例1](doc/tool/echarts/002-折线图-line1.md)
-    * [柱状图(bar)示例1](doc/tool/echarts/003-柱状图-bar1.md)
+    * [饼图(pie)示例](doc/tool/echarts/001-饼图-pie1.md)
+    * [折线图(line)示例](doc/tool/echarts/002-折线图-line1.md)
+    * [柱状图(bar)示例](doc/tool/echarts/003-柱状图-bar1.md)
 
 ## 9. 常见问题
 
