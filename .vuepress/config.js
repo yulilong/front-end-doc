@@ -145,6 +145,7 @@ module.exports = {
         "013-JS数字计算精度和显示",
         "014-Web-Worker使用教程",
         "015-JS常见问题解决",
+        "016-常用的代码片段",
         {
           title: "函数",
           collapsable: false, // 让一个组永远都是展开状态
@@ -170,7 +171,6 @@ module.exports = {
           // collapsable: false,
           children: [
             "advanced/002-错误处理try_catch",
-            "advanced/003-常用的代码片段",
             "advanced/004-轮播代码实现",
             "advanced/006-手机端页面开发",
             "advanced/007-SEO搜索引擎优化",
