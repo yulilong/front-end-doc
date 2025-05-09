@@ -223,7 +223,7 @@
     * [vue3的路由](doc/vue/vue3/019-vue-router4.x.md)
     * [pinia状态管理](doc/vue/vue3/020-pinia状态管理.md)
     * [vite](doc/vue/vue3/099-vite.md)
-    * [弄懂npm-create-vue](doc/vue/vue3/100-弄懂npm-create-vue.md)
+    * [新建vue3项目及相关问题](doc/vue/vue3/100-新建vue3项目及相关问题.md)
     * [vite关于低版本浏览器的支持](doc/vue/vue3/101-vite关于低版本浏览器的支持.md)
 
 ## 6. TypeScript

@@ -372,7 +372,7 @@ module.exports = {
             'vue3/019-vue-router4.x',
             'vue3/020-pinia状态管理',
             'vue3/099-vite',
-            'vue3/100-弄懂npm-create-vue',
+            'vue3/100-新建vue3项目及相关问题',
             'vue3/101-vite关于低版本浏览器的支持',
           ],
         },
