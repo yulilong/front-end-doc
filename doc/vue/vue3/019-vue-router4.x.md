@@ -25,11 +25,11 @@ import Home from '@/pages/Home.vue'
 import About from '@/pages/About.vue'
 
 const router = createRouter({
-	history:createWebHistory(),
-	routes:[
-		{ path:'/home', component:Home },
-		{ path:'/about', component:About }
-	]
+  history:createWebHistory(),
+  routes:[
+    { path:'/home', component:Home },
+    { path:'/about', component:About }
+  ]
 })
 export default router
 ```
@@ -82,8 +82,8 @@ app.mount('#app')
    >
    > ```js
    > const router = createRouter({
-   > 	history:createWebHistory(), //history模式
-   > 	/******/
+   >   history:createWebHistory(), //history模式
+   >   /******/
    > })
    > ```
 
@@ -94,8 +94,8 @@ app.mount('#app')
    >
    > ```js
    > const router = createRouter({
-   > 	history:createWebHashHistory(), //hash模式
-   > 	/******/
+   >   history:createWebHashHistory(), //hash模式
+   >   /******/
    > })
    > ```
 
@@ -132,16 +132,16 @@ routes:[
 ```ts
 const router = createRouter({
   history:createWebHistory(),
-	routes:[
-		{
-			name:'xinwen',
-			path:'/news',
-			component:News,
-			children:[
-				{ name:'xiang', path:'detail', component:Detail }
-			]
-		},
-	]
+  routes:[
+    {
+      name:'xinwen',
+      path:'/news',
+      component:News,
+      children:[
+        { name:'xiang', path:'detail', component:Detail }
+      ]
+    },
+  ]
 })
 export default router
 ```
@@ -177,9 +177,9 @@ export default router
 
 ```js
 {
-	name:'xiang',
-	path:'detail/:id/:title/:content',
-	component:Detail,
+  name:'xiang',
+  path:'detail/:id/:title/:content',
+  component:Detail,
   // props的对象写法，作用：把对象中的每一组key-value作为props传给Detail组件
   // props:{a:1,b:2,c:3}, 
   // props的布尔值写法，作用：把收到了每一组params参数，作为props传给Detail组件
@@ -308,7 +308,7 @@ const route = useRoute();
 **注意**：
 
 - 传递`params`参数时，需要提前在路由配置中占位。
-- 传递`params`参数时，若使用`to`的对象写法，必须使用`name`配置项，不能用`path`。详情见8.2.1节的解释
+- 传递`params`参数时，若使用`to`的对象写法，必须使用`name`配置项，不能用`path`。详情见4.2.1节的解释
 
 路由文件：
 
