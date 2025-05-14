@@ -461,79 +461,53 @@ router.push({ name: 'Product', params: { id: 456, name: 'Laptop' }
      hash: '#section-2',     // 哈希锚点（URL 中显示为 #section-2）
      replace: false,         // 是否替换当前历史记录（默认为 false，即新增记录）
    });
+   
+   // 参数说明
+   // 1. path：直接指定目标路径，需与路由配置中的 path 匹配。
+   // 2. name：通过路由配置中定义的 name 跳转，适合解耦路径与逻辑。
+   // 路由配置示例
+   const routes = [
+     { path: '/user/:id', name: 'UserProfile', component: UserProfile }
+   ];
+   // 通过 name 跳转
+   router.push({ name: 'UserProfile', params: { id: 123 } });
+   
+   // 3. params
+   // 用于传递动态路由参数（如 /user/:id）。
+   // 必须与路由配置的 path 或 name 匹配。
+   // 若使用 path，params 会被忽略，需直接在路径中拼接参数：
+   router.push({ path: `/user/${userId}` }); // ✅
+   router.push({ path: '/user', params: { id: 123 } }); // ❌ params 无效
+   // 若使用 name，可通过 params 传递参数：
+   router.push({ name: 'UserProfile', params: { id: 123 } }); // ✅
+   
+   // 4. query
+   // 传递 URL 查询参数（显示在 URL 中）。
+   // 参数会被序列化为 ?key1=value1&key2=value2。
+   router.push({
+     path: '/search',
+     query: { q: 'vue', page: 2 }
+   });
+   // 结果：/search?q=vue&page=2
+   
+   // 5. hash：指定页面内的锚点（即 #hash 部分）
+   router.push({ path: '/about', hash: '#contact' });
+   // 结果：/about#contact
+   
+   // 6. replace
+   // 默认为 false，导航时会向历史栈添加新记录。
+   // 设为 true 时，替换当前历史记录（相当于 router.replace()）：
+   router.push({ path: '/login', replace: true });
    ```
 
-   
+3. **总结**
 
-#### 5.1.1 路由对象形式参数说明
+   - **字符串路径**：简单直接，适合固定路径。
+   - **对象形式**：灵活控制参数、查询、哈希等。
+   - **`params` vs `query`**：`params` 用于动态路由，`query` 用于 URL 可见参数。
+   - **`replace`**：控制是否替换当前历史记录。
 
-- **`path`**：直接指定目标路径，需与路由配置中的 `path` 匹配。
-
-- **`name`**：通过路由配置中定义的 `name` 跳转，适合解耦路径与逻辑。
-
-  ```js
-  // 路由配置示例
-  const routes = [
-    { path: '/user/:id', name: 'UserProfile', component: UserProfile }
-  ];
-  
-  // 通过 name 跳转
-  router.push({ name: 'UserProfile', params: { id: 123 } });
-  ```
-
-- **`params`**
-
-  - 用于传递动态路由参数（如 `/user/:id`）。
-
-  - **必须与路由配置的 `path` 或 `name` 匹配**。
-
-  - **注意**：
-
-    - 若使用 `path`，`params` 会被忽略，需直接在路径中拼接参数：
-
-      ```js
-      router.push({ path: `/user/${userId}` }); // ✅
-      router.push({ path: '/user', params: { id: 123 } }); // ❌ params 无效
-      ```
-
-    - 若使用 `name`，可通过 `params` 传递参数：
-
-      ```js
-      router.push({ name: 'UserProfile', params: { id: 123 } }); // ✅
-      ```
-
-- **`query`**
-
-  - 传递 URL 查询参数（显示在 URL 中）。
-
-  - 参数会被序列化为 `?key1=value1&key2=value2`。
-
-    ```js
-    router.push({
-      path: '/search',
-      query: { q: 'vue', page: 2 }
-    });
-    // 结果：/search?q=vue&page=2
-    ```
-
--  **`hash`**：指定页面内的锚点（即 `#hash` 部分）
-
-  ```js
-  router.push({ path: '/about', hash: '#contact' });
-  // 结果：/about#contact
-  ```
-
-- **`replace`**
-
-  - 默认为 `false`，导航时会向历史栈添加新记录。
-
-  - 设为 `true` 时，替换当前历史记录（相当于 `router.replace()`）：
-
-    ```js
-    router.push({ path: '/login', replace: true });
-    ```
-
-#### 5.1.2 特殊场景与注意事项
+#### 5.1.1 特殊场景与注意事项
 
 1. **动态路由参数的可选性**
 
