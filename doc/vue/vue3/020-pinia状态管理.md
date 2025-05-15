@@ -54,30 +54,11 @@ app.mount('#app')
 
 ## 3. 存储+读取数据
 
-1. Store`是一个保存：**状态**、**业务逻辑** 的实体，每个组件都可以**读取**、**写入**它。
+1. Store是一个保存：**状态**、**业务逻辑** 的实体，每个组件都可以**读取**、**写入**它。
 
 2. 它有三个概念：`state`、`getter`、`action`，相当于组件中的： `data`、 `computed` 和 `methods`。
 
-3. 具体编码：`src/store/count.ts`
-
-   ```ts
-   // 引入defineStore用于创建store
-   import {defineStore} from 'pinia'
-   
-   // 定义并暴露一个store
-   export const useCountStore = defineStore('count',{
-     // 动作
-     actions:{},
-     // 状态
-     state(){
-       return { sum:6 }
-     },
-     // 计算
-     getters:{}
-   })
-   ```
-
-4. 具体编码：`src/store/talk.ts`
+3. 具体编码：`src/store/talk.ts`
 
    ```js
    // 引入defineStore用于创建store
@@ -85,38 +66,43 @@ app.mount('#app')
    
    // 定义并暴露一个store
    export const useTalkStore = defineStore('talk',{
-     // 动作
-     actions:{},
-     // 状态
+     // 状态：存储的变量
      state(){
        return {
+         num: 10,
+         info: null,
          talkList:[
-           {id:'yuysada01',content:'你今天有点怪，哪里怪？怪好看的！'},
-        		{id:'yuysada02',content:'草莓、蓝莓、蔓越莓，你想我了没？'},
-           {id:'yuysada03',content:'心里给你留了一块地，我的死心塌地'}
+           {id:'da01', content:'你今天有点怪，哪里怪？怪好看的！'},
+           {id:'da02', content:'草莓、蓝莓、蔓越莓，你想我了没？'},
          ]
        }
      },
-     // 计算
-     getters:{}
+     // 动作：执行方法，用来设置状态
+     actions:{
+       // 同步方法
+       setNumber(num: umber) {
+         this.num = num
+       }
+       // 异步方法
+       getInfo() {
+         info().then( res => {
+           this.info = res.info
+         })
+       }
+     },
+     // 计算：根据状态来计算新变量
+     getters:{
+       // 基本 getter，返回 state 的计算值
+       doubleNum: (state) => state.num * 2,
+       // 可以访问其他 getter
+       doubleCountNum(): number {
+         return this.doubleNum + 1;
+       },
+     }
    })
    ```
 
 5. 组件中使用`state`中的数据
-
-   ```vue
-   <template>
-     <h2>当前求和为：{{ sumStore.sum }}</h2>
-   </template>
-   
-   <script setup lang="ts" name="Count">
-     // 引入对应的useXxxxxStore	
-     import {useSumStore} from '@/store/sum'
-     
-     // 调用useXxxxxStore得到对应的store
-     const sumStore = useSumStore()
-   </script>
-   ```
 
    ```vue
    <template>
@@ -129,12 +115,16 @@ app.mount('#app')
    
    <script setup lang="ts" name="Count">
      import axios from 'axios'
+     // 引入对应的useXxxxxStore	
      import {useTalkStore} from '@/store/talk'
-   
+     // 调用useXxxxxStore得到对应的store
      const talkStore = useTalkStore()
+     // 执行方法
+     talkStore.setNumber(20)
+     // getter 使用
+     talkStore.doubleNum
    </script>
    ```
-
 
 ## 4. 修改数据(三种方式)
 
@@ -195,9 +185,9 @@ countStore.incrementOdd(n.value)
 
 ```vue
 <template>
-	<div class="count">
-		<h2>当前求和为：{{sum}}</h2>
-	</div>
+  <div class="count">
+    <h2>当前求和为：{{sum}}</h2>
+  </div>
 </template>
 <script setup lang="ts" name="Count">
   import { useCountStore } from '@/store/count'
