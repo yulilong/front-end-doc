@@ -263,7 +263,7 @@ module.exports = {
         "004-css兼容性",
         "005-normalize-reset",
         "006-css常用简单效果样式",
-        "007-css一些常见效果代码",
+        "007-css复杂效果示例",
         "008-margin外边距合并",
         "009-float浮动",
         "010-css常用属性",

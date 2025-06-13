@@ -135,7 +135,7 @@
     * [css兼容性](/doc/css/004-css兼容性.md)
     * [normalize-reset](/doc/css/005-normalize-reset.md)
     * [css常用简单效果样式](/doc/css/006-css常用简单效果样式.md)
-    * [css一些常见效果代码](/doc/css/007-css一些常见效果代码.md)
+    * [css复杂效果示例](/doc/css/007-css复杂效果示例.md)
     * [margin外边距合并](/doc/css/008-margin外边距合并.md)
     * [float浮动](/doc/css/009-float浮动.md)
     * [css常用属性](/doc/css/010-css常用属性.md)
