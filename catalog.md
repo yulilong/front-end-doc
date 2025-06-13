@@ -64,7 +64,6 @@
     * [函数柯里化](/doc/js/006-1函数柯里化.md)
 * 高级
     * [002-错误处理try_catch](/doc/js/advanced/002-错误处理try_catch.md)
-    * [003-常用的代码片段](/doc/js/advanced/003-常用的代码片段.md)
     * [004-轮播代码实现](/doc/js/advanced/004-轮播代码实现.md)
     * [006-手机端页面开发](/doc/js/advanced/006-手机端页面开发.md)
     * [007-SEO搜索引擎优化](/doc/js/advanced/007-SEO搜索引擎优化.md)
@@ -135,7 +134,7 @@
     * [定位](/doc/css/003-定位.md)
     * [css兼容性](/doc/css/004-css兼容性.md)
     * [normalize-reset](/doc/css/005-normalize-reset.md)
-    * [css常用代码片段](/doc/css/006-css常用代码片段.md)
+    * [css常用简单效果样式](/doc/css/006-css常用简单效果样式.md)
     * [css一些常见效果代码](/doc/css/007-css一些常见效果代码.md)
     * [margin外边距合并](/doc/css/008-margin外边距合并.md)
     * [float浮动](/doc/css/009-float浮动.md)
