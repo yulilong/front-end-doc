@@ -1,0 +1,94 @@
+<!--
+	此示例下载自 https://echarts.apache.org/examples/zh/editor.html?c=line-smooth&code=PYBwLglsB2AEC8sDeAoWsD0HaBezQWJqAhboLKJgdv6BY_wBZhggDOAXFgKYDGFAhgE5i0B07Idmya9gnAOYYAXhQyhIMXlQC2AGwDEkMKqZpM2QC6mgKjlAf2qALCIKBuA0DgFoAyMvVp31ke9GCYAPMM4Dkx8wR2PgA0rrDuXgDKYACeTsgAZjBgkRBSTM4AzAAMwQC-oegFeliw5oD7sYCd2oAWaoAvqQSAfdEkgDD_gPfKgKdygMAxgEFB5oC7sYDdnjUEgLLyJHrinBAAJs5IsDoJ3rA5wbBT4lTOAEzZmABUPYM1gJ3xfaMk-9jF6KWA89aAhuaADqaAdsYEgLAqgOradk3NgLBygEzFQCYSn9AHxmgC5PPQ6cRMaCzZCwABGwGowGUvmyAFIQgsmEtfCxYe5OD5YDd9LBAAT51kA356ABiU7kZXoAoOUAX4qABudADUGgDtbQDpXoBj5WaENegEP5QD2BugqdYKMAAG5MTgOYDAVSQEBzMJgDYwzi-dgeCC0EJ6cmlAAagBd4wAK6tZxU09B4AIIGhguSXhGIgDKwHwsdjucRiGLG93Tf3sZwAbR82QAnPRstkADrQbIAdgAtNkAGw4nwARmyCeTqczObz-fzxZT6azubWBe21dLdYrTcTNbL9Z9-fbJdr5YbvebA9zAF1CmTJ6UAJrW21i-3oGLOw0a92xL2-WXsVQAVyYPhN0-wEIIr0A3z6AdCVmndALOer0AvwmAQMjrIAG6MA9GaAYoS74BvH0A0eq3s8bwQk0gAU6oAm_GADOJgDftoABUp6LQCoQEwrqRmEqDuug0DsMo3o-K8-Y4qUEHAR8nxhOgYZgBGsCRgAHLsazZpk2xrAArNk-ZrAALJkPEcYmaxpkJsD5qx2QTpRHpbj6qgQNAh6Tu6tDKMqYAUM4WoHmE5LoJhWE4XhvivNsxHYKRrzkdJ1G0ZGOS5CsnGCY5saiYW7nZNsAlifm2aScpkqbvh8mKSGWGqepmnhJwOnuuSY4oHkADcQA
+	⚠ 请注意，该图表不是 Apache ECharts 官方示例，而是由用户代码生成的。请注意鉴别其内容。
+-->
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-gl/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-stat/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-graph-modularity extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-graph-modularity/dist/echarts-graph-modularity.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/bmap.min.js"></script>
+  -->
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  // 更多的配置：https://echarts.apache.org/zh/option.html#title
+  // 整个图表的总标题
+  title: {
+    text: '整个图表的标题',
+    textStyle: {fontSize: 30,},
+  },
+  // 图表跟容器间的设置，可以调节图表距离容器的位置
+  grid: { left: 30, right: 20 /*调节距离容器边距的位置*/ },
+  // 每条数据的名字标题设置，不写则不显示
+  legend: { bottom: '0%', left: 'center' },
+  // 鼠标移到每个数据上出现悬浮窗口，显示数据信息   鼠标hover
+  tooltip: {
+    trigger: 'axis',
+  },
+  // X轴坐标信息设置
+  xAxis: {
+    type: 'category',
+    data: ['09:00\n07-06', '10:00\n07-06', '11:00\n07-06', '12:00\n07-06', '12:00\n07-06', '12:00\n07-06', '12:00\n07-06'],
+  },
+  // Y轴坐标信息设置
+  yAxis: {
+    type: 'value'
+  },
+  // 显示的数据系列，每种数据都要标记是那种类型，每条数据的显示设置在这里添加
+  series: [
+    {
+      name: '数据1', // 这条数据的名字
+      data: [820, 632, 501, 434, 500, 700, 1320],
+      type: 'line',
+      smooth: true
+    },
+    {
+      name: '数据2', // 这条数据的名字
+      data: [300, 350, 500, 900, 1000, 1024, 1160],
+      type: 'line',
+      smooth: true
+    },
+  ]
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>
