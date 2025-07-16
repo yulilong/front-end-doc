@@ -145,12 +145,12 @@ module.exports = {
         "013-JS数字计算精度和显示",
         "014-Web-Worker使用教程",
         "015-JS常见问题解决",
-        "016-常用的代码片段",
         {
           title: "JS效果-代码片段",
           collapsable: false,
           children: [
             // "01-js-example/",
+            "01-js-example/01-常用的代码片段",
             "01-js-example/01-示例1",
           ],
         },

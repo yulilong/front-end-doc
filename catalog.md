@@ -58,8 +58,8 @@
 * [JS数字计算精度和显示](/doc/js/013-JS数字计算精度和显示.md)
 * [Web-Worker使用教程](/doc/js/014-Web-Worker使用教程.md)
 * [JS常见问题解决](/doc/js/015-JS常见问题解决.md)
-* [常用的代码片段](/doc/js/016-常用的代码片段.md)
 * JS效果-代码片段
+    * [常用的代码片段](/doc/js/01-js-example/01-常用的代码片段.md)
     * [代码示例1](/doc/js/01-js-example/01-示例1.md)
 * 函数
     * [函数](/doc/js/006-函数.md)
