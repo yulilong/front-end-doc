@@ -147,6 +147,14 @@ module.exports = {
         "015-JS常见问题解决",
         "016-常用的代码片段",
         {
+          title: "JS效果-代码片段",
+          collapsable: false,
+          children: [
+            // "01-js-example/",
+            "01-js-example/01-示例1",
+          ],
+        },
+        {
           title: "函数",
           collapsable: false, // 让一个组永远都是展开状态
           children: [
