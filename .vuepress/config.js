@@ -151,7 +151,7 @@ module.exports = {
           children: [
             // "01-js-example/",
             "01-js-example/01-常用的代码片段",
-            "01-js-example/01-示例1",
+            "01-js-example/02-示例1",
           ],
         },
         {
