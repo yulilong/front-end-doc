@@ -1,0 +1,153 @@
+<!--
+	此示例下载自 https://echarts.apache.org/examples/zh/editor.html?c=bar-simple&code=PYBwLglsB2AEC8sDeAoW6MHpO0C6mgqOUE7tQCzVAQt0BmAwezNAnILQ3QCMBDAYwGsBzAJ2AFdoAJgGFgAG2BcAXLADkAYgBmSmQBo69bLEC0coBfUwOAWgDIz1GSGFEBTaanr0w5gB5hpMwPXOgI31APpmA_tVXH6FhSdZFnNoOy5fGxNQZxCw8wi1KPQ7RwBlMABPCys_GwUYMDSIAC9LWAAmAAYk5PQWMQlnOQBmNpk89ABfPK7ajRxABeNALk9AMQtAdgtAeH08sGAxSBBcurAuCA4OBOcIOwBbSOTmdm4-QRFxKVk5KuvVWE1ATn1AdK8qQEW82mWHIqyc5E6MBvOzSUChkdTuOEA4aaAdW1AL5u72SPSifTymkAnhmAO7dDIA-M2GgD7owB2_tJABTqgFS9QAXCYBRHS0OLyFg2gissAYwDAsx2ziqtwCQRkcXCoORUU0gAdTQB2xoAcjPh9ABTVgAG15AwABwAdgALABGJi3eQqhR6vUyAC6_QwAGcEhBzGbpHK_ppAADmJMAQjqAeATAHBmgE740YuP7WMFZEDlGQgK37OpcJgCCC8G3ymRKgBsAFIdarUybwbBAOXGgDYlb0uQC92oAyvUAMSqAWXl8X90JoCd4iSQtKRK4Asf7lgBYbQDOepXADD_sEAQeqAF7dK0bq7A-Zt4wBWKqplSyNVTjOmqICJhgJi2sfoJCwABuTFEvHKGuu8-25h2GWy5V3MouMi4HGYAAoarB35-AHRVKcASgFWBETBE0x1EJgGHMURGTNAALYAAHdpAUQ8LSAlcbDNCALDCaQVmPedNEAQM9ACNrQASuUAJLkxxKaQNT-QVkk0QBuOUAMHUXC8FtABI5fAxUAdXU_THaAmB2YN3G8cNkkDYNQ3MCSokjaNY1tGQZznWQVSXY1CJwPMmJcQAs5WLMda3xetG2bfE2y7XsB2HfFRzBcdQnCZTVJ1RdlzHNcNy3Ryd23DADyPE8WmuGoAvQISROcQBLJUATXk5LBTQLyvb5bwirN6kaB85GVdUtQ6PysBwYDHIYxz_SKoLj1opUwowuoouDQAn3UAMCVAFlExK6mS3Zrx-Sq_M0LLAUuA19RBDLNFKsFpqiUDHPAyDoN-Iq4MQ5DUPMMdyuSRaoIAGQgaB0tW-CkNgFDRAtbaGowGjKno27NEAGm9ABi5fA2MACH_AApXQA4uVgABBWBABezQB0n0ASH_ABQCSHACwEwBx-MAA-VAAKlQA87UABucBMcprnDEnxbpSTIg2cGSuowBSYzjBU3PnBNZy0rNABXrQAoOUAI3Tgf04ycDrLwG2IJtWw7bt8T7IcRzHCcLipumaY8rSvPXTd5QCgbHOqkL6oy7HZHi0mhRwFK-pOorMvHbLmjyzVtUmkqAp2uoVbBNXao143YC1mQ2s6_GbANtKlld02RpkFYmGgM0QCYLhnMK43ZoRMd5rBPblt3NbzsutC7ZsZPDuOmCzo2q7zHQ6jpBaei8gcjAugAbiAA
+	⚠ 请注意，该图表不是 Apache ECharts 官方示例，而是由用户代码生成的。请注意鉴别其内容。
+-->
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-gl/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-stat/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-graph-modularity extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-graph-modularity/dist/echarts-graph-modularity.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/bmap.min.js"></script>
+  -->
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+      // 整个容器的背景色
+      backgroundColor: '#fff',
+      // 中间标题
+      title: {
+        text: '环形饼图',
+        left: 'center',
+        top: 'center',
+        textStyle: {
+          fontSize: 20,
+          color: '#333'
+        }
+      },
+      // 提示框样式
+      tooltip: {
+        trigger: 'item',
+        backgroundColor: '#000', // 弹窗背景黑色
+        textStyle: {
+          color: '#fff'         // 文字白色
+        }
+      },
+      // 项目标题显示设置: 在底部居中显示
+      legend: { bottom: '0', left: 'center' },
+      // 数据颜色
+      color: ['#b8741a', '#7f7f7f'],
+      series: [
+        // 最底层透明边框环
+        {
+          type: 'pie',
+          radius: ['86%', '87%'], // 控制边框环宽度和位置
+          // 设置饼图在容器中的位置：[水平位置， 垂直位置]
+          center: ['50%', '45%'],
+          data: [
+            { value: 100, itemStyle: { color: 'rgba(0, 0, 0, 0.05)' } }
+          ],
+          label: { show: false },
+          silent: true, // 禁止交互
+          z: 1
+        },
+        // 主圆环图：两个数据块
+        {
+          name: '环形饼图',
+          type: 'pie',
+          radius: ['50%', '75%'], // 控制主环厚度
+          // 设置饼图在容器中的位置：[水平位置， 垂直位置]
+          center: ['50%', '45%'],
+          data: [
+            {
+              value: 13000,
+              name: '剩余',
+              // itemStyle: {
+              //   color: '#b8741a'
+              // }
+            },
+            {
+              value: 18000,
+              name: '已分配',
+              // itemStyle: {
+              //   color: '#7f7f7f'
+              // }
+            }
+          ],
+          label: {
+            show: false
+          },
+          labelLine: {
+            show: false
+          },
+          z: 2
+        },
+        // 第二个圆环（用于 A 更粗）——通过叠加实现
+        {
+          name: '环形饼图',
+          type: 'pie',
+          radius: ['50%', '80%'], // 比上面更厚
+          // 设置饼图在容器中的位置：[水平位置， 垂直位置]
+          center: ['50%', '45%'],
+          data: [
+            {
+              value: 13000,
+              name: '剩余',
+              // itemStyle: {
+              //   color: '#b8741a'
+              // }
+            },
+            {
+              value: 18000,
+              name: '已分配',
+              itemStyle: {
+                color: 'transparent'
+              }
+            }
+          ],
+          label: { show: false },
+          labelLine: { show: false },
+          z: 3
+        }
+      ]
+    };
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>
