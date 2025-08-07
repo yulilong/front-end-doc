@@ -389,6 +389,7 @@ module.exports = {
       "/doc/typeScript/": [
         "001-在react中使用TypeScript",
         "002-typescript部分语法说明",
+        "003-typeScript中一些关键字含义",
         "020-TS中常见问题解决",
       ],
 
