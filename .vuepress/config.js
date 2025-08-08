@@ -384,6 +384,14 @@ module.exports = {
             'vue3/101-vite关于低版本浏览器的支持',
           ],
         },
+        {
+          title: "vue3代码示例",
+          collapsable: false,
+          children: [
+            ['vue3/code-demo/', '简介'],
+            'vue3/code-demo/01-代码示例1.md',
+          ]
+        }
       ],
       // TypeScript部分文档
       "/doc/typeScript/": [

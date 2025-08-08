@@ -226,6 +226,8 @@
     * [vite](doc/vue/vue3/099-vite.md)
     * [新建vue3项目及相关问题](doc/vue/vue3/100-新建vue3项目及相关问题.md)
     * [vite关于低版本浏览器的支持](doc/vue/vue3/101-vite关于低版本浏览器的支持.md)
+* VUE3代码示例
+    * [代码示例1](doc/vue/vue3/code-demo/01-代码示例1.md)
 
 ## 6. TypeScript
 
