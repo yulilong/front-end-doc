@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ECharts 饼图示例</title>
+  <!-- 引入 ECharts -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <style>
+    #main {
+      width: 500px;
+      height: 290px;
+      margin: 0px auto;
+      border: 1px solid #ccc; /* 方便看到边界 */
+    }
+  </style>
+</head>
+<body>
+  <div id="main"></div>
+
+  <script>
+    const chartDom = document.getElementById('main');
+    const myChart = echarts.init(chartDom);
+
+    const option = {
+      title: {
+        text: '我是大标题',
+        subtext: '我是副标题',
+        left: 'center'
+      },
+      tooltip: {
+        trigger: 'item',
+      },
+      // 图例显示
+      legend: {
+        orient: 'vertical',  // 垂直布局
+        left: 10,           // 距离左边 10px
+        bottom: 10,          // 距离底部 10px
+        textStyle: {
+          fontSize: 12
+        }
+      },
+      series: [
+        {
+          name: '扩容情况',
+          type: 'pie',
+          radius: ['0%', '70%'], // 内外半径：第二个的百分比决定这个饼图的大小
+          center: ['50%', '55%'], // 中心点位置：通过这个来移动饼图
+          // 设置距离容器边缘: 这个设置可以达到位移饼图的效果，但是无法达到把饼图变大的效果
+          // top: 10, bottom: 10, left: 10, right: 10,
+          label: {
+            formatter: '{b}: {c}',
+          },
+          labelLine: {
+            length: 20,
+            length2: 10,
+          },
+          data: [
+            { value: 11, name: 'CPU扩容需求数', itemStyle: { color: '#87CEFA' } },
+            { value: 11, name: '内存扩容需求数', itemStyle: { color: '#FFA500' } },
+            { value: 11, name: '磁盘扩容需求数', itemStyle: { color: '#9370DB' } },
+          ],
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)',
+            },
+          },
+        },
+      ],
+    };
+
+    myChart.setOption(option);
+
+    window.addEventListener('resize', () => {
+      myChart.resize();
+    });
+  </script>
+</body>
+</html>
