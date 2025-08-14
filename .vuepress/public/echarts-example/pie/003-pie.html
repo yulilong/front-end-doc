@@ -8,7 +8,7 @@
   <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
   <style>
     #main {
-      width: 500px;
+      width: 700px;
       height: 290px;
       margin: 0px auto;
       border: 1px solid #ccc; /* 方便看到边界 */
@@ -48,24 +48,42 @@
           center: ['50%', '55%'], // 中心点位置：通过这个来移动饼图
           // 设置距离容器边缘: 这个设置可以达到位移饼图的效果，但是无法达到把饼图变大的效果
           // top: 10, bottom: 10, left: 10, right: 10,
+          // 设置每个数据显示的样式
+          itemStyle: {
+            borderRadius: 5,  // 圆角半径
+            borderColor: '#fff', // 边框颜色
+            borderWidth: 2, // 边框宽度
+          },
           label: {
             formatter: '{b}: {c}',
           },
+          // 每个数据指示的标题线长度
           labelLine: {
-            length: 20,
-            length2: 10,
+            length: 20, // 第一段线长度
+            length2: 40, // 第二段线长度
           },
           data: [
             { value: 11, name: 'CPU扩容需求数', itemStyle: { color: '#87CEFA' } },
             { value: 11, name: '内存扩容需求数', itemStyle: { color: '#FFA500' } },
             { value: 11, name: '磁盘扩容需求数', itemStyle: { color: '#9370DB' } },
           ],
+          // 当鼠标 hover 到数据项上，ECharts 会触发 emphasis 状态
           emphasis: {
+            // 高亮时数据显示样式
             itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)',
+              borderWidth: 5, // 高亮时的边框宽度
+              borderColor: '#fff', // 高亮时的边框颜色
+              shadowBlur: 10, // 高亮时的阴影模糊度
+              shadowOffsetX: 0, // 高亮时的阴影水平偏移
+              shadowOffsetY: 0, // 高亮时的阴影垂直偏移
+              shadowColor: 'rgba(0, 0, 0, 0.5)', // 高亮时的阴影颜色
             },
+            // 高亮时的数据标签样式
+            label: {
+              show: true,              // 高亮时是否显示标签
+              fontSize: 18,
+              fontWeight: 'bold'
+            }
           },
         },
       ],
