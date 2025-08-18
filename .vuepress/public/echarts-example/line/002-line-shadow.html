@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>ECharts 渐变折线图</title>
+  <!-- 引入 ECharts -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <style>
+    #chart {
+      width: 800px;
+      height: 400px;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <!-- 图表容器 -->
+  <div id="chart"></div>
+
+  <script>
+    // 初始化
+    const chartDom = document.getElementById('chart');
+    const myChart = echarts.init(chartDom);
+
+    const option = {
+      grid: {
+        left: 10,
+        right: 10,
+        top: 30,
+        bottom: 30,
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['06-16', '06-17', '06-18', '06-19', '06-20', '06-21', '06-22'],
+        axisLine: { lineStyle: { color: '#999' } },
+        axisTick: { show: false }
+      },
+      yAxis: {
+        type: 'value',
+        axisLine: { show: false },
+        axisTick: { show: false },
+        splitLine: { lineStyle: { color: '#eee' } }
+      },
+      // 鼠标移到每个数据上出现悬浮窗口，显示数据信息   鼠标hover
+      tooltip: {
+        trigger: 'axis'
+      },
+      series: [{
+        name: '数据',
+        type: 'line',
+        smooth: true, // 平滑曲线
+        data: [40, 80, 60, 100, 90, 110, 125],
+        // 设置数据点显示圆点
+        symbol: 'circle',
+        symbolSize: 8,
+        // 每个数据点的样式，需要设置symbol: 'circle',才会生效
+        itemStyle: {
+          color: '#fff',          // 数据点颜色
+          borderColor: '#1890ff', // 数据点边框颜色
+          borderWidth: 2          // 数据点边框宽度
+        },
+        // 点和点之间的连线样式
+        lineStyle: {
+          color: '#1890ff',       // 连线颜色
+          width: 2                // 连线宽度
+        },
+        areaStyle: {
+          // 渐变填充
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: 'rgba(24,144,255,0.5)' },
+            { offset: 1, color: 'rgba(24,144,255,0)' }
+          ])
+        }
+      }]
+    };
+
+    myChart.setOption(option);
+  </script>
+</body>
+</html>
