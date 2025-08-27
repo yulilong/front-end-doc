@@ -115,7 +115,9 @@ module.exports = {
         // '',
         "001-ES6新特性列表",
         '001-import-export',
-        "002-数组新增方法",
+        "002-Array-对象新增方法",
+        "002-Object-对象新增方法",
+        "002-Number-Math和数值的扩展",
         "003-asyncawait函数说明",
         "004-ES6的类",
         "005-迭代器和for···of",
@@ -128,8 +130,6 @@ module.exports = {
         "012-Promise",
         "013-手写Promise",
         "014-Decorator装饰器",
-        "015-对象的新增方法",
-        "016-Number-Math和数值的扩展",
       ],
       // javascript
       "/doc/js/": [

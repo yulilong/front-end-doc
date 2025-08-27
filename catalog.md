@@ -10,7 +10,9 @@
 
 * [ES6新特性列表](/doc/es6/001-ES6新特性列表.md)
 * [import export](/doc/es6/001-import-export.md)
-* [数组新增方法](/doc/es6/002-数组新增方法.md)
+* [Array 对象 - 新增方法](/doc/es6/002-Array-对象新增方法.md)
+* [Object 对象 - 新增方法](/doc/es6/002-Object-对象新增方法.md)
+* [Number-Math和数值的扩展](/doc/es6/002-Number-Math和数值的扩展.md)
 * [async/await函数说明](/doc/es6/003-asyncawait函数说明.md)
 * [ES6的类](/doc/es6/004-ES6的类.md)
 * [迭代器和for···of](/doc/es6/005-迭代器和for···of.md)
@@ -23,8 +25,6 @@
 * [Promise](/doc/es6/012-Promise.md)
 * [手写Promise](/doc/es6/013-手写Promise.md)
 * [Decorator装饰器](/doc/es6/014-Decorator装饰器.md)
-* [对象的新增方法](/doc/es6/015-对象的新增方法.md)
-* [Number-Math和数值的扩展](/doc/es6/016-Number-Math和数值的扩展.md)
 
 
 ### 1.1 JS标准库

@@ -4,7 +4,7 @@
 
 
 
-# 对象的新增方法
+# Object 对象 - 新增方法
 
 转载整理自：https://es6.ruanyifeng.com/#docs/object-methods
 
