@@ -283,6 +283,7 @@ module.exports = {
           children: [
             "css-demo/01-css常用简单效果样式",
             "css-demo/10-css复杂效果示例",
+            "css-demo/20-css整体效果",
           ],
         },
         {
