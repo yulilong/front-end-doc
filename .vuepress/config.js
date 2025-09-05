@@ -298,15 +298,19 @@ module.exports = {
           children: ["css3/001-css3新属性介绍", "css3/002-css3-media查询"],
         },
         {
-          title: "less",
+          title: "less-scss",
           collapsable: false,
-          children: ["less/001-less代码片段"],
+          children: [
+            "less/001-less代码片段",
+
+            "scss/001-scss语法说明",
+          ],
         },
-        {
-          title: "scss",
-          collapsable: false,
-          children: ["scss/001-scss语法说明"],
-        },
+        // {
+        //   title: "scss",
+        //   collapsable: false,
+        //   children: ["scss/001-scss语法说明"],
+        // },
         {
           title: "CSS文章",
           collapsable: false,

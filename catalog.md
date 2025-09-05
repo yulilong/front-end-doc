@@ -156,10 +156,10 @@
 * CSS3
     * [css3新属性介绍](/doc/css/css3/001-css3新属性介绍.md)
     * [css3@media查询](/doc/css/css3/002-css3-media查询.md)
-* less
+* less-sass
     * [less代码片段](/doc/css/less/001-less代码片段.md)
-* scss
     * [scss语法说明](/doc/css/scss/001-scss语法说明.md)
+    
 * 文章
     * [7个关于background-image好用技巧](/doc/css/blog/001-7个关于background-image好用技巧.md)
     * [隐藏元素opacity-visibility-display对比](/doc/css/blog/002-隐藏元素opacity-visibility-display对比.md)
