@@ -15,7 +15,7 @@
 效果：
 
 <iframe
-  :src="$withBase('/css/css-demo/01-01.html')"
+  :src="$withBase('/css/css-demo/20-01.html')"
   width="100%" height="300"
   frameborder="1" scrolling="No" leftmargin="0" topmargin="0"
 />
@@ -31,7 +31,7 @@
 效果：
 
 <iframe
-  :src="$withBase('/css/css-demo/01-02.html')"
+  :src="$withBase('/css/css-demo/20-02.html')"
   width="100%" height="270"
   frameborder="1" scrolling="No" leftmargin="0" topmargin="0"
 />
