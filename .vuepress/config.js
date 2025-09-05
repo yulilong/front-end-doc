@@ -270,8 +270,6 @@ module.exports = {
         "003-定位",
         "004-css兼容性",
         "005-normalize-reset",
-        "006-css常用简单效果样式",
-        "007-css复杂效果示例",
         "008-margin外边距合并",
         "009-float浮动",
         "010-css常用属性",
@@ -279,6 +277,14 @@ module.exports = {
         "012-css中min-max-clamp使用",
         "013-css常见问题",
         "014-块-行内-行内快元素",
+        {
+          title: "css代码效果",
+          collapsable: false,
+          children: [
+            "css-demo/01-css常用简单效果样式",
+            "css-demo/10-css复杂效果示例",
+          ],
+        },
         {
           title: "css深入浅出",
           collapsable: false,

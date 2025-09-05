@@ -8,7 +8,7 @@
 
 效果如下图：
 
-<img src="./img/066-css-effect.gif" style="zoom:50%;" />
+<img src="./img/02-css-effect-01.gif" style="zoom:50%;" />
 
 代码：
 

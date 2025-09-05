@@ -2,7 +2,7 @@
 
 [TOC]
 
-# 六、CSS简单效果样式(代码片段)
+# CSS简单效果样式
 
 ## 1. 高度自适应屏幕高度
 
@@ -382,7 +382,7 @@ document.body.onselectstart = document.body.ondrag = function(){
 
 效果：
 
-![](./img/006-simple-01.png)
+![](./img/01-01.png)
 
 代码示例：
 
@@ -774,5 +774,5 @@ html {
 
 效果：
 
-![](./img/001.png)
+![](./img/01-02.png)
 
