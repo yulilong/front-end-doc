@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<title>排行榜 — 纯两色渐变横线</title>
+<style>
+  :root{
+    --bg: #0b1627;
+    --panel: #16253f;
+    --text: #cfe8ff;
+    --muted: #9fb6d6;
+    --grad-a: #2ee8ff;   /* 左侧颜色 */
+    --grad-b: #48ffb1;   /* 右侧颜色 */
+    --line-height: 2px;
+    --row-h: 60px;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    min-height:100vh;
+    background:var(--bg);
+    font-family:"Microsoft YaHei",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    color:var(--text);
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:15px 16px;
+  }
+
+  .wrap{
+    width:860px;
+    background:var(--panel);
+    border-radius:10px;
+    /* padding:18px 22px; */
+    /* box-shadow: 0 6px 18px rgba(0,0,0,0.45) inset; */
+  }
+
+  table.rank{
+    width:100%;
+    border-collapse:separate;
+    border-spacing:0;
+    text-align:center;
+    color:var(--text);
+  }
+
+  .rank thead th{
+    font-weight:700;
+    font-size:18px;
+    padding:12px 8px 18px;
+    position:relative;
+  }
+
+  .rank th, .rank td{
+    padding:12px 8px;
+    position:relative;   /* 给伪元素定位基准 */
+    height:var(--row-h);
+    vertical-align:middle;
+  }
+
+  /* 每行底部的纯两色渐变横线（从左到右，仅两色） */
+  .rank tbody tr{
+    position:relative;
+  }
+  .rank tbody tr::after{
+    content:"";
+    position:absolute;
+    left:12px;                 /* 留一点左右内边距，看起来更精致 */
+    right:12px;
+    bottom:8px;                /* 距离单元底部 8px */
+    height: var(--line-height);
+    pointer-events:none;
+    background: linear-gradient(90deg, var(--grad-a) 0%, var(--grad-b) 100%);
+    /* 可选微弱发光（不改变渐变本身）*/
+    filter: drop-shadow(0 0 6px rgba(72,255,177,0.12));
+  }
+
+  /* 如果不想最后一行有横线，取消下面注释 */
+  /* .rank tbody tr:last-child::after{ display:none; } */
+
+  /* 列宽调整 */
+  .rank td:nth-child(1), .rank th:nth-child(1){ width:100px; }
+  .rank td:nth-child(2), .rank th:nth-child(2){ width:320px; }
+  .rank td:nth-child(3), .rank th:nth-child(3){ width:240px; }
+
+  /* .muted{ color:var(--muted); font-weight:500; } */
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <table class="rank">
+      <thead>
+        <tr>
+          <th>TOP10</th>
+          <th>用户名</th>
+          <th>费用总金额</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>张三</td><td>100.00</td></tr>
+        <tr><td>2</td><td>张三</td><td>100.00</td></tr>
+        <tr><td>3</td><td>张三</td><td>100.00</td></tr>
+        <tr><td>4</td><td>张三</td><td>100.00</td></tr>
+        <tr><td>5</td><td>张三</td><td>100.00</td></tr>
+        <tr><td>6</td><td>张三</td><td>100.00</td></tr>
+        <tr><td>7</td><td>张三</td><td>100.00</td></tr>
+        <tr><td>10</td><td class="muted">......</td><td class="muted">......</td></tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
