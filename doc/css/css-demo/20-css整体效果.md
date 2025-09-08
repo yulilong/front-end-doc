@@ -38,3 +38,21 @@
 
 
 
+## 3. 排名 — 渐变进度条（按排名递减）
+
+效果图片：
+
+![](./img/20-03.png)
+
+代码：浏览器控制台查看iframe源代码
+
+效果：
+
+<iframe
+  :src="$withBase('/css/css-demo/20-03.html')"
+  width="100%" height="270"
+  frameborder="1" scrolling="No" leftmargin="0" topmargin="0"
+/>
+
+
+
