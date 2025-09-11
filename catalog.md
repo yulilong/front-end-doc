@@ -232,6 +232,7 @@
     * [vite关于低版本浏览器的支持](doc/vue/vue3/101-vite关于低版本浏览器的支持.md)
 * VUE3代码示例
     * [代码示例1](doc/vue/vue3/code-demo/01-代码示例1.md)
+    * [02-富文本编辑器的使用](doc/vue/vue3/code-demo/02-富文本编辑器的使用.md)
 
 ## 6. TypeScript
 

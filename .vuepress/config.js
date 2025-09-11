@@ -401,6 +401,7 @@ module.exports = {
           children: [
             ['vue3/code-demo/', '简介'],
             'vue3/code-demo/01-代码示例1.md',
+            'vue3/code-demo/02-富文本编辑器的使用.md',
           ]
         }
       ],
