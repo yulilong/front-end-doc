@@ -400,8 +400,8 @@ module.exports = {
           collapsable: false,
           children: [
             ['vue3/code-demo/', '简介'],
-            'vue3/code-demo/01-代码示例1.md',
-            'vue3/code-demo/02-富文本编辑器的使用.md',
+            'vue3/code-demo/01-element-plus组件代码示例1.md',
+            'vue3/code-demo/30-富文本编辑器的使用.md',
           ]
         }
       ],
