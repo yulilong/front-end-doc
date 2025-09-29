@@ -54,21 +54,19 @@ a:hover{
 
 
 
-## 3. input输入框输入时去掉默认蓝边
+## 3. input输入框相关
 
-```less
-input {
-    &:focus {
-        outline: none;
-    }
+### 3.1 输入时去掉默认蓝边
+
+```css
+input:focus {
+  outline: none;
 }
 ```
 
+### 3.2 placeholder字体颜色修改
 
-
-## 4. input输入框placeholder字体颜色修改
-
-```less
+```css
 input {
     &::-webkit-input-placeholder { /* WebKit browsers*/ 
         color:#999;
@@ -86,18 +84,55 @@ input {
 }
 ```
 
-## 5 div模拟textarea文本域实现高度自适应
+### 3.3  input复选框CheckBox默认演示纯CSS修改
 
-HTML：
+```html
+<input type="checkbox" name="btn" id="btn1"><label for="btn1">按钮2</label>
+<style>
+  input[type="checkbox"]{
+    width:20px;
+    height:20px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle; 
+    line-height: 18px;
+    position: relative;
+  }
+  input[type="checkbox"]::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #d9d9d9;
+  }
+  input[type="checkbox"]:checked::before{
+    content: "\2713";  // “\2713”实体符号√
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:100%;
+    border: 1px solid #e50232;
+    color:#e50232;
+    font-size: 20px;
+    font-weight: bold;
+  }
+</style>
+```
+
+
+
+## 4. div相关
+
+### 4.1 div模拟textarea文本域实现高度自适应
 
 ```html
 <div class="textarea" contenteditable="true"><br /></div>
-```
-
-CSS:
-
-```css
-.textarea{
+<style>
+  .textarea{
     width: 200px;
     min-height: 20px;
     max-height: 300px;
@@ -116,56 +151,17 @@ CSS:
 
     border-color: rgba(82, 168, 236, 0.8);
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
-}
+  }
+</style>
 ```
 
-## 6 input复选框CheckBox默认演示纯CSS修改
 
-HTML：
 
-```html
-<input type="checkbox" name="btn" id="btn1"><label for="btn1">按钮2</label>
-```
 
-CSS:
 
-```css
-input[type="checkbox"]{
-  width:20px;
-  height:20px;
-  display: inline-block;
-  text-align: center;
-  vertical-align: middle; 
-  line-height: 18px;
-  position: relative;
-}
-input[type="checkbox"]::before{
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: #fff;
-  width: 100%;
-  height: 100%;
-  border: 1px solid #d9d9d9;
-}
-input[type="checkbox"]:checked::before{
-  content: "\2713";  // “\2713”实体符号√
-  background-color: #fff;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width:100%;
-  border: 1px solid #e50232;
-  color:#e50232;
-  font-size: 20px;
-  font-weight: bold;
-}
-```
+## 5. 文本、文字相关
 
-## 7. 文本、文字相关
-
-### 7.1  禁止文字被选中
+### 5.1  禁止文字被选中
 
 HTML：
 
@@ -206,7 +202,7 @@ document.body.onselectstart = document.body.ondrag = function(){
 
 参考资料：https://blog.csdn.net/qq_39241443/article/details/79533898
 
-### 7.2  一行文本颜色渐变
+### 5.2  一行文本颜色渐变
 
 
 ```css
@@ -217,7 +213,7 @@ document.body.onselectstart = document.body.ondrag = function(){
 }
 ```
 
-### 7.3 单行文本溢出显示省略号(超出宽度)
+### 5.3 单行文本溢出显示省略号(超出宽度)
 
 ```html
 <style>
@@ -262,7 +258,7 @@ document.body.onselectstart = document.body.ondrag = function(){
 | `pre-line`     | 保留   | 合并         | 换行     | 移除     | 挂起                 |
 | `break-spaces` | 保留   | 保留         | 换行     | 换行     | 换行                 |
 
-### 7.4 多行文本溢出显示省略号(超出宽度)
+### 5.4 多行文本溢出显示省略号(超出宽度)
 
 方法一：
 
@@ -332,7 +328,7 @@ document.body.onselectstart = document.body.ondrag = function(){
 2. 给p::after添加渐变背景可避免文字只显示一半。
 3. 由于ie6-7不显示content内容，所以要添加标签兼容ie6-7（如：`<span>…<span/>`）；兼容ie8需要将::after替换成:after。
 
-### 7.5 强制文本换行、不换行(超出宽度)
+### 5.5 强制文本换行、不换行(超出宽度)
 
 ```html
 <div>
@@ -376,7 +372,7 @@ document.body.onselectstart = document.body.ondrag = function(){
 </div>
 
 
-### 7.5 文字两端对齐(类似于Excel表格)
+### 5.6 文字两端对齐(类似于Excel表格)
 
 需要用到的CSS属性：`text-align: justify;` 和 `text-align-last: justify;`
 
@@ -427,7 +423,7 @@ document.body.onselectstart = document.body.ondrag = function(){
 
 
 
-## 8. 隐藏页面元素几种方法
+## 6. 隐藏页面元素几种方法
 
 1、**display:none** 
 
@@ -479,7 +475,7 @@ document.body.onselectstart = document.body.ondrag = function(){
 
 `jquery`的`slideUp`动画，它就是设置元素的`overflow:hidden`后，接着通过定时器，不断地设置元素的`height，margin-top，margin-bottom，border-top，border-bottom，padding-top，padding-bottom`为0，从而达到`slideUp`的效果
 
-### 8.1 元素隐藏后的事件响应
+### 6.1 元素隐藏后的事件响应
 
 ```html
 <style>
@@ -536,7 +532,7 @@ document.body.onselectstart = document.body.ondrag = function(){
 结果发现，触发了`click`事件，也就是通过JS可以触发被设置为`display:none`的元素的事件。
 所以前面无法触发点击事件的真正原因是鼠标无法真正接触到被设置成隐藏的元素
 
-### 8.2 CSS3 transition对这几种方法的影响
+### 6.2 CSS3 transition对这几种方法的影响
 
 `CSS3`提供的`transition`极大地提高了网页动画的编写，但并不是每一种`CSS`属性都可以通过`transition`来进行动画的。我们修改代码如下：
 
@@ -602,7 +598,7 @@ $(".height0").on("click", function () {
 
 
 
-## 9. 修改网站为(黑白)灰色代码
+## 7. 修改网站为(黑白)灰色代码
 
 ```css
 <style>
@@ -623,7 +619,7 @@ html {
 
 
 
-## 10. 三角形效果
+## 8. 三角形效果
 
 ```css
 /** 正三角 */
@@ -659,7 +655,7 @@ html {
 </style>
 <div class="triangle"></div><div class="triangle1"></div>
 
-## 11. 虚线效果
+## 9. 虚线效果
 
 ```css
  .dotted-line{
@@ -678,7 +674,7 @@ html {
 </style>
 <div class="dotted-line">我是一段描述，展示效果</div>
 
-## 12. 优惠券效果
+## 10. 优惠券效果
 
 ```css
  .coupon{
@@ -709,7 +705,7 @@ html {
 
 
 
-## 13. 气泡阴影、缺圆投影效果
+## 11. 气泡阴影、缺圆投影效果
 
 ```less
 // 三角形阴影
