@@ -155,7 +155,42 @@ input {
 </style>
 ```
 
+### 4.2 横线从左到右颜色渐变
 
+效果：
+
+![](./img/01-03.png)
+
+代码：
+
+```html
+<style>
+  body { background-color: #2b2f3a; color: #ccc; padding: 20px; }
+  .label {
+    display: flex; justify-content: space-between;
+    margin-bottom: 8px; font-size: 16px;  width: 600px;
+  }
+  .gradient-line {
+    height: 3px; /* 横线的粗细 */
+    border-radius: 5px; width: 600px;
+    /* 有多种颜色 */
+    background: linear-gradient(
+      to right, 
+      rgba(47, 97, 255, 0.1) 0%,   /* 左边完全透明 */
+      rgba(47, 97, 255, 0.5) 20%, /* 渐变到蓝色 */
+      rgba(47, 228, 183, 1) 100% /* 右边青绿色 */
+    );
+    /*只有2种颜色的写法：background: linear-gradient(to right, #2f61ff, #2fe4b7); */
+  }
+</style>
+<body>
+  <div class="label">
+    <span>数据卷：</span>
+    <span>状态良好</span>
+  </div>
+  <div class="gradient-line"></div>
+</body>
+```
 
 
 
