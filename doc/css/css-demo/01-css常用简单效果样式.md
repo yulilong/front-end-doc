@@ -192,6 +192,40 @@ input {
 </body>
 ```
 
+### 4.3 竖线渐变显示
+
+效果：
+
+<img src="./img/01-04.png" style="zoom:33%;" />
+
+代码：
+
+```html
+<style>
+  body {
+    background-color: #2b2f3a; color: #ccc; padding: 20px; display: flex; align-items: center;
+  }
+  .label { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .gradient-vertical-line {
+    width: 2px;   /* 竖线粗细 */
+    height: 220px; /* 竖线高度，可以自行调整 */
+    background: linear-gradient(
+      to bottom, 
+      rgba(47, 97, 255, 0) 0%,   /* 顶部透明 */
+      rgba(47, 97, 255, 1) 30%, /* 渐变到蓝色 */
+      rgba(47, 228, 183, 1) 100% /* 底部青绿色 */
+    );
+  }
+</style>
+<body>
+  <div class="label">
+    <span>数据卷</span>
+    <div class="gradient-vertical-line"></div>
+    <span>状态良好</span>
+  </div>
+</body>
+```
+
 
 
 ## 5. 文本、文字相关
