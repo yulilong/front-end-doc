@@ -492,6 +492,110 @@ document.body.onselectstart = document.body.ondrag = function(){
 
 
 
+### 5.7 三行两列,文字右对齐，列宽度根据最多内容而定
+
+3行2列内容，列都是右对齐，第一列宽度固定，第二列宽度跟行最大宽度而定
+
+效果如下图所示：
+
+![](./img/01-05.png)
+
+1、使用table标签实现
+
+```html
+<style>
+  .fixed-table {
+    width: auto;
+    border-collapse: collapse;
+    margin: 20px;
+  }
+
+  .fixed-table td {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    text-align: right;
+    white-space: nowrap; /*当宽度不够的时候，不换行*/
+  }
+
+  .fixed-table td:first-child {
+    width: 150px;
+    background-color: #f5f5f5;
+  }
+</style>
+<table class="fixed-table">
+  <tr>
+    <td>固定宽度内容1</td>
+    <td>自适应宽度内容1 - 这段文字会根据内容自动调整列宽1</td>
+  </tr>
+  <tr>
+    <td>固定150px</td>
+    <td>第二列内容2</td>
+  </tr>
+  <tr>
+    <td>第三行</td>
+    <td>这是更长的自适应内容示例，该列宽度会扩展到容纳此内容3</td>
+  </tr>
+</table>
+```
+
+2、使用flex实现：
+
+```html
+<style>
+  .flex-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+  }
+
+  .flex-row {
+    display: flex;
+    justify-content: flex-end;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+  }
+
+  .flex-row:last-child {
+    border-bottom: none;
+  }
+
+  .fixed-col {
+    width: 150px;
+    text-align: right;
+    padding-right: 15px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .auto-col {
+    flex: 1;
+    text-align: right;
+    min-width: 0;
+    /* 防止内容溢出 */
+    color: #666;
+  }
+</style>
+<div class="flex-container">
+  <div class="flex-row">
+    <div class="fixed-col">固定标题4：</div>
+    <div class="auto-col">自适应内容1，长度会根据内容自动调整</div>
+  </div>
+  <div class="flex-row">
+    <div class="fixed-col">固定标题5：</div>
+    <div class="auto-col">这段内容比较长，会撑开第二列的宽度，但第一列始终保持150px固定宽度</div>
+  </div>
+  <div class="flex-row">
+    <div class="fixed-col">固定标题6：</div>
+    <div class="auto-col">短内容</div>
+  </div>
+</div>
+```
+
+
+
 ## 6. 隐藏页面元素几种方法
 
 1、**display:none** 
