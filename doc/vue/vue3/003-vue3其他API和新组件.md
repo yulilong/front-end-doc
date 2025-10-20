@@ -188,6 +188,74 @@ let { msg } = useMsgRef('你好', 2000)
 </script>
 ```
 
+### 1.5 nextTick
+
+Vue 的响应式更新是 **批量的（batched）**，所有同步代码执行完后才会刷新视图。 `nextTick` 就是让你「等这次刷新完成」后再执行代码。
+
+`nextTick()` 是 Vue 提供的一个异步方法，用来在 **下一次 DOM 更新完成后** 执行回调。
+ 简单来说，它让你「等视图更新完再执行某段逻辑」。
+
+所以记住这句话：
+
+> **“你改完响应式数据后，DOM 不会马上变。要等 nextTick() 才能拿到新 DOM。”**
+
+```js
+import { nextTick } from 'vue';
+// Promise + await（最常用）
+async function getData() {
+  count.value++
+  await nextTick()
+  console.log('DOM 已更新')
+}
+// 回调函数写法
+async function getData() {
+  count.value++
+  nextTick(() => {
+    console.log('DOM 已更新')
+  })
+}
+```
+
+为什么需要它？    
+Vue 是**异步更新 DOM** 的。当你修改响应式数据时，Vue 不会立刻更新 DOM，而是等待当前“事件循环（event loop）”结束后统一更新。
+
+```js
+count.value++
+console.log(document.querySelector('#num').textContent)
+```
+
+这时打印的内容仍是旧值。因为 DOM 还没更新。如果你希望“等 DOM 更新后再访问/操作”，就要这样写：
+
+```js
+count.value++
+await nextTick()
+console.log(document.querySelector('#num').textContent) // ✅ 新值
+```
+
+`nextTick()` 常见应用场景
+
+| 场景                     | 示例                                                         | 说明                    |
+| ------------------------ | ------------------------------------------------------------ | ----------------------- |
+| 🔄 数据变化后要访问新 DOM | `v-if` 切换、`v-for` 新增后操作元素                          | 等新 DOM 出现后才能操作 |
+| 🎨 操作第三方组件         | Element Plus 的 `clearSelection()`、`toggleRowSelection()` 等 | 要等表格渲染完成        |
+| 🧩 动画过渡控制           | 等下一帧再启动动画                                           | 保证 transition 生效    |
+| 🧍‍♂️聚焦输入框             | `inputRef.value.focus()`                                     | 输入框必须先渲染到页面  |
+| 🧠 复杂 watch             | watch 回调中数据变化需要再更新视图后再处理                   | 避免访问旧 DOM 状态     |
+
+
+
+| 时机                                | 是否需要 nextTick  |
+| ----------------------------------- | ------------------ |
+| 改数据后立即访问 DOM                | ✅ 需要             |
+| 改数据后仅逻辑判断                  | ❌ 不需要           |
+| 调用 Element Plus 等依赖 DOM 的方法 | ✅ 通常需要         |
+| 生命周期 onMounted 内访问初始 DOM   | ❌ 不需要（已渲染） |
+| watch 中要操作新 DOM                | ✅ 常需要           |
+
+
+
+
+
 ## 2. 新组件
 
 ### 2.1 Teleport
