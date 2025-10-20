@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <title>上下切换菜单</title>
+  <style>
+    body{
+      margin:0; height:270px; display:flex; justify-content:center; align-items:center;
+      background:#1c2c48; color:#fff; font-family:system-ui,Arial;
+    }
+    .menu{
+      display:flex; flex-direction:column; align-items:center; gap:12px;
+      width:220px; user-select:none;
+    }
+    .arrow{
+      border:none; background:transparent; color:#fff; cursor:pointer;
+      font-size:40px; line-height:0.8; padding:6px; transition:transform .2s ease,opacity .2s;
+      opacity:.9;
+    }
+    .arrow:hover{ transform:scale(1.15); opacity:1; }
+    /* 用 ">" 旋转成上下箭头 */
+    .arrow.up   { transform:rotate(-90deg); }
+    .arrow.down { transform:rotate( 90deg); }
+
+    .items{ display:flex; flex-direction:column; align-items:center; gap:14px; width:100%; }
+    .item{
+      /* 固定高度，布局不变，避免其它行被挤压导致抖动 */
+      height:1.8em; line-height:1.8em; 
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+      width:100%; text-align:center;
+
+      color:rgba(255,255,255,.6);
+      transform:scale(1); will-change:transform;
+      transition:transform .28s ease, color .28s ease, text-shadow .28s ease;
+    }
+    .item.active{
+      transform:scale(1.35);
+      color:#fff; font-weight:700;
+      text-shadow:0 0 10px rgba(255,255,255,.55);
+    }
+  </style>
+</head>
+<body>
+  <div class="menu">
+    <button class="arrow up"   id="btnUp">></button>
+    <div class="items" id="list">
+      <div class="item">虚拟内存</div>
+      <div class="item active">虚拟CPU</div>
+      <div class="item">虚拟存储</div>
+      <div class="item">虚拟IP</div>
+    </div>
+    <button class="arrow down" id="btnDown">></button>
+  </div>
+
+  <script>
+    const items = Array.from(document.querySelectorAll('.item'));
+    let index = items.findIndex(el => el.classList.contains('active'));
+    if (index < 0) index = 0, items[0].classList.add('active');
+
+    function setActive(next){
+      items[index].classList.remove('active');
+      index = (next + items.length) % items.length;  // 循环切换
+      items[index].classList.add('active');
+    }
+    document.getElementById('btnUp').addEventListener('click',   () => setActive(index - 1));
+    document.getElementById('btnDown').addEventListener('click', () => setActive(index + 1));
+
+    // 可选：键盘 ↑/↓ 也可切换
+    window.addEventListener('keydown', e => {
+      if (e.key === 'ArrowUp')   setActive(index - 1);
+      if (e.key === 'ArrowDown') setActive(index + 1);
+    });
+  </script>
+</body>
+</html>
