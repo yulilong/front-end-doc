@@ -428,11 +428,59 @@ export const useTalkStore = defineStore('talk',()=>{
 
 
 
+## 9. 一些常见问题
 
+### 9.1 使用const store = useUserStore()和直接使用useUserStore() 有什么区别吗？
 
+结论：   在 **大多数情况下**，`const store = useUserStore()` 和 `useUserStore()` 表现效果是 **相同的** —— 因为 Pinia 的 `useXxxStore()` 本身返回的就是一个响应式的全局单例（Store 实例）。
 
+但是：**当你要在模板中使用、要结构数据、要在逻辑中多次访问时 —— **保存成变量 (`const store = useUserStore()`) 更安全、更高效、更语义化**。
 
+`useUserStore()` 是什么？    
+在 `defineStore('user', {...})` 定义后，Pinia 会生成一个“hook 风格”的函数 `useUserStore()`，它会：
 
+- **创建或返回一个全局的 Store 实例；**
+- 这个实例是响应式的；
+- 整个应用中，同一个 Store ID 只会有一个实例。
+- 所以：`useUserStore() === useUserStore() ` 永远返回同一个对象
+
+```js
+const store = useUserStore()
+store.userInfo
+store.getUserInfo()
+```
+
+写法1：保存到变量,这种写法的优点：
+
+- **语义清晰**：`store.xxx` 一看就知道是 Store 内的东西；
+- **便于结构**：可以配合 `storeToRefs(store)`；
+- **利于类型推导**：TypeScript 能推导出 store 的完整类型；
+- **易于重用**：多处逻辑复用时不必重复调用。
+
+```js
+useUserStore().userInfo
+useUserStore().getUserInfo()
+```
+
+写法2：直接调用，这种写法虽然可以用，但有以下缺点：
+
+- ❌ **重复调用**：虽然底层是同一个实例，但每次调用都要经过一次查找；
+
+- ❌ **不直观**：可读性较差，不容易看出属于哪个 store；
+
+- ❌ **不便结构**：你无法像 `const { userInfo } = storeToRefs(store)` 那样简洁使用；
+
+- ❌ **watch / computed 中重复写** 时显得臃肿。
+
+- 特别说明：不会创建多个实例。有的同学担心：我在一个组件里多次调用 `useUserStore()` 会不会创建多个 store？不会。Pinia 内部会缓存同一个 ID 的 store 实例。所以它们操作的都是同一份状态。
+
+  ```js
+  const a = useUserStore()
+  const b = useUserStore()
+  console.log(a === b) // true ✅
+  ```
+
+  
 
 
 
