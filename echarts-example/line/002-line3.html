@@ -1,0 +1,137 @@
+<!-- [380,295,220,350,385,405,520,530,660,800,830,550] -->
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>ECharts — 柱状+折线+首尾直线+阴影</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <style>
+    body { background:#1c2c48; color:#fff; margin:0; }
+    #chart { width:100%; height:250px; }
+  </style>
+</head>
+<body>
+  <div id="chart"></div>
+  <script>
+    const dom = document.getElementById('chart');
+    const myChart = echarts.init(dom);
+
+    const xData = ['A','B','C','D','E','F','G','H','I','J','K','L'];
+    const actual  = [380,295,220,350,385,405,520,530,660,800,830,550];
+    const bars    = [360,380,400,430,460,480,500,510,530,600,650,680];
+
+    const n = actual.length;
+    const start = actual[0];
+    const end = actual[n-1];
+
+    const option = {
+      backgroundColor: '#1c2c48',
+      grid: { left: '6%', right: '6%', bottom: '14%', containLabel: true },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: { type: 'line' },
+        formatter: function (params) {
+          // 🚫 过滤掉首尾直线
+          const showList = params.filter(p => p.seriesName !== '首尾直线');
+          
+          let html = `${showList[0].name} <br/>`
+          showList.forEach(e => {
+            html += `
+              <div>
+                ${e.marker} <strong>${e.seriesName}</strong> <br />
+                使用个数： ${e.value} <br />
+                其他：${e.data && e.data.total || 0} <br />
+              </div>
+            `
+          });
+          return html
+        }
+      },
+      xAxis: {
+        type: 'category',
+        data: xData,
+        axisLabel: { color: '#d0d7df', rotate: 35 },
+        axisLine: { lineStyle: { color: '#3f536c' } }
+      },
+      yAxis: {
+        type: 'value',
+        axisLabel: { color: '#d0d7df' },
+        splitLine: { lineStyle: { color: '#2f3a4a' } }
+      },
+      series: [
+        {
+          name: '柱状图',
+          type: 'bar',
+          data: bars,
+          barWidth: 14,
+          itemStyle: { color: '#4a90e2' },
+          z: 0
+        },
+        {
+          name: '真实折线',
+          type: 'line',
+          data: actual,
+          smooth: false,
+          symbol: 'circle',
+          symbolSize: 6,
+          itemStyle: {
+            color: '#ff8a4c',
+            borderColor: '#1c2c48',
+            borderWidth: 2
+          },
+          lineStyle: { color: '#ff8a4c', width: 2 },
+          z: 3
+        },
+        {
+          name: '首尾直线',
+          type: 'line',
+          data: [start, null, null, null, null, null, null, null, null, null, null, end],
+          connectNulls: true,
+          symbol: 'none',
+          lineStyle: {
+            color: 'rgba(255,255,255,0.4)',
+            width: 1,
+            type: 'solid'
+          },
+          tooltip: { show: false }, // 🚫 禁止单独 hover 时显示
+          z: 2
+        }
+      ]
+    };
+
+    myChart.setOption(option);
+
+    // --- 绘制阴影区域 ---
+    function updatePolygon() {
+      const coords = actual.map((y, i) =>
+        myChart.convertToPixel({xAxisIndex:0,yAxisIndex:0}, [xData[i], y])
+      );
+      const startCoord = myChart.convertToPixel({xAxisIndex:0,yAxisIndex:0}, [xData[0], start]);
+      const endCoord   = myChart.convertToPixel({xAxisIndex:0,yAxisIndex:0}, [xData[n-1], end]);
+      const polygonPoints = [...coords, endCoord, startCoord];
+
+      myChart.setOption({
+        graphic: {
+          type: 'polygon',
+          shape: { points: polygonPoints },
+          style: { fill: 'rgba(255,138,76,0.22)', stroke: 'none' },
+          z: 1
+        }
+      });
+    }
+
+    // 多次渲染需要移出监听事件，否则会报错：should not be called during main process
+    myChart.off('finished');
+    // 监听图表渲染完成事件
+    myChart.on('finished', updatePolygon);
+    // myChart.on('finished', () => {
+    //   updatePolygon(); // 这么写可以传参
+    // });
+    window.addEventListener('resize', () => {
+      myChart.resize();
+      updatePolygon();
+    });
+  </script>
+</body>
+</html>
+

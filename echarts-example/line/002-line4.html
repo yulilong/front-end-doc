@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>ECharts — 多折线带首尾阴影</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <style>
+    body { background:#1c2c48; color:#fff; margin:0; }
+    #chart { width:100%; height:300px; }
+  </style>
+</head>
+<body>
+  <div id="chart"></div>
+  <script>
+    const myChart = echarts.init(document.getElementById('chart'));
+
+    const xData = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月'];
+
+    // ✅ 数据差异明显
+    const datasets = {
+      '虚机CPU': [120, 580, 90, 160, 130, 200, 170, 210, 190, 250],
+      '虚机内存': [400, 900, 480, 520, 510, 600, 580, 650, 700, 750],
+      '虚机磁盘': [800, 1350, 1100, 1050, 1200, 1150, 1250, 1300, 1280, 1350],
+      '虚机网络': [1500, 2000, 1450, 1400, 2200, 2500, 2200, 2100, 2050, 2200],
+      '虚机IO': [2500, 2900, 2200, 3500, 3500, 3300, 3400, 2700, 2750, 3600]
+    };
+
+    // const colors = ['#4fc3f7','#81c784','#ffb74d','#e57373','#ba68c8'];
+    const colors = ['yellow','#81c784','#ffb74d','#e57373','#ba68c8'];
+
+    // 构造 series，每条折线两部分：
+    // 1. 折线
+    // 2. 封闭区域（折线 + 首尾直线）做阴影
+    const series = Object.entries(datasets).map(([name, data], idx) => {
+      const color = colors[idx % colors.length];
+      const firstPoint = [0, data[0]];
+      const lastPoint = [xData.length - 1, data[data.length - 1]];
+
+      return [
+        // 阴影区域
+        {
+          name,
+          type: 'line',
+          data: [
+            ...data.map((y, i) => [i, y]),
+            lastPoint,
+            firstPoint
+          ],
+          xAxisIndex: 0,
+          yAxisIndex: 0,
+          lineStyle: { width: 0 },
+          symbol: 'none',
+          areaStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: color },
+              { offset: 1, color: 'rgba(0,0,0,0)' }
+            ]),
+            opacity: 0.25
+          },
+          tooltip: { show: false } // 不显示首尾闭合线的 tooltip
+        },
+        // 主折线
+        {
+          name,
+          type: 'line',
+          data,
+          smooth: false,
+          symbol: 'circle',
+          symbolSize: 6,
+          lineStyle: { width: 2, color: color },
+          itemStyle: { color: color },
+          emphasis: { focus: 'series' }
+        }
+      ];
+    }).flat();
+
+    const option = {
+      // backgroundColor: '#1c2c48',
+      grid: { left: '6%', right: '6%', bottom: '14%', containLabel: true },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: { type: 'line' }
+      },
+      legend: {
+        bottom: 10,
+        textStyle: { color: '#fff' },
+        icon: 'rect',  // 设置为矩形
+        itemWidth: 20, // 设置宽度
+        itemHeight: 5 // 设置高度
+      },
+      xAxis: {
+        type: 'category',
+        data: xData,
+        axisLabel: { color: '#d0d7df', rotate: 30 },
+        axisLine: { lineStyle: { color: '#3f536c' } }
+      },
+      yAxis: {
+        type: 'value',
+        axisLabel: { color: '#d0d7df' },
+        splitLine: { lineStyle: { color: '#2f3a4a' } }
+      },
+      series
+    };
+
+    myChart.setOption(option);
+  </script>
+</body>
+</html>
