@@ -178,9 +178,10 @@ const classes = useCssModule()
 
 ### 2.1 响应式 CSS 变量 v-bind()
 
-单文件组件的 `<style>` 标签支持使用 `v-bind` CSS 函数将 CSS 的值链接到动态的组件状态：
+单文件组件的 `<style>` 标签支持使用 `v-bind` CSS 函数将 CSS 的值链接到动态的组件状态。
 
 ```vue
+<!-- VUE2组件写法 -->
 <template>
   <div class="text">hello</div>
 </template>
@@ -198,29 +199,50 @@ export default {
 </style>
 ```
 
-这个语法同样也适用于 [`<script setup>`](https://cn.vuejs.org/api/sfc-script-setup.html)，且支持 JavaScript 表达式 (需要用引号包裹起来)：
+这个语法同样也适用于 [`<script setup>`](https://cn.vuejs.org/api/sfc-script-setup.html)，且支持 JavaScript 表达式：
+
+虽然支持运算，但需要注意语法规则：
+
+- ‌**必须使用引号包裹**‌：包含运算的表达式需要用引号包围起来
+- ‌**单位处理**‌：涉及单位的运算需要确保表达式最终返回正确的带单位值
 
 ```vue
 <script setup>
 import { ref } from 'vue'
 const accentColor = ref('#42b983')
-const theme = ref({
-    color: 'red',
-})
+const treeContentWidth = ref(200)
+const theme = ref({ color: 'red', })
 </script>
-
 <style scoped>
 .header {
-  color: v-bind(accentColor);
+  color: v-bind('theme.color');
   border: 2px solid v-bind('accentColor + "80"');
 }
-p {
-  color: v-bind('theme.color');
+.element {
+  width: v-bind('treeContentWidth - 18 + "px"'); /* 算术运算 */
+}
+/* 三元表达式 */
+.dynamic-element {
+  width: v-bind('treeContentWidth - 18 > 0 ? treeContentWidth - 18 + "px" : "0px"');
 }
 </style>
 ```
 
 实际的值会被编译成哈希化的 CSS 自定义属性，因此 CSS 本身仍然是静态的。自定义属性会通过内联样式的方式应用到组件的根元素上，并且在源值变更的时候响应式地更新。
+
+```css
+/* 编译后 */
+.element {
+  color: var(--treeContentWidth);
+}
+/* 当使用<style scoped>时，Vue会为CSS变量添加哈希标识，避免污染全局样式 */
+/* 编译后带Scoped */
+.element[data-v-f3f3eg9] {
+  color: var(--f3f3eg9-treeContentWidth);
+}
+```
+
+
 
 ### 2.2 动态类名绑定
 
