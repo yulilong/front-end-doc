@@ -214,22 +214,43 @@ function handleChange(val: User[]) {
 
 ## 2. el-table-column 内 `template` 的 `#default` 插槽取值
 
-el-table中 el-table-column 里面的 template 的 `#default`取值都有什么
+在Vue3的Element Plus中，el-table-column使用template的`#default`（即插槽）可以获取到当前行、列、索引等数据。具体来说，这个插槽提供了以下属性：
 
-在 Vue3 的 Element Plus 中，`el-table-column` 内 `template` 的 `#default` 插槽会接收一个包含当前行、列、行索引等信息的对象1。根据搜索结果，其具体取值主要包括：
+- scope.row: 当前行的数据
+- scope.column: 当前列的数据
+- scope.$index: 当前行的索引（从0开始）
+- scope.disable: 是否禁用（用于一些操作）
 
-`scope.row`
+当你在 `#default` 中接收参数时（通常命名为 `scope`），这个 `scope` 对象包含以下主要属性：
 
-这是最常用的属性，代表当前行的数据对象1。通过它可以访问该行所有字段的值，例如 `scope.row.date`、`scope.row.name` 等1。在实现可编辑表格时，也常通过 `v-model` 绑定 `scope.row` 上的特定字段来实现9。
+| 属性名       | 说明                                   | 类型     |
+| :----------- | :------------------------------------- | :------- |
+| **`$index`** | **当前行的索引**（从 0 开始）          | `number` |
+| **`row`**    | **当前行的数据对象**                   | `object` |
+| **`column`** | **当前列的信息对象**                   | `object` |
+| **`store`**  | Table 内部的状态管理对象（通常用不到） | `object` |
 
-`scope.$index`
+其中最常用的是 **`row`** 和 **`$index`**。
 
-表示当前行的索引（从 0 开始）1。这在需要根据行序号进行操作时非常有用。
+```vue
+<el-table-column label="姓名和地址">
+  <template #default="{ row, $index }">
+    <p><strong>姓名：</strong>{{ row.name }}</p>
+    <p><small>行号：{{ $index + 1 }}</small></p>
+  </template>
+</el-table-column>
+<el-table-column prop="name" label="姓名">
+  <template #default="{ row, column }">
+    <div>
+      {{ row.status }}
+      属性名: {{ column.property }} <!-- 输出 'name' -->
+      <br>
+      列标签: {{ column.label }} <!-- 输出 '姓名' -->
+      <br>
+      单元格值: {{ row[column.property] }} <!-- 等同于 row.name -->
+    </div>
+  </template>
+</el-table-column>
 
- `scope.column`
+```
 
-包含当前列的信息，例如列的属性配置1。
-
-`scope.rowIndex`
-
-在某些上下文中，也用于表示当前行的索引9。
