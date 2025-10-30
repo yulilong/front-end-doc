@@ -210,3 +210,26 @@ function handleChange(val: User[]) {
 </script>
 ```
 
+
+
+## 2. el-table-column 内 `template` 的 `#default` 插槽取值
+
+el-table中 el-table-column 里面的 template 的 `#default`取值都有什么
+
+在 Vue3 的 Element Plus 中，`el-table-column` 内 `template` 的 `#default` 插槽会接收一个包含当前行、列、行索引等信息的对象1。根据搜索结果，其具体取值主要包括：
+
+`scope.row`
+
+这是最常用的属性，代表当前行的数据对象1。通过它可以访问该行所有字段的值，例如 `scope.row.date`、`scope.row.name` 等1。在实现可编辑表格时，也常通过 `v-model` 绑定 `scope.row` 上的特定字段来实现9。
+
+`scope.$index`
+
+表示当前行的索引（从 0 开始）1。这在需要根据行序号进行操作时非常有用。
+
+ `scope.column`
+
+包含当前列的信息，例如列的属性配置1。
+
+`scope.rowIndex`
+
+在某些上下文中，也用于表示当前行的索引9。
