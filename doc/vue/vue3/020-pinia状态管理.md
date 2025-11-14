@@ -28,7 +28,7 @@ Pinia 是 Vue 的专属状态管理库，它允许你跨组件或页面共享状
 
 ## 2. 搭建 pinia 环境
 
-1、安装 pinia 包：
+### 2.1 安装 pinia 包
 
 ```bash
 npm install pinia
@@ -36,7 +36,7 @@ npm install pinia
 yarn add pinia
 ```
 
-2、创建一个 pinia 实例 (根 store) 并将其传递给应用：
+### 2.2 创建一个 pinia 实例 (根 store) 并将其传递给应用：
 
 ```js
 import { createApp } from 'vue'
@@ -52,7 +52,7 @@ app.mount('#app')
 
 重启服务后，就可以在浏览器的vue插件中看到`pinia`选项
 
-3、一个完整的store定义文件(src/store/talk.ts)：
+### 2.3 一个完整的store定义文件(src/store/talk.ts)：
 
 1. Store是一个保存：**状态**、**业务逻辑** 的实体，每个组件都可以**读取**、**写入**它。
 
@@ -400,31 +400,100 @@ talkStore.$subscribe((mutate,state)=>{
 })
 ```
 
-## 8. store组合式写法
+## 8. store调用另外一个store的方法
+
+**可以在一个 store 中调用另一个 store 的方法或 state**，但要**在方法内部（即函数作用域内）调用**，⚠️ **不要在 store 定义顶层直接调用**。
+
+例子：
+
+1、`auth.ts`文件：
 
 ```js
-import {defineStore} from 'pinia'
-import axios from 'axios'
-import {nanoid} from 'nanoid'
-import {reactive} from 'vue'
-
-export const useTalkStore = defineStore('talk',()=>{
-  // talkList就是state
-  const talkList = reactive(
-    JSON.parse(localStorage.getItem('talkList') as string) || []
-  )
-  // getATalk函数相当于action
-  async function getATalk(){
-    // 发请求，下面这行的写法是：连续解构赋值+重命名
-    let {data:{content:title}} = await axios.get('https://api.uomg.com/api/rand.qinghua?format=json')
-    // 把请求回来的字符串，包装成一个对象
-    let obj = {id:nanoid(),title}
-    // 放到数组中
-    talkList.unshift(obj)
+// stores/auth.ts
+import { defineStore } from 'pinia'
+export const useAuthStore = defineStore('auth', {
+  state: () => ({
+    token: 'abc123'
+  }),
+  actions: {
+    getToken() {
+      return this.token
+    },
+    setToken(newToken: string) {
+      this.token = newToken
+    }
   }
-  return {talkList,getATalk}
 })
 ```
+
+2、`user.ts`文件，会调用`auth.ts`的store
+
+```js
+import { defineStore } from 'pinia'
+import { useAuthStore } from './auth'
+export const useUserStore = defineStore('user', {
+  state: () => ({
+    name: '张三',
+    token: ''
+  }),
+  actions: {
+    async fetchUserInfo() {
+      const authStore = useAuthStore()   // ✅ 在方法内部调用
+      const token = authStore.token      // 调用属性
+      authStore.setToken()               // 调用方法 
+      console.log('当前 token:', token)
+      // ...根据 token 获取用户信息
+    }
+  }
+})
+```
+
+### 8.1 不要在定义外层直接调用
+
+下面这种写法 ❌ 会导致 **循环依赖或初始化错误**：
+
+```js
+// ❌ 错误写法
+const authStore = useAuthStore()
+export const useUserStore = defineStore('user', {
+  actions: {
+    fetchUserInfo() {
+      console.log(authStore.getToken())
+    }
+  }
+})
+```
+
+❌ 错误原因：    
+ store 定义文件会在应用初始化时被加载，`useAuthStore()` 此时 Pinia 还未完全注册，可能导致“active pinia was not found”错误。
+
+### 8.2 正确调用时机总结
+
+| 调用位置                     | 是否允许 | 原因                              |
+| ---------------------------- | -------- | --------------------------------- |
+| 在 store 的 **actions 内部** | ✅ 允许   | 动态引用，不影响初始化            |
+| 在 store 的 **getters 内部** | ⚠️ 不推荐 | getter 频繁执行，可能造成性能浪费 |
+| 在 store **定义外部顶层**    | ❌ 禁止   | 容易循环依赖或初始化错误          |
+| 在组件 `setup()` 中          | ✅ 允许   | 生命周期正确，Pinia 已初始化      |
+
+### 8.3 如果需要双向调用（两个 store 互相依赖）
+
+可以这样做来避免循环依赖：
+
+- 让 **下层 store** 提供通用逻辑
+- 让 **上层 store** 调用下层的函数
+- 或者把公共逻辑抽成一个 **composable**，比如 `useAuthUtils()`
+
+```js
+// composables/useAuthUtils.ts
+export function useAuthUtils() {
+  const authStore = useAuthStore()
+  const refreshToken = () => { /* ... */ }
+  return { refreshToken }
+}
+```
+
+然后在不同 store 中都可以安全使用。
 
 
 
