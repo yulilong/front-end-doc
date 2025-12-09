@@ -254,3 +254,81 @@ function handleChange(val: User[]) {
 
 ```
 
+
+
+## 3. 日期组件限制用户选择的最大日期范围为 **7 天**
+
+1、在日期组件里面设置
+
+```vue
+<template>
+  <el-date-picker
+    v-model="range"
+    type="daterange"
+    range-separator="至"
+    start-placeholder="开始日期"
+    end-placeholder="结束日期"
+    :disabled-date="disabledRange"
+    @calendar-change="onCalendarChange"
+    @visible-change="onVisibleChange"
+  />
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+/* 正式绑定的值 */
+const range = ref([]);
+
+/* 保存日历面板的“中间选择”状态：
+   calendar-change 回调会传 [Date|null, Date|null]，
+   例如：第一次点 start 时可能是 [startDate, null] */
+const tempRange = ref([null, null]);
+
+// calendar-change 事件回调（当面板上的选择发生变化时触发 - 仅 range 模式）
+const onCalendarChange = (val) => {
+  tempRange.value = val || [null, null];
+};
+
+// 面板显示/隐藏变化：隐藏时清空临时状态，防止残留
+const onVisibleChange = (visible) => {
+  if (!visible) tempRange.value = [null, null];
+};
+
+// 禁用逻辑：如果已选 start -> 禁用 start + 7 天以外的结束日期
+const disabledRange = (time) => {
+  const day = 24 * 60 * 60 * 1000;
+  const date = time;
+
+  const [start, end] = tempRange.value;
+
+  // 选了开始日期（第一步）
+  if (start && !end) {
+    const maxEnd = new Date(start.getTime() + 7 * day);
+    return date.getTime() > maxEnd.getTime();
+  }
+
+  // 选了结束日期（倒选，第一步选的是结束）
+  if (end && !start) {
+    const minStart = new Date(end.getTime() - 7 * day);
+    return date.getTime() < minStart.getTime();
+  }
+
+  // 如果两者都有或都没有（未交互或已确认），则不在这里强行禁用额外日期
+  return false;
+};
+</script>
+```
+
+2、提交时校验，不限制选择（简单版）
+
+```js
+// 只在表单提交时检查是否超 7 天：
+const isValidRange = () => {
+  const [start, end] = range.value;
+  const diff = (end - start) / (1000 * 3600 * 24);
+
+  return diff <= 7;
+};
+```
+
