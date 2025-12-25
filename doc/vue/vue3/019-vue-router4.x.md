@@ -538,6 +538,25 @@ router.push({ name: 'Product', params: { id: 456, name: 'Laptop' }
        .catch((err) => console.error('导航被阻止', err));
      ```
 
+
+
+### 5.2 在新标签页打开链接：router.resolve() + window.open
+
+```js
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const openInNewTab = () => {
+  const routeUrl = router.resolve({
+    name: 'userDetail',
+    query: { id: 123 }
+  })
+  window.open(routeUrl.href, '_blank')
+}
+```
+
+
+
 ## 6. 导航守卫
 
 [官方链接](https://router.vuejs.org/zh/guide/advanced/navigation-guards.html)
