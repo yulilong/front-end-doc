@@ -613,6 +613,50 @@ function IsURL (str_url) {
 
 这里重点是要数字结尾， 在计算机中通常小数 1. , 2. 这种写法， 就是可是小数点结尾的， 是正确的。这里强制让数字结尾。
 
+### 6.5 只能输入中文、英文、数字
+
+```js
+// 只允许中文、英文、数字
+const pattern = /^[\u4e00-\u9fa5a-zA-Z0-9]+$/
+console.log(pattern.test('HelloWorld'))    // true
+console.log(pattern.test('123456'))        // true
+console.log(pattern.test('你好世界'))       // true
+console.log(pattern.test('hello_world'))   // false（包含下划线）
+console.log(pattern.test('hello 世界'))    // false（包含空格）
+```
+
+正则表达式解释
+
+- `^` - 字符串开始
+- `[\u4e00-\u9fa5]` - 中文字符范围（常用汉字）
+- `[a-zA-Z]` - 英文字母（大小写）
+- `[0-9]` - 数字
+- `+` - 一个或多个字符（用 `*` 表示零个或多个）
+- `$` - 字符串结束
+
+注意事项
+
+1. **空字符串处理**：正则中的 `+` 表示至少一个字符，如果需要允许空字符串，可以将 `+` 改为 `*`
+2. **长度限制**：可以结合使用，例如 `/^[\u4e00-\u9fa5a-zA-Z0-9]{1,20}$/` 限制1-20个字符
+3. **性能考虑**：对于大量数据的校验，正则表达式可能有一定性能开销
+4. **Unicode 支持**：如果需要支持更多 Unicode 字符（如Emoji），需要调整正则表达式
+
+#### 包含常见中文符号的版本（可选）
+
+```js
+// 允许中文、英文、数字及常用中文标点
+const patternWithChinesePunctuation = /^[\u4e00-\u9fa5a-zA-Z0-9，。？！、；："'（）《》【】·]+$/
+```
+
+#### 更精确的汉字范围（包括生僻字）
+
+```js
+// 包含扩展汉字集的版本
+const extendedPattern = /^[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaffa-zA-Z0-9]+$/
+```
+
+
+
 
 
 ## 参考资料
