@@ -264,6 +264,7 @@
     * [饼图(pie)示例](doc/tool/echarts/001-饼图-pie1.md)
     * [折线图(line)示例](doc/tool/echarts/002-折线图-line1.md)
     * [柱状图(bar)示例](doc/tool/echarts/003-柱状图-bar1.md)
+    * [一些option配置说明](doc/tool/echarts/010-一些option配置说明.md)
     * [特殊图表示例](doc/tool/echarts/100-特殊图表.md)
 
 ## 9. 常见问题
