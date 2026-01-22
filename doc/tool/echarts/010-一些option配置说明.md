@@ -14,7 +14,7 @@
 
 ```js
 yAxis: {
-	type: 'value',
+  type: 'value',
   minInterval: 1,
 }
 ```
