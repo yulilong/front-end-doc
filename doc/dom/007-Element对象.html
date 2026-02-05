@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>七、Element对象 | 前端知识</title>
+    <meta name="description" content="一个总结前端知识的文档网站">
+    <link rel="icon" href="/logo.png">
+  <script defer="defer" src="/static/jquery.slim.min.js"></script>
+  <script defer="defer" src="/static/jquery.fancybox.min.js"></script>
+  <link defer="defer" rel="stylesheet" type="text/css" href="/static/jquery.fancybox.min.css">
+    
+    <link rel="preload" href="/assets/css/0.styles.76f153c4.css" as="style"><link rel="preload" href="/assets/js/app.2afb8482.js" as="script"><link rel="preload" href="/assets/js/123.1246f4df.js" as="script"><link rel="prefetch" href="/assets/js/10.0ef1013d.js"><link rel="prefetch" href="/assets/js/100.59669d01.js"><link rel="prefetch" href="/assets/js/101.741c2686.js"><link rel="prefetch" href="/assets/js/102.47149e7d.js"><link rel="prefetch" href="/assets/js/103.f1eaf177.js"><link rel="prefetch" href="/assets/js/104.f23808ff.js"><link rel="prefetch" href="/assets/js/105.f5bdad72.js"><link rel="prefetch" href="/assets/js/106.b8157b10.js"><link rel="prefetch" href="/assets/js/107.a275a057.js"><link rel="prefetch" href="/assets/js/108.4906ec1c.js"><link rel="prefetch" href="/assets/js/109.b21c5677.js"><link rel="prefetch" href="/assets/js/11.3ee5972a.js"><link rel="prefetch" href="/assets/js/110.11790a6f.js"><link rel="prefetch" href="/assets/js/111.519e46a2.js"><link rel="prefetch" href="/assets/js/112.856c72b2.js"><link rel="prefetch" href="/assets/js/113.1a9718fd.js"><link rel="prefetch" href="/assets/js/114.98562c57.js"><link rel="prefetch" href="/assets/js/115.dd09f294.js"><link rel="prefetch" href="/assets/js/116.3e697856.js"><link rel="prefetch" href="/assets/js/117.9ed54de6.js"><link rel="prefetch" href="/assets/js/118.837075a7.js"><link rel="prefetch" href="/assets/js/119.eeb7356e.js"><link rel="prefetch" href="/assets/js/12.ef92ad8b.js"><link rel="prefetch" href="/assets/js/120.d76e8c70.js"><link rel="prefetch" href="/assets/js/121.5490f8be.js"><link rel="prefetch" href="/assets/js/122.bf95df47.js"><link rel="prefetch" href="/assets/js/124.1b332371.js"><link rel="prefetch" href="/assets/js/125.e968eefc.js"><link rel="prefetch" href="/assets/js/126.41b0b42d.js"><link rel="prefetch" href="/assets/js/127.8d532027.js"><link rel="prefetch" href="/assets/js/128.e3d0dd45.js"><link rel="prefetch" href="/assets/js/129.2eec7742.js"><link rel="prefetch" href="/assets/js/13.5d83ca59.js"><link rel="prefetch" href="/assets/js/130.184a5326.js"><link rel="prefetch" href="/assets/js/131.55d5602a.js"><link rel="prefetch" href="/assets/js/132.0739ad32.js"><link rel="prefetch" href="/assets/js/133.eb282834.js"><link rel="prefetch" href="/assets/js/134.9df36c58.js"><link rel="prefetch" href="/assets/js/135.6d3b3c22.js"><link rel="prefetch" href="/assets/js/136.f6fc5239.js"><link rel="prefetch" href="/assets/js/137.13c0c004.js"><link rel="prefetch" href="/assets/js/138.d9558cc8.js"><link rel="prefetch" href="/assets/js/139.450241fe.js"><link rel="prefetch" href="/assets/js/14.bb2ca207.js"><link rel="prefetch" href="/assets/js/140.e1bf74b6.js"><link rel="prefetch" href="/assets/js/141.b02477b9.js"><link rel="prefetch" href="/assets/js/142.2d68a06d.js"><link rel="prefetch" href="/assets/js/143.c47820a5.js"><link rel="prefetch" href="/assets/js/144.17e6f31d.js"><link rel="prefetch" href="/assets/js/145.2e8592c6.js"><link rel="prefetch" href="/assets/js/146.720781fb.js"><link rel="prefetch" href="/assets/js/147.bf3ed75b.js"><link rel="prefetch" href="/assets/js/148.9505073e.js"><link rel="prefetch" href="/assets/js/149.f9dd6c7c.js"><link rel="prefetch" href="/assets/js/15.16c14ea6.js"><link rel="prefetch" href="/assets/js/150.90a127d0.js"><link rel="prefetch" href="/assets/js/151.9d50afd2.js"><link rel="prefetch" href="/assets/js/152.fbecf0f6.js"><link rel="prefetch" href="/assets/js/153.32c2bb94.js"><link rel="prefetch" href="/assets/js/154.3c5424d9.js"><link rel="prefetch" href="/assets/js/155.4587c969.js"><link rel="prefetch" href="/assets/js/156.b40288c2.js"><link rel="prefetch" href="/assets/js/157.edd410f1.js"><link rel="prefetch" href="/assets/js/158.ada22e21.js"><link rel="prefetch" href="/assets/js/159.ae4e1769.js"><link rel="prefetch" href="/assets/js/16.70266c95.js"><link rel="prefetch" href="/assets/js/160.1c2e95e3.js"><link rel="prefetch" href="/assets/js/161.764559ae.js"><link rel="prefetch" href="/assets/js/162.f3834de5.js"><link rel="prefetch" href="/assets/js/163.17919df8.js"><link rel="prefetch" href="/assets/js/164.a9b1a7d4.js"><link rel="prefetch" href="/assets/js/165.e649e97a.js"><link rel="prefetch" href="/assets/js/166.02532372.js"><link rel="prefetch" href="/assets/js/167.7d112130.js"><link rel="prefetch" href="/assets/js/168.90c0dfba.js"><link rel="prefetch" href="/assets/js/169.d313ed3c.js"><link rel="prefetch" href="/assets/js/17.1f842ac0.js"><link rel="prefetch" href="/assets/js/170.4d971d67.js"><link rel="prefetch" href="/assets/js/171.6a5296d2.js"><link rel="prefetch" href="/assets/js/172.388c5f2d.js"><link rel="prefetch" href="/assets/js/173.8724128a.js"><link rel="prefetch" href="/assets/js/174.0bee9e04.js"><link rel="prefetch" href="/assets/js/175.0e539288.js"><link rel="prefetch" href="/assets/js/176.69aebc77.js"><link rel="prefetch" href="/assets/js/177.e321e16b.js"><link rel="prefetch" href="/assets/js/178.7a6767c2.js"><link rel="prefetch" href="/assets/js/179.b1cd3d26.js"><link rel="prefetch" href="/assets/js/18.958e91d3.js"><link rel="prefetch" href="/assets/js/180.aa4e26e5.js"><link rel="prefetch" href="/assets/js/181.373fea9f.js"><link rel="prefetch" href="/assets/js/182.00faf1e3.js"><link rel="prefetch" href="/assets/js/183.f5084718.js"><link rel="prefetch" href="/assets/js/184.d853e461.js"><link rel="prefetch" href="/assets/js/185.b0233d58.js"><link rel="prefetch" href="/assets/js/186.46563f8c.js"><link rel="prefetch" href="/assets/js/187.8f099752.js"><link rel="prefetch" href="/assets/js/188.3d2adfff.js"><link rel="prefetch" href="/assets/js/189.56085996.js"><link rel="prefetch" href="/assets/js/19.29243772.js"><link rel="prefetch" href="/assets/js/190.74ee9249.js"><link rel="prefetch" href="/assets/js/191.2912c7b3.js"><link rel="prefetch" href="/assets/js/192.816999ff.js"><link rel="prefetch" href="/assets/js/193.66e79d51.js"><link rel="prefetch" href="/assets/js/194.a0aef591.js"><link rel="prefetch" href="/assets/js/195.ca729864.js"><link rel="prefetch" href="/assets/js/196.5f2550df.js"><link rel="prefetch" href="/assets/js/197.53a5a951.js"><link rel="prefetch" href="/assets/js/198.9b7fd80a.js"><link rel="prefetch" href="/assets/js/199.7d76d45a.js"><link rel="prefetch" href="/assets/js/20.65ee3cb2.js"><link rel="prefetch" href="/assets/js/200.beed8c2d.js"><link rel="prefetch" href="/assets/js/201.60704fe0.js"><link rel="prefetch" href="/assets/js/202.0f40a335.js"><link rel="prefetch" href="/assets/js/203.c4a08479.js"><link rel="prefetch" href="/assets/js/204.f281776c.js"><link rel="prefetch" href="/assets/js/205.486b8447.js"><link rel="prefetch" href="/assets/js/206.b9d6473d.js"><link rel="prefetch" href="/assets/js/207.0100e25c.js"><link rel="prefetch" href="/assets/js/208.1f4aeb54.js"><link rel="prefetch" href="/assets/js/209.421e2a33.js"><link rel="prefetch" href="/assets/js/21.f02a2061.js"><link rel="prefetch" href="/assets/js/210.1c1f9f92.js"><link rel="prefetch" href="/assets/js/211.033ec43d.js"><link rel="prefetch" href="/assets/js/212.eaedd29f.js"><link rel="prefetch" href="/assets/js/213.8fa26e5f.js"><link rel="prefetch" href="/assets/js/214.b09ab61f.js"><link rel="prefetch" href="/assets/js/215.ba27a46e.js"><link rel="prefetch" href="/assets/js/216.3d36839f.js"><link rel="prefetch" href="/assets/js/217.c408db8c.js"><link rel="prefetch" href="/assets/js/218.8d420404.js"><link rel="prefetch" href="/assets/js/219.024c3aff.js"><link rel="prefetch" href="/assets/js/22.77807269.js"><link rel="prefetch" href="/assets/js/220.5cd1fed8.js"><link rel="prefetch" href="/assets/js/221.c8398355.js"><link rel="prefetch" href="/assets/js/222.eee93b67.js"><link rel="prefetch" href="/assets/js/223.890a46b1.js"><link rel="prefetch" href="/assets/js/224.af9ae0f2.js"><link rel="prefetch" href="/assets/js/225.64543242.js"><link rel="prefetch" href="/assets/js/226.67eb4e8b.js"><link rel="prefetch" href="/assets/js/227.9dea1e95.js"><link rel="prefetch" href="/assets/js/228.9fd3cd8c.js"><link rel="prefetch" href="/assets/js/229.e3bb4f30.js"><link rel="prefetch" href="/assets/js/23.04033c47.js"><link rel="prefetch" href="/assets/js/230.fd5e90a4.js"><link rel="prefetch" href="/assets/js/231.77d39633.js"><link rel="prefetch" href="/assets/js/232.0fb9b697.js"><link rel="prefetch" href="/assets/js/233.9fd67d1e.js"><link rel="prefetch" href="/assets/js/234.df71f2f9.js"><link rel="prefetch" href="/assets/js/235.72c89c6a.js"><link rel="prefetch" href="/assets/js/236.71d9c1f7.js"><link rel="prefetch" href="/assets/js/237.291e0d2b.js"><link rel="prefetch" href="/assets/js/238.39113381.js"><link rel="prefetch" href="/assets/js/239.468bdffb.js"><link rel="prefetch" href="/assets/js/24.d5ebdf50.js"><link rel="prefetch" href="/assets/js/240.6a6ca3de.js"><link rel="prefetch" href="/assets/js/241.f9a26874.js"><link rel="prefetch" href="/assets/js/242.9d8553eb.js"><link rel="prefetch" href="/assets/js/25.56b8443d.js"><link rel="prefetch" href="/assets/js/26.c90580d1.js"><link rel="prefetch" href="/assets/js/27.ec93c7fa.js"><link rel="prefetch" href="/assets/js/28.38543972.js"><link rel="prefetch" href="/assets/js/29.2d9ac121.js"><link rel="prefetch" href="/assets/js/3.9c9ba874.js"><link rel="prefetch" href="/assets/js/30.566c00ec.js"><link rel="prefetch" href="/assets/js/31.840c7368.js"><link rel="prefetch" href="/assets/js/32.085a9b53.js"><link rel="prefetch" href="/assets/js/33.2568f008.js"><link rel="prefetch" href="/assets/js/34.c693b23c.js"><link rel="prefetch" href="/assets/js/35.0b12ec66.js"><link rel="prefetch" href="/assets/js/36.5de34291.js"><link rel="prefetch" href="/assets/js/37.316e55e2.js"><link rel="prefetch" href="/assets/js/38.fedb1c7b.js"><link rel="prefetch" href="/assets/js/39.3903f3e4.js"><link rel="prefetch" href="/assets/js/4.e2e10cba.js"><link rel="prefetch" href="/assets/js/40.b458a04d.js"><link rel="prefetch" href="/assets/js/41.51efbc84.js"><link rel="prefetch" href="/assets/js/42.5c079c5c.js"><link rel="prefetch" href="/assets/js/43.d67826ec.js"><link rel="prefetch" href="/assets/js/44.e4379bb2.js"><link rel="prefetch" href="/assets/js/45.d1573aa8.js"><link rel="prefetch" href="/assets/js/46.9ed06d3b.js"><link rel="prefetch" href="/assets/js/47.44c98776.js"><link rel="prefetch" href="/assets/js/48.8bcc4819.js"><link rel="prefetch" href="/assets/js/49.ad20e965.js"><link rel="prefetch" href="/assets/js/5.9862dc9a.js"><link rel="prefetch" href="/assets/js/50.e8fde2ac.js"><link rel="prefetch" href="/assets/js/51.73d7229f.js"><link rel="prefetch" href="/assets/js/52.250dc5fe.js"><link rel="prefetch" href="/assets/js/53.f604ad65.js"><link rel="prefetch" href="/assets/js/54.1c7de7b1.js"><link rel="prefetch" href="/assets/js/55.4d268d71.js"><link rel="prefetch" href="/assets/js/56.9da1ef8f.js"><link rel="prefetch" href="/assets/js/57.5a47f404.js"><link rel="prefetch" href="/assets/js/58.f02f1dd9.js"><link rel="prefetch" href="/assets/js/59.866dce11.js"><link rel="prefetch" href="/assets/js/6.ab1c77d5.js"><link rel="prefetch" href="/assets/js/60.b747b975.js"><link rel="prefetch" href="/assets/js/61.dbd99295.js"><link rel="prefetch" href="/assets/js/62.64069c98.js"><link rel="prefetch" href="/assets/js/63.ed8b0dd0.js"><link rel="prefetch" href="/assets/js/64.3acd796b.js"><link rel="prefetch" href="/assets/js/65.b9dbfb42.js"><link rel="prefetch" href="/assets/js/66.61b81117.js"><link rel="prefetch" href="/assets/js/67.8d82f096.js"><link rel="prefetch" href="/assets/js/68.e3a8f010.js"><link rel="prefetch" href="/assets/js/69.4f199ada.js"><link rel="prefetch" href="/assets/js/7.32aa26cb.js"><link rel="prefetch" href="/assets/js/70.5b5eccfe.js"><link rel="prefetch" href="/assets/js/71.a19b24f5.js"><link rel="prefetch" href="/assets/js/72.01636d1f.js"><link rel="prefetch" href="/assets/js/73.4ea8ca9c.js"><link rel="prefetch" href="/assets/js/74.624abc0f.js"><link rel="prefetch" href="/assets/js/75.7e0202b6.js"><link rel="prefetch" href="/assets/js/76.7aaabc49.js"><link rel="prefetch" href="/assets/js/77.90e5533f.js"><link rel="prefetch" href="/assets/js/78.3758ee0d.js"><link rel="prefetch" href="/assets/js/79.15d46be1.js"><link rel="prefetch" href="/assets/js/8.cdadef6d.js"><link rel="prefetch" href="/assets/js/80.952bd008.js"><link rel="prefetch" href="/assets/js/81.3f570b43.js"><link rel="prefetch" href="/assets/js/82.62e50e74.js"><link rel="prefetch" href="/assets/js/83.3bf5ea27.js"><link rel="prefetch" href="/assets/js/84.e89c9df3.js"><link rel="prefetch" href="/assets/js/85.b9ec2ec1.js"><link rel="prefetch" href="/assets/js/86.cf032aea.js"><link rel="prefetch" href="/assets/js/87.5b38d42a.js"><link rel="prefetch" href="/assets/js/88.95904b6f.js"><link rel="prefetch" href="/assets/js/89.700238a1.js"><link rel="prefetch" href="/assets/js/9.b8b9f88e.js"><link rel="prefetch" href="/assets/js/90.3371b61c.js"><link rel="prefetch" href="/assets/js/91.5ac22d50.js"><link rel="prefetch" href="/assets/js/92.5edf548a.js"><link rel="prefetch" href="/assets/js/93.7c2caa65.js"><link rel="prefetch" href="/assets/js/94.af97350f.js"><link rel="prefetch" href="/assets/js/95.977e351c.js"><link rel="prefetch" href="/assets/js/96.783365c1.js"><link rel="prefetch" href="/assets/js/97.1c56ba20.js"><link rel="prefetch" href="/assets/js/98.8bec8d2e.js"><link rel="prefetch" href="/assets/js/99.30c76886.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.102ccaf5.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.76f153c4.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="前端知识" class="logo"> <span class="site-name can-hide">前端知识</span></a> <div class="links" style="max-width:nullpx;"><form id="search-form" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"><div class="nav-item"><a href="/catalog.html" class="nav-link">目录</a></div><div class="nav-item"><a href="/doc/es6/" class="nav-link">ES6</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">javascript</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/doc/js/" class="nav-link">js</a></li><li class="dropdown-item"><!----> <a href="/doc/js/standardLibrary/" class="nav-link">js标准库</a></li><li class="dropdown-item"><!----> <a href="/doc/dom/" class="nav-link router-link-active">dom操作文档</a></li><li class="dropdown-item"><!----> <a href="/doc/designPattern/" class="nav-link">设计模式</a></li></ul></div></div><div class="nav-item"><a href="/doc/browserNetwork/" class="nav-link">浏览器</a></div><div class="nav-item"><a href="/doc/css/" class="nav-link">CSS</a></div><div class="nav-item"><a href="/doc/react/" class="nav-link">react</a></div><div class="nav-item"><a href="/doc/vue/" class="nav-link">vue</a></div><div class="nav-item"><a href="/doc/typeScript/" class="nav-link">TypeScript</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">其他</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/doc/html/" class="nav-link">html</a></li><li class="dropdown-item"><!----> <a href="/doc/node/" class="nav-link">node</a></li><li class="dropdown-item"><!----> <a href="/doc/tool/" class="nav-link">工具</a></li><li class="dropdown-item"><!----> <a href="/doc/tool/echarts/" class="nav-link">echarts</a></li><li class="dropdown-item"><!----> <a href="/doc/problem/" class="nav-link">常见问题</a></li></ul></div></div> <a href="https://github.com/yulilong/front-end-doc" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/catalog.html" class="nav-link">目录</a></div><div class="nav-item"><a href="/doc/es6/" class="nav-link">ES6</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">javascript</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/doc/js/" class="nav-link">js</a></li><li class="dropdown-item"><!----> <a href="/doc/js/standardLibrary/" class="nav-link">js标准库</a></li><li class="dropdown-item"><!----> <a href="/doc/dom/" class="nav-link router-link-active">dom操作文档</a></li><li class="dropdown-item"><!----> <a href="/doc/designPattern/" class="nav-link">设计模式</a></li></ul></div></div><div class="nav-item"><a href="/doc/browserNetwork/" class="nav-link">浏览器</a></div><div class="nav-item"><a href="/doc/css/" class="nav-link">CSS</a></div><div class="nav-item"><a href="/doc/react/" class="nav-link">react</a></div><div class="nav-item"><a href="/doc/vue/" class="nav-link">vue</a></div><div class="nav-item"><a href="/doc/typeScript/" class="nav-link">TypeScript</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">其他</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/doc/html/" class="nav-link">html</a></li><li class="dropdown-item"><!----> <a href="/doc/node/" class="nav-link">node</a></li><li class="dropdown-item"><!----> <a href="/doc/tool/" class="nav-link">工具</a></li><li class="dropdown-item"><!----> <a href="/doc/tool/echarts/" class="nav-link">echarts</a></li><li class="dropdown-item"><!----> <a href="/doc/problem/" class="nav-link">常见问题</a></li></ul></div></div> <a href="https://github.com/yulilong/front-end-doc" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><a href="/doc/dom/" class="sidebar-link">零、DOM</a></li><li><a href="/doc/dom/001-节点的类型.html" class="sidebar-link">一、节点的类型</a></li><li><a href="/doc/dom/002-节点的关系.html" class="sidebar-link">二、节点的关系</a></li><li><a href="/doc/dom/003-节点的操作.html" class="sidebar-link">三、节点的操作</a></li><li><a href="/doc/dom/004-动态集合NodeLIst-HTMLCollection.html" class="sidebar-link">四、动态集合NodeLIst-HTMLCollection等</a></li><li><a href="/doc/dom/005-Element.html" class="sidebar-link">五、Element</a></li><li><a href="/doc/dom/006-Node.html" class="sidebar-link">六、Node</a></li><li><a href="/doc/dom/007-Element对象.html" class="one-level one-level-active active sidebar-link">七、Element对象</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/doc/dom/007-Element对象.html#_1-element实例的属性" class="sidebar-link">1. Element实例的属性</a></li><li class="sidebar-sub-header"><a href="/doc/dom/007-Element对象.html#_2-实例方法" class="sidebar-link">2. 实例方法</a></li><li class="sidebar-sub-header"><a href="/doc/dom/007-Element对象.html#_3-参考资料" class="sidebar-link">3. 参考资料</a></li></ul></li><li><a href="/doc/dom/008-document对象.html" class="sidebar-link">八、document对象</a></li><li><a href="/doc/dom/009-事件模型.html" class="sidebar-link">九、事件模型</a></li><li><a href="/doc/dom/010-事件种类.html" class="sidebar-link">十、事件种类</a></li></ul> </div> <div class="page"> <div class="content"><p></p><div class="table-of-contents"><ul><li><a href="#_1-element实例的属性">1. Element实例的属性</a><ul><li><a href="#_1-1-元素特性的相关属性">1.1 元素特性的相关属性</a></li><li><a href="#_1-2-元素状态的相关属性">1.2 元素状态的相关属性</a></li><li><a href="#_1-3-element-attributes">1.3 Element.attributes</a></li><li><a href="#_1-4-element-classname，element-classlist">1.4 Element.className，Element.classList</a></li><li><a href="#_1-5-element-dataset">1.5 Element.dataset</a></li><li><a href="#_1-6-element-innerhtml">1.6 Element.innerHTML</a></li><li><a href="#_1-7-element-outerhtml">1.7 Element.outerHTML</a></li><li><a href="#_1-8-element-clientheight，element-clientwidth">1.8 Element.clientHeight，Element.clientWidth</a></li><li><a href="#_1-9-element-clientleft，element-clienttop">1.9 Element.clientLeft，Element.clientTop</a></li><li><a href="#_1-10-element-scrollheight，element-scrollwidth">1.10 Element.scrollHeight，Element.scrollWidth</a></li><li><a href="#_1-11-element-scrollleft，element-scrolltop">1.11 Element.scrollLeft，Element.scrollTop</a></li><li><a href="#_1-12-element-offsetparent">1.12 Element.offsetParent</a></li><li><a href="#_1-13-element-offsetheight，element-offsetwidth">1.13 Element.offsetHeight，Element.offsetWidth</a></li><li><a href="#_1-14-element-offsetleft，element-offsettop">1.14 Element.offsetLeft，Element.offsetTop</a></li><li><a href="#_1-15-element-style">1.15 Element.style</a></li><li><a href="#_1-16-element-children，element-childelementcount">1.16 Element.children，Element.childElementCount</a></li><li><a href="#_1-17-element-firstelementchild，element-lastelementchild">1.17 Element.firstElementChild，Element.lastElementChild</a></li><li><a href="#_1-18-element-nextelementsibling，element-previouselementsibling">1.18 Element.nextElementSibling，Element.previousElementSibling</a></li></ul></li><li><a href="#_2-实例方法">2. 实例方法</a><ul><li><a href="#_2-1-属性相关方法">2.1 属性相关方法</a></li><li><a href="#_2-1-element-queryselector">2.1 Element.querySelector()</a></li><li><a href="#_2-3-element-queryselectorall">2.3 Element.querySelectorAll()</a></li><li><a href="#_2-4-element-getelementsbyclassname">2.4 Element.getElementsByClassName()</a></li><li><a href="#_2-5-element-getelementsbytagname">2.5 Element.getElementsByTagName()</a></li><li><a href="#_2-6-element-closest">2.6 Element.closest()</a></li><li><a href="#_2-7-element-matches">2.7 Element.matches()</a></li><li><a href="#_2-8-事件相关方法">2.8 事件相关方法</a></li><li><a href="#_2-9-element-scrollintoview">2.9 Element.scrollIntoView()</a></li><li><a href="#_2-10-element-getboundingclientrect">2.10 Element.getBoundingClientRect()</a></li><li><a href="#_2-11-element-getclientrects">2.11 Element.getClientRects()</a></li><li><a href="#_2-12-element-insertadjacentelement">2.12 Element.insertAdjacentElement()</a></li><li><a href="#_2-13-element-insertadjacenthtml-，element-insertadjacenttext">2.13 Element.insertAdjacentHTML()，Element.insertAdjacentText()</a></li><li><a href="#_2-14-element-remove">2.14 Element.remove()</a></li><li><a href="#_2-15-element-focus-，element-blur">2.15 Element.focus()，Element.blur()</a></li><li><a href="#_2-16-element-click">2.16 Element.click()</a></li></ul></li><li><a href="#_3-参考资料">3. 参考资料</a></li></ul></div><p></p> <p>[TOC]</p> <h1 id="七、element对象"><a href="#七、element对象" aria-hidden="true" class="header-anchor">#</a> 七、Element对象</h1> <p>Element元素的继承关系：</p> <div class="language- extra-class"><pre class="language-text"><code>+---------------+       +-----------+          +----------+
+|  EventTarget  | ----&gt; | Node      | =------&gt; | Element  |
++---------------+       +-----------+          +----------+
+</code></pre></div><p>Element对象对应网页的HTML元素。每个HTML元素在DOM树上都会转化成一个Element节点对象。</p> <p>元素节点的<code>nodeType</code>属性都是1.</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;p&gt;ppppp&lt;/p&gt;
+&lt;script&gt;
+    var p = document.querySelector('p');
+    console.log(p.nodeName);  // &quot;P&quot;
+    console.log(p.nodeType);  // 1
+&lt;/script&gt;
+</code></pre></div><p>Element对象继承了Node接口，因此Node的属性和方法在Element对象都存在。此外，不同的HTML元素对应的元素节点是不一样的，浏览器使用不同的构造函数，生成不同的元素节点，比如<code>&lt;a&gt;</code>元素的节点对象由<code>HTMLAnchorElement</code>构造函数生成，<code>&lt;button&gt;</code>元素的节点对象由<code>HTMLButtonElement</code>构造函数生成。因此，元素节点不是一种对象，而是一组对象，这些对象除了继承<code>Element</code>的属性和方法，还有各自构造函数的属性和方法。</p> <h2 id="_1-element实例的属性"><a href="#_1-element实例的属性" aria-hidden="true" class="header-anchor">#</a> 1. Element实例的属性</h2> <h3 id="_1-1-元素特性的相关属性"><a href="#_1-1-元素特性的相关属性" aria-hidden="true" class="header-anchor">#</a> 1.1 元素特性的相关属性</h3> <ol><li><strong>Element.id</strong></li></ol> <p><code>Element.id</code>属性返回指定元素的<code>id</code>属性，该属性可读写。</p> <p>注意，<code>id</code>属性的值是大小写敏感，即浏览器能正确识别<code>&lt;p id=&quot;foo&quot;&gt;</code>和<code>&lt;p id=&quot;FOO&quot;&gt;</code>这两个元素的<code>id</code>属性，但是最好不要这样命名。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;p id=&quot;foo&quot;&gt;ppppp&lt;/p&gt;
+&lt;script&gt;
+    var p = document.querySelector('p');
+    console.log(p.id);  // &quot;foo&quot;
+    p.id = &quot;one&quot;;   // 此时ID会立刻修改
+    console.log(p.id);  // &quot;one&quot;
+&lt;/script&gt;
+</code></pre></div><ol><li><strong>Element.tagName</strong></li></ol> <p><code>Element.tagName</code>属性返回指定元素的大写标签名，与<code>nodeName</code>属性的值相等。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;span id=&quot;myspan&quot;&gt;Hello&lt;/span&gt;
+&lt;script&gt;
+    var span = document.getElementById('myspan');
+    console.log(span.tagName);
+    console.log(span.nodeName);
+&lt;/script&gt;
+</code></pre></div><ol><li><strong>Element.dir</strong></li></ol> <p><code>Element.dir</code>属性用于读写当前元素的文字方向，可能是从左到右（<code>&quot;ltr&quot;</code>），也可能是从右到左（<code>&quot;rtl&quot;</code>）。</p> <ol><li><strong>Element.accessKey</strong></li></ol> <p><code>Element.accessKey</code>属性用于读写分配给当前元素的快捷键。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;button accesskey=&quot;h&quot; id=&quot;btn&quot;&gt;点击&lt;/button&gt;
+&lt;script&gt;
+    var btn = document.getElementById('btn');
+    console.log(btn.accessKey);
+&lt;/script&gt;
+</code></pre></div><p>上面代码中，<code>btn</code>元素的快捷键是<code>h</code>，按下<code>Alt + h</code>就能将焦点转移到它上面。</p> <ol><li><p><strong>Element.draggable</strong></p> <p><code>Element.draggable</code>属性返回一个布尔值，表示当前元素是否可拖动。该属性可读写。</p></li> <li><p><strong>Element.lang</strong></p> <p><code>Element.lang</code>属性返回当前元素的语言设置。该属性可读写。</p> <div class="language- extra-class"><pre class="language-text"><code>// HTML 代码如下
+// &lt;html lang=&quot;en&quot;&gt;
+document.documentElement.lang // &quot;en&quot;
+</code></pre></div></li> <li><p><strong>Element.tabIndex</strong></p> <p><code>Element.tabIndex</code>属性返回一个整数，表示当前元素在 Tab 键遍历时的顺序。该属性可读写。</p> <p><code>tabIndex</code>属性值如果是负值（通常是<code>-1</code>），则 Tab 键不会遍历到该元素。如果是正整数，则按照顺序，从小到大遍历。如果两个元素的<code>tabIndex</code>属性的正整数值相同，则按照出现的顺序遍历。遍历完所有<code>tabIndex</code>为正整数的元素以后，再遍历所有<code>tabIndex</code>等于<code>0</code>、或者属性值是非法值、或者没有<code>tabIndex</code>属性的元素，顺序为它们在网页中出现的顺序。</p></li> <li><p><strong>Element.title</strong></p> <p><code>Element.title</code>属性用来读写当前元素的 HTML 属性<code>title</code>。该属性通常用来指定，鼠标悬浮时弹出的文字提示框。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;p title=&quot;我是p&quot; id=&quot;btn&quot;&gt;111111&lt;/p&gt;
+&lt;script&gt;
+    var btn = document.getElementById('btn');
+    console.log(btn.title); // &quot;我是p&quot;
+&lt;/script&gt;
+</code></pre></div></li></ol> <h3 id="_1-2-元素状态的相关属性"><a href="#_1-2-元素状态的相关属性" aria-hidden="true" class="header-anchor">#</a> 1.2 元素状态的相关属性</h3> <ol><li><p><strong>Element.hidden</strong></p> <p><code>Element.hidden</code>属性返回一个布尔值，表示当前元素的<code>hidden</code>属性，用来控制当前元素是否可见。该属性可读写。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;p title=&quot;我是p&quot; id=&quot;btn&quot;&gt;111111&lt;/p&gt;
+&lt;div id=&quot;mydiv&quot;&gt;我会变&lt;/div&gt;
+&lt;script&gt;
+    var btn = document.getElementById('btn');
+    var mydiv = document.getElementById('mydiv');
+    btn.addEventListener('click', function () {
+        mydiv.hidden = !mydiv.hidden;
+    }, false);  // 点击btn 会切换 显示与隐藏 mydiv
+&lt;/script&gt;
+</code></pre></div><p>注意，该属性与 CSS 设置是互相独立的。CSS 对这个元素可见性的设置，<code>Element.hidden</code>并不能反映出来。也就是说，这个属性并不难用来判断当前元素的实际可见性。</p> <p>CSS 的设置高于<code>Element.hidden</code>。如果 CSS 指定了该元素不可见（<code>display: none</code>）或可见（<code>display: hidden</code>），那么<code>Element.hidden</code>并不能改变该元素实际的可见性。换言之，这个属性只在 CSS 没有明确设定当前元素的可见性时才有效。</p></li> <li><p><strong>Element.contentEditable，Element.isContentEditable</strong></p> <div class="language- extra-class"><pre class="language-text"><code>&lt;div contenteditable id=&quot;one&quot;&gt;123&lt;/div&gt;
+&lt;script&gt;
+    var one = document.getElementById('one');
+    console.log(one.contentEditable); // &quot;true&quot;此时页面one元素可以编辑
+    console.log(one.isContentEditable); // true 
+    one.contentEditable = false;  
+    console.log(one.contentEditable); // &quot;false&quot;  页面不能编辑了
+    console.log(one.isContentEditable); // false
+&lt;/script&gt;
+</code></pre></div><p>上面代码中，<code>&lt;div&gt;</code>元素有<code>contenteditable</code>属性，因此用户可以在网页上编辑这个区块的内容。</p> <p><code>Element.contentEditable</code>属性返回一个字符串，表示是否设置了<code>contenteditable</code>属性，有三种可能的值。该属性可写。</p> <blockquote><p><code>&quot;true&quot;</code>：元素内容可编辑</p> <p><code>&quot;false&quot;</code>：元素内容不可编辑</p> <p><code>&quot;inherit&quot;</code>：元素是否可编辑，继承了父元素的设置</p></blockquote> <p><code>Element.isContentEditable</code>属性返回一个布尔值，同样表示是否设置了<code>contenteditable</code>属性。该属性只读。</p></li></ol> <h3 id="_1-3-element-attributes"><a href="#_1-3-element-attributes" aria-hidden="true" class="header-anchor">#</a> 1.3 Element.attributes</h3> <p><code>Element.attributes</code>属性返回一个类似数组的对象，成员是当前元素节点的所有属性节点</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;p id=&quot;one&quot; class=&quot;tt&quot;&gt;123&lt;/p&gt;
+&lt;script&gt;
+    var p = document.querySelector('p');
+    var attrs = p.attributes;
+    for (var i = attrs.length - 1; i &gt;= 0; i--) {
+        console.log(attrs[i].name + '-&gt;' + attrs[i].value);
+    }
+    // &quot;class-&gt;tt&quot;
+    // &quot;id-&gt;one&quot;
+&lt;/script&gt;
+</code></pre></div><p>上面代码遍历<code>p</code>元素的所有属性。</p> <h3 id="_1-4-element-classname，element-classlist"><a href="#_1-4-element-classname，element-classlist" aria-hidden="true" class="header-anchor">#</a> 1.4 Element.className，Element.classList</h3> <p><code>className</code>属性用来读写当前元素节点的<code>class</code>属性。它的值是一个字符串，每个<code>class</code>之间用空格分割。</p> <p><code>classList</code>属性返回一个类似数组的对象，当前元素节点的每个<code>class</code>就是这个对象的一个成员。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;div class=&quot;one two three&quot; id=&quot;myDiv&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+    var div = document.getElementById('myDiv');
+    console.log(div.className); // &quot;one two three&quot;
+    console.log(div.classList); 
+    // DOMTokenList(3) [&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, value: &quot;one two three&quot;, length:3]
+&lt;/script&gt;
+</code></pre></div><p>上面代码中，<code>className</code>属性返回一个空格分隔的字符串，而<code>classList</code>属性指向一个类似数组的对象，该对象的<code>length</code>属性（只读）返回当前元素的<code>class</code>数量。</p> <p><code>classList</code>对象有下列方法:</p> <blockquote><p><code>add()</code>：增加一个 class</p> <p><code>remove()</code>：移除一个 class</p> <p><code>contains()</code>：检查当前元素是否包含某个 class</p> <p><code>toggle()</code>：将某个 class 移入或移出当前元素</p> <p><code>item()</code>：返回指定索引位置的 class</p> <p><code>toString()</code>：将 class 的列表转为字符串</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>&lt;div class=&quot;one two three&quot; id=&quot;myDiv&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+    var div = document.getElementById('myDiv');
+    div.classList.add('myCssClass');
+    div.classList.add('foo', 'bar');
+    div.classList.remove('myCssClass');
+    div.classList.toggle('myCssClass'); // 如果 myCssClass 不存在就加入，否则移除
+    div.classList.contains('myCssClass'); // 返回 true 或者 false
+    div.classList.item(0); // 返回第一个 Class
+    div.classList.toString();
+&lt;/script&gt;
+</code></pre></div><p><code>className</code>和<code>classList</code>在添加和删除某个 class 时的写法:</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;div class=&quot;one&quot; id=&quot;foo&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+    var foo = document.getElementById('foo');
+    // 添加class
+    foo.className += 'bold';
+    foo.classList.add('bold');
+    // 删除class
+    foo.classList.remove('bold');
+    foo.className = foo.className.replace(/^bold$/, '');
+&lt;/script&gt;
+</code></pre></div><p><code>toggle</code>方法可以接受一个布尔值，作为第二个参数。如果为<code>true</code>，则添加该属性；如果为<code>false</code>，则去除该属性。</p> <div class="language- extra-class"><pre class="language-text"><code>el.classList.toggle('abc', boolValue);
+
+// 等同于
+if (boolValue) {
+  el.classList.add('abc');
+} else {
+  el.classList.remove('abc');
+}
+</code></pre></div><h3 id="_1-5-element-dataset"><a href="#_1-5-element-dataset" aria-hidden="true" class="header-anchor">#</a> 1.5 Element.dataset</h3> <p>网页元素可以自定义<code>data-</code>属性，用来添加数据。</p> <p><code>Element.dataset</code>属性返回一个对象，可以从这个对象读写<code>data-</code>属性。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;div id=&quot;foo&quot; data-columns=&quot;3&quot; data-index-number=&quot;12314&quot; data-parent=&quot;cars&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+    var foo = document.getElementById('foo');
+    console.log(foo.dataset.columns);   // &quot;3&quot;
+    console.log(foo.dataset.indexNumber); // &quot;12314&quot;
+    console.log(foo.dataset.parent);    // &quot;cars&quot;
+&lt;/script&gt;
+</code></pre></div><p>注意，<code>dataset</code>上面的各个属性返回都是字符串。</p> <p>HTML 代码中，<code>data-</code>属性的属性名，只能包含英文字母、数字、连词线（<code>-</code>）、点（<code>.</code>）、冒号（<code>:</code>）和下划线（<code>_</code>）。它们转成 JavaScript 对应的<code>dataset</code>属性名，规则如下：</p> <blockquote><p>开头的<code>data-</code>会省略</p> <p>如果连词线后面跟了一个英文字母，那么连词线会取消，该字母变成大写</p> <p>其他字符不变</p></blockquote> <p>因此，<code>data-abc-def</code>对应<code>dataset.abcDef</code>，<code>data-abc-1</code>对应<code>dataset[&quot;abc-1&quot;]</code>。</p> <p>除了使用<code>dataset</code>读写<code>data-</code>属性，也可以使用<code>Element.getAttribute()</code>和<code>Element.setAttribute()</code>，通过完整的属性名读写这些属性。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;div id=&quot;foo&quot; data-columns=&quot;3&quot; data-index-number=&quot;12314&quot; data-parent=&quot;cars&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+    var foo = document.getElementById('foo');
+    console.log(foo.getAttribute('data-columns'));    // &quot;3&quot;
+    console.log(foo.getAttribute('data-index-number')); // &quot;12314&quot;
+    console.log(foo.getAttribute('data-parent'));   // &quot;cars&quot;
+&lt;/script&gt;
+</code></pre></div><h3 id="_1-6-element-innerhtml"><a href="#_1-6-element-innerhtml" aria-hidden="true" class="header-anchor">#</a> 1.6 Element.innerHTML</h3> <p><code>Element.innerHTML</code>属性返回一个字符串，等同于该元素包含的所有 HTML 代码。该属性可读写，常用来设置某个节点的内容。它能改写所有元素节点的内容，包括<code>&lt;HTML&gt;</code>和<code>&lt;body&gt;</code>元素。</p> <p>如果将<code>innerHTML</code>属性设为空，等于删除所有它包含的所有节点:<code>el.innerHTML = '';</code>,代码等于将<code>el</code>节点变成了一个空节点，<code>el</code>原来包含的节点被全部删除。</p> <p>注意，读取属性值的时候，如果文本节点包含<code>&amp;</code>、小于号（<code>&lt;</code>）和大于号（<code>&gt;</code>），<code>innerHTML</code>属性会将它们转为实体形式<code>&amp;amp;</code>、<code>&amp;lt;</code>、<code>&amp;gt;</code>。如果想得到原文，建议使用<code>element.textContent</code>属性。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;p id=&quot;para&quot;&gt; 5 &gt; 3 &lt;/p&gt;
+&lt;script&gt;
+    var foo = document.getElementById('para')
+    console.log(foo.innerHTML);   // &quot; 5 &amp;gt; 3 &quot;
+&lt;/script&gt;
+</code></pre></div><p>写入的时候，如果插入的文本包含 HTML 标签，会被解析成为节点对象插入 DOM。注意，如果文本之中含有<code>&lt;script&gt;</code>标签，虽然可以生成<code>script</code>节点，但是插入的代码不会执行。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;p id=&quot;one&quot;&gt;one&lt;/p&gt;
+&lt;script&gt;
+    var one = document.getElementById('one');
+    var name = &quot;&lt;script&gt;alert('haha')\&lt;\/script&gt;&quot;;
+    one.innerHTML = name;
+    console.log(one.innerHTML);
+&lt;/script&gt;
+</code></pre></div><p>上面代码将脚本插入内容，脚本并不会执行。但是，<code>innerHTML</code>还是有安全风险的。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;p id=&quot;one&quot;&gt;one&lt;/p&gt;
+&lt;script&gt;
+    var one = document.getElementById('one');
+    var name = &quot;&lt;img src=x onerror=alert(1)&gt;&quot;;
+    one.innerHTML = name; // 页面运行后 会弹出框
+    console.log(one.innerHTML);
+&lt;/script&gt;
+</code></pre></div><p>上面代码中，<code>alert</code>方法是会执行的。因此为了安全考虑，如果插入的是文本，最好用<code>textContent</code>属性代替<code>innerHTML</code>。</p> <h3 id="_1-7-element-outerhtml"><a href="#_1-7-element-outerhtml" aria-hidden="true" class="header-anchor">#</a> 1.7 Element.outerHTML</h3> <p><code>Element.outerHTML</code>属性返回一个字符串，表示当前元素节点的所有 HTML 代码，包括该元素本身和所有子元素。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;div id=&quot;d&quot;&gt;&lt;p&gt;Hello&lt;/p&gt;&lt;/div&gt;
+&lt;script&gt;
+    var d = document.getElementById('d');
+    console.log(d.innerHTML); // &lt;p&gt;Hello&lt;/p&gt; 
+    // &quot;&lt;p&gt;Hello&lt;/p&gt;&quot;
+    console.log(d.outerHTML); // &lt;div id=&quot;d&quot;&gt;&lt;p&gt;Hello&lt;/p&gt;&lt;/div&gt;
+    // &quot;&lt;div id=\&quot;d\&quot;&gt;&lt;p&gt;Hello&lt;/p&gt;&lt;/div&gt;&quot;
+&lt;/script&gt;
+</code></pre></div><p><code>outerHTML</code>属性是可读写的，对它进行赋值，等于替换掉当前元素。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;div id=&quot;container&quot;&gt;&lt;div id=&quot;d&quot;&gt;Hello&lt;/div&gt;&lt;/div&gt;
+&lt;script&gt;
+    var container = document.getElementById('container');
+    var d = document.getElementById('d');
+    console.log(container.firstChild.nodeName); // &quot;DIV&quot;
+    console.log(d.nodeName);          // &quot;DIV&quot;
+    d.outerHTML = '&lt;p&gt;Hello&lt;/p&gt;';
+    console.log(container.firstChild.nodeName); // &quot;P&quot;
+    console.log(d.nodeName);          // &quot;DIV&quot;
+&lt;/script&gt;
+</code></pre></div><p>上面代码中，变量<code>d</code>代表子节点，它的<code>outerHTML</code>属性重新赋值以后，内层的<code>div</code>元素就不存在了，被<code>p</code>元素替换了。但是，变量<code>d</code>依然指向原来的<code>div</code>元素，这表示被替换的<code>DIV</code>元素还存在于内存中。</p> <p>注意，如果一个节点没有父节点，设置<code>outerHTML</code>属性会报错:</p> <div class="language- extra-class"><pre class="language-text"><code>var div = document.createElement('div');
+div.outerHTML = '&lt;p&gt;test&lt;/p&gt;';
+// DOMException: Failed to set the 'outerHTML' property on 'Element': This element has no parent node.
+</code></pre></div><h3 id="_1-8-element-clientheight，element-clientwidth"><a href="#_1-8-element-clientheight，element-clientwidth" aria-hidden="true" class="header-anchor">#</a> 1.8 Element.clientHeight，Element.clientWidth</h3> <p><code>Element.clientHeight</code>属性返回一个整数值，表示元素节点的 CSS 高度（单位像素），只对块级元素生效，对于行内元素返回<code>0</code>。如果块级元素没有设置 CSS 高度，则返回实际高度。</p> <p>除了元素本身的高度，它还包括<code>padding</code>部分，但是不包括<code>border</code>、<code>margin</code>。如果有水平滚动条，还要减去水平滚动条的高度。注意，这个值始终是整数，如果是小数会被四舍五入。</p> <p><code>Element.clientWidth</code>属性返回元素节点的 CSS 宽度，同样只对块级元素有效，也是只包括元素本身的宽度和<code>padding</code>，如果有垂直滚动条，还要减去垂直滚动条的宽度。</p> <p><code>document.documentElement</code>的<code>clientHeight</code>属性，返回当前视口的高度（即浏览器窗口的高度），等同于<code>window.innerHeight</code>属性减去水平滚动条的高度（如果有的话）。<code>document.body</code>的高度则是网页的实际高度。一般来说，<code>document.body.clientHeight</code>大于<code>document.documentElement.clientHeight</code>。</p> <div class="language- extra-class"><pre class="language-text"><code>// 视口高度
+document.documentElement.clientHeight
+// 网页总高度
+document.body.clientHeight
+</code></pre></div><h3 id="_1-9-element-clientleft，element-clienttop"><a href="#_1-9-element-clientleft，element-clienttop" aria-hidden="true" class="header-anchor">#</a> 1.9 Element.clientLeft，Element.clientTop</h3> <p><code>Element.clientLeft</code>属性等于元素节点左边框（left border）的宽度（单位像素），不包括左侧的<code>padding</code>和<code>margin</code>。如果没有设置左边框，或者是行内元素（<code>display: inline</code>），该属性返回<code>0</code>。该属性总是返回整数值，如果是小数，会四舍五入。</p> <p><code>Element.clientTop</code>属性等于网页元素顶部边框的宽度（单位像素），其他特点都与<code>clientTop</code>相同。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;style&gt;
+    #tt {border: 1px solid}
+    #one { border: 12px solid red; padding:10px; margin: 15px; }
+&lt;/style&gt;
+&lt;div id=&quot;tt&quot;&gt;
+    &lt;div id=&quot;one&quot;&gt;one&lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var one = document.getElementById('one');
+    console.log(one.clientLeft);  // 12
+    console.log(one.clientTop);   // 12
+&lt;/script&gt;
+</code></pre></div><h3 id="_1-10-element-scrollheight，element-scrollwidth"><a href="#_1-10-element-scrollheight，element-scrollwidth" aria-hidden="true" class="header-anchor">#</a> 1.10 Element.scrollHeight，Element.scrollWidth</h3> <p><code>Element.scrollHeight</code>属性返回一个整数值（小数会四舍五入），表示当前元素的总高度（单位像素），包括溢出容器、当前不可见的部分。它包括<code>padding</code>，但是不包括<code>border</code>、<code>margin</code>以及水平滚动条的高度（如果有水平滚动条的话），还包括伪元素（<code>::before</code>或<code>::after</code>）的高度。</p> <p><code>Element.scrollWidth</code>属性表示当前元素的总宽度（单位像素），其他地方都与<code>scrollHeight</code>属性类似。这两个属性只读。</p> <p>整张网页的总高度可以从<code>document.documentElement</code>或<code>document.body</code>上读取。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;style&gt;
+    #tt { border: 1px solid; height: 100px; width: 200px;  overflow: scroll; }
+&lt;/style&gt;
+&lt;div id=&quot;tt&quot;&gt;
+    &lt;p&gt;123ssssaaaaaaaaaaaaaaaaaaaaaa&lt;/p&gt;
+    &lt;p&gt;123&lt;/p&gt;&lt;p&gt;123&lt;/p&gt;&lt;p&gt;123&lt;/p&gt;
+    &lt;p&gt;123&lt;/p&gt;&lt;p&gt;123&lt;/p&gt;&lt;p&gt;123&lt;/p&gt;&lt;p&gt;123&lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var tt = document.getElementById('tt');
+    console.log(tt.clientHeight); // 85
+    console.log(tt.clientWidth);  // 185
+    console.log(tt.scrollHeight); // 320
+    console.log(tt.scrollWidth);  // 255
+&lt;/script&gt;
+</code></pre></div><p>注意，如果元素节点的内容出现溢出，即使溢出的内容是隐藏的，<code>scrollHeight</code>属性仍然返回元素的总高度。</p> <p>上面的代码中，即使tt元素的CSS高度只有100像素，且溢出部分不可见，但是<code>scrollHeight</code>仍然会返回该元素的原始高度。</p> <h3 id="_1-11-element-scrollleft，element-scrolltop"><a href="#_1-11-element-scrollleft，element-scrolltop" aria-hidden="true" class="header-anchor">#</a> 1.11 Element.scrollLeft，Element.scrollTop</h3> <p><code>Element.scrollLeft</code>属性表示当前元素的水平滚动条向右侧滚动的像素数量，<code>Element.scrollTop</code>属性表示当前元素的垂直滚动条向下滚动的像素数量。对于那些没有滚动条的网页元素，这两个属性总是等于0。</p> <p>这两个属性都可读写，设置该属性的值，会导致浏览器将当前元素自动滚动到相应的位置。</p> <p>如果要查看整张网页的水平的和垂直的滚动距离，要从<code>document.documentElement</code>元素上读取。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;style&gt;
+    #tt { border: 1px solid; height: 100px; width: 200px;  overflow: scroll; }
+&lt;/style&gt;
+&lt;div id=&quot;tt&quot;&gt;
+    &lt;p&gt;123ssssaaaaaaaaaaaaaaaaaaaaaa&lt;/p&gt;
+    &lt;p&gt;123&lt;/p&gt;&lt;p&gt;123&lt;/p&gt;&lt;p&gt;123&lt;/p&gt;
+    &lt;p&gt;123&lt;/p&gt;&lt;p&gt;123&lt;/p&gt;&lt;p&gt;123&lt;/p&gt;&lt;p&gt;123&lt;/p&gt;
+&lt;/div&gt;
+  &lt;button&gt;我是按钮&lt;/button&gt;
+  &lt;script&gt;
+    var tt = document.getElementById('tt');
+    var btn = document.querySelector(&quot;button&quot;);
+    btn.onclick = function() {
+      console.log(tt.scrollLeft); // 0 
+      console.log(tt.scrollTop);  // 0
+      tt.scrollLeft = &quot;40&quot;;     // 执行后横向滚动条会移动到中间位置(大约)
+    }
+    // 读取整张网页的水平的和垂直的滚动距离
+    console.log(document.documentElement.scrollLeft)
+    console.log(document.documentElement.scrollLeft)
+  &lt;/script&gt;
+</code></pre></div><h3 id="_1-12-element-offsetparent"><a href="#_1-12-element-offsetparent" aria-hidden="true" class="header-anchor">#</a> 1.12 Element.offsetParent</h3> <p><code>Element.offsetParent</code>属性返回最靠近当前元素的、并且 CSS 的<code>position</code>属性不等于<code>static</code>的上层元素。</p> <p>该属性主要用于确定子元素位置偏移的计算基准，<code>Element.offsetTop</code>和<code>Element.offsetLeft</code>就是根据<code>offsetParent</code>元素的距离计算的。</p> <p>如果该元素是不可见的（<code>display</code>属性为<code>none</code>），或者位置是固定的（<code>position</code>属性为<code>fixed</code>），则<code>offsetParent</code>属性返回<code>null</code>。</p> <p>如果某个元素的所有上层节点的<code>position</code>属性都是<code>static</code>，则<code>Element.offsetParent</code>属性指向<code>&lt;body&gt;</code>元素。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;style&gt;
+    #tt { border: 1px solid; height: 100px; width: 200px;  overflow: scroll; }
+&lt;/style&gt;
+
+&lt;div id=&quot;tt&quot; style=&quot;position: relative;&quot;&gt;
+    &lt;p&gt;
+        &lt;span id=&quot;one&quot;&gt;Hello&lt;/span&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+        &lt;span id=&quot;two&quot; style=&quot;display: none;&quot;&gt;Hello&lt;/span&gt;
+    &lt;/p&gt;
+&lt;/div&gt;
+&lt;span id=&quot;three&quot;&gt;333&lt;/span&gt;
+&lt;script&gt;
+    var one = document.getElementById('one');
+    var two = document.getElementById('two');
+    var three = document.getElementById('three');
+    console.log(one.offsetParent);  // &lt;div  id=&quot;tt&quot; ......
+    console.log(two.offsetParent) // null
+    console.log(three.offsetParent) // &lt;body&gt; ......
+&lt;/script&gt;
+</code></pre></div><p>上面的代码中，id为<code>one</code>的元素的<code>offsetParent</code>属性就是id为<code>tt</code>的<code>div</code>元素。</p> <p>上面的代码中，id为<code>two</code>的<code>span</code>元素的<code>offsetParent</code>属性是<code>null</code>。</p> <p>上面的代码中，id为<code>three</code>的<code>span</code>元素的<code>offsetParent</code>属性是<code>body</code>元素。</p> <h3 id="_1-13-element-offsetheight，element-offsetwidth"><a href="#_1-13-element-offsetheight，element-offsetwidth" aria-hidden="true" class="header-anchor">#</a> 1.13 Element.offsetHeight，Element.offsetWidth</h3> <p><code>Element.offsetHeight</code>属性返回一个整数，表示元素的 CSS 垂直高度（单位像素），包括元素本身的高度、padding 和 border，以及水平滚动条（如果存在且渲染的话），不包含:before或:after等伪类元素的高度。</p> <p><code>Element.offsetWidth</code>属性表示元素的 CSS 水平宽度（单位像素），其他都与<code>Element.offsetHeight</code>一致。</p> <p>这两个属性都是只读属性，只比<code>Element.clientHeight</code>和<code>Element.clientWidth</code>多了边框的高度或宽度。如果元素的 CSS 设为不可见（比如<code>display: none;</code>），则返回<code>0</code>。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;style&gt;
+    #tt { border: 5px solid; height: 100px; width: 200px; padding: 5px; overflow: scroll; }
+&lt;/style&gt;
+&lt;div id=&quot;tt&quot;&gt;
+    &lt;p&gt;123ssssaaaaaaaaaaaaaaaaaaaaaa&lt;/p&gt;
+    &lt;p&gt;123&lt;/p&gt;&lt;p&gt;123&lt;/p&gt;&lt;p&gt;123&lt;/p&gt;
+    &lt;p&gt;123&lt;/p&gt;&lt;p&gt;123&lt;/p&gt;&lt;p&gt;123&lt;/p&gt;&lt;p&gt;123&lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var tt = document.getElementById('tt');
+    console.log(tt.clientHeight); // 95
+    console.log(tt.clientWidth);  // 195
+    console.log(tt.scrollHeight); // 330
+    console.log(tt.scrollWidth);  // 260
+    console.log(tt.offsetHeight); // 120
+    console.log(tt.offsetWidth ); // 220
+&lt;/script&gt;
+</code></pre></div><h3 id="_1-14-element-offsetleft，element-offsettop"><a href="#_1-14-element-offsetleft，element-offsettop" aria-hidden="true" class="header-anchor">#</a> 1.14 Element.offsetLeft，Element.offsetTop</h3> <p><code>Element.offsetLeft</code>返回当前元素左上角相对于<code>Element.offsetParent</code>节点的水平位移，<code>Element.offsetTop</code>返回垂直位移，单位为像素。通常，这两个值是指相对于父节点的位移。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;style&gt;
+    body { margin: 0; }
+    .one { border: 1px solid; height: 300px; width: 300px;
+        overflow: scroll; position: relative;
+    }
+    p { margin: 30px 0; border: 1px solid red; }
+&lt;/style&gt;
+&lt;p&gt;123&lt;/p&gt;
+&lt;div class=&quot;one&quot;&gt;
+    &lt;p&gt;1&lt;/p&gt;&lt;p&gt;2&lt;/p&gt;&lt;p&gt;3&lt;/p&gt; &lt;p&gt;4&lt;/p&gt;&lt;p&gt;5&lt;/p&gt;&lt;p&gt;6&lt;/p&gt;
+    &lt;p&gt;7&lt;/p&gt;&lt;p&gt;8&lt;/p&gt;&lt;p&gt;9&lt;/p&gt; &lt;p&gt;10&lt;/p&gt;&lt;p&gt;11&lt;/p&gt;&lt;p&gt;12&lt;/p&gt;
+    &lt;p&gt;13&lt;/p&gt;dddddddd &lt;span class=f&gt;ffffffffffffffffffffffffff&lt;/span&gt;&lt;p&gt;14&lt;/p&gt;
+    &lt;p&gt;15&lt;/p&gt;&lt;p&gt;16&lt;/p&gt;&lt;p&gt;17&lt;/p&gt; &lt;p&gt;18&lt;/p&gt;&lt;p&gt;19&lt;/p&gt;&lt;p&gt;20&lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var one = document.querySelector(&quot;.one&quot;);
+    var f = document.querySelector(&quot;.f&quot;);
+    // one.scrollTop = f.offsetTop; 设置 直接滚动到指定位置
+    console.log(f.offsetLeft) // 80
+    console.log(f.offsetTop)  // 732
+&lt;/script&gt;
+</code></pre></div><p>下面的代码可以算出元素左上角相对于整张网页的坐标:</p> <div class="language- extra-class"><pre class="language-text"><code>function getElementPosition(e) {
+  var x = 0;
+  var y = 0;
+  while (e !== null)  {
+    x += e.offsetLeft;
+    y += e.offsetTop;
+    e = e.offsetParent; // 这个是重点，每次循环都找到offsetParent
+  }
+  return {x: x, y: y};
+}
+</code></pre></div><p>下面是函数测试：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;style&gt;
+    body { margin: 0; border: 1px solid;}    
+    p { margin: 30px 0; border: 1px solid red; }
+  &lt;/style&gt;
+  &lt;p&gt;123&lt;/p&gt;
+  &lt;div&gt; &lt;p&gt;内部&lt;/p&gt;
+    &lt;div&gt; &lt;p&gt;又一个内部&lt;/p
+      &lt;div&gt; &lt;p id=&quot;one&quot;&gt;又一个&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+      var one = document.querySelector(&quot;#one&quot;);
+      console.log(one.offsetTop);
+      function getElementPosition(e) {
+        var x = 0; var y = 0;
+        while (e !== null)  {
+          x += e.offsetLeft; y += e.offsetTop; e = e.offsetParent;
+        }
+        return {x: x, y: y};
+      }
+    var tmp = getElementPosition(one);
+    console.log(tmp.x)  // 1
+    console.log(tmp.y)  // 193
+  &lt;/script&gt;
+</code></pre></div><h3 id="_1-15-element-style"><a href="#_1-15-element-style" aria-hidden="true" class="header-anchor">#</a> 1.15 Element.style</h3> <p>每个元素节点都有<code>style</code>用来读写该元素的行内样式信息</p> <p><code>style</code>属性返回一个 <a href="https://developer.mozilla.org/zh-US/docs/DOM/CSSStyleDeclaration" target="_blank" rel="noopener noreferrer"><code>CSSStyleDeclaration</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 对象，表示元素的 内联<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes#style" target="_blank" rel="noopener noreferrer"><code>style</code> 属性（attribute）<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>，但忽略任何样式表应用的属性。</p> <p>由于 <code>style</code> 属性的优先级和通过style设置内联样式是一样的，并且在css层级样式中拥有最高优先级，因此在为特定的元素设置样式时很有用。</p> <p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/style" target="_blank" rel="noopener noreferrer">HTMLElement.style   MDN<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h3 id="_1-16-element-children，element-childelementcount"><a href="#_1-16-element-children，element-childelementcount" aria-hidden="true" class="header-anchor">#</a> 1.16 Element.children，Element.childElementCount</h3> <p><code>Element.children</code>属性返回一个类似数组的对象（<code>HTMLCollection</code>实例），包括当前元素节点的所有子元素。如果当前元素没有子元素，则返回的对象包含零个成员。</p> <p><code>Element.children</code>属性与<code>Node.childNodes</code>属性的区别是，它只包括元素类型的子节点，不包括其他类型的子节点。</p> <p><code>Element.childElementCount</code>属性返回当前元素节点包含的子元素节点的个数，与<code>Element.children.length</code>的值相同。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;div id=&quot;one&quot;&gt;
+    &lt;span&gt;1 &lt;/span&gt;&lt;span&gt;2 &lt;/span&gt;&lt;span&gt;3 &lt;/span&gt;
+&lt;/div&gt;
+&lt;div id=&quot;two&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+    var one = document.getElementById(&quot;one&quot;);
+    var two = document.getElementById(&quot;two&quot;);
+    if (one.children.length) {
+        var children = one.children;
+        for (var i = 0; i &lt; children.length; i++){
+            console.log(children[i]);
+        }
+    }
+    // &lt;span&gt;1 &lt;/span&gt;
+    // &lt;span&gt;2 &lt;/span&gt;
+    // &lt;span&gt;3 &lt;/span&gt;
+    console.log(two.children);  // HTMLCollection []
+&lt;/script&gt;
+</code></pre></div><h3 id="_1-17-element-firstelementchild，element-lastelementchild"><a href="#_1-17-element-firstelementchild，element-lastelementchild" aria-hidden="true" class="header-anchor">#</a> 1.17 Element.firstElementChild，Element.lastElementChild</h3> <p><code>Element.firstElementChild</code>属性返回当前元素的第一个元素子节点。</p> <p><code>Element.lastElementChild</code>返回最后一个元素子节点。</p> <p>如果没有元素子节点，这两个属性返回<code>null</code>。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;div id=&quot;one&quot;&gt;
+    &lt;span&gt;1 &lt;/span&gt;&lt;span&gt;2 &lt;/span&gt;&lt;span&gt;3 &lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;two&quot;&gt;&lt;/div&gt;
+  &lt;script&gt;
+    var one = document.getElementById(&quot;one&quot;);
+    var two = document.getElementById(&quot;two&quot;);
+    console.log(one.firstElementChild); // &lt;span&gt;1 &lt;/span&gt;
+    console.log(one.lastElementChild);  // &lt;span&gt;3 &lt;/span&gt;
+    console.log(two.firstElementChild); // null
+    console.log(two.lastElementChild);  // null
+  &lt;/script&gt;
+</code></pre></div><h3 id="_1-18-element-nextelementsibling，element-previouselementsibling"><a href="#_1-18-element-nextelementsibling，element-previouselementsibling" aria-hidden="true" class="header-anchor">#</a> 1.18 Element.nextElementSibling，Element.previousElementSibling</h3> <p><code>Element.nextElementSibling</code>属性返回当前元素节点的后一个同级元素节点，如果没有则返回<code>null</code>。</p> <p><code>Element.previousElementSibling</code>属性返回当前元素节点的前一个同级元素节点，如果没有则返回<code>null</code>。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;div id=&quot;tt&quot;&gt;
+    &lt;div id=&quot;div-01&quot;&gt;Here is div-01&lt;/div&gt;
+    &lt;div id=&quot;div-02&quot;&gt;Here is div-02&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+    var one = document.getElementById('div-01');
+    var two = document.getElementById(&quot;div-02&quot;);
+    console.log(one.nextElementSibling);  // &lt;div id=&quot;div-02&quot;&gt;Here is div-02&lt;/div&gt;
+    console.log(two.nextElementSibling);  // null
+    console.log(one.previousElementSibling);// null
+    console.log(two.previousElementSibling);// &lt;div id=&quot;div-01&quot;&gt;Here is div-01&lt;/div&gt;
+  &lt;/script&gt;
+</code></pre></div><h2 id="_2-实例方法"><a href="#_2-实例方法" aria-hidden="true" class="header-anchor">#</a> 2. 实例方法</h2> <h3 id="_2-1-属性相关方法"><a href="#_2-1-属性相关方法" aria-hidden="true" class="header-anchor">#</a> 2.1 属性相关方法</h3> <p>元素节点提供六个方法，用来操作属性。</p> <ul><li><code>getAttribute()</code>：读取某个属性的值</li> <li><code>getAttributeNames()</code>：返回当前元素的所有属性名</li> <li><code>setAttribute()</code>：写入属性值</li> <li><code>hasAttribute()</code>：某个属性是否存在</li> <li><code>hasAttributes()</code>：当前元素是否有属性</li> <li><code>removeAttribute()</code>：删除属性</li></ul> <p>这些方法的介绍请看《属性的操作》一章。</p> <h3 id="_2-1-element-queryselector"><a href="#_2-1-element-queryselector" aria-hidden="true" class="header-anchor">#</a> 2.1 Element.querySelector()</h3> <p><code>Element.querySelector</code>方法接受 CSS 选择器作为参数，返回父元素的第一个匹配的子元素。如果没有找到匹配的子元素，就返回<code>null</code>。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;div id=&quot;tt&quot;&gt;
+    &lt;div&gt;123&lt;/div&gt; &lt;p&gt;p&lt;/p&gt; &lt;p&gt;2p&lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var one = document.getElementById('tt');
+    var p = one.querySelector(&quot;p&quot;);
+    console.log(p); // &lt;p&gt;p&lt;/p&gt;
+&lt;/script&gt;
+</code></pre></div><p>上面代码返回<code>content</code>节点的第一个<code>p</code>元素。</p> <p><code>Element.querySelector</code>方法可以接受任何复杂的 CSS 选择器。</p> <div class="language- extra-class"><pre class="language-text"><code>document.body.querySelector(&quot;style[type='text/css'], style:not([type])&quot;);
+</code></pre></div><p>注意，这个方法无法选中伪元素。</p> <p>它可以接受多个选择器，它们之间使用逗号分隔。</p> <div class="language- extra-class"><pre class="language-text"><code>element.querySelector('div, p');
+</code></pre></div><p>上面代码返回<code>element</code>的第一个<code>div</code>或<code>p</code>子元素。</p> <p>需要注意的是，浏览器执行<code>querySelector</code>方法时，是先在全局范围内搜索给定的 CSS 选择器，然后过滤出哪些属于当前元素的子元素。因此，会有一些违反直觉的结果，下面是一段 HTML 代码。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;div&gt;
+    &lt;blockquote id=&quot;outer&quot;&gt;
+        &lt;p&gt;Hello&lt;/p&gt;
+        &lt;div id=&quot;inner&quot;&gt;
+            &lt;p&gt;World&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var outer = document.getElementById('outer');
+    var p = outer.querySelector('div p')
+    console.log(p); // &lt;p&gt;Hello&lt;/p&gt;
+&lt;/script&gt;
+</code></pre></div><p>上面的代码实际上返回的是第一个<code>p</code>元素，而不是第二个。</p> <h3 id="_2-3-element-queryselectorall"><a href="#_2-3-element-queryselectorall" aria-hidden="true" class="header-anchor">#</a> 2.3 Element.querySelectorAll()</h3> <p><code>Element.querySelectorAll</code>方法接受 CSS 选择器作为参数，返回一个<code>NodeList</code>实例，包含所有匹配的子元素。</p> <p>该方法的执行机制与<code>querySelector</code>方法相同，也是先在全局范围内查找，再过滤出当前元素的子元素。因此，选择器实际上针对整个文档的。</p> <p>它也可以接受多个 CSS 选择器，它们之间使用逗号分隔。如果选择器里面有伪元素的选择器，则总是返回一个空的<code>NodeList</code>实例。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;div id=&quot;one&quot;&gt;
+    &lt;div class=&quot;tt&quot;&gt;&lt;p&gt;tt&lt;/p&gt;&lt;/div&gt;
+    &lt;div id=&quot;two&quot;&gt;
+        &lt;p&gt;1&lt;/p&gt; &lt;p&gt;2&lt;/p&gt; &lt;p&gt;3&lt;/p&gt;
+        &lt;p&gt;4&lt;/p&gt; &lt;p&gt;5&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var one = document.getElementById('one');
+    var p = one.querySelectorAll('div#two &gt; p')
+    console.log(p); // NodeList(5) [p, p, p, p, p]
+&lt;/script&gt;
+</code></pre></div><h3 id="_2-4-element-getelementsbyclassname"><a href="#_2-4-element-getelementsbyclassname" aria-hidden="true" class="header-anchor">#</a> 2.4 Element.getElementsByClassName()</h3> <p><code>Element.getElementsByClassName</code>方法返回一个<code>HTMLCollection</code>实例，成员是当前元素节点的所有具有指定 class 的子元素节点。该方法与<code>document.getElementsByClassName</code>方法的用法类似，只是搜索范围不是整个文档，而是当前元素节点。</p> <p>注意，该方法的参数大小写敏感。</p> <p>由于<code>HTMLCollection</code>实例是一个活的集合，<code>document</code>对象的任何变化会立刻反应到实例，下面的代码不会生效。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;div id=&quot;example&quot;&gt;
+    &lt;p class=&quot;foo&quot;&gt;123&lt;/p&gt;
+    &lt;p class=&quot;foo&quot;&gt;abc&lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var element = document.getElementById('example');
+    var matches = element.getElementsByClassName('foo');
+    for (var i = 0; i&lt; matches.length; i++) {
+        matches[i].classList.remove('foo');
+        matches.item(i).classList.add('bar');
+    }
+    // 执行后，HTML 代码如下
+    // &lt;div id=&quot;example&quot;&gt;
+    //   &lt;p&gt;&lt;/p&gt;
+    //   &lt;p class=&quot;foo bar&quot;&gt;&lt;/p&gt;
+    // &lt;/div&gt;
+&lt;/script&gt;
+</code></pre></div><p>上面代码中，<code>matches</code>集合的第一个成员，一旦被拿掉 class 里面的<code>foo</code>，就会立刻从<code>matches</code>里面消失，导致出现上面的结果。</p> <h3 id="_2-5-element-getelementsbytagname"><a href="#_2-5-element-getelementsbytagname" aria-hidden="true" class="header-anchor">#</a> 2.5 Element.getElementsByTagName()</h3> <p><code>Element.getElementsByTagName</code>方法返回一个<code>HTMLCollection</code>实例，成员是当前节点的所有匹配指定标签名的子元素节点。该方法与<code>document.getElementsByClassName</code>方法的用法类似，只是搜索范围不是整个文档，而是当前元素节点。</p> <p>注意，该方法的参数是大小写不敏感的。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;div id=&quot;one&quot;&gt;
+    &lt;p id=&quot;foo&quot;&gt;123&lt;/p&gt;
+    &lt;p class=&quot;foo&quot;&gt;abc&lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var one = document.getElementById('one');
+    var foo = document.getElementById(&quot;foo&quot;);
+    var p = one.getElementsByTagName('p');
+    console.log(p);
+    one.removeChild(foo);
+    console.log(p);
+&lt;/script&gt;
+</code></pre></div><h3 id="_2-6-element-closest"><a href="#_2-6-element-closest" aria-hidden="true" class="header-anchor">#</a> 2.6 Element.closest()</h3> <p><code>Element.closest</code>方法接受一个 CSS 选择器作为参数，返回匹配该选择器的、最接近当前节点的一个祖先节点（包括当前节点本身）。如果没有任何节点匹配 CSS 选择器，则返回<code>null</code>。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;article&gt;
+    &lt;div id=&quot;div-01&quot;&gt;Here is div-01
+        &lt;div id=&quot;div-02&quot;&gt;Here is div-02
+            &lt;div id=&quot;div-03&quot;&gt;Here is div-03&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/article&gt;
+&lt;script&gt;
+    var div03 = document.getElementById('div-03');
+    console.log(div03.closest(&quot;#div-02&quot;));    // div-02
+    console.log(div03.closest(&quot;div div&quot;));    // div-03
+    console.log(div03.closest(&quot;article &gt; div&quot;));//div-01
+    console.log(div03.closest(&quot;:not(div)&quot;));  // article
+&lt;/script&gt;
+</code></pre></div><p>上面代码中，由于<code>closest</code>方法将当前节点也考虑在内，所以第二个<code>closest</code>方法返回<code>div-03</code>。</p> <h3 id="_2-7-element-matches"><a href="#_2-7-element-matches" aria-hidden="true" class="header-anchor">#</a> 2.7 Element.matches()</h3> <p><code>Element.matches</code>方法返回一个布尔值，表示当前元素是否匹配给定的 CSS 选择器。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;div class=&quot;one two&quot; id=&quot;tt&quot;&gt;one&lt;/div&gt;
+&lt;script&gt;
+    var tt = document.getElementById('tt');
+    console.log(tt.matches(&quot;.two&quot;));  // true
+    console.log(tt.matches(&quot;.three&quot;));  // false
+    console.log(tt.matches(&quot;#tt&quot;));   // true
+    console.log(tt.matches(&quot;#ee&quot;));   // false
+&lt;/script&gt;
+</code></pre></div><h3 id="_2-8-事件相关方法"><a href="#_2-8-事件相关方法" aria-hidden="true" class="header-anchor">#</a> 2.8 事件相关方法</h3> <p>以下三个方法与<code>Element</code>节点的事件相关。这些方法都继承自<code>EventTarget</code>接口，详见相关章节。</p> <ul><li><code>Element.addEventListener()</code>：添加事件的回调函数</li> <li><code>Element.removeEventListener()</code>：移除事件监听函数</li> <li><code>Element.dispatchEvent()</code>：触发事件</li></ul> <div class="language- extra-class"><pre class="language-text"><code>element.addEventListener('click', listener, false);
+element.removeEventListener('click', listener, false);
+
+var event = new Event('click');
+element.dispatchEvent(event);
+</code></pre></div><h3 id="_2-9-element-scrollintoview"><a href="#_2-9-element-scrollintoview" aria-hidden="true" class="header-anchor">#</a> 2.9 Element.scrollIntoView()</h3> <p><code>Element.scrollIntoView</code>方法滚动当前元素，进入浏览器的可见区域，类似于设置<code>window.location.hash</code>的效果。</p> <p>该方法可以接受一个布尔值作为参数:</p> <p>如果为<code>true</code>，表示元素的顶部与当前区域的可见部分的顶部对齐（前提是当前区域可滚动）；</p> <p>如果为<code>false</code>，表示元素的底部与当前区域的可见部分的尾部对齐（前提是当前区域可滚动）。</p> <p>如果没有提供该参数，默认为<code>true</code>。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;style&gt;
+    body { margin: 0; }
+    .one { border: 1px solid; height: 300px; width: 300px;
+        overflow: scroll; position: relative;
+    }
+    p { margin: 30px 0; border: 1px solid red; }
+&lt;/style&gt;
+&lt;p&gt;123&lt;/p&gt;
+&lt;div class=&quot;one&quot;&gt;
+    &lt;p&gt;1&lt;/p&gt;&lt;p&gt;2&lt;/p&gt;&lt;p&gt;3&lt;/p&gt; &lt;p&gt;4&lt;/p&gt;&lt;p&gt;5&lt;/p&gt;&lt;p&gt;6&lt;/p&gt;
+    &lt;p&gt;7&lt;/p&gt;&lt;p&gt;8&lt;/p&gt;&lt;p&gt;9&lt;/p&gt; &lt;p&gt;10&lt;/p&gt;&lt;p&gt;11&lt;/p&gt;&lt;p&gt;12&lt;/p&gt;
+    &lt;p&gt;13&lt;/p&gt;dddddddd &lt;span class=f&gt;ffffffffffffffffffffffffff&lt;/span&gt;&lt;p&gt;14&lt;/p&gt;
+    &lt;p&gt;15&lt;/p&gt;&lt;p&gt;16&lt;/p&gt;&lt;p&gt;17&lt;/p&gt; &lt;p&gt;18&lt;/p&gt;&lt;p&gt;19&lt;/p&gt;&lt;p&gt;20&lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var one = document.querySelector(&quot;.one&quot;);
+    var f = document.querySelector(&quot;.f&quot;);
+    f.scrollIntoView();   // f移动到了one内部的可见区域顶部 
+    f.scrollIntoView(false);// f移动到了one内部的可见区域底部
+&lt;/script&gt;
+</code></pre></div><h3 id="_2-10-element-getboundingclientrect"><a href="#_2-10-element-getboundingclientrect" aria-hidden="true" class="header-anchor">#</a> 2.10 Element.getBoundingClientRect()</h3> <p><code>Element.getBoundingClientRect</code>方法返回一个对象，提供当前元素节点的大小、位置等信息，基本上就是 CSS 盒状模型的所有信息。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;style&gt;
+    body { margin: 0; }
+    .one { border: 1px solid; height: 300px; width: 300px;
+    }
+&lt;/style&gt;
+&lt;p&gt;ss&lt;/p&gt;
+&lt;div class=&quot;one&quot;&gt;
+    &lt;p&gt;123&lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var one = document.querySelector(&quot;.one&quot;);
+    var ret = one.getBoundingClientRect();
+    console.log(ret); // DOMRect {x: 0, y: 54, width: 302, height: 302, top: 54, …}
+    console.log(Object.keys(ret));  // []
+&lt;/script&gt;
+</code></pre></div><p>上面代码中，<code>getBoundingClientRect</code>方法返回的<code>rect</code>对象，具有以下属性（全部为只读）。</p> <ul><li><code>x</code>：元素左上角相对于视口的横坐标</li> <li><code>y</code>：元素左上角相对于视口的纵坐标</li> <li><code>height</code>：元素高度</li> <li><code>width</code>：元素宽度</li> <li><code>left</code>：元素左上角相对于视口的横坐标，与<code>x</code>属性相等</li> <li><code>right</code>：元素右边界相对于视口的横坐标（等于<code>x + width</code>）</li> <li><code>top</code>：元素顶部相对于视口的纵坐标，与<code>y</code>属性相等</li> <li><code>bottom</code>：元素底部相对于视口的纵坐标（等于<code>y + height</code>）</li></ul> <p>由于元素相对于视口（viewport）的位置，会随着页面滚动变化，因此表示位置的四个属性值，都不是固定不变的。如果想得到绝对位置，可以将<code>left</code>属性加上<code>window.scrollX</code>，<code>top</code>属性加上<code>window.scrollY</code>。</p> <p>注意，<code>getBoundingClientRect</code>方法的所有属性，都把边框（<code>border</code>属性）算作元素的一部分。也就是说，都是从边框外缘的各个点来计算。因此，<code>width</code>和<code>height</code>包括了元素本身 + <code>padding</code> + <code>border</code>。</p> <p>另外，上面的这些属性，都是继承自原型的属性，<code>Object.keys</code>会返回一个空数组，这一点也需要注意。</p> <p>上面代码中，<code>ret</code>对象没有自身属性，而<code>Object.keys</code>方法只返回对象自身的属性，所以返回了一个空数组。</p> <h3 id="_2-11-element-getclientrects"><a href="#_2-11-element-getclientrects" aria-hidden="true" class="header-anchor">#</a> 2.11 Element.getClientRects()</h3> <p><code>Element.getClientRects</code>方法返回一个类似数组的对象，里面是当前元素在页面上形成的所有矩形（所以方法名中的<code>Rect</code>用的是复数）。每个矩形都有<code>bottom</code>、<code>height</code>、<code>left</code>、<code>right</code>、<code>top</code>和<code>width</code>六个属性，表示它们相对于视口的四个坐标，以及本身的高度和宽度。</p> <p>对于盒状元素（比如<code>&lt;div&gt;</code>和<code>&lt;p&gt;</code>），该方法返回的对象中只有该元素一个成员。</p> <p>对于行内元素（比如<code>&lt;span&gt;</code>、<code>&lt;a&gt;</code>、<code>&lt;em&gt;</code>），该方法返回的对象有多少个成员(经过chrome浏览器测试)：</p> <p>HTML代码中行内元素行数，加上实际网页行数减一，</p> <p>比如代码中span元素写了三行，实际页面是2行，那么返回的对象就是4个</p> <p>而<code>Element.getBoundingClientRect()</code>方法对于行内元素总是返回一个矩形对象。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;style&gt;
+    HTML, body {margin: 0;}
+    .one {
+        width: 800px; border: 1px solid; font-size: 15px;
+    }
+&lt;/style&gt;
+&lt;div class=&quot;one&quot;&gt;
+    &lt;span id=&quot;inline&quot;&gt;
+        Hello World
+        Element.getClientRects
+        方法返回一个类似数组的对象Element.getClientRects方法返回一个类似数组的对象Ele
+    &lt;/span&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var el = document.getElementById('inline');
+    console.log(el.getClientRects().length);// 4
+    console.log(el.getClientRects());   // 1
+    // DOMRectList {0: DOMRect, 1: DOMRect, 2: DOMRect, 3: DOMRect, length: 4}
+    console.log(el.getBoundingClientRect());
+    // DOMRect {x: 1, y: 1, width: 790.71875, height: 42, top: 1, …}
+&lt;/script&gt;
+</code></pre></div><p>这个方法主要用于判断行内元素是否换行，以及行内元素的每一行的位置偏移。</p> <h3 id="_2-12-element-insertadjacentelement"><a href="#_2-12-element-insertadjacentelement" aria-hidden="true" class="header-anchor">#</a> 2.12 Element.insertAdjacentElement()</h3> <p><code>Element.insertAdjacentElement</code>方法在相对于当前元素的指定位置，插入一个新的节点。该方法返回被插入的节点，如果插入失败，返回<code>null</code>。</p> <p>该方法一共可以接受两个参数，第一个参数是一个字符串，表示插入的位置，第二个参数是将要插入的节点。第一个参数只可以取如下的值：</p> <blockquote><ul><li><code>beforebegin</code>：当前元素之前</li> <li><code>afterbegin</code>：当前元素内部的第一个子节点前面</li> <li><code>beforeend</code>：当前元素内部的最后一个子节点后面</li> <li><code>afterend</code>：当前元素之后</li></ul></blockquote> <p>注意，<code>beforebegin</code>和<code>afterend</code>这两个值，只在当前节点有父节点时才会生效。如果当前节点是由脚本创建的，没有父节点，那么插入会失败。</p> <p>如果插入的节点是一个文档里现有的节点，它会从原有位置删除，放置到新的位置。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;p id=&quot;pp&quot;&gt;我是pp&lt;/p&gt;
+&lt;div id=&quot;one&quot;&gt; 123&lt;/div&gt;
+&lt;script&gt;
+    var one = document.getElementById('one');
+    var pp = document.getElementById('pp');
+    var p1 = document.createElement('p');
+    var p2 = document.createElement('p');
+    p2.innerText = 'p2q';
+    tt = p1.insertAdjacentElement('afterend', p2);
+    dd = one.insertAdjacentElement('afterend', p2);
+    ff = one.insertAdjacentElement('afterend', pp);// 这里会把 pp移动到div里面
+    console.log(tt);// null
+    console.log(dd);// &lt;p&gt;p2q&lt;/p&gt;
+    console.log(ff);// &lt;p id=&quot;pp&quot;&gt;我是pp&lt;/p&gt;
+&lt;/script&gt;
+</code></pre></div><h3 id="_2-13-element-insertadjacenthtml-，element-insertadjacenttext"><a href="#_2-13-element-insertadjacenthtml-，element-insertadjacenttext" aria-hidden="true" class="header-anchor">#</a> 2.13 Element.insertAdjacentHTML()，Element.insertAdjacentText()</h3> <p><code>Element.insertAdjacentHTML</code>方法用于将一个 HTML 字符串，解析生成 DOM 结构，插入相对于当前节点的指定位置。</p> <p>该方法接受两个参数，第一个是一个表示指定位置的字符串，第二个是待解析的 HTML 字符串。第一个参数只能设置下面四个值之一。</p> <blockquote><ul><li><code>beforebegin</code>：当前元素之前</li> <li><code>afterbegin</code>：当前元素内部的第一个子节点前面</li> <li><code>beforeend</code>：当前元素内部的最后一个子节点后面</li> <li><code>afterend</code>：当前元素之后</li></ul></blockquote> <p>该方法只是在现有的 DOM 结构里面插入节点，这使得它的执行速度比<code>innerHTML</code>方法快得多。</p> <p>注意，该方法不会转义 HTML 字符串，这导致它不能用来插入用户输入的内容，否则会有安全风险。</p> <p><code>Element.insertAdjacentText</code>方法在相对于当前节点的指定位置，插入一个文本节点，用法与<code>Element.insertAdjacentHTML</code>方法完全一致。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;div id=&quot;one&quot;&gt;one&lt;/div&gt;
+&lt;div id=&quot;two&quot;&gt;two&lt;/div&gt;
+&lt;script&gt;
+    var one = document.getElementById('one');
+    var two = document.getElementById('two');
+    one.insertAdjacentHTML('beforeend', '&lt;p id=&quot;pt&quot;&gt;pp&lt;/p&gt;');
+    one.insertAdjacentHTML('beforeend', '&lt;&gt;   1');
+    two.insertAdjacentText('beforeend', '&lt;p id=&quot;pt&quot;&gt;pp&lt;/p&gt;');
+    two.insertAdjacentText('beforeend', '&lt;&gt;   1');
+    
+    // HTML 代码：&lt;div id=&quot;one&quot;&gt;one&lt;/div&gt;
+    var d1 = document.getElementById('one');
+    d1.insertAdjacentHTML('afterend', '&lt;div id=&quot;two&quot;&gt;two&lt;/div&gt;');
+    // 执行后的 HTML 代码：
+    // &lt;div id=&quot;one&quot;&gt;one&lt;/div&gt;&lt;div id=&quot;two&quot;&gt;two&lt;/div&gt;
+    
+    // HTML 代码：&lt;div id=&quot;one&quot;&gt;one&lt;/div&gt;
+    var d1 = document.getElementById('one');
+    d1.insertAdjacentText('afterend', 'two');
+    // 执行后的 HTML 代码：
+    // &lt;div id=&quot;one&quot;&gt;one&lt;/div&gt;two
+&lt;/script&gt;
+</code></pre></div><h3 id="_2-14-element-remove"><a href="#_2-14-element-remove" aria-hidden="true" class="header-anchor">#</a> 2.14 Element.remove()</h3> <p><code>Element.remove</code>方法继承自 ChildNode 接口，用于将当前元素节点从它的父节点移除。</p> <div class="language- extra-class"><pre class="language-text"><code>3&lt;div id=&quot;one&quot;&gt;one&lt;/div&gt;4
+&lt;script&gt;
+    var one = document.getElementById('one');
+    tt = one.remove();  // one从HTML中删除
+    console.log(tt)   // undefined
+&lt;/script&gt;
+</code></pre></div><h3 id="_2-15-element-focus-，element-blur"><a href="#_2-15-element-focus-，element-blur" aria-hidden="true" class="header-anchor">#</a> 2.15 Element.focus()，Element.blur()</h3> <p><code>Element.focus</code>方法用于将当前页面的焦点，转移到指定元素上。</p> <p>该方法可以接受一个对象作为参数。参数对象的<code>preventScroll</code>属性是一个布尔值，指定是否将当前元素停留在原始位置，而不是滚动到可见区域。</p> <div class="language- extra-class"><pre class="language-text"><code>function getFocus() {
+  document.getElementById('btn').focus({preventScroll:false});
+}
+</code></pre></div><p>上面代码会让<code>btn</code>元素获得焦点，并滚动到可见区域。</p> <p>最后，从<code>document.activeElement</code>属性可以得到当前获得焦点的元素。</p> <p><code>Element.blur</code>方法用于将焦点从当前元素移除。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;div&gt;123:&lt;input id=&quot;one&quot; type=&quot;text&quot;&gt;&lt;/div&gt;
+&lt;div&gt;ppp:&lt;input id=&quot;two&quot; type=&quot;text&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+    var one = document.getElementById('one');
+    one.focus();  // one 输入框会获取焦点
+    console.log(document.activeElement);// 可以得到有焦点的元素
+    //     one.blur();
+&lt;/script&gt;
+</code></pre></div><h3 id="_2-16-element-click"><a href="#_2-16-element-click" aria-hidden="true" class="header-anchor">#</a> 2.16 Element.click()</h3> <p><code>Element.click</code>方法用于在当前元素上模拟一次鼠标点击，相当于触发了<code>click</code>事件。</p> <h2 id="_3-参考资料"><a href="#_3-参考资料" aria-hidden="true" class="header-anchor">#</a> 3. 参考资料</h2> <p><a href="https://javascript.ruanyifeng.com/dom/element.html" target="_blank" rel="noopener noreferrer">Element对象 阮一峰<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><a href="https://wangdoc.com/javascript/dom/element.html" target="_blank" rel="noopener noreferrer">Element 节点 阮一峰 网道<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement" target="_blank" rel="noopener noreferrer">HTMLElement  MDN<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Element" target="_blank" rel="noopener noreferrer">Element  MDN<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></div> <div class="page-edit"><div class="edit-link"><a href="https://github.com/yulilong/front-end-doc/edit/master/doc/dom/007-Element对象.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">Last Updated: </span> <span class="time">4/18/2020, 4:44:55 PM</span></div></div> <!----> </div> <!----></div></div>
+    <script src="/assets/js/123.1246f4df.js" defer></script><script src="/assets/js/app.2afb8482.js" defer></script>
+  </body>
+</html>
