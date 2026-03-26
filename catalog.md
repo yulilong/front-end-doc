@@ -230,7 +230,8 @@
     * [新建vue3项目及相关问题](doc/vue/vue3/100-新建vue3项目及相关问题.md)
     * [vite关于低版本浏览器的支持](doc/vue/vue3/101-vite关于低版本浏览器的支持.md)
 * VUE3代码示例
-    * [element-plus 代码示例](doc/vue/vue3/code-demo/01-element-plus组件代码示例1.md)
+    * [element-plus 代码示例](doc/vue/vue3/code-demo/01-element-plus代码示例1.md)
+    * [element-plus 样式修改示例](doc/vue/vue3/code-demo/02-element-plus样式修改1.md)
     * [代码示例1](doc/vue/vue3/code-demo/20-代码示例1.md)
     * [富文本编辑器使用](doc/vue/vue3/code-demo/30-富文本编辑器的使用.md)
 
