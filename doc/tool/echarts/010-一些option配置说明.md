@@ -38,3 +38,28 @@ yAxis: {
 },
 ```
 
+
+
+## 2. 柱状图的配置相关
+
+### 2.1 设置柱状图的宽度
+
+```js
+let data = [10, 20, 15, 20, 22, 12]
+let option = {
+	series: [
+    {
+      type: 'bar', name: '名字', barGap: 0,
+      data: data,
+      barWidth: (() => {
+        // 大于5条数据，设置宽度为15
+    		if (data.length > 5) {
+          return 15;
+        }
+        return null; // 自适应
+    	})(),
+    }
+  ]
+}
+```
+
