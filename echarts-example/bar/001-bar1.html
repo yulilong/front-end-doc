@@ -1,0 +1,87 @@
+<!--
+	此示例下载自 https://echarts.apache.org/examples/zh/editor.html?c=bar-simple&code=PYBwLglsB2AEC8sDeAoWtJgDYFMBcya6GOAHmAQOSBXgYFnagknKCP5oG1Ogf2qUA0R6uAZhbEoBjHNDA4ATpSIBfLulIBBUhADOBVMQwBPEPkFCAhuIDmwCds7dYAE2OGCAbUqAF-MAyEYFo5ToMDOioC5zb0pAN0VANblKAF0OWAB6aNhAeetAKjlGQAVtQBC3AA1AF3jAWBVAB89rWNhAPujAO38MwAsVQHDTQHVtQD4zQC5PQGnTQBt4wrjDFVUAGUMAIxwsDXbiCWAwY30AZgAGWBGZWXkYuLLAWDlGgE0swEP5QHsDIm1lNQ0dPSoAN0MsAFccb1UAC2AAdwJea9UcWDkiL4kIDh1LBHJpiGBdPpKH1DFJlug7BMnNZ0EhYFdbvoAIwAJhmUWghgAtlD3F4ohBxESAMoQ3CnITALDmKgAYgAYuyAGxTAAcABZKD8fvDiGiMXcCHj8bBCSSqP5vJScDS6fo0YzmRI2VMuYocQBRABCQpkIpRyHR10lsCxAFYZXKoaElVTadp6ZbNSzBBz2QBhA12rmm81adDWSIjQAU6qlAG4ZgAuExqAB1NADwK1iw_UGw3DsCerwIYAkd1F6BAwFUlKg0CoYFAVlzvHMROM4m1giQQhkQqKKcAdsbprS_LRFVKAXu1AGV61hhEgA6hAbGBHlR-TMAKTSdAycIoGQAbiAA
+	⚠ 请注意，该图表不是 Apache ECharts 官方示例，而是由用户代码生成的。请注意鉴别其内容。
+-->
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-gl/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-stat/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-graph-modularity extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-graph-modularity/dist/echarts-graph-modularity.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/bmap.min.js"></script>
+  -->
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  title: {
+    text: '自定义柱状图',
+    left: 'center'
+  },
+  xAxis: {
+    type: 'category',
+    data: ['运行中', '关机', '其他'], // 每个柱子的X轴名称
+    // 设置X周文字显示旋转
+    // axisLabel: {
+    //   rotate: 30 
+    // }
+  },
+  // 设置不显示Y轴信息
+  yAxis: { type: 'value', show: false },
+  series: [{
+    type: 'bar',
+    data: [
+      { value: 120, name: '运行中', itemStyle: { color: '#FF6384' } },
+      { value: 200, name: '关机', itemStyle: { color: '#36A2EB' } },
+      { value: 150, name: '其他', itemStyle: { color: '#FFCE56' } },
+      
+    ],
+    // 在柱子顶部显示数值
+    label: {
+      show: true,
+      position: 'top',
+      formatter: '{c}' // 显示数据值
+    },
+    // 柱子宽度
+    barWidth: '40%'
+  }]
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>
