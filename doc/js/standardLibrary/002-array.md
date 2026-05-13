@@ -578,42 +578,42 @@ arr.forEach((item) => {
 
 ### 3.12 filter()：过滤，返回满足条件新数组
 
-`filter`方法用于过滤数组成员，满足条件的成员组成一个新数组返回。
+`filter`方法用于过滤数组成员，满足条件的成员组成一个新数组返回。如果没有符合条件的成员，则返回空数组。该方法不会改变原数组。
 
-它的参数是一个函数，所有数组成员依次执行该函数，返回结果为`true`的成员组成一个新数组返回。该方法不会改变原数组。
+`filter`方法第一个参数是一个函数，所有数组成员依次执行该函数，返回结果为`true`的成员组成一个新数组作为`filter`方法的返回值。
 
 ```javascript
+// 将大于3的数组成员，作为一个新数组返回。
 [1, 2, 3, 4, 5].filter(function (elem) {
   return (elem > 3);
 })
 // [4, 5]
-```
 
-上面代码将大于`3`的数组成员，作为一个新数组返回。
+// 数组没有满足条件的，则返回空数组
+[1, 2, 3, 4, 5].filter(function (elem) {
+  return (elem > 30);
+})
+// []
 
-```javascript
-var arr = [0, 1, 'a', false];
-
-arr.filter(Boolean)
+// filter方法返回数组arr里面所有布尔值为true的成员。
+[0, 1, 'a', false].filter(Boolean)
 // [1, "a"]
 ```
-
-上面代码中，`filter`方法返回数组`arr`里面所有布尔值为`true`的成员。
 
 `filter`方法的参数函数可以接受三个参数：当前成员，当前位置和整个数组。
 
 ```javascript
+// 返回偶数位置的成员组成的新数组
 [1, 2, 3, 4, 5].filter(function (elem, index, arr) {
   return index % 2 === 0;
 });
 // [1, 3, 5]
 ```
 
-上面代码返回偶数位置的成员组成的新数组。
-
 `filter`方法还可以接受第二个参数，用来绑定参数函数内部的`this`变量。
 
 ```javascript
+// 过滤器myFilter内部有this变量，它可以被filter方法的第二个参数obj绑定，返回大于3的成员。
 var obj = { MAX: 3 };
 var myFilter = function (item) {
   if (item > this.MAX) return true;
@@ -622,8 +622,6 @@ var myFilter = function (item) {
 var arr = [2, 8, 3, 4, 1, 3, 2, 9];
 arr.filter(myFilter, obj) // [8, 4, 9]
 ```
-
-上面代码中，过滤器`myFilter`内部有`this`变量，它可以被`filter`方法的第二个参数`obj`绑定，返回大于`3`的成员。
 
 ### 3.13 some()，every()：判断成员是否满足某个条件
 
