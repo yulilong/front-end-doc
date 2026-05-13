@@ -4,7 +4,9 @@
 
 # element-plus 代码示例
 
-## 1. element-plus组件的form表单实现自定义组件
+## 1. 组件使用
+
+### 1.1 element-plus组件的form表单实现自定义组件
 
 Vue 3 + TypeScript + Element Plus + 自定义组件作为数组输入源
 
@@ -212,7 +214,7 @@ function handleChange(val: User[]) {
 
 
 
-## 2. el-table-column 内 `template` 的 `#default` 插槽取值
+### 1.2 el-table-column 内 `template` 的 `#default` 插槽取值
 
 在Vue3的Element Plus中，el-table-column使用template的`#default`（即插槽）可以获取到当前行、列、索引等数据。具体来说，这个插槽提供了以下属性：
 
@@ -256,7 +258,7 @@ function handleChange(val: User[]) {
 
 
 
-## 3. 日期组件限制用户选择的最大日期范围为 **7 天**
+### 1.3 日期组件限制用户选择的最大日期范围为 **7 天**
 
 1、在日期组件里面设置
 
@@ -331,4 +333,77 @@ const isValidRange = () => {
   return diff <= 7;
 };
 ```
+
+
+
+## 2. 组件使用遇到的问题解决
+
+### 2.1 form表单报错页面滚动到错误处
+
+当form表单高度和宽度都超过的页面可视区域的时候，表单校验选项报错后，页面不会股东到错误处，导致不知道哪里错了，需要页面滚动到错误出直接修改问题。
+
+1、el-form组件自带的属性(经过实测有效，element-plus@2.7.6)：
+
+```vue
+<el-form
+  scroll-to-error
+  :scroll-into-view-options="{
+    behavior: 'smooth', // 平滑的移动
+    block: 'center', // 垂直移动到哪里的位置：start：滚到顶部 center：滚到中间 end：滚到底部
+    inline: 'center' // 水平移动到哪里的位置：nearest：默认最近位置 center：横向居中
+  }"
+>
+<!-- 或者 -->
+<el-form
+  :scroll-to-error="true"
+>
+```
+
+`scroll-to-error`：是否开启“校验失败自动滚动”，默认是false
+
+`scroll-into-view-options`：配置“滚动行为参数”
+
+2、使用代码定位到错误处(经过实测上下滚动有效，横向滚动无效)：
+
+```js
+const submit = async () => {
+  if (!formRef.value) return
+  try {
+    // 校验通过
+    await formRef.value.validate()
+  } catch (err) {
+    // 校验失败后滚动
+    scrollToError()
+  }
+}
+
+const scrollToError = () => {
+  // 找到第一个报错元素
+  const errorItem = document.querySelector('.is-error')
+  if (errorItem) {
+    errorItem.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'center'
+    })
+  }
+}
+// 推荐升级版（最稳）
+const scrollToError = () => {
+  const errorItem = document.querySelector('.is-error')
+  if (!errorItem) return
+  errorItem.scrollIntoView({
+    behavior: 'smooth',
+    block: 'center',
+    inline: 'center'
+  })
+  // 聚焦输入框,或者别的另写
+  const input = errorItem.querySelector('input')
+  input?.focus()
+}
+```
+
+
+
+
 
