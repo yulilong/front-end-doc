@@ -50,7 +50,11 @@ app.use(pinia) // 使用插件
 app.mount('#app')
 ```
 
-重启服务后，就可以在浏览器的vue插件中看到`pinia`选项
+1、添加上面代码后，项目中就可以使用pinia了，在浏览器的vue插件中也可以看到`pinia`选项了。
+
+**注意**：`pinia`在`main.js`文件注册好后就可以使用了，不需要像vuex那样在引用根store文件了(定义的store还要统一在这个文件中引入)。
+
+
 
 ### 2.3 一个完整的store定义文件(src/store/talk.ts)：
 
@@ -212,6 +216,8 @@ onMounted(async () => {
 <script setup lang="ts">
 import { useUserStore } from '@/stores/user'
 const store = useUserStore()
+// 在代码中使用
+console.log(store.userInfo)
 </script>
 ```
 
@@ -238,6 +244,8 @@ const store = useUserStore()
 import { storeToRefs } from 'pinia'
 const store = useUserStore()
 const { userInfo, isLoading } = storeToRefs(store)
+// 在代码中使用，因为转化成了refs，所以要.value才能获取到值 
+console.log(userInfo.value)
 </script>
 ```
 
@@ -551,7 +559,70 @@ useUserStore().getUserInfo()
 
   
 
+## pinia的原理
 
+### 1. 状态共享原理(Store 单例机制)
 
+#### 1.1 为什么两个页面拿到的是同一个 store？
 
+```js
+// A.vue
+const userStore = useUserStore()
+
+// B.vue
+const userStore = useUserStore()
+```
+
+如上面代码所示，两个组件使用了同一个stroe文件。
+
+很多初学者会认为：每次调用 useUserStore()，都会重新创建 store
+
+但实际上：**Pinia 内部会缓存 store 实例**
+
+#### 1.2 defineStore 的真正作用
+
+```js
+defineStore('user', {})
+```
+
+`defineStore `本质：**不是创建 store，而是“定义 store**
+
+#### 1.3 store 真正创建时机
+
+真正创建发生在：`useUserStore()`第一次调用的时候，后续在执行都是获取store，不会创建。
+
+#### 1.4 Pinia 的单例缓存机制（核心）
+
+Pinia 内部类似：`const storeMap = new Map()`
+
+第一次：`useUserStore()`，不存在 → 创建 store → 放入缓存
+
+第二次：`useUserStore()`，已存在 → 直接返回缓存实例
+
+pinia是通过`defineStore('user')`中的`user`作为 store 的唯一 ID，来实现全局唯一的
+
+#### 1.5 为什么组件销毁后 store 还存在？
+
+因为 store 属于 pinia 实例，不属于组件。组件销毁 store 不会销毁。
+
+这就是状态管理的核心价值，实现跨组件共享状态的原理。
+
+#### 1.6 总结
+
+Pinia 的核心机制：
+
+- defineStore 用于定义 store
+- useStore 用于获取 store
+- Pinia 内部通过 store id 做单例缓存
+
+所以多个组件拿到的是同一个 store 实例
+
+## Pinia 与 Vuex 的区别
+
+| Vuex                 | Pinia      |
+| -------------------- | ---------- |
+| 启动时创建全部 store | 按需创建   |
+| 单一 store           | 多 store   |
+| 模块复杂             | 天然模块化 |
+| TS 支持弱            | TS 支持强  |
 
