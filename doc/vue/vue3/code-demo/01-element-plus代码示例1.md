@@ -403,6 +403,85 @@ const scrollToError = () => {
 }
 ```
 
+### 2.2 多个form表单组件校验
+
+子组件：
+
+```js
+const validate = async () => {
+  if (!formRef.value) return
+  try {
+    await formRef.value.validate()
+
+    return {
+      valid: true
+    }
+  } catch (err: any) {
+    return {
+      valid: false,
+      errors: err
+    }
+  }
+}
+defineExpose({
+  validate
+})
+```
+
+父组件核心逻辑（重点）:
+
+```js
+import { ElMessage } from 'element-plus'
+
+const handleSubmit = async () => {
+  const forms = [
+    formARef.value,
+    formBRef.value,
+    formCRef.value
+  ]
+
+  for (const form of forms) {
+    if (!form) continue
+
+    const result = await form.validate()
+    // 校验失败
+    if (!result.valid) {
+      // 获取第一个错误字段
+      const firstErrorKey = Object.keys(result.errors)[0]
+
+      // 第一个错误信息
+      const firstError = result.errors[firstErrorKey]?.[0]?.message
+      // 弹窗提示
+      ElMessage.error(firstError)
+      // 滚动定位
+      scrollToError()
+      return
+    }
+  }
+  // 没有问题，执行方法
+  ElMessage.success('提交成功')
+}
+```
+
+errors 数据结构：
+
+```js
+{
+  name: [
+    {
+      message: '请输入姓名',
+      field: 'name'
+    }
+  ],
+  age: [
+    {
+      message: '请输入年龄',
+      field: 'age'
+    }
+  ]
+}
+```
+
 
 
 
