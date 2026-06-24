@@ -191,16 +191,33 @@ cross-env LIMIT=10240  increase-memory-limit # LIMIT是分配的内存大小，�
 
 - 永久调整限制(推荐)
 
+  1、第一种解决方案(编辑文件)：
+
   ```bash
   # 编辑 sysctl 配置文件
   sudo vi /etc/sysctl.conf
   
-  # 在文件末尾添加以下行（示例值为 524288）
+  # 在文件末尾添加以下行：524288 是一个常用的推荐值，足以应对大型前端项目
   fs.inotify.max_user_watches=524288
   
   # 保存退出后，执行以下命令使配置生效
   sudo sysctl -p
   ```
+
+  2、第二种解决方案(终端执行命令)：
+
+  ```bash
+  # tee -a 会将配置追加到 /etc/sysctl.conf 文件中，确保重启后依然有效
+  # sysctl -p 会重新加载配置使更改立即生效
+  echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+  
+  # 验证是否生效
+  cat /proc/sys/fs/inotify/max_user_watches
+  ```
+
+  如果输出 `524288`，说明修改成功。此时重新启动你的 npm 服务即可。
+
+  
 
 - 临时调整限制(重启电脑后失效)
 
@@ -255,5 +272,7 @@ cross-env LIMIT=10240  increase-memory-limit # LIMIT是分配的内存大小，�
 
 
 
+## 其他相关问题
 
+请参考这个连接：[NPM常见问题](https://yu66.vip/doc/npm-yarn-node/002-NPM%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98.html)
 
