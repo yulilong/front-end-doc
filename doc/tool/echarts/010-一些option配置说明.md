@@ -84,6 +84,12 @@ let option = {
   // borderColor / borderWidth：自定义网格边框的颜色和粗细，默认边框为透明无样式。
   // backgroundColor：给绘图网格区域设置专属背景色，支持纯色和半透明色，提升图表视觉层次感。
   // containLabe：布尔值，默认false，设置为true时，grid 的边距会自动把坐标轴标签的尺寸计算在内，彻底避免标签被容器边缘截断。
+  yAxis: {
+    name: 'Y轴名称', // 垂直坐标轴 单位名称
+  },
+  xAxis: {
+    name: 'X轴名称', // 水平坐标轴 单位名称
+  },
 }
 ```
 
