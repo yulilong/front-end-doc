@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>水球图示例</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts-liquidfill@3/dist/echarts-liquidfill.min.js"></script>
+  <style>
+    body {margin: 0;}
+    #main {
+      width: 100%;
+      height: 250px;
+      margin: auto;
+      background: #0a1f33; /* 背景色仅用于模拟效果 */
+    }
+  </style>
+</head>
+<body>
+  <div id="main"></div>
+  <script>
+    var chart = echarts.init(document.getElementById('main'));
+
+    var value = 0.6623; // 当前值
+    var option = {
+      title: {
+        text: '已分配xxx / 总量xxx',
+        left: "center",
+        bottom: 20,
+        textStyle: {
+          color: "#fff",
+          fontSize: 18,
+        },
+      },
+      series: [{
+        type: 'liquidFill',
+        radius: '80%',
+        center: ['50%', '43%'], // 调整位置
+        data: [value], // 百分比（0~1之间）
+        // data: [value, value * 0.9, value * 0.8], // 多层波浪更自然
+        // color: ['#3ba5ff'],
+        // 颜色从上到下渐变
+        color: [
+          {
+            type: 'linear',
+            x: 0, y: 0, x2: 0, y2: 1,
+            colorStops: [
+              { offset: 0, color: '#3ba5ff' },
+              { offset: 1, color: 'blue' } //#1d6fd6
+            ]
+          }
+        ],
+        backgroundStyle: {
+          borderWidth: 2,
+          borderColor: '#3ba5ff',
+          color: 'rgba(59,165,255,0.2)' // 圆背景色
+        },
+        label: {
+          formatter: function(param) {
+            return '分配率' + (param.value * 100).toFixed(2) + '%';
+          },
+          fontSize: 20,
+          color: '#fff'
+        },
+        outline: {
+          show: true,
+          borderDistance: 3,
+          itemStyle: {
+            borderColor: '#3ba5ff',
+            borderWidth: 2
+          }
+        }
+      }],
+      // graphic: [
+      //   {
+      //     type: 'text',
+      //     left: 'center',
+      //     // top: '85%',
+      //     bottom: '10%',
+      //     style: {
+      //       text: '已分配xxx / 总量xxx',
+      //       fill: '#fff',
+      //       font: '16px sans-serif'
+      //     }
+      //   }
+      // ]
+    };
+
+    chart.setOption(option);
+  </script>
+</body>
+</html>
