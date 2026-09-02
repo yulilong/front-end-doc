@@ -51,6 +51,10 @@ let option = {
     {
       type: 'bar', name: '名字', barGap: 0,
       data: data,
+      barWidth: '40%',      // 期望宽度
+      barMaxWidth: 50,      // 最宽不超过 50px，即使设置了百分比，柱子也不会超过这个值。
+      barMinWidth: 10       // 最窄不低于 10px，保证柱子在任何情况下都可见且易于点击。
+      // 根据数据量来确认宽度
       barWidth: (() => {
         // 大于5条数据，设置宽度为15
     		if (data.length > 5) {
