@@ -69,7 +69,50 @@ let option = {
 
 
 
-## 3. 其他一些配置
+## 3. 折线图配置相关
+
+### 3.1 多条折线的时候，只显示一条线，其他点击标题显示
+
+```js
+let option = {
+  grid: {},
+  // 示例样式。也就是折线图的标题
+  legend: {
+    selectedMode: 'single', // 这个是关键，设置只显示一条线模式
+    data: [
+      { name: '虚机一号', itemStyle: { color: 'red'}}, // 设置这个示例的颜色，为了统一还需要同步设置折线颜色
+    ]，
+    formatter: function(name) {
+      if(name === '虚机一号') return '虚机\n一号';
+      return name
+    }
+  }
+}
+```
+
+
+
+## 点击事件
+
+### 1. 点击数据示例(数据标题)触发事件
+
+```js
+const myChart = echarts.init(div)
+myChart.setOption(option)
+// 这个是监听事件：可以在点击后执行一些操作，比如给Y坐标更换坐标单位
+myChart.on('legendselectchanged', (params) => {
+  const selectName = params.name
+  myChart.setoption({
+    yAxis: {
+      name: selectName
+    }
+  })
+})
+```
+
+
+
+##  其他一些配置
 
 ```js
 let option = {
