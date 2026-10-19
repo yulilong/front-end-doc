@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+  <meta charset="utf-8" />
+  <title>无缝循环 — 高亮渐变版</title>
+  <style>
+    :root {
+      --bg: #1f2b40;
+    }
+
+    /* html, */
+    /* body {
+      height: 100%;
+      margin: 0;
+    } */
+
+    body {
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+    }
+
+    .wrap {
+      text-align: center;
+      user-select: none;
+      /* border: 5px solid red; */
+    }
+
+    .arrow {
+      font-size: 40px;
+      color: #dfe7f6;
+      cursor: pointer;
+      margin: 10px 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .viewport {
+      width: 320px;
+      height: 300px;
+      overflow: hidden;
+      margin: 8px auto;
+      position: relative;
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      will-change: transform;
+      transition: transform 360ms cubic-bezier(.2, .9, .2, 1);
+    }
+
+    .item {
+      height: 60px;
+      line-height: 60px;
+      width: 100%;
+      text-align: center;
+      font-size: 20px;
+      opacity: 0.6;
+      color: rgb(153, 153, 153);
+      box-sizing: border-box;
+      user-select: none;
+      transition: font-size 0.36s cubic-bezier(.2, .9, .2, 1),
+        color 0.36s cubic-bezier(.2, .9, .2, 1),
+        opacity 0.36s cubic-bezier(.2, .9, .2, 1);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div id="btnUp" class="arrow">∧</div>
+    <div class="viewport">
+      <div id="list" class="list"></div>
+    </div>
+    <div id="btnDown" class="arrow">∨</div>
+  </div>
+
+  <script>
+    const rawItems = [
+      "虚拟内存t", "虚拟CPU3", "虚拟存储", "虚拟IP",
+      "虚拟网络", "虚拟磁盘", "虚拟GPU", "虚拟带宽",
+      "虚拟安全组", "虚拟交换机", "虚拟防火墙", "虚拟网关",
+      "虚拟负载均衡", "虚拟镜像11"
+    ];
+
+    const ITEM_H = 60, VIEW_H = 300;
+    const VISIBLE = 5, CENTER = Math.floor(VISIBLE / 2);
+    const ANIM_MS = 360;
+
+    const listEl = document.getElementById('list');
+    let n = rawItems.length;
+    let currentIndex = 0;
+    let isAnimating = false;
+
+    // 初始化 VISIBLE+2 个节点
+    function initNodes() {
+      listEl.innerHTML = '';
+      for (let i = 0; i < VISIBLE + 2; i++) {
+        const div = document.createElement('div');
+        div.className = 'item';
+        listEl.appendChild(div);
+      }
+    }
+
+    // 填充可见节点文本
+    function fillVisible() {
+      const children = listEl.children;
+      for (let i = 0; i < children.length; i++) {
+        const offset = i - (CENTER + 1);
+        let idx = (currentIndex + offset + n) % n;
+        children[i].textContent = rawItems[idx];
+      }
+    }
+
+    // ⭐ 更新高亮渐变
+    function updateHighlight() {
+      const children = listEl.children;
+      for (let i = 0; i < children.length; i++) {
+        const offset = i - (CENTER + 1);
+        const t = Math.max(0, 1 - Math.abs(offset)); // 中心 t=1, 周围 t<1
+        const fontSize = 20 + t * (28 - 20);
+        const opacity = 0.6 + t * (1 - 0.6);
+        const colorVal = Math.floor(153 + t * (255 - 153)); // 灰->白
+        children[i].style.fontSize = `${fontSize}px`;
+        children[i].style.opacity = opacity;
+        children[i].style.color = `rgb(${colorVal},${colorVal},${colorVal})`;
+      }
+    }
+
+    // 设置 transform
+    function setTransform(y, animate = true) {
+      if (!animate) listEl.style.transition = 'none';
+      else listEl.style.transition = `transform ${ANIM_MS}ms cubic-bezier(.2,.9,.2,1)`;
+      listEl.style.transform = `translateY(${y}px)`;
+    }
+
+    // 基础 translate
+    const baseTranslate = VIEW_H / 2 - ((CENTER + 1) * ITEM_H + ITEM_H / 2);
+    setTransform(baseTranslate, false);
+
+    initNodes();
+    fillVisible();
+    updateHighlight();
+
+    // 移动函数
+    function move(step) {
+      if (isAnimating) return;
+      isAnimating = true;
+      currentIndex = (currentIndex + step + n) % n;
+
+      fillVisible();     // 更新文本
+      updateHighlight(); // ⭐ 更新高亮渐变
+
+      setTransform(baseTranslate - step * ITEM_H, true);
+
+      const onEnd = () => {
+        listEl.removeEventListener('transitionend', onEnd);
+        setTransform(baseTranslate, false);
+        requestAnimationFrame(() => { isAnimating = false; });
+      };
+      listEl.addEventListener('transitionend', onEnd);
+    }
+
+    // 按键绑定
+    document.getElementById('btnDown').addEventListener('click', () => move(1));
+    document.getElementById('btnUp').addEventListener('click', () => move(-1));
+    window.addEventListener('keydown', e => {
+      if (e.key === 'ArrowDown') move(1);
+      if (e.key === 'ArrowUp') move(-1);
+    });
+  </script>
+</body>
+
+</html>

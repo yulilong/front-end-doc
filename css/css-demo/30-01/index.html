@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资源监控中心</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <!-- 字体样式引用 -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet"> -->
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // 根据浏览器窗口大小，整体缩放页面
+        function setDashboardScale() {
+            const scaleX = window.innerWidth / 1920;
+            const scaleY = window.innerHeight / 1080;
+            const scale = Math.min(scaleX, scaleY);
+            document.documentElement.style.setProperty('--dashboard-scale', scale);
+        }
+        setDashboardScale();
+        window.addEventListener('resize', setDashboardScale);
+    </script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="scan-line"></div>
+        <div class="grid-overlay"></div>
+        
+        <header class="header">
+            <div class="header-left">
+                <div class="logo-container">
+                    <div class="system-info">
+                        <span class="system-name">中国银行</span>
+                    </div>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="main-title">
+                    <div class="title-decoration left"></div>
+                    <div class="title-content">
+                        <div class="title-main">
+                            <span class="title-text">云资源可视化中心</span>
+                        </div>
+                    </div>
+                    <div class="title-decoration right"></div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="datetime-display">
+                    <div class="date" id="currentDate"></div>
+                    <div class="time" id="currentTime"></div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <aside class="left-panel">
+                <div class="panel-section">
+                    <div class="section-header">
+                        <div class="header-icon"></div>
+                        <span>托管云资源总览</span>
+                        <div class="header-line"></div>
+                    </div>
+                    <div class="panel-content">
+                        <div class="stat-grid">
+                            <div class="stat-card wide">
+                                <div class="card-glow"></div>
+                                <div class="stat-icon cloud-icon"></div>
+                                <div class="stat-info wide-info">
+                                    <span class="stat-value" data-target="4">0</span>
+                                    <span class="stat-label">云平台数量</span>
+                                </div>
+                            </div>
+                            <div class="stat-card wide">
+                                <div class="card-glow"></div>
+                                <div class="stat-icon container-icon"></div>
+                                <div class="stat-info wide-info">
+                                    <span class="stat-value" data-target="18">0</span>
+                                    <span class="stat-label">容器平台集群数量</span>
+                                </div>
+                            </div>
+                            <div class="stat-card wide">
+                                <div class="card-glow"></div>
+                                <div class="stat-icon zone-icon"></div>
+                                <div class="stat-info wide-info">
+                                    <span class="stat-value" data-target="156">0</span>
+                                    <span class="stat-label">项目数量</span>
+                                </div>
+                            </div>
+                            <div class="stat-card wide">
+                                <div class="card-glow"></div>
+                                <div class="stat-icon vm-icon"></div>
+                                <div class="stat-info wide-info">
+                                    <span class="stat-value" data-target="2847">0</span>
+                                    <span class="stat-label">虚拟机数量</span>
+                                </div>
+                            </div>
+                            <div class="stat-card wide">
+                                <div class="card-glow"></div>
+                                <div class="stat-icon pod-icon"></div>
+                                <div class="stat-info wide-info">
+                                    <span class="stat-value" data-target="12480">0</span>
+                                    <span class="stat-label">容器Pod数量</span>
+                                </div>
+                            </div>
+                            <div class="stat-card wide">
+                                <div class="card-glow"></div>
+                                <div class="stat-icon server-icon"></div>
+                                <div class="stat-info wide-info">
+                                    <span class="stat-value" data-target="1240">0</span>
+                                    <span class="stat-label">物理机数量</span>
+                                </div>
+                            </div>
+                            <div class="stat-card wide">
+                                <div class="card-glow"></div>
+                                <div class="stat-icon disk-icon"></div>
+                                <div class="stat-info wide-info">
+                                    <span class="stat-value" data-target="368">0</span>
+                                    <span class="stat-label">存储设备数量</span>
+                                </div>
+                            </div>
+                            <div class="resource-card">
+                                <div class="resource-info">
+                                    <div class="resource-icon cpu-icon"></div>
+                                    <div class="resource-text">
+                                        <span class="resource-name">CPU核心</span>
+                                        <div class="resource-main">
+                                            <span class="resource-value" data-target="45632">0</span>
+                                            <span class="resource-unit">核</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="donut-group">
+                                    <span class="donut-usage-label">使用率</span>
+                                    <div class="resource-donut-wrap">
+                                        <svg viewBox="0 0 60 60" class="donut-svg">
+                                            <circle class="donut-track" cx="30" cy="30" r="24"/>
+                                            <circle class="donut-progress" cx="30" cy="30" r="24"
+                                                    stroke-dasharray="150.8"
+                                                    stroke-dashoffset="150.8"
+                                                    data-percent="68"/>
+                                        </svg>
+                                        <div class="donut-label">68%</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="resource-card">
+                                <div class="resource-info">
+                                    <div class="resource-icon mem-icon"></div>
+                                    <div class="resource-text">
+                                        <span class="resource-name">内存容量</span>
+                                        <div class="resource-main">
+                                            <span class="resource-value" data-target="128">0</span>
+                                            <span class="resource-unit">TB</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="donut-group">
+                                    <span class="donut-usage-label">使用率</span>
+                                    <div class="resource-donut-wrap">
+                                        <svg viewBox="0 0 60 60" class="donut-svg">
+                                            <circle class="donut-track" cx="30" cy="30" r="24"/>
+                                            <circle class="donut-progress" cx="30" cy="30" r="24"
+                                                    stroke-dasharray="150.8"
+                                                    stroke-dashoffset="150.8"
+                                                    data-percent="56"/>
+                                        </svg>
+                                        <div class="donut-label">56%</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="resource-card">
+                                <div class="resource-info">
+                                    <div class="resource-icon disk-icon"></div>
+                                    <div class="resource-text">
+                                        <span class="resource-name">存储容量</span>
+                                        <div class="resource-main">
+                                            <span class="resource-value" data-target="2.4">0</span>
+                                            <span class="resource-unit">PB</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="donut-group">
+                                    <span class="donut-usage-label">使用率</span>
+                                    <div class="resource-donut-wrap">
+                                        <svg viewBox="0 0 60 60" class="donut-svg">
+                                            <circle class="donut-track" cx="30" cy="30" r="24"/>
+                                            <circle class="donut-progress" cx="30" cy="30" r="24"
+                                                    stroke-dasharray="150.8"
+                                                    stroke-dashoffset="150.8"
+                                                    data-percent="45"/>
+                                        </svg>
+                                        <div class="donut-label">45%</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                    </div>
+                </div>
+            </aside>
+
+            <section class="center-panel">
+                <div class="map-container">
+
+                    <div class="map-content">
+                        <div class="province-info-overlay" id="provinceInfoOverlay">
+                            <div class="province-info-header">
+                                <span class="province-info-name" id="provinceInfoName">--</span>
+                                <span class="province-info-status" id="provinceInfoStatus">切换中...</span>
+                            </div>
+                            <div class="province-info-divider"></div>
+                            <div class="province-info-grid">
+                                <div class="province-info-item">
+                                    <span class="pii-icon project"></span>
+                                    <span class="pii-label">项目</span>
+                                    <span class="pii-value" id="provinceInfoProjects">--</span>
+                                </div>
+                                <div class="province-info-item">
+                                    <span class="pii-icon vm"></span>
+                                    <span class="pii-label">虚机</span>
+                                    <span class="pii-value" id="provinceInfoVM">--</span>
+                                </div>
+                                <div class="province-info-item">
+                                    <span class="pii-icon memory"></span>
+                                    <span class="pii-label">内存</span>
+                                    <span class="pii-value" id="provinceInfoMemory">--</span>
+                                </div>
+                                <div class="province-info-item">
+                                    <span class="pii-icon storage"></span>
+                                    <span class="pii-label">存储</span>
+                                    <span class="pii-value" id="provinceInfoStorage">--</span>
+                                </div>
+                            </div>
+                            <div class="province-info-progress">
+                                <div class="province-info-progress-bar" id="provinceInfoProgressBar"></div>
+                            </div>
+                        </div>
+                        <div id="chinaMap" class="map-chart"></div>
+                    </div>
+                </div>
+
+                <div class="data-flow-container">
+                    <div class="flow-line">
+                        <div class="flow-particle"></div>
+                        <div class="flow-particle"></div>
+                        <div class="flow-particle"></div>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="right-panel">
+                <div class="panel-section">
+                    <div class="section-header">
+                        <div class="header-icon"></div>
+                        <span>分行资源排名</span>
+                        <div class="header-line"></div>
+                    </div>
+                    <div class="panel-content">
+                        <div class="chart-container">
+                            <div class="chart-title">
+                                <span id="rankingTitle">分行CPU核心数排名 TOP 15</span>
+                                <div class="ranking-tabs">
+                                    <span class="ranking-tab active" data-type="cpu">CPU</span>
+                                    <span class="ranking-tab" data-type="memory">内存</span>
+                                    <span class="ranking-tab" data-type="storage">存储</span>
+                                </div>
+                            </div>
+                            <div id="branchRankingChart" class="chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+    
+    <script src="app.js"></script>
+</body>
+</html>

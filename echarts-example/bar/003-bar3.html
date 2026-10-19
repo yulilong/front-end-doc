@@ -1,0 +1,136 @@
+<div id="chart" style="width: 700px; height: 400px;"></div>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<script>
+const chart = echarts.init(document.getElementById('chart'));
+
+const categories = [
+  '一月销售数据特别特别特别长的名称',
+  '二月产品类别名称也很长需要处理',
+  '三月类目'
+];
+
+// 工具函数：长标签自动换行
+function wrapLabel(value, maxLength = 6) {
+  if (!value) return '';
+  const rowCount = Math.ceil(value.length / maxLength);
+  let result = '';
+  for (let i = 0; i < rowCount; i++) {
+    const start = i * maxLength;
+    const end = start + maxLength;
+    result += value.substring(start, end);
+    if (i < rowCount - 1) result += '\n';
+  }
+  return result;
+}
+
+// 在柱状图的末端/顶部 显示值
+const labelOption = {
+  show: true,
+  position: 'right',  // 横向条形图，数字在右边显示（柱子末端）
+  formatter: '{c}%',  // 显示值+百分号
+  color: '#333',
+  fontSize: 12
+};
+
+const option = {
+  // 鼠标放到 柱子上出现弹窗显示的内容
+  tooltip: {
+    trigger: 'item',
+    formatter: function (params) {
+      return `
+        <div>
+          ${params.marker} <strong>${params.seriesName}</strong><br/>
+          类目: ${params.name} <br/>
+          值: ${params.value}%<br/>
+          详情: ${params.data.info || '无'}
+        </div>
+      `;
+    }
+  },
+  // 数据标识
+  legend: {
+    data: ['产品A', '产品B', '产品C', '产品D']
+  },
+  // 图表距离容器边缘位置
+  grid: { left: '5%', right: '10%', bottom: '10%', containLabel: true },
+  // X轴坐标
+  xAxis: { 
+    type: 'value',
+    // 显示单位
+    axisLabel: { formatter: '{value}%' },
+    max: 100
+  },
+  yAxis: { 
+    type: 'category', 
+    data: categories,
+    axisLabel: {
+      formatter: function (value) {
+        return wrapLabel(value, 6);
+      }
+    },
+    triggerEvent: true
+  },
+  series: [
+    {
+      name: '产品A',
+      type: 'bar',
+      label: labelOption,
+      data: [
+        { value: 45, info: 'A-一月详情', itemStyle: { color: '#e74c3c' } },
+        { value: 60, info: 'A-二月详情', itemStyle: { color: '#9b59b6' } },
+        { value: 30, info: 'A-三月详情', itemStyle: { color: '#1abc9c' } }
+      ]
+    },
+    {
+      name: '产品B',
+      type: 'bar',
+      label: labelOption,
+      data: [
+        { value: 20, info: 'B-一月详情', itemStyle: { color: '#3498db' } },
+        { value: 35, info: 'B-二月详情', itemStyle: { color: '#f39c12' } },
+        { value: 50, info: 'B-三月详情', itemStyle: { color: '#2ecc71' } }
+      ]
+    },
+    {
+      name: '产品C',
+      type: 'bar',
+      label: labelOption,
+      data: [
+        { value: 15, info: 'C-一月详情', itemStyle: { color: '#e67e22' } },
+        { value: 40, info: 'C-二月详情', itemStyle: { color: '#2980b9' } },
+        { value: 25, info: 'C-三月详情', itemStyle: { color: '#c0392b' } }
+      ]
+    },
+    {
+      name: '产品D',
+      type: 'bar',
+      label: labelOption,
+      data: [
+        { value: 10, info: 'D-一月详情', itemStyle: { color: '#8e44ad' } },
+        { value: 25, info: 'D-二月详情', itemStyle: { color: '#16a085' } },
+        { value: 20, info: 'D-三月详情', itemStyle: { color: '#27ae60' } }
+      ]
+    }
+  ]
+};
+
+chart.setOption(option);
+
+// 鼠标移到Y轴坐标上悬停显示完整信息（tooltip）
+chart.on('mouseover', function (params) {
+  if (params.componentType === 'yAxis') {
+    chart.dispatchAction({
+      type: 'showTip',
+      seriesIndex: 0,
+      name: params.value,
+      position: 'top',
+      dataIndex: categories.indexOf(params.value)
+    });
+  }
+});
+chart.on('mouseout', function (params) {
+  if (params.componentType === 'yAxis') {
+    chart.dispatchAction({ type: 'hideTip' });
+  }
+});
+</script>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>排名 — 渐变进度条（按排名递减）</title>
+<style>
+  :root{
+    --bg: #3a3f4b;
+    --muted: #cfcfd2;
+    --bar-bg: rgba(255,255,255,0.08);
+  }
+  *{box-sizing: border-box;}
+  body{
+    margin: 0;
+    background: var(--bg);
+    font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+    color: #fff;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+
+  .wrap{
+    width: 100%;
+    margin: 10px auto;
+  }
+
+  /* 两列布局，列内部左对齐 */
+  .cols{
+    display: flex;
+    gap: 30px;
+    align-items: flex-start; /* 列顶部对齐 */
+  }
+  .col{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* 列项左对齐 */
+  }
+
+  .item{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0;
+    width: 100%;
+  }
+
+  /* 固定宽度的序号/奖杯区域以保证列对齐 */
+  .rank{
+    width: 36px;        /* 固定宽度，保证数字与奖杯垂直对齐 */
+    min-width: 36px;
+    text-align: left;
+    font-size: 18px;
+    color: #fff;
+  }
+  .rank .trophy{
+    font-size: 22px;
+    line-height: 1;
+    display: inline-block;
+  }
+  .gold { color: #f6d365; }   /* 黄金色 */
+  .silver { color: #d6d8da; } /* 银色 */
+  .bronze { color: #d39b6a; } /* 铜色 */
+
+  /* 固定名称宽度，保持进度条能按列对齐 */
+  .name{
+    width: 120px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  /* 进度条容器（灰色背景）*/
+  .bar{
+    flex: 1;
+    height: 30px;
+    border-radius: 20px;
+    /* background: var(--bar-bg); */
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* 渐变填充条，宽度使用 CSS 变量 --w */
+  .bar-fill{
+    height: 100%;
+    width: var(--w, 50%);
+    max-width: 100%;
+    min-width: 6px; /*太短时仍有一点显示 */
+    border-radius: 20px;
+    background: linear-gradient(90deg, #7b61ff 0%, #6b8df7 28%, #36d3d0 60%, #2fc4a8 100%);
+    transition: width 600ms cubic-bezier(.2,.9,.3,1);
+
+    /* 第二套显示样式，内容区域居中显示 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: max-content; /* 避免内容过长时被挤压 */
+    padding: 0 10px;
+  }
+
+  /* 文本始终居中显示在进度条中间（不随填充宽度移动） */
+  .bar-label{
+    /* position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 14px;
+    color: #fff;
+    pointer-events: none;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.35);
+    white-space: nowrap; */
+
+    /* 第二套显示样式 */
+    font-size: 14px;
+    color: #fff;
+    pointer-events: none;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.35);
+    white-space: nowrap;
+  }
+
+  /* 在窄屏上稍微适配（非必须） */
+  @media (max-width: 900px){
+    .wrap{ width: 92%; }
+    .name{ width: 90px; }
+    .rank{ width: 30px; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="cols">
+      <div class="col" id="col-left"></div>
+      <div class="col" id="col-right"></div>
+    </div>
+  </div>
+
+  <script>
+    // 数据：模拟 1..10 名，可替换成真实数组
+    // 进度百分比按排名线性递减：rank=1 -> 100%，rank=10 -> 10%
+    const MAX_RANK = 10;
+    const data = Array.from({length: MAX_RANK}, (_, i) => {
+      const rank = i + 1;
+      // 这里按线性缩放，你可以改成任意映射（或从后端拿具体利用率）
+      const percent = Math.round(((MAX_RANK - rank + 1) / MAX_RANK) * 100);
+      return {
+        rank,
+        name: `虚拟机xx${rank}`,
+        percent
+      };
+    });
+
+    const left = document.getElementById('col-left');
+    const right = document.getElementById('col-right');
+
+    // 渲染函数：把数组前 5 个放左列，后 5 个放右列
+    function makeItem(item){
+      const div = document.createElement('div');
+      div.className = 'item';
+
+      // rank / trophy
+      const r = document.createElement('div');
+      r.className = 'rank';
+      if(item.rank === 1){
+        r.innerHTML = `<span class="trophy gold">🏆</span>`;
+      } else if(item.rank === 2){
+        r.innerHTML = `<span class="trophy silver">🥈</span>`;
+      } else if(item.rank === 3){
+        r.innerHTML = `<span class="trophy bronze">🥉</span>`;
+      } else {
+        r.textContent = item.rank;
+      }
+
+      // name
+      const name = document.createElement('div');
+      name.className = 'name';
+      name.textContent = item.name;
+
+      // bar container
+      const bar = document.createElement('div');
+      bar.className = 'bar';
+
+      // fill uses CSS variable --w 来控制宽度
+      const fill = document.createElement('div');
+      fill.className = 'bar-fill';
+      fill.style.setProperty('--w', item.percent + '%');
+
+      // label 居中显示
+      const label = document.createElement('div');
+      label.className = 'bar-label';
+      label.textContent = `利用率 ${item.percent}%`;
+
+      bar.appendChild(fill);
+      // bar.appendChild(label);
+      fill.appendChild(label);
+
+      div.appendChild(r);
+      div.appendChild(name);
+      div.appendChild(bar);
+
+      return div;
+    }
+
+    // 插入左列（1-5）和右列（6-10）
+    data.slice(0,5).forEach(it => left.appendChild(makeItem(it)));
+    data.slice(5).forEach(it => right.appendChild(makeItem(it)));
+
+    // 如果你想动态改变某个名次的利用率（演示渐变效果），可以运行：
+    // setTimeout(() => { document.querySelectorAll('.bar-fill')[0].style.setProperty('--w','85%'); }, 800);
+  </script>
+</body>
+</html>
