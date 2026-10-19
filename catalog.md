@@ -153,7 +153,7 @@
     * [001-宽度与高度](/doc/css/depth/001-宽度与高度.md)
     * [002-堆叠上下文](/doc/css/depth/002-堆叠上下文.md)
     * [003-icon全解](/doc/css/depth/003-icon全解.md)
-    * [004-移动端页面(响应式)](/doc/css/depth/004-移动端页面(响应式).md)
+    * [004-移动端页面-响应式](/doc/css/depth/004-移动端页面-响应式.md)
     * [005-Flex布局](/doc/css/depth/005-Flex布局.md)
     * [006-布局套路](/doc/css/depth/006-布局套路.md)
     * [007-BFC](/doc/css/depth/007-BFC.md)

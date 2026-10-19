@@ -295,7 +295,7 @@ module.exports = {
             "depth/001-宽度与高度",
             "depth/002-堆叠上下文",
             "depth/003-icon全解",
-            "depth/004-移动端页面(响应式)",
+            "depth/004-移动端页面-响应式",
             "depth/005-Flex布局",
             "depth/006-布局套路",
             "depth/007-BFC",
